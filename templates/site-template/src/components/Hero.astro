@@ -1,0 +1,43 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import type { Link } from '../content/types';
+
+interface Props {
+  headline: string;
+  lede: string;
+  primaryCta: Link;
+  secondaryCta?: Link;
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+
+const { headline, lede, primaryCta, secondaryCta, image, imageAlt = '' } = Astro.props;
+---
+
+<section class="py-10 sm:py-16">
+  <div class={`wrap grid items-center gap-10 ${image ? 'md:grid-cols-[1.1fr_1fr] md:gap-16' : ''}`}>
+    <div>
+      <h1>{headline}</h1>
+      <p class="mt-5 max-w-xl text-xl text-muted">{lede}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
+        {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
+      </div>
+      <slot />
+    </div>
+    {
+      image && (
+        <Image
+          src={image}
+          alt={imageAlt}
+          widths={[480, 800, 1200]}
+          sizes="(min-width: 48rem) 50vw, 100vw"
+          loading="eager"
+          fetchpriority="high"
+          class="aspect-[4/3] w-full rounded-card object-cover"
+        />
+      )
+    }
+  </div>
+</section>

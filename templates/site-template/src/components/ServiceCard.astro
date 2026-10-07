@@ -1,0 +1,24 @@
+---
+import type { Service } from '../content/types';
+
+interface Props {
+  service: Service;
+  /** Link to the service's own page; omit on one-page sites */
+  href?: string;
+}
+
+const { service, href } = Astro.props;
+---
+
+<article class="border-t-[3px] border-brand pt-5">
+  <h3>{service.name}</h3>
+  <p class="mt-2 text-muted">{service.summary}</p>
+  {service.priceFrom && <p class="mt-2 font-semibold">{service.priceFrom}</p>}
+  {
+    href && (
+      <p class="mt-3 font-semibold">
+        <a href={href}>More about {service.name}</a>
+      </p>
+    )
+  }
+</article>

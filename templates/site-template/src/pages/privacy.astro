@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../content/site';
+
+// Plain-language privacy policy for a small site with a contact form.
+// Not legal advice: add industry-specific disclaimers from the intake form.
+const formProvider = site.forms.contactEndpoint.includes('web3forms') ? 'Web3Forms' : 'Formspree';
+const updated = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(new Date());
+---
+
+<BaseLayout title="Privacy policy" description={`How ${site.name} handles the information you send through this website.`}>
+  <section class="section">
+    <div class="wrap prose-basic max-w-3xl">
+      <h1>Privacy policy</h1>
+      <p class="text-muted">Last updated {updated}.</p>
+
+      <h2>What we collect</h2>
+      <p>
+        If you fill out a form on this site, we receive the details you enter, such as your name, email, phone number and
+        message. Forms are processed by {formProvider}, which delivers them to our inbox.
+      </p>
+
+      <h2>How we use it</h2>
+      <p>Only to reply to you and to provide the service you asked about. We don’t sell or share your information.</p>
+
+      <h2>Analytics</h2>
+      <p>
+        We use Vercel Web Analytics to count visits and see which pages are useful. It doesn’t use cookies and doesn’t
+        identify you personally.
+      </p>
+
+      <h2>Deleting your information</h2>
+      <p>
+        Email{' '}
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        {' '}and we’ll delete your messages and contact details.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

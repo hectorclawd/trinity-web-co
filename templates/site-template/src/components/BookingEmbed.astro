@@ -1,0 +1,41 @@
+---
+// Embeds the client's existing booking tool (Square, Vagaro, Booksy, Calendly, Cal.com).
+// Never build booking ourselves (playbook section 5). Add the provider's host to frame-src
+// in vercel.json when embedUrl is set.
+import { isPlaceholder } from '../lib/format';
+
+interface Props {
+  provider: string;
+  /** Public booking page; always shown as a link */
+  url: string;
+  /** Iframe URL if the provider supports embedding (Growth and Premium) */
+  embedUrl?: string;
+  heading?: string;
+}
+
+const { provider, url, embedUrl, heading = 'Book online' } = Astro.props;
+const ready = !isPlaceholder(url);
+---
+
+{
+  ready && (
+    <section id="book" class="section bg-surface" aria-labelledby="book-title">
+      <div class="wrap">
+        <h2 id="book-title">{heading}</h2>
+        {embedUrl && (
+          <iframe
+            src={embedUrl}
+            title={`Book with ${provider}`}
+            loading="lazy"
+            class="mt-6 h-[44rem] w-full rounded-card border border-line bg-bg"
+          ></iframe>
+        )}
+        <p class="mt-6">
+          <a class="btn btn-primary" href={url}>
+            Book on {provider}
+          </a>
+        </p>
+      </div>
+    </section>
+  )
+}

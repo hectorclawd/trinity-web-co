@@ -1,0 +1,26 @@
+---
+description: Fill site.ts and set up the site from docs/intake.md
+---
+
+Set up this client site from the intake answers. Follow the Trinity Web Co. playbook (sections 2 and 5).
+
+1. Read `docs/intake.md` and `CLAUDE.md`. If the package, business name, phone, email, hours or services are missing, stop and list what's missing. Don't guess.
+2. Fill `CLAUDE.md`: replace every `{{...}}` placeholder from the intake.
+3. Rewrite `src/content/site.ts` from the intake:
+   - Copy facts exactly. Name, address and phone must match the Google Business Profile character for character.
+   - `phone.e164` is `+1` followed by 10 digits. `phone.textable` only if the intake says texts are OK.
+   - Pick the most specific schema.org `schemaType` for the niche (HVACBusiness, Plumber, Electrician, HousePainter, HairSalon, BarberShop, NailSalon, BeautySalon, AutoRepair, AutoWash, ExerciseGym, SportsActivityLocation, ...).
+   - Reviews: only the ones the client listed, word for word, with the name and source as given. Starter shows 3; Growth and Premium show 6–8. Never write or improve a review.
+   - Services and areas: write body copy from the intake in the client's tone. Area pages must say something specific to that area, not the same text with the city name swapped.
+   - Set `features` for the package (see the README table) and set `seo.title` (under 60 characters) and `seo.description` (under 155).
+4. Remove what the package doesn't include:
+   - Starter: delete `src/pages/services/`, `src/pages/areas/`, `src/pages/blog/`, `src/content/blog/` and the collection in `src/content.config.ts`; point service cards at `/#services` or omit `href`.
+   - Growth: delete the blog pages and content; keep at most 2 service or area pages.
+   - Premium: keep everything; delete the sample post once real posts exist.
+   - Keep the page count within the package limit (4 / 7 / 12).
+5. Brand: update `src/styles/tokens.css` (colors, fonts) from the intake's brand answers. Swap the `@fontsource-variable` package if the font changes (`npm install`, update the import). Check every text and button color pair for 4.5:1 contrast.
+6. Images: put the client's photos in `src/assets/` (keep each under ~2,000px; Astro outputs WebP), update the imports in `site.ts`, and write real alt text. Replace `public/favicon.svg` and `public/og-image.jpg` (1200×630).
+7. If there's a booking embed or another iframe, add its host to `frame-src` in `vercel.json`. If the form uses Web3Forms, it's already allowed.
+8. Run `npm run check` and `npm run build`. Fix every error.
+9. Search the repo for `[Sample`, `REPLACE_ME` and `{{`, and list anything left with the reason (e.g. "waiting on Formspree ID").
+10. Report what you filled, what you removed, and what's still missing from the client. One commit: "Set up site from intake".

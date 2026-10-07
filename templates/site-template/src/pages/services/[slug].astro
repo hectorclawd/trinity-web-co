@@ -1,0 +1,51 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABand from '../../components/CTABand.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import { site } from '../../content/site';
+import type { Service } from '../../content/types';
+
+export const getStaticPaths = (() =>
+  site.services.map((service) => ({ params: { slug: service.slug }, props: { service } }))) satisfies GetStaticPaths;
+
+const { service } = Astro.props as { service: Service };
+const city = site.address?.city ?? site.areas[0]?.name ?? '';
+const others = site.services.filter((s) => s.slug !== service.slug);
+const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
+---
+
+<BaseLayout title={`${service.name} in ${city}`} description={service.summary}>
+  <section class="section">
+    <div class="wrap grid items-start gap-10 md:grid-cols-[1.3fr_1fr] md:gap-16">
+      <div>
+        <h1>{service.name} in {city}</h1>
+        {service.body.map((paragraph) => <p class="mt-5 max-w-2xl">{paragraph}</p>)}
+        {service.priceFrom && <p class="mt-5 text-xl font-semibold">{service.priceFrom}</p>}
+      </div>
+      <ContactForm
+        endpoint={site.forms.contactEndpoint}
+        variant={site.features.quoteForm ? 'quote' : 'contact'}
+        jobTypes={site.forms.quoteJobTypes}
+        submitLabel={site.features.quoteForm ? 'Request my quote' : 'Send message'}
+        fallback={fallback}
+      />
+    </div>
+  </section>
+
+  {
+    others.length > 0 && (
+      <section class="section bg-surface" aria-labelledby="other-services">
+        <div class="wrap">
+          <h2 id="other-services">Other services</h2>
+          <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+            {others.map((other) => <ServiceCard service={other} href={`/services/${other.slug}/`} />)}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CTABand {...site.cta} />
+</BaseLayout>

@@ -1,0 +1,112 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import Reviews from '../components/Reviews.astro';
+import Gallery from '../components/Gallery.astro';
+import BookingEmbed from '../components/BookingEmbed.astro';
+import HoursList from '../components/HoursList.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { site } from '../content/site';
+import { fullAddress } from '../lib/format';
+
+const address = fullAddress(site);
+const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
+---
+
+<BaseLayout>
+  <Hero {...site.hero} />
+
+  <section id="services" class="section bg-surface" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title">What we do</h2>
+      <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        {site.services.map((service) => <ServiceCard service={service} href={`/services/${service.slug}/`} />)}
+      </div>
+    </div>
+  </section>
+
+  <Reviews reviews={site.reviews} googleReviewUrl={site.googleReviewUrl} />
+
+  {site.features.gallery && <Gallery images={site.gallery} />}
+
+  <section class="section bg-surface" aria-labelledby="about-title">
+    <div class={`wrap grid items-center gap-10 ${site.about.image ? 'md:grid-cols-[1fr_1.3fr] md:gap-16' : ''}`}>
+      {
+        site.about.image && (
+          <Image
+            src={site.about.image}
+            alt={site.about.imageAlt ?? ''}
+            widths={[400, 700]}
+            sizes="(min-width: 48rem) 40vw, 100vw"
+            class="aspect-[4/5] w-full max-w-sm rounded-card object-cover"
+          />
+        )
+      }
+      <div>
+        <h2 id="about-title">{site.about.heading}</h2>
+        <p class="mt-4 max-w-xl">{site.about.paragraphs[0]}</p>
+        <p class="mt-4 font-semibold"><a href="/about/">More about us</a></p>
+      </div>
+    </div>
+  </section>
+
+  {site.features.booking && site.booking && <BookingEmbed {...site.booking} />}
+
+  <section id="visit" class="section" aria-labelledby="visit-title">
+    <div class="wrap grid items-start gap-10 md:grid-cols-2 md:gap-16">
+      <div>
+        <h2 id="visit-title">{site.serviceAreaOnly ? 'Hours and service area' : 'Hours and location'}</h2>
+        {address && !site.serviceAreaOnly && <address class="mt-4 text-xl not-italic">{address}</address>}
+        {
+          site.areas.length > 0 && (
+            <p class="mt-4">
+              We serve{' '}
+              {site.areas.map((area, i) => (
+                <>
+                  {i > 0 && (i === site.areas.length - 1 ? ' and ' : ', ')}
+                  <a href={`/areas/${area.slug}/`}>{area.name}</a>
+                </>
+              ))}
+              .
+            </p>
+          )
+        }
+        <div class="mt-6"><HoursList hours={site.hours} /></div>
+      </div>
+      {site.features.map && address && !site.serviceAreaOnly && <MapEmbed query={`${site.name}, ${address}`} title={`Map to ${site.name}`} />}
+    </div>
+  </section>
+
+  <FAQ items={site.faqs} />
+
+  <CTABand {...site.cta} />
+
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <div class="wrap grid items-start gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16">
+      <div>
+        <h2 id="contact-title">{site.features.quoteForm ? 'Get a free quote' : 'Get in touch'}</h2>
+        <p class="mt-4">Tell us what you need and we’ll get back to you within one business day.</p>
+        {
+          site.phone && (
+            <p class="mt-4">
+              Or call{' '}
+              <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>
+            </p>
+          )
+        }
+      </div>
+      <ContactForm
+        endpoint={site.forms.contactEndpoint}
+        variant={site.features.quoteForm ? 'quote' : 'contact'}
+        jobTypes={site.forms.quoteJobTypes}
+        submitLabel={site.features.quoteForm ? 'Request my quote' : 'Send message'}
+        fallback={fallback}
+      />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import type { HoursRow } from '../content/types';
+import { formatHours } from '../lib/format';
+
+interface Props {
+  hours: HoursRow[];
+}
+
+const { hours } = Astro.props;
+---
+
+<table class="w-full max-w-md border-collapse">
+  <caption class="sr-only">Opening hours</caption>
+  <tbody>
+    {
+      hours.map((row) => (
+        <tr class="border-b border-line">
+          <th scope="row" class="py-3 text-left font-semibold">{row.label}</th>
+          <td class="py-3 text-right tabular-nums">{formatHours(row)}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

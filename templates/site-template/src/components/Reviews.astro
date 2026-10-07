@@ -1,0 +1,42 @@
+---
+// Real reviews only, word for word, as the client provided them (playbook section 5).
+// Renders nothing when the list is empty: never fill it with invented reviews.
+import type { Review } from '../content/types';
+import { isPlaceholder } from '../lib/format';
+
+interface Props {
+  reviews: Review[];
+  heading?: string;
+  googleReviewUrl?: string;
+}
+
+const { reviews, heading = 'What customers say', googleReviewUrl } = Astro.props;
+const headingId = 'reviews-title';
+---
+
+{
+  reviews.length > 0 && (
+    <section class="section" aria-labelledby={headingId}>
+      <div class="wrap">
+        <h2 id={headingId}>{heading}</h2>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((review) => (
+            <figure class="m-0 rounded-card border-l-4 border-accent bg-surface p-6">
+              <blockquote class="text-lg">
+                <p>{review.text}</p>
+              </blockquote>
+              <figcaption class="mt-3 font-semibold text-muted">
+                {review.name}, via {review.source}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        {googleReviewUrl && !isPlaceholder(googleReviewUrl) && (
+          <p class="mt-6 font-semibold">
+            <a href={googleReviewUrl}>Leave us a review on Google</a>
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}

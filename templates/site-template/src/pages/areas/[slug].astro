@@ -1,0 +1,43 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABand from '../../components/CTABand.astro';
+import { site } from '../../content/site';
+import type { Area } from '../../content/types';
+
+export const getStaticPaths = (() =>
+  site.areas.map((area) => ({ params: { slug: area.slug }, props: { area } }))) satisfies GetStaticPaths;
+
+const { area } = Astro.props as { area: Area };
+const heading = `${site.primaryService} in ${area.name}`;
+---
+
+<BaseLayout title={heading} description={area.summary}>
+  <section class="section">
+    <div class="wrap">
+      <h1 class="first-letter:uppercase">{heading}</h1>
+      {area.body.map((paragraph) => <p class="mt-5 max-w-2xl">{paragraph}</p>)}
+      {
+        site.phone && (
+          <p class="mt-8">
+            <a class="btn btn-primary" href={`tel:${site.phone.e164}`}>
+              Call {site.phone.display}
+            </a>
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section bg-surface" aria-labelledby="area-services">
+    <div class="wrap">
+      <h2 id="area-services">Services in {area.name}</h2>
+      <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+        {site.services.map((service) => <ServiceCard service={service} href={`/services/${service.slug}/`} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTABand {...site.cta} />
+</BaseLayout>

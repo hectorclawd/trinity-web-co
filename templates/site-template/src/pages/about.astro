@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reviews from '../components/Reviews.astro';
+import CTABand from '../components/CTABand.astro';
+import { site } from '../content/site';
+---
+
+<BaseLayout title="About" description={`${site.about.heading}. ${site.about.paragraphs[0]}`.slice(0, 155)}>
+  <section class="section">
+    <div class={`wrap grid items-start gap-10 ${site.about.image ? 'md:grid-cols-[1.3fr_1fr] md:gap-16' : ''}`}>
+      <div>
+        <h1>{site.about.heading}</h1>
+        {site.about.paragraphs.map((paragraph) => <p class="mt-5 max-w-2xl">{paragraph}</p>)}
+        {
+          site.licenses && site.licenses.length > 0 && (
+            <ul class="mt-6 space-y-1 text-muted">
+              {site.licenses.map((license) => <li>{license}</li>)}
+            </ul>
+          )
+        }
+      </div>
+      {
+        site.about.image && (
+          <Image
+            src={site.about.image}
+            alt={site.about.imageAlt ?? ''}
+            widths={[400, 700]}
+            sizes="(min-width: 48rem) 40vw, 100vw"
+            loading="eager"
+            class="aspect-[4/5] w-full max-w-sm rounded-card object-cover"
+          />
+        )
+      }
+    </div>
+  </section>
+
+  <Reviews reviews={site.reviews} googleReviewUrl={site.googleReviewUrl} />
+
+  <CTABand {...site.cta} />
+</BaseLayout>
