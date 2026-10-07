@@ -24,6 +24,7 @@
 
   --radius-card: 0.5rem;
   --radius-btn: 0.5rem;
+  --radius-field: 0.5rem;       /* form fields; keep small even with pill buttons, or the textarea turns into a pill */
 }
 
 @layer base {
