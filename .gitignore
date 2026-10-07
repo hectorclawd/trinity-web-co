@@ -12,3 +12,6 @@ clients/*/site/
 dist/
 .astro/
 .vercel/
+
+.vercel
+.env*

@@ -1,0 +1,7 @@
+# Only the website gets uploaded to Vercel. Business docs, client folders and
+# templates never leave this machine through a deploy.
+/*
+!/site
+/site/node_modules
+/site/dist
+/site/.astro
