@@ -108,7 +108,8 @@ The Client will:
 - The first 3 months of Care Standard are included in the build price, founding prices included. The plan then renews automatically at **$________/month**, billed on the ____ of each month by auto-charge, starting ________.
 - Included: ________ *(copy from playbook §3 for the chosen plan)*. Unused edit time does not roll over. Work beyond the plan is $75/hour, quoted first.
 - **Either side may cancel with 30 days' written notice.**
-- **On cancellation:** the Designer transfers the GitHub repository to the Client's account and helps move hosting, for a one-time $150 handoff fee.
+- **On cancellation:** the Designer transfers the GitHub repository to the Client's account and helps move hosting, for a one-time $150 handoff fee. The Designer keeps hosting the site for 30 days after the plan ends so the Client can move it.
+- **Late payments:** if a care-plan payment isn't fixed within 15 days, edits pause, but the site stays online. If it's still unpaid 60 days after its due date, the Designer may end the care plan by written notice and hand off the site. The unpaid fees and the handoff fee stay owed (master service agreement §7.6a and §7.8).
 - Price increases require 60 days' written notice.
 - Sales tax on hosting: ________ *(to be confirmed with the Texas Comptroller or a CPA before the first care-plan invoice, playbook §6)*.
 

@@ -32,6 +32,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | When a founding Starter pays 100% upfront, 50% ($450) counts as the deposit | Keeps the deposit rule the same as every 50/50 project; a client who cancels after kickoff gets back the rest, minus work done | Attorney review of the contract |
 | 2026-10-07 | Never take a client's site offline for an unpaid care plan; pause edits and care work until it's paid | Taking a site offline hurts the client's business and Hector's reputation more than the unpaid fee is worth | After the first unpaid care plan |
 | 2026-10-07 | If a project ends after kickoff, work done is measured hourly at $75; the client owes the greater of the deposit or hours worked, never more than the project total | Simplest to explain and defend; matches the out-of-scope hourly rate | Attorney review of the contract |
+| 2026-10-07 | If a care plan is unpaid 60 days after its due date, Hector may end it by written notice and hand off the site; unpaid fees and the $150 handoff fee stay owed | Without an end point, a non-paying client's site would stay on Hector's Vercel account forever | Attorney review of the contract |
 
 ### Changelog
 
@@ -55,6 +56,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Sales materials added in `business/sales/`; old pricing, contracts, outreach and lead tracker moved to `business/archive/` |
 | 2026-10-07 | Master service agreement drafted in `business/sales/` (attorney review pending) |
 | 2026-10-07 | §3, §4, §6: founding Starter deposit is 50% of the upfront payment; never take a site offline for non-payment; work done on termination billed hourly at $75 |
+| 2026-10-07 | §3: a care plan unpaid 60 days can be ended by written notice, followed by a handoff |
 
 ## 1. Business model
 
@@ -178,7 +180,7 @@ Three care plans at $49, $99 and $199 a month: Care Essential, Care Standard and
 - Unused edit time does not roll over.
 - Work beyond the plan is billed at $75/hr in 30-minute blocks, quoted before you start.
 - Bill care plans on the same day each month by auto-charge (card or ACH) so you never chase payments.
-- If a care-plan payment fails and isn't fixed within 15 days, pause edits and care work until it's paid. Never take the site offline for non-payment.
+- If a care-plan payment fails and isn't fixed within 15 days, pause edits and care work until it's paid. Never take the site offline for non-payment. If it's still unpaid 60 days after its due date, you may end the care plan by written notice and hand off the site (repo transfer, $150 handoff fee); the unpaid fees stay owed.
 - Raise prices for new clients first; give existing clients 60 days' notice of any increase.
 
 ## 4. Client workflow: first contact to launch

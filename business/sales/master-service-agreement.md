@@ -101,7 +101,7 @@ Client will:
 
 ## 6. Ownership
 
-6.1 **What Client owns.** Once Client has paid every amount due under a Scope, Client owns the final Site built under it: its code, the content created for it, and the domain. Until then, Designer keeps all rights in the work, and Client may not use it outside the preview link.
+6.1 **What Client owns.** Once Client has paid the build fees under a Scope (package, add-ons and change orders), Client owns the final Site built under it: its code, the content created for it, and the domain. Until then, Designer keeps all rights in the work, and Client may not use it outside the preview link. Unpaid care-plan fees don't affect ownership; they stay owed as a debt.
 
 6.2 **Designer Tools.** Designer keeps ownership of Designer Tools, even when they're part of the Site. Once Client has paid in full, Client gets a permanent, royalty-free, non-exclusive license to use, copy and change the Designer Tools inside the Site, including after a handoff. Client may not resell the Designer Tools on their own. Designer may reuse Designer Tools, and the general know-how from the project, for other clients.
 
@@ -131,7 +131,11 @@ Client will:
 
 7.5 **No uptime promise.** Designer monitors the Site and works to fix outages within the plan's response time. Designer doesn't guarantee uptime, and isn't responsible for outages caused by the hosting provider, the domain registrar, Client's form or booking tools, or other third parties, beyond working with them to fix the problem.
 
-7.6 **Late care-plan payments.** If a care-plan payment fails and isn't fixed within 15 days, Designer may pause edits and other care-plan work until it's paid. **Designer never takes the Site offline for non-payment.** Hosting, SSL and the Site's forms keep running while edits are paused.
+7.6 **Late care-plan payments.** If a care-plan payment fails and isn't fixed within 15 days, Designer may pause edits and other care-plan work until it's paid. **Designer never takes the Site offline as a way to collect payment.** Hosting, SSL and the Site's forms keep running while edits are paused.
+
+7.6a **Ending a care plan for non-payment.** If a care-plan payment is still unpaid 60 days after its due date, Designer may end the care plan by written notice and hand off the Site under section 7.8. The unpaid fees, plus the handoff fee, stay owed.
+
+> **⚖ Attorney review:** confirm the notice for 7.6a (whether it should give a final chance to pay, for example 10 days), and that unpaid fees stay collectible after the handoff.
 
 7.7 **Cancellation.** Either party may cancel a care plan with 30 days' written notice.
 
@@ -140,7 +144,11 @@ Client will:
 - Help move hosting to an account Client controls.
 - Charge a one-time handoff fee of $150.
 
-Designer does the handoff only once all amounts due are paid. After the handoff, Designer has no further duty to host, maintain or fix the Site.
+Designer does the handoff only once all amounts due are paid, **except** when Designer ends the care plan for non-payment under 7.6a. In that case Designer hands off the Site anyway, and the unpaid fees and the handoff fee stay owed.
+
+After the care plan ends, Designer keeps hosting the Site for 30 days so Client can move it. After that, Designer may remove it from Designer's hosting account. After the handoff, Designer has no further duty to host, maintain or fix the Site.
+
+> **⚖ Attorney review:** the 30-day hosting window after a care plan ends isn't in the playbook. Confirm it's long enough, and that removing the Site after it doesn't conflict with 7.6.
 
 7.9 **Price changes.** Designer gives at least 60 days' written notice before raising a care-plan price.
 
@@ -260,7 +268,7 @@ By signing, each party agrees to this Agreement. Each signer confirms they have 
 4. **Sales tax** on care-plan hosting (3.7; also a CPA or Comptroller question).
 5. **Privacy policy and disclaimers:** whether that responsibility sits with Client (5.6).
 6. **Ownership wording:** Client owns the code while Designer keeps and licenses Designer Tools (6.1–6.2).
-7. **Automatic renewal** of the care plan after the 3 included months: disclosure and consent (7.3).
+7. **Automatic renewal and ending for non-payment:** disclosure and consent for the renewal after the 3 included months (7.3); notice, the handoff and collecting unpaid fees when a care plan ends after 60 days unpaid, and the 30-day hosting window afterward (7.6a, 7.8).
 8. **Abandonment:** whether invoicing the full remaining balance is enforceable (8.2).
 9. **Warranty disclaimer, accessibility and the Texas Deceptive Trade Practices Act:** wording, formatting and whether to include a waiver (9.3–9.4).
 10. **Liability cap, the indirect-damages exclusion, the indemnity, and fit with E&O insurance** (10.1–10.3).
