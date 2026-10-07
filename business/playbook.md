@@ -16,6 +16,19 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | --- | --- | --- | --- |
 | 2026-10-07 | Start as a solo operator, part-time, Dallas–Fort Worth only | Low cost, local trust, walk-in outreach works | After client #5 |
 | 2026-10-07 | Stack: Astro + Tailwind, GitHub, Vercel Pro | Fast static sites, one template for every client, Claude Code handles it well | If a client needs e-commerce |
+| 2026-10-07 | Founding deal trades the discount for a written testimonial and case-study permission only. No Google review in the trade; reviews are requested separately at day 7, same as every client | Google's review policy bans incentives for reviews, and the FTC's 2024 reviews rule bars incentives tied to positive reviews | Attorney review of the contract |
+| 2026-10-07 | Discovery-call budget line: "My packages run $1,500 to $4,800. Most businesses like yours fit Growth at $2,800." plus founding prices | The old line ("Most of my clients…") claimed clients that don't exist yet | After 5 launched sites |
+| 2026-10-07 | Cold emails include a `[Mailing address]`: a PO box or virtual mailbox, never a home address | CAN-SPAM requires a valid postal address in commercial email | When the PO box is set up |
+| 2026-10-07 | Care plans renamed Care Essential, Care Standard and Care Plus | "Growth" was both a package and a care plan, which confused clients | Not planned |
+| 2026-10-07 | Payment: Premium is 40/30/30; Starter and Growth are 50/50 (founding Starter still 100% upfront, under $1,000) | Spreads a large invoice across milestones; contract essential #3 now matches §4 | After the first Premium client |
+| 2026-10-07 | Discovery calls are 20 minutes everywhere, including outreach scripts | Scripts said 15, §4 said 20 | Not planned |
+| 2026-10-07 | Founding offer says "first 3 clients only," with no "this month" | The offer has no deadline; "this month" was fake urgency | When founding spots are filled |
+| 2026-10-07 | Intake form no longer asks whether a privacy policy is needed; every site gets one, and the form asks what it should mention | Every site collects form data and the §5 QA checklist requires a privacy page | Not planned |
+| 2026-10-07 | Founding clients get the 3 bundled months of Care Standard, like every build | Keeps one rule for every client and starts recurring revenue on day one | After 3 founding clients |
+| 2026-10-07 | Percentage add-ons (Spanish +40%, rush +25%) are calculated on the price the client actually pays | Founding clients shouldn't pay percentages of a price they aren't paying | After 3 founding clients |
+| 2026-10-07 | Deposit is fully refundable until the kickoff call, non-refundable after. **Attorney to confirm** | Fair to clients who back out before any work; protects time once work starts | Attorney review of the contract |
+| 2026-10-07 | Sales tax on care-plan hosting left undecided; contracts carry a blank | Needs an answer from the Texas Comptroller or a CPA (§6) | Before the first care-plan invoice |
+| 2026-10-07 | Prospect tracker status values: Contacted, Follow-up 1, Follow-up 2, Replied, Call booked, Proposal sent, Signed, Not interested, Opted out, No reply (closed) | Lets you count the §7 funnel the same way every week | End of the first 30 days of outreach |
 
 ### Changelog
 
@@ -23,6 +36,20 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | --- | --- |
 | 2026-10-07 | First version of the playbook |
 | 2026-10-07 | Naming conventions: GitHub org is `trinitywebco-sites`; local client folders live in the `trinity-web-co/clients/` folder |
+| 2026-10-07 | §2: founding deal no longer includes a Google review |
+| 2026-10-07 | §4: new discovery-call budget line |
+| 2026-10-07 | §7: cold email gets a `[Mailing address]` (PO box or virtual mailbox); outreach rules updated |
+| 2026-10-07 | §3, §8: care plans renamed Care Essential, Care Standard, Care Plus |
+| 2026-10-07 | §4, §6: Premium 40/30/30 and Starter/Growth 50/50; contract essential #3 updated |
+| 2026-10-07 | §7: outreach scripts ask for a 20-minute call |
+| 2026-10-07 | §7: "this month" removed from the founding offer |
+| 2026-10-07 | §4: intake form's privacy-policy question changed |
+| 2026-10-07 | §2, §3: founding clients get the 3 bundled months of Care Standard |
+| 2026-10-07 | §2: percentage add-ons apply to the price the client pays |
+| 2026-10-07 | §4, §6: deposit refundable until the kickoff call (attorney to confirm) |
+| 2026-10-07 | Decisions log: sales tax on care plans left as a blank |
+| 2026-10-07 | §7: tracker gets a notes column and fixed status values |
+| 2026-10-07 | Sales materials added in `business/sales/`; old pricing, contracts, outreach and lead tracker moved to `business/archive/` |
 
 ## 1. Business model
 
@@ -103,7 +130,7 @@ Three fixed-scope packages: Starter at $1,500, Growth at $2,800 and Premium at $
 
 **Default:** pitch Growth first, every time. It is the package that actually gets them calls, and Starter becomes the fallback when budget is tight rather than the anchor.
 
-**Why founding prices:** your first 3 clients take a chance on someone with no portfolio. In exchange for the discount they agree in writing to a written testimonial, permission to show the site as a case study, and a Google review if they're happy. Never fake a testimonial or invent a client to fill the gap.
+**Why founding prices:** your first 3 clients take a chance on someone with no portfolio. In exchange for the discount they agree in writing to a written testimonial and permission to show the site as a case study. A Google review is **not** part of the trade (Google bans incentives for reviews); ask for one separately at day 7, the same as every client (section 4). Founding clients also get the 3 bundled months of Care Standard, like every build. Never fake a testimonial or invent a client to fill the gap.
 
 ### Add-ons (sell after the main package is agreed)
 
@@ -116,15 +143,17 @@ Three fixed-scope packages: Starter at $1,500, Growth at $2,800 and Premium at $
 | Rush delivery (half the turnaround) | +25% |
 | Google Business Profile full optimization (if not in package) | $250 |
 
+Percentage add-ons are calculated on the price the client actually pays (the founding price for founding clients).
+
 ### What counts as a revision round
 
 One round is a single consolidated list of changes sent within 5 business days of your review link. New pages, new features or a new design direction are change orders, quoted separately before any work.
 
 ## 3. Monthly care plans
 
-Three care plans at $49, $99 and $199 a month. Any site you host must be on one; a client who declines gets a full handoff instead (section 4).
+Three care plans at $49, $99 and $199 a month: Care Essential, Care Standard and Care Plus. Any site you host must be on one; a client who declines gets a full handoff instead (section 4).
 
-|  | **Essential** | **Standard** (default) | **Growth** |
+|  | **Care Essential** | **Care Standard** (default) | **Care Plus** |
 | --- | --- | --- | --- |
 | Price | $49/mo | $99/mo | $199/mo |
 | Hosting on your Vercel account, SSL, uptime monitoring | Yes | Yes | Yes |
@@ -137,7 +166,7 @@ Three care plans at $49, $99 and $199 a month. Any site you host must be on one;
 | New content | No | No | 1 blog post or new service page per month |
 | Annual mini-refresh (new photos, copy tune-up) | No | Yes | Yes |
 
-**Default:** bundle the first 3 months of Standard into every build price, then it renews automatically at $99/mo with 30 days' notice to cancel. Clients see the value before they pay for it, and your recurring revenue starts on day one.
+**Default:** bundle the first 3 months of Care Standard into every build price, founding prices included, then it renews automatically at $99/mo with 30 days' notice to cancel. Clients see the value before they pay for it, and your recurring revenue starts on day one.
 
 **Rules that protect your time:**
 
@@ -152,12 +181,12 @@ Every project runs the same 9 stages, and no build work starts until the contrac
 
 1. **First contact** (day 0): reply within 4 hours, book a 20-minute discovery call.
 2. **Discovery call** (day 1–3): qualify, then send a proposal within 24 hours.
-3. **Proposal + contract + deposit** (day 3–7): e-signed contract, 50% deposit.
+3. **Proposal + contract + deposit** (day 3–7): e-signed contract, deposit (50%, or 40% for Premium).
 4. **Intake form + kickoff** (day 7–10): client fills the intake form; you set up the repo and accounts.
 5. **Content collection** (by a set date): turnaround clock starts only when content is complete.
 6. **Build** (Starter 10, Growth 15, Premium 25 business days).
 7. **Review rounds**: preview link, consolidated feedback, revisions.
-8. **Final payment + launch**: final 50% due before the domain goes live.
+8. **Final payment + launch**: final payment due before the domain goes live.
 9. **Handoff + care plan**: walkthrough, logins doc, review request, 30-day check-in.
 
 ### Discovery call questions (20 minutes)
@@ -183,7 +212,7 @@ Fit and logistics:
 11. Do you have a logo, photos of your work, and text about your services?
 12. When do you want this live, and is anything driving that date?
 13. Who besides you has a say in the decision?
-14. Have you set a budget? (If they hesitate: "Most of my clients land between $1,500 and $2,800.")
+14. Have you set a budget? (If they hesitate: "My packages run $1,500 to $4,800. Most businesses like yours fit Growth at $2,800. For my first 3 clients only, I have founding prices: $900 for Starter or $1,800 for Growth." Drop the founding sentence once those spots are filled.)
 
 **Red flags (walk away or price higher):** wants e-commerce with 100+ products, "just copy this competitor's site," asks for unlimited revisions, can't name who decides, pushes back on any deposit.
 
@@ -200,17 +229,16 @@ Build this once in Tally or Google Forms and send the link after the deposit cle
 | Brand | Logo files (upload), brand colors if any, 3 sites you like + why, words that describe the business (e.g. "friendly, fast, family-owned") |
 | Content | Photos (upload, 10–30), team bios, 5–10 favorite reviews with customer first names, certifications, awards |
 | Accounts | Domain registrar, Google Business Profile access, booking tool, social links |
-| Legal | Do you need a privacy policy? (yes if collecting form data), any industry disclaimers |
+| Legal | Anything the privacy policy needs to mention (every site gets one, since forms collect data), any industry disclaimers |
 | Sign-off | Who approves the site, best way to reach them, preferred review days |
 
 ### Payment structure
 
-**Default:** 50% deposit to book, 50% before launch. Projects under $1,000 (founding Starter) are paid 100% upfront.
+**Default:** Starter and Growth are 50% deposit to book, 50% before launch. Premium is 40/30/30: 40% to book, 30% at first review, 30% at launch. Projects under $1,000 (founding Starter) are paid 100% upfront.
 
-- Deposit is non-refundable once work starts; it holds your calendar slot.
+- The deposit holds your calendar slot. It is fully refundable until the kickoff call and non-refundable after it. (Attorney to confirm this wording before first use.)
 - Final payment is due before you point the domain at the new site. The site stays on a preview link until paid.
 - Care plan auto-billing starts the month after the 3 bundled months end.
-- For Premium, offer 40/30/30: 40% to book, 30% at first review, 30% at launch.
 
 ### Content collection
 
@@ -406,7 +434,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 
 1. **Scope:** package name, exact page list, features, number of revision rounds, what is *not* included
 2. **Timeline:** turnaround in business days starting when content is complete; client content due date
-3. **Payment:** 50/50 schedule, due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
+3. **Payment:** 50/50 schedule for Starter and Growth (founding Starter paid 100% upfront), 40/30/30 for Premium; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
 4. **Revisions and change orders:** what a round is; new requests quoted in writing first; hourly rate
 5. **Client responsibilities:** content, accuracy of their claims and licenses, rights to photos and logos they send
 6. **Ownership:** client owns the final site code, content and domain once paid in full; you keep the right to reuse your template and components, and to show the site in your portfolio
@@ -414,7 +442,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 8. **Abandonment:** if the client goes silent 30+ days, you may invoice the balance and close or launch the project
 9. **Warranty:** 30 days of free bug fixes after launch (bugs, not new requests)
 10. **Limitation of liability:** capped at fees paid; no guarantee of search rankings or revenue
-11. **Termination:** either side with written notice; deposit non-refundable after work begins; work done is paid for
+11. **Termination:** either side with written notice; deposit fully refundable until the kickoff call, non-refundable after (attorney to confirm); work done is paid for
 12. **Governing law:** Texas, Dallas County
 
 ### Invoicing and admin tools
@@ -444,7 +472,7 @@ Put this in your contract and on your website's FAQ. Clients trust it, and it en
 
 ## 7. Client acquisition: first 3 clients in 30 days
 
-Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–1.5 hours a day around class and work. Expect roughly 120 contacts → 15 replies → 6 discovery calls → 3 signed. Track every contact in one spreadsheet: business, niche, area, channel, date, status, next follow-up.
+Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–1.5 hours a day around class and work. Expect roughly 120 contacts → 15 replies → 6 discovery calls → 3 signed. Track every contact in one spreadsheet (`business/sales/prospect-tracker.csv`): business, niche, area, channel, date contacted, status, next follow-up, notes. Status is always one of: Contacted, Follow-up 1, Follow-up 2, Replied, Call booked, Proposal sent, Signed, Not interested, Opted out, No reply (closed).
 
 **Default channel mix:** walk-ins first (highest reply rate for local owners), then email and DMs to the same list. Your warm network goes first of all: first clients often come from a referral like "my cousin's barber needs a site."
 
@@ -491,9 +519,15 @@ Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–
 >
 > I'm a Dallas web developer building fast sites for local \[trades / salons\]. I recorded a 2-minute video showing 3 things I'd fix: \[Loom link\]
 >
-> I'm taking 3 founding clients at a reduced price this month. Worth a 15-minute call this week?
+> I have a reduced founding price for my first 3 clients only. Worth a 20-minute call this week?
 >
-> &#91;Your name\] \[Business name\] · \[phone\] · \[your site\] Not interested? Just reply "no" and I won't email again.
+> \[Your name\]
+> Trinity Web Co. · \[phone\] · \[your site\]
+> \[Mailing address\]
+>
+> Not interested? Just reply "no" and I won't email again.
+
+The mailing address must be a PO box or virtual mailbox, never your home address (CAN-SPAM requires a valid postal address in commercial email).
 
 **Follow-up (3–4 days later, same thread):**
 
@@ -507,7 +541,7 @@ Bring: printed one-page price sheet, business cards, your phone with their site 
 >
 > **If the owner is there:** I was looking you up on my phone before I came in. \[Show phone.\] Your reviews are great, but \[your site took 8 seconds to load / I couldn't find a way to book / it doesn't show up when I searched "barber Oak Cliff"\]. Here's a site I built that loads in about one second. \[Show demo.\]
 >
-> I'm taking on 3 founding clients this month at a discounted rate. Could I grab 15 minutes later this week to show you what yours could look like? No cost for the mockup.
+> I have a discounted founding price for my first 3 clients only. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
 >
 > **If they're busy or not there:** No problem. Can I leave this with you? \[Hand over sheet with your card stapled and a sticky note: "3 quick fixes for your site, call or text \[phone\], \[Name\]."\] What's the best way to reach the owner?
 
@@ -529,7 +563,7 @@ Best for salons, barbers, detailers and trainers who post often. Follow them and
 
 - Personalize every message with one real detail (a review, a post, their area). Never mass-blast.
 - Two follow-ups maximum, then stop. Honor every "no" and opt-out immediately.
-- Emails include your real name, business name and a way to opt out.
+- Emails include your real name, business name, a mailing address (PO box or virtual mailbox) and a way to opt out.
 - Never claim results you haven't produced ("I'll get you on page 1"). Say what you'll build and how you'll measure it.
 
 ## 8. Pricing and income math
@@ -540,13 +574,13 @@ At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $3,25
 
 - "Active clients" = clients paying a care plan. New builds are added on top at the pace shown.
 - Average build = $2,400 (a mix of mostly Growth with some Starter and Premium at standard prices).
-- A build takes about 28 hours including sales, calls and admin. Care takes about 0.5 / 1 / 3 hours a month for Essential / Standard / Growth.
+- A build takes about 28 hours including sales, calls and admin. Care takes about 0.5 / 1 / 3 hours a month for Care Essential / Care Standard / Care Plus.
 - Costs: Claude ($20, then $100 from 5 clients), Vercel Pro $20, Google Workspace $8, insurance $40 from 10 clients, plus about 3% card fees.
 - Taxes: 25% of profit set aside for federal income and self-employment tax (no Texas state income tax).
 
 |  | **2 clients** | **5 clients** | **10 clients** |
 | --- | --- | --- | --- |
-| Care plan mix | 2 Standard | 2 Essential, 2 Standard, 1 Growth | 3 Essential, 5 Standard, 2 Growth |
+| Care plan mix | 2 Care Standard | 2 Care Essential, 2 Care Standard, 1 Care Plus | 3 Care Essential, 5 Care Standard, 2 Care Plus |
 | Recurring care revenue | $198/mo | $495/mo | $1,040/mo |
 | New builds | 1 every 2 months | 1 per month | 3 every 2 months |
 | Build revenue | $1,200/mo | $2,400/mo | $3,600/mo |
@@ -561,7 +595,7 @@ At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $3,25
 
 - **Recurring revenue is your safety net.** If you stop selling for a semester (finals, internship), 10 care clients still bring in $1,040 a month, about $12,500 a year, for about 13 hours a month.
 - **Your first 3 months earn less.** Founding prices ($900–$1,800) and bundled free care months mean month 1–3 take-home is closer to $600–$900/mo. That's the cost of a portfolio.
-- **Upselling care beats finding new clients.** Moving 3 Standard clients to Growth adds $300/mo with no sales effort.
+- **Upselling care beats finding new clients.** Moving 3 Care Standard clients to Care Plus adds $300/mo with no sales effort.
 
 ### When to raise prices
 

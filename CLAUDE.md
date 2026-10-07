@@ -14,7 +14,7 @@ This business is separate from Focus Forward. Don't mix its checklist, brand, or
 |---|---|
 | Ideal client, target niches, positioning | §1 Business model |
 | Packages (Starter / Growth / Premium), founding-client prices, add-ons, revision rounds | §2 Service packages |
-| Care plans (Essential / Standard / Growth) and the rules that protect Hector's time | §3 Monthly care plans |
+| Care plans (Care Essential / Care Standard / Care Plus) and the rules that protect Hector's time | §3 Monthly care plans |
 | Client workflow: discovery call, proposal, contract, deposit, intake, content, build, review rounds, launch checklist, handoff | §4 Client workflow |
 | Stack, Claude Code workflow, starter template structure, naming conventions | §5 Technical build process |
 | Pre-launch QA checklist | §5 Pre-launch QA checklist |
@@ -35,16 +35,14 @@ Rules for using it:
 ```
 /business      How the business runs
   playbook.md          The full playbook (source of truth, see above)
-  pricing.md           OUTDATED draft, superseded by playbook §2–3
-  contracts/           Agreement templates (attorney review before first use, playbook §6)
-  outreach/            Cold email, walk-in, phone and follow-up scripts
+  sales/               Price sheet, discovery call, outreach scripts, scope template, intake form, prospect tracker
+  archive/             Old pricing, contracts, outreach scripts and lead list, superseded by the playbook (see its README)
 /templates     Reusable starting points for client work
   starter-site/        Plain-HTML starter, built before the playbook (see open items)
 /clients       One folder per client, named with the client slug (playbook §5)
   <client-slug>/site   The client's site repo, cloned from trinitywebco-sites (git-ignored here)
   <client-slug>/admin  Contract, invoices, intake; never in the site repo
   _template/           Starting docs for a new client
-  _leads.md            Lead tracker
 /site          The Trinity Web Co. website itself
 ```
 
@@ -75,7 +73,7 @@ Files built before the playbook was added, which now conflict with it:
 - [ ] `site/` has no demo sites or PageSpeed scores yet (§7 Week 1 asks for both).
 - [ ] `templates/starter-site/` is plain HTML. §5 calls for an Astro + Tailwind GitHub template repo in `trinitywebco-sites`, with `site.ts`, `.claude/commands/` and `docs/`.
 - [ ] Hosting: `site/` was set up for Cloudflare Pages (`_headers` file). §5 uses Vercel Pro for client sites. Decide whether our own site moves too.
-- [ ] `business/pricing.md`, `business/contracts/` and `business/outreach/` use the old package names and prices. Update them or delete them in favor of the playbook.
+- [x] `business/pricing.md`, `business/contracts/` and `business/outreach/` moved to `business/archive/`, replaced by the playbook and `business/sales/` (2026-10-07).
 - [ ] `clients/_template/` puts docs at the folder root. §5 puts them in `<client-slug>/admin/`.
 
 Other open items:

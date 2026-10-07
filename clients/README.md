@@ -13,6 +13,6 @@ One folder per client, named in kebab-case after the business (e.g. `oak-cliff-t
   site/                  Their website (its own git repo when it goes live)
 ```
 
-Lead tracking (before anyone's a client) lives in `_leads.md`.
+Lead tracking (before anyone's a client) lives in `business/sales/prospect-tracker.csv`.
 
 **Never store passwords or card numbers here.** Reference credentials by their name in the password manager.

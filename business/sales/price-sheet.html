@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trinity Web Co. price sheet</title>
+<!--
+  One-page printable price sheet. Source for every price and feature: business/playbook.md §2–3.
+  Print: open in Chrome or Edge > Print > Destination "Save as PDF" > Paper "Letter" >
+  Margins "Default" > turn on "Background graphics".
+  Before printing, replace the [bracketed] contact placeholders in the footer.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #13262B;
+    --ink-soft: #3E5458;
+    --river: #1D6B66;
+    --river-deep: #0E3F3C;
+    --limestone: #ECEFE9;
+    --paper: #FAFBF8;
+    --gold: #EDB23A;
+    --line: #C6CFC9;
+    --font: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+
+  @page { size: letter; margin: 0.35in 0.45in; }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    margin: 0;
+    background: var(--limestone);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 8.2pt;
+    line-height: 1.3;
+  }
+
+  .sheet {
+    width: 7.6in;
+    margin: 0.3in auto;
+    background: var(--paper);
+    padding: 0.32in 0.36in;
+  }
+
+  @media print {
+    body { background: var(--paper); }
+    .sheet { width: auto; margin: 0; padding: 0; }
+  }
+
+  h1, h2, h3 { font-stretch: 125%; margin: 0; line-height: 1.1; }
+
+  /* Header */
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.3in;
+    padding-bottom: 0.1in;
+    border-bottom: 2px solid var(--river);
+  }
+  .brand { display: flex; align-items: center; gap: 0.12in; color: var(--river-deep); }
+  .brand svg { width: 0.62in; height: auto; }
+  .brand h1 { font-size: 19pt; font-weight: 800; }
+  .brand p { margin: 2px 0 0; color: var(--ink-soft); font-size: 9pt; }
+  .top-note { text-align: right; font-size: 8pt; color: var(--ink-soft); max-width: 2.6in; }
+  .top-note strong { color: var(--ink); display: block; font-size: 9pt; }
+
+  section { margin-top: 0.13in; }
+  h2 {
+    font-size: 11pt;
+    font-weight: 800;
+    color: var(--river-deep);
+    margin-bottom: 0.06in;
+  }
+  h2 span { font-stretch: 100%; font-weight: 500; font-size: 8.4pt; color: var(--ink-soft); margin-left: 6px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  th, td { padding: 2.6px 6px; vertical-align: top; text-align: left; border-bottom: 1px solid var(--line); }
+  tbody th { font-weight: 600; color: var(--ink-soft); }
+  thead th { border-bottom: none; padding: 0 0 0 1px; }
+  col.label { width: 0.98in; }
+
+  .plan {
+    position: relative;
+    background: var(--limestone);
+    padding: 5px 8px 4px;
+    border-top: 4px solid var(--river);
+  }
+  .plan .head { display: flex; align-items: baseline; justify-content: space-between; gap: 4px; }
+  .plan h3 { font-size: 11pt; font-weight: 800; }
+  .plan .price { font-size: 15pt; font-weight: 800; font-stretch: 112%; }
+  .plan h3 { white-space: nowrap; }
+  table.care .plan h3 { font-size: 10pt; }
+  table.care .plan .price { font-size: 13.5pt; }
+  .plan .price small { font-size: 8.5pt; font-weight: 500; font-stretch: 100%; color: var(--ink-soft); }
+  .plan .for { font-weight: 400; color: var(--ink-soft); font-size: 8pt; margin-top: 2px; }
+  .plan.featured { background: var(--river-deep); color: var(--paper); border-top-color: var(--gold); }
+  .plan.featured .for, .plan.featured .price small { color: #CFE0DC; }
+  .tag {
+    display: inline-block;
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--river);
+    color: var(--paper);
+    margin-right: 4px;
+    vertical-align: 1px;
+  }
+  .plan.featured .tag { background: var(--gold); color: var(--ink); }
+  .gap { width: 6px; }
+  td.featured-col { background: #EEF3F0; }
+  tr.price-row td { font-weight: 700; }
+
+  /* Founding offer */
+  .founding {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.16in;
+    align-items: center;
+    margin-top: 0.1in;
+    padding: 6px 12px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 4px;
+  }
+  .founding h2 { color: var(--ink); margin: 0; font-size: 10.5pt; }
+  .founding .prices { display: flex; gap: 0.18in; margin-top: 3px; }
+  .founding .prices div { font-size: 8pt; }
+  .founding .prices b { display: block; font-size: 13pt; font-stretch: 112%; font-weight: 800; }
+  .founding .prices s { color: #5A4A1E; font-weight: 500; font-size: 8pt; }
+  .founding p { margin: 0; font-size: 8.3pt; }
+
+  /* Terms and add-ons */
+  ul.terms { margin: 0; padding-left: 1.1em; columns: 2; column-gap: 0.25in; }
+  ul.terms li { margin-bottom: 3px; break-inside: avoid; }
+  ul.addons { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px 0.2in; }
+  ul.addons li { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 2px 0; }
+
+  /* Footer */
+  .contact {
+    margin-top: 0.12in;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.2in;
+    padding: 6px 12px;
+    background: var(--river-deep);
+    color: var(--paper);
+    border-radius: 4px;
+  }
+  .contact .who { font-stretch: 125%; font-weight: 800; font-size: 10.5pt; }
+  .contact .lines { font-size: 9pt; display: flex; gap: 0.2in; flex-wrap: wrap; }
+  .placeholder { border-bottom: 1px dashed #8FB3AE; padding: 0 2px; }
+  .fine { margin: 0.08in 0 0; font-size: 7.2pt; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+  <header class="top">
+    <div class="brand">
+      <svg viewBox="0 0 48 32" aria-hidden="true">
+        <path d="M3 28 Q24 -6 45 28" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M14 28 L18 11 M24 28 L24 6.5 M34 28 L30 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M1 28 H47" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>Trinity Web Co.</h1>
+        <p>Fast websites for owner-operated Dallas businesses</p>
+      </div>
+    </div>
+    <div class="top-note">
+      <strong>Fixed prices. You own it.</strong>
+      Built by a local developer you can text. Your domain and accounts stay in your name.
+    </div>
+  </header>
+
+  <section>
+    <h2>Website packages <span>One-time price. Every build includes 3 months of Care Standard.</span></h2>
+    <table>
+      <colgroup><col class="label"><col><col><col></colgroup>
+      <thead>
+        <tr>
+          <th></th>
+          <th><div class="plan"><div class="head"><h3>Starter</h3><div class="price">$1,500</div></div><div class="for">New or very small businesses</div></div></th>
+          <th><div class="plan featured"><div class="head"><h3>Growth</h3><div class="price">$2,800</div></div><div class="for"><span class="tag">Recommended</span>For calls and bookings</div></div></th>
+          <th><div class="plan"><div class="head"><h3>Premium</h3><div class="price">$4,800</div></div><div class="for">Many services or areas, lots of content</div></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Every site</th><td colspan="3">Click-to-call and text buttons · Google Maps and hours · fast on phones</td></tr>
+        <tr><th>Pages (up to)</th><td>4: Home, Services, About, Contact</td><td class="featured-col">7: + 2 service/area pages, Gallery/FAQ</td><td>12: + 4 more service/area pages, blog</td></tr>
+        <tr><th>Forms</th><td>Spam-protected contact form</td><td class="featured-col">Contact form + quote request form</td><td>Contact form + multi-step quote form</td></tr>
+        <tr><th>Online booking</th><td>Link to your booking tool</td><td class="featured-col">Embedded (Square, Vagaro, Booksy…)</td><td>Embedded booking, styled to match</td></tr>
+        <tr><th>Reviews</th><td>3 reviews + Google review link</td><td class="featured-col">6–8 reviews + review-request QR code</td><td>+ a full reviews page</td></tr>
+        <tr><th>Local search</th><td>Titles, sitemap, Search Console</td><td class="featured-col">+ schema, area pages, Google profile</td><td>+ plan for 10 local search terms</td></tr>
+        <tr><th>Blog</th><td>—</td><td class="featured-col">—</td><td>3 launch posts written for local search</td></tr>
+        <tr><th>Analytics</th><td>Visitor analytics</td><td class="featured-col">+ call and form click tracking</td><td>+ 30-day results report</td></tr>
+        <tr><th>Writing</th><td>You supply it; I edit and polish</td><td class="featured-col">I write it from a 30-minute interview</td><td>I write everything</td></tr>
+        <tr><th>Photos</th><td>Yours or licensed stock</td><td class="featured-col">15 stock images + yours, optimized</td><td>+ 1-hour on-site photo session</td></tr>
+        <tr><th>Revision rounds</th><td>2</td><td class="featured-col">2</td><td>3</td></tr>
+        <tr class="price-row"><th>Ready in</th><td>10 business days</td><td class="featured-col">15 business days</td><td>25 business days</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="founding">
+    <div>
+      <h2>Founding-client prices</h2>
+      <div class="prices">
+        <div><b>$900</b>Starter <s>$1,500</s></div>
+        <div><b>$1,800</b>Growth <s>$2,800</s></div>
+      </div>
+    </div>
+    <p><strong>For my first 3 clients only</strong> (not offered on Premium). In return, you agree in writing to a short testimonial and to let me show your site as an example of my work. Includes 3 months of Care Standard.</p>
+  </div>
+
+  <section>
+    <h2>Monthly care plans <span>I host it, keep it running, and make your edits. No logins for you to manage.</span></h2>
+    <table class="care">
+      <colgroup><col class="label"><col><col><col></colgroup>
+      <thead>
+        <tr>
+          <th></th>
+          <th><div class="plan"><div class="head"><h3>Care Essential</h3><div class="price">$49<small>/mo</small></div></div><div class="for">Hosting and upkeep</div></div></th>
+          <th><div class="plan featured"><div class="head"><h3>Care Standard</h3><div class="price">$99<small>/mo</small></div></div><div class="for"><span class="tag">3 months included</span>with every build</div></div></th>
+          <th><div class="plan"><div class="head"><h3>Care Plus</h3><div class="price">$199<small>/mo</small></div></div><div class="for">Ongoing content and local search</div></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th>Every plan</th><td colspan="3">Hosting and SSL · uptime monitoring · forms and booking tested monthly · security updates · backups</td></tr>
+        <tr><th>Edits per month</th><td>30 minutes</td><td class="featured-col">1 hour</td><td>3 hours</td></tr>
+        <tr><th>I reply within</th><td>3 business days</td><td class="featured-col">1 business day</td><td>Same business day</td></tr>
+        <tr><th>Monthly report</th><td>—</td><td class="featured-col">One-page email: visits, calls, forms</td><td>Report + 20-minute quarterly call</td></tr>
+        <tr><th>Google profile</th><td>—</td><td class="featured-col">2 posts a month</td><td>4 posts a month + review replies</td></tr>
+        <tr><th>New content</th><td>—</td><td class="featured-col">—</td><td>1 blog post or service page a month</td></tr>
+        <tr><th>Yearly refresh</th><td>—</td><td class="featured-col">New photos, copy tune-up</td><td>New photos, copy tune-up</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>How it works</h2>
+    <ul class="terms">
+      <li><strong>Starter and Growth: half to book, half at launch.</strong> Premium: 40% to book, 30% at first review, 30% at launch. Founding Starter: paid upfront.</li>
+      <li><strong>The build clock starts once your content is in.</strong> Your site stays on a preview link until the final payment.</li>
+      <li><strong>A revision round</strong> is one combined list of changes, sent within 5 business days. New pages or features are quoted first.</li>
+      <li><strong>Care Standard renews at $99/mo</strong> after the 3 included months. Cancel with 30 days' notice. Unused edit time doesn't roll over.</li>
+      <li><strong>You own your domain, Google profile and accounts.</strong> If you leave a care plan, I hand over the code and help you move ($150 one-time).</li>
+      <li><strong>Need more?</strong> Work beyond your care plan is $75/hr, always quoted before I start.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Add-ons <span>Percentages are based on the price you pay.</span></h2>
+    <ul class="addons">
+      <li>Extra page <b>$150</b></li>
+      <li>Spanish version <b>+40%</b></li>
+      <li>Logo refresh <b>$250</b></li>
+      <li>Extra revision round <b>$150</b></li>
+      <li>Rush, half the time <b>+25%</b></li>
+      <li>Google profile optimization <b>$250</b></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="contact">
+      <div class="who"><span class="placeholder">[Your name]</span> · Trinity Web Co.</div>
+      <div class="lines">
+        <span class="placeholder">[Phone / text]</span>
+        <span class="placeholder">[Email]</span>
+        <span class="placeholder">[Website]</span>
+      </div>
+    </div>
+    <p class="fine">Prices as of October 2026. No one can honestly guarantee Google rankings or sales, so I don't. I'll tell you exactly what I'll build and how we'll measure it.</p>
+  </footer>
+
+</main>
+</body>
+</html>
