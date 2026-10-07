@@ -1,6 +1,7 @@
 ---
 // Contact or quote form. Posts to Formspree / Web3Forms (no server code), with a honeypot
 // for spam, text error messages, and a status line announced to screen readers.
+import { site } from '../content/site';
 import { isPlaceholder } from '../lib/format';
 
 interface Props {
@@ -36,6 +37,8 @@ const {
 
 const id = (name: string) => `${idPrefix}-${name}`;
 const configured = !isPlaceholder(endpoint);
+// Demo sites (site.demo) check the fields, then say nothing was sent
+const demo = site.demo === true;
 const fieldClass =
   'w-full rounded-btn border-[1.5px] border-[#9CA3AF] bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error';
 const labelClass = 'mb-1.5 block text-base font-semibold';
@@ -43,11 +46,12 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
 
 <form
   class:list={['rounded-card border border-line p-5 sm:p-8', surface ? 'bg-surface' : 'bg-bg']}
-  action={endpoint}
+  action={demo ? undefined : endpoint}
   method="POST"
   novalidate
   data-contact-form
   data-configured={configured ? 'true' : 'false'}
+  data-demo={demo ? 'true' : undefined}
   data-success={successMessage}
   data-fallback={fallback}
   data-submit-label={submitLabel}
@@ -128,6 +132,12 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
         invalid[0].focus();
         const names = invalid.map((field) => form.querySelector(`label[for="${field.id}"]`)?.textContent?.trim().toLowerCase().replace(/[?:.]$/, ''));
         show(`Please fill in: ${names.join(', ')}.`, 'error');
+        return;
+      }
+
+      if (form.dataset.demo === 'true') {
+        form.reset();
+        show('This is a demo site, so nothing was sent. On a real site, this message goes straight to the owner’s inbox.', 'success');
         return;
       }
 

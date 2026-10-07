@@ -15,7 +15,9 @@ interface Props {
   noindex?: boolean;
 }
 
-const { title, description = site.seo.description, ogImage = site.seo.ogImage, noindex = false } = Astro.props;
+const { title, description = site.seo.description, ogImage = site.seo.ogImage } = Astro.props;
+// Demo sites are made-up businesses, so keep them out of search results
+const noindex = Astro.props.noindex || site.demo;
 const fullTitle = title ? `${title} | ${site.name}` : site.seo.title;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImageUrl = new URL(ogImage, site.url).href;
@@ -47,6 +49,17 @@ const schema = localBusinessSchema(site);
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    {
+      site.demo && (
+        <aside class="bg-text px-4 py-1.5 text-center text-sm leading-snug text-bg" aria-label="Demo notice">
+          <strong>Demo site:</strong> a made-up business.
+          <span class="max-sm:hidden">
+            {' '}Built by{' '}
+            <a class="text-bg underline" href="https://trinitywebco.com/">Trinity Web Co.</a>
+          </span>
+        </aside>
+      )
+    }
     <Header />
     <main id="main">
       <slot />

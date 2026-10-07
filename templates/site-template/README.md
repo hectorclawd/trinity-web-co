@@ -44,6 +44,10 @@ vercel.json                security headers and CSP
 | `features.blog` | false | false | true |
 | Reviews | 3 | 6–8 | 6–8, plus a reviews page |
 
+## Demo sites
+
+Trinity Web Co.'s own demo sites (playbook section 7) are built from this template like any client site, with `demo: true` in `site.ts`. That adds a slim "Demo site: a made-up business" bar above the header, makes the forms say nothing was sent instead of posting anywhere, adds `noindex` to every page, and swaps the privacy page's form section for a demo note. Leave out reviews, license numbers and awards: on a made-up business they'd be invented. Never set `demo` on a client site.
+
 ## Improve the template, not just the site
 
 When you build something worth reusing for a client (e.g. a before/after slider), copy it back into this template the same week (playbook section 5).

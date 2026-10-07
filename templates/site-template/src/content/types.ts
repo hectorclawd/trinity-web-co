@@ -126,4 +126,9 @@ export interface SiteConfig {
   };
   /** "Website by Trinity Web Co." in the footer */
   credit: boolean;
+  /**
+   * Trinity Web Co. demo sites only (playbook section 7): a slim "Demo site" banner on every page,
+   * a form that sends nothing, and noindex. Never set this on a client site.
+   */
+  demo?: boolean;
 }
