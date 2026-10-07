@@ -22,5 +22,9 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
 6. Images: put the client's photos in `src/assets/` (keep each under ~2,000px; Astro outputs WebP), update the imports in `site.ts`, and write real alt text. Replace `public/favicon.svg` and `public/og-image.jpg` (1200×630).
 7. If there's a booking embed or another iframe, add its host to `frame-src` in `vercel.json`. If the form uses Web3Forms, it's already allowed.
 8. Run `npm run check` and `npm run build`. Fix every error.
-9. Search the repo for `[Sample`, `REPLACE_ME` and `{{` (skip `node_modules/`, `README.md`, `docs/qa-report.md`, which `/qa` fills, and `src/lib/format.ts`, which checks for `REPLACE_ME` on purpose), and list anything left with the reason (e.g. "waiting on Formspree ID").
-10. Report what you filled, what you removed, and what's still missing from the client. One commit: "Set up site from intake".
+9. Vercel, previews only until launch day. A new project's first plain `vercel deploy` goes to **production** (it happened on our own site and on the first demo), so never run it without a target:
+   - `npx vercel link --yes --project site-<client-slug>` (creates the project if it doesn't exist).
+   - `npx vercel deploy --target=preview`, every time until launch.
+   - `npx vercel ls site-<client-slug>`: the Environment column must say Preview. If a Production deployment is listed, remove it with `npx vercel remove <its URL> --yes` and tell Hector.
+10. Search the repo for `[Sample`, `REPLACE_ME` and `{{` (skip `node_modules/`, `README.md`, `docs/qa-report.md`, which `/qa` fills, and `src/lib/format.ts`, which checks for `REPLACE_ME` on purpose), and list anything left with the reason (e.g. "waiting on Formspree ID").
+11. Report what you filled, what you removed, and what's still missing from the client. One commit: "Set up site from intake".

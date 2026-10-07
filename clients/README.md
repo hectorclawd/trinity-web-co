@@ -22,7 +22,7 @@ One folder per client, named with the client slug: `<business>-<area>`, lowercas
    git clone https://github.com/trinitywebco-sites/site-<client-slug>.git clients/<client-slug>/site
    ```
 4. Paste the intake form answers into `site/docs/intake.md`, then run `/new-site` in that repo. The repo's own `CLAUDE.md` takes it from there.
-5. Create the Vercel project with the same name as the repo (`site-<client-slug>`).
+5. `/new-site` creates the Vercel project with the same name as the repo (`site-<client-slug>`) and deploys a preview. Until launch day, always deploy with `--target=preview`: a new project's first plain `vercel deploy` goes to production.
 
 The site repo has its own git history. This repo ignores `clients/*/site/`, so client code is never committed here.
 
