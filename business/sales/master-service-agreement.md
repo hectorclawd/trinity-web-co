@@ -4,9 +4,7 @@
 >
 > **How it fits with the scope page:** each client signs this agreement once. Each project or care plan then gets its own project scope page (`contract-scope-template.md`), signed by both sides. This agreement holds the terms that are the same for every client. The scope page holds the details for one project: package, pages, prices, payment schedule, dates and care plan. Sections 1–12 here line up with sections 1–12 on the scope page, so each pair covers the same playbook §6 contract essential.
 >
-> **Two kinds of notes in this draft:**
-> - **⚖ Attorney review:** a clause the attorney should check or rewrite. All of them are also listed in the "Attorney review list" at the end.
-> - **✎ Hector to decide:** the playbook doesn't cover this yet. Decide, fill in the blank, and log the decision in the playbook if it becomes a Default.
+> **⚖ Attorney review** marks a clause the attorney should check or rewrite. All of them are also listed in the "Attorney review list" at the end.
 
 ---
 
@@ -53,10 +51,9 @@ This master service agreement (the "Agreement") starts on ________ (the "Effecti
 3.2 **Deposit.** Work starts only after the deposit has cleared. The deposit holds Client's place in Designer's schedule.
 - If Client cancels **before the kickoff call**, Designer refunds the deposit in full.
 - If Client cancels **after the kickoff call**, the deposit is not refundable.
+- When a Scope is paid 100% at signing (founding Starter), **50% of that payment counts as the deposit**. If Client cancels after the kickoff call, section 11.3 decides how much of the other 50% is refunded.
 
 > **⚖ Attorney review:** confirm that this refund rule is enforceable as written and appears the same way here, in section 11 and on the Scope.
->
-> **✎ Hector to decide:** for a project paid 100% at signing (founding Starter), how much counts as the "deposit" if Client cancels after kickoff? Options: ☐ the full payment ☐ 50% of it, with the rest refunded minus completed work.
 
 3.3 **Final payment before Launch.** The final payment is due before Designer points the domain at the Site. Until then, the Site stays on a preview link.
 
@@ -134,9 +131,7 @@ Client will:
 
 7.5 **No uptime promise.** Designer monitors the Site and works to fix outages within the plan's response time. Designer doesn't guarantee uptime, and isn't responsible for outages caused by the hosting provider, the domain registrar, Client's form or booking tools, or other third parties, beyond working with them to fix the problem.
 
-7.6 **Late care-plan payments.** If a care-plan payment fails and isn't fixed within 15 days, Designer may pause edits and other care-plan work. Designer will not take the Site offline for non-payment without at least ____ days' written notice.
-
-> **✎ Hector to decide:** whether you'll ever take a site offline for non-payment, and after how many days' notice. Taking a client's site offline hurts their business and your reputation; most designers pause edits and send a final notice first.
+7.6 **Late care-plan payments.** If a care-plan payment fails and isn't fixed within 15 days, Designer may pause edits and other care-plan work until it's paid. **Designer never takes the Site offline for non-payment.** Hosting, SSL and the Site's forms keep running while edits are paused.
 
 7.7 **Cancellation.** Either party may cancel a care plan with 30 days' written notice.
 
@@ -191,9 +186,11 @@ Designer does the handoff only once all amounts due are paid. After the handoff,
 
 > **⚖ Attorney review:** same wording as 3.2. Confirm both stay identical.
 
-11.3 **Work done.** If a project ends after the kickoff call, Client pays for the work completed up to the termination date, at $75 an hour, minus payments already made. Client never pays more than the Scope total.
+11.3 **Work done.** If a project ends after the kickoff call, Client owes the greater of:
+- the deposit, or
+- the work completed up to the termination date, at $75 an hour.
 
-> **✎ Hector to decide:** the playbook says "work done is paid for" but doesn't say how to measure it. Hourly is the simplest to defend; the other option is the milestone payments already reached.
+Client never owes more than the Scope total. Designer subtracts the payments Client has already made: Client pays any difference, and Designer refunds anything Client paid beyond what it owes. Designer keeps a log of hours worked on each project and shares it on request.
 
 11.4 **Ownership on termination.** Client gets rights under section 6 only in work that has been paid for.
 
@@ -275,6 +272,5 @@ By signing, each party agrees to this Agreement. Each signer confirms they have 
 ## Before first use (Hector)
 
 - [ ] Fill in Designer's legal name, entity type and business address. Use a PO box or virtual mailbox, not a home address.
-- [ ] Decide the three ✎ items: what counts as the deposit when a founding Starter pays 100% upfront (3.2), notice before taking a site offline (7.6), and how completed work is measured on termination (11.3).
-- [ ] Attorney review, then remove every ⚠, ⚖ and ✎ note and this checklist.
+- [ ] Attorney review, then remove every ⚠ and ⚖ note and this checklist.
 - [ ] Save the reviewed version as the template in the e-sign tool (playbook §6).

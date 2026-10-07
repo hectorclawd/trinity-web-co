@@ -29,6 +29,9 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Deposit is fully refundable until the kickoff call, non-refundable after. **Attorney to confirm** | Fair to clients who back out before any work; protects time once work starts | Attorney review of the contract |
 | 2026-10-07 | Sales tax on care-plan hosting left undecided; contracts carry a blank | Needs an answer from the Texas Comptroller or a CPA (§6) | Before the first care-plan invoice |
 | 2026-10-07 | Prospect tracker status values: Contacted, Follow-up 1, Follow-up 2, Replied, Call booked, Proposal sent, Signed, Not interested, Opted out, No reply (closed) | Lets you count the §7 funnel the same way every week | End of the first 30 days of outreach |
+| 2026-10-07 | When a founding Starter pays 100% upfront, 50% ($450) counts as the deposit | Keeps the deposit rule the same as every 50/50 project; a client who cancels after kickoff gets back the rest, minus work done | Attorney review of the contract |
+| 2026-10-07 | Never take a client's site offline for an unpaid care plan; pause edits and care work until it's paid | Taking a site offline hurts the client's business and Hector's reputation more than the unpaid fee is worth | After the first unpaid care plan |
+| 2026-10-07 | If a project ends after kickoff, work done is measured hourly at $75; the client owes the greater of the deposit or hours worked, never more than the project total | Simplest to explain and defend; matches the out-of-scope hourly rate | Attorney review of the contract |
 
 ### Changelog
 
@@ -50,6 +53,8 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Decisions log: sales tax on care plans left as a blank |
 | 2026-10-07 | §7: tracker gets a notes column and fixed status values |
 | 2026-10-07 | Sales materials added in `business/sales/`; old pricing, contracts, outreach and lead tracker moved to `business/archive/` |
+| 2026-10-07 | Master service agreement drafted in `business/sales/` (attorney review pending) |
+| 2026-10-07 | §3, §4, §6: founding Starter deposit is 50% of the upfront payment; never take a site offline for non-payment; work done on termination billed hourly at $75 |
 
 ## 1. Business model
 
@@ -173,6 +178,7 @@ Three care plans at $49, $99 and $199 a month: Care Essential, Care Standard and
 - Unused edit time does not roll over.
 - Work beyond the plan is billed at $75/hr in 30-minute blocks, quoted before you start.
 - Bill care plans on the same day each month by auto-charge (card or ACH) so you never chase payments.
+- If a care-plan payment fails and isn't fixed within 15 days, pause edits and care work until it's paid. Never take the site offline for non-payment.
 - Raise prices for new clients first; give existing clients 60 days' notice of any increase.
 
 ## 4. Client workflow: first contact to launch
@@ -234,7 +240,7 @@ Build this once in Tally or Google Forms and send the link after the deposit cle
 
 ### Payment structure
 
-**Default:** Starter and Growth are 50% deposit to book, 50% before launch. Premium is 40/30/30: 40% to book, 30% at first review, 30% at launch. Projects under $1,000 (founding Starter) are paid 100% upfront.
+**Default:** Starter and Growth are 50% deposit to book, 50% before launch. Premium is 40/30/30: 40% to book, 30% at first review, 30% at launch. Projects under $1,000 (founding Starter) are paid 100% upfront, and 50% of that payment counts as the deposit.
 
 - The deposit holds your calendar slot. It is fully refundable until the kickoff call and non-refundable after it. (Attorney to confirm this wording before first use.)
 - Final payment is due before you point the domain at the new site. The site stays on a preview link until paid.
@@ -434,7 +440,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 
 1. **Scope:** package name, exact page list, features, number of revision rounds, what is *not* included
 2. **Timeline:** turnaround in business days starting when content is complete; client content due date
-3. **Payment:** 50/50 schedule for Starter and Growth (founding Starter paid 100% upfront), 40/30/30 for Premium; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
+3. **Payment:** 50/50 schedule for Starter and Growth (founding Starter paid 100% upfront, 50% of it counts as the deposit), 40/30/30 for Premium; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
 4. **Revisions and change orders:** what a round is; new requests quoted in writing first; hourly rate
 5. **Client responsibilities:** content, accuracy of their claims and licenses, rights to photos and logos they send
 6. **Ownership:** client owns the final site code, content and domain once paid in full; you keep the right to reuse your template and components, and to show the site in your portfolio
@@ -442,7 +448,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 8. **Abandonment:** if the client goes silent 30+ days, you may invoice the balance and close or launch the project
 9. **Warranty:** 30 days of free bug fixes after launch (bugs, not new requests)
 10. **Limitation of liability:** capped at fees paid; no guarantee of search rankings or revenue
-11. **Termination:** either side with written notice; deposit fully refundable until the kickoff call, non-refundable after (attorney to confirm); work done is paid for
+11. **Termination:** either side with written notice; deposit fully refundable until the kickoff call, non-refundable after (attorney to confirm); work done is paid for at $75/hour (client owes the greater of the deposit or hours worked, never more than the project total)
 12. **Governing law:** Texas, Dallas County
 
 ### Invoicing and admin tools

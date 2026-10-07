@@ -69,7 +69,7 @@
 | Second payment | $________ (30%) | When the first review link is sent |
 | Final payment | $________ (30%) | Before the domain points to the new site |
 
-*Founding Starter ($900): paid 100% upfront at signing.* Delete the schedules that don't apply.
+*Founding Starter ($900): paid 100% upfront at signing. $450 of it (50%) counts as the deposit.* Delete the schedules that don't apply.
 
 - **Deposit refunds:** the deposit is fully refundable if the Client cancels before the kickoff call, and non-refundable after the kickoff call. *(Attorney to confirm this wording.)*
 - Percentage add-ons (Spanish version, rush delivery) are calculated on the package price the Client actually pays.
@@ -129,7 +129,7 @@ For 30 days after launch, the Designer fixes bugs (things that don't work as bui
 
 - Either side may end the project with written notice.
 - The deposit is fully refundable until the kickoff call and non-refundable after it. *(Attorney to confirm.)*
-- The Client pays for all work completed up to the termination date.
+- After the kickoff call, the Client pays the greater of the deposit or the work completed up to the termination date at $75/hour, never more than the total above. Any amount paid beyond that is refunded (master service agreement §11.3).
 
 ## 12. Governing law
 
