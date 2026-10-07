@@ -7,7 +7,7 @@ Run the playbook's pre-launch QA (section 5) and record the results in `docs/qa-
 1. `npm run check`: must be 0 errors.
 2. `npm run build`: must succeed.
 3. `npm run qa:links`: no broken internal links.
-4. Search `src/` and `dist/` for `[Sample`, `REPLACE_ME`, `{{` and lorem ipsum. Each hit fails "No placeholder text".
+4. Search `src/` and `dist/` for `[Sample`, `REPLACE_ME`, `{{` and lorem ipsum, skipping `src/lib/format.ts` (its `isPlaceholder()` checks for `REPLACE_ME` on purpose). Each other hit fails "No placeholder text".
 5. Start `npm run preview` in the background. Then:
    - Lighthouse mobile, 3 runs on the homepage and one inner page: `npx lighthouse <url> --quiet --chrome-flags="--headless" --only-categories=performance,accessibility,best-practices,seo --output=json --output-path=<scratch file>`. Record the median of each score and the LCP. Targets: Performance 90+, Accessibility 95+, LCP under 2.5 s.
    - Playwright screenshots of every page at 360, 390, 768, 1024 and 1440px. Check each width for sideways scrolling (`document.documentElement.scrollWidth > innerWidth`), and look at the screenshots for anything broken.
