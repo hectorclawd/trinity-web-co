@@ -98,7 +98,7 @@ export interface SiteConfig {
 
   booking?: { provider: string; url: string; embedUrl?: string };
   forms: {
-    /** Formspree or Web3Forms endpoint. Leave "REPLACE_ME" until it exists. */
+    /** Formspree or Web3Forms endpoint. Keep the template placeholder until it exists (see isPlaceholder in src/lib/format.ts). */
     contactEndpoint: string;
     /** Job types for the quote form (Growth and Premium) */
     quoteJobTypes?: string[];
