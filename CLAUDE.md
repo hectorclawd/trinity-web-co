@@ -27,6 +27,7 @@ Rules for using it:
 - **When anything in this repo conflicts with the playbook, the playbook wins.** Point out the conflict to Hector instead of silently picking one.
 - **Quote prices only from the playbook.** Don't use numbers from older files or from memory.
 - **Build client sites with the playbook's stack and template structure** (§5): Astro + Tailwind, every business fact in `src/content/site.ts`, GitHub org `trinitywebco-sites`, Vercel Pro, and the repo, branch and commit naming in the naming conventions table.
+- **`templates/site-template/` in this repo is the source of truth for the client template.** Make template fixes here first and commit them, then push them to `trinitywebco-sites/site-template` afterward. To update it, clone the org repo, delete its tracked files (`git rm -rq .`), extract `git archive HEAD:templates/site-template` into it, then commit and push. Never edit the org repo directly, and never push this repo's history or anything outside `templates/site-template/` to it.
 - **Never mark a site ready to launch until every item in the §5 QA checklist passes** and the §4 launch checklist is done. Save the results in the client repo's `docs/qa-report.md`.
 - **When Hector changes a Default,** add a row to the playbook's decisions log (date, decision, why, revisit when) and a changelog line.
 
@@ -38,7 +39,7 @@ Rules for using it:
   sales/               Price sheet, discovery call, outreach scripts, master service agreement + scope template, intake form, prospect tracker
   archive/             Old pricing, contracts, outreach scripts and lead list, superseded by the playbook (see its README)
 /templates     Reusable starting points for client work
-  site-template/       Astro + Tailwind client starter (playbook §5); push to trinitywebco-sites/site-template
+  site-template/       Astro + Tailwind client starter (playbook §5); source of truth for trinitywebco-sites/site-template
 /clients       One folder per client, named with the client slug (playbook §5)
   <client-slug>/site   The client's site repo, cloned from trinitywebco-sites (git-ignored here)
   <client-slug>/admin  Contract, invoices, intake; never in the site repo
@@ -79,7 +80,7 @@ Files built before the playbook was added, which now conflict with it:
 Other open items:
 
 - [ ] Domain. The site assumes `trinitywebco.com` and `hello@trinitywebco.com`.
-- [ ] Create the `trinitywebco-sites` GitHub org, push `templates/site-template/` to it as `site-template`, and mark it a template repository.
+- [x] `trinitywebco-sites` GitHub org created; `templates/site-template/` pushed to `trinitywebco-sites/site-template` as a private template repository with fresh history (52 files, exported from commit 24bdeed; 2026-10-07).
 - [x] Vercel project `trinity-web-co-site` created (root directory `site`, Astro preset, Node 24) and linked with the CLI from the repo root; `.vercelignore` uploads only `site/` (2026-10-07). Preview deployments only for now: the first deploy went to production by default and was removed, so `trinity-web-co-site.vercel.app` returns 404 until launch.
 - [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebco.com` domain and deploy to production.
 - [ ] Formspree form ID. Replace `REPLACE_ME` in `site.forms.contactEndpoint` in `site/src/content/site.ts`.
