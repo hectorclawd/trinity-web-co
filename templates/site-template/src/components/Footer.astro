@@ -39,7 +39,7 @@ const social = site.social.filter((link) => !isPlaceholder(link.href));
       {
         site.credit && (
           <span>
-            {' '}Website by{' '}
+            <span aria-hidden="true">{' '}·</span>{' '}Website by{' '}
             <a class="text-white" href="https://trinitywebco.com/">Trinity Web Co.</a>
           </span>
         )
