@@ -85,3 +85,5 @@ Other open items:
 - [x] Social share image: `site/public/og-image.png` (1200×630).
 - [ ] Headshot and a short personal story for the About section.
 - [ ] Business setup per playbook §6 (LLC, EIN, bank account, sales tax question on hosting).
+- [ ] Attorney review (playbook §6, about $300–$600) of `business/sales/master-service-agreement.md` and `business/sales/contract-scope-template.md` before the first client signs.
+- [ ] Attorney to confirm the deposit refund rule: fully refundable until the kickoff call, non-refundable after (founding Starter: 50% of the upfront payment counts as the deposit). Playbook §4 and contract essentials #3 and #11.
