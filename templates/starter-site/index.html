@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{BUSINESS_NAME}} | {{SHORT_TAGLINE}} in {{CITY}}</title>
+  <meta name="description" content="{{META_DESCRIPTION — 140–160 characters: what you do, where, and why choose you}}">
+  <link rel="canonical" href="https://{{DOMAIN}}/">
+  <meta name="theme-color" content="#1F3A5F">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{BUSINESS_NAME}} | {{SHORT_TAGLINE}}">
+  <meta property="og:description" content="{{META_DESCRIPTION}}">
+  <meta property="og:url" content="https://{{DOMAIN}}/">
+  <meta property="og:image" content="https://{{DOMAIN}}/images/og-image.jpg">
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+  <!-- Fonts: pick one or two per client at fonts.google.com, then update --font-display / --font-body in styles.css.
+       Remove these three lines to use system fonts (fastest). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <!-- LocalBusiness schema: use the most specific type (Restaurant, HairSalon, Plumber, Dentist, Store...).
+       Name, address and phone must match the Google Business Profile exactly. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{{SCHEMA_TYPE}}",
+    "name": "{{BUSINESS_NAME}}",
+    "url": "https://{{DOMAIN}}/",
+    "telephone": "{{PHONE_E164}}",
+    "email": "{{EMAIL}}",
+    "image": "https://{{DOMAIN}}/images/og-image.jpg",
+    "priceRange": "{{PRICE_RANGE e.g. $$}}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{STREET}}",
+      "addressLocality": "{{CITY}}",
+      "addressRegion": "TX",
+      "postalCode": "{{ZIP}}",
+      "addressCountry": "US"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": {{LAT}}, "longitude": {{LNG}} },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00" }
+    ],
+    "sameAs": ["{{FACEBOOK_URL}}", "{{INSTAGRAM_URL}}"]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="/">
+        <!-- Swap for <img src="/images/logo.svg" alt="{{BUSINESS_NAME}}" width="160" height="40"> when there's a logo -->
+        {{BUSINESS_NAME}}
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#visit">Hours and location</a>
+        <a class="btn btn-primary btn-small" href="tel:{{PHONE_E164}}">Call {{PHONE_DISPLAY}}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <h1>{{HEADLINE — what you do and for whom, in under 10 words}}</h1>
+          <p class="lede">{{ONE_OR_TWO_SENTENCES — what makes this business the right choice, and the neighborhood it serves}}</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="tel:{{PHONE_E164}}">Call {{PHONE_DISPLAY}}</a>
+            <a class="btn btn-secondary" href="#contact">{{SECONDARY_ACTION e.g. Get a free quote / Book online / See the menu}}</a>
+          </div>
+        </div>
+        <img class="hero-img" src="/images/hero.jpg" alt="{{HERO_ALT — describe the photo}}" width="1200" height="900" fetchpriority="high">
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="wrap">
+        <h2>{{SERVICES_HEADING e.g. What we do}}</h2>
+        <!-- Copy a .service block per service. Remove the price line if the client doesn't publish prices. -->
+        <div class="services">
+          <article class="service">
+            <h3>{{SERVICE_1}}</h3>
+            <p>{{SERVICE_1_DESCRIPTION}}</p>
+            <p class="price">{{SERVICE_1_PRICE e.g. From $45}}</p>
+          </article>
+          <article class="service">
+            <h3>{{SERVICE_2}}</h3>
+            <p>{{SERVICE_2_DESCRIPTION}}</p>
+            <p class="price">{{SERVICE_2_PRICE}}</p>
+          </article>
+          <article class="service">
+            <h3>{{SERVICE_3}}</h3>
+            <p>{{SERVICE_3_DESCRIPTION}}</p>
+            <p class="price">{{SERVICE_3_PRICE}}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section section-alt">
+      <div class="wrap about">
+        <img src="/images/about.jpg" alt="{{ABOUT_ALT e.g. Owner Maria Lopez in the shop on Bishop Ave}}" width="800" height="1000" loading="lazy">
+        <div>
+          <h2>{{ABOUT_HEADING}}</h2>
+          <p>{{ABOUT_PARAGRAPH_1 — the story: who started it, when, why}}</p>
+          <p>{{ABOUT_PARAGRAPH_2 — what customers can count on}}</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews: REAL reviews only, quoted word for word, with the customer's permission. Delete this section if there are none yet. -->
+    <section class="section" aria-labelledby="reviews-title">
+      <div class="wrap">
+        <h2 id="reviews-title">What customers say</h2>
+        <div class="reviews">
+          <figure class="review">
+            <blockquote><p>{{REVIEW_1_TEXT}}</p></blockquote>
+            <figcaption>{{REVIEW_1_NAME}}, via Google</figcaption>
+          </figure>
+          <figure class="review">
+            <blockquote><p>{{REVIEW_2_TEXT}}</p></blockquote>
+            <figcaption>{{REVIEW_2_NAME}}, via Google</figcaption>
+          </figure>
+        </div>
+        <p class="reviews-link"><a href="{{GOOGLE_REVIEWS_URL}}">Read all reviews on Google</a></p>
+      </div>
+    </section>
+
+    <section id="visit" class="section section-alt">
+      <div class="wrap visit">
+        <div>
+          <h2>Hours and location</h2>
+          <address>
+            {{STREET}}<br>
+            {{CITY}}, TX {{ZIP}}
+          </address>
+          <p><a class="btn btn-secondary" href="https://www.google.com/maps/dir/?api=1&amp;destination={{URL_ENCODED_ADDRESS}}">Get directions</a></p>
+          <p class="area">{{SERVICE_AREA_NOTE — optional, e.g. We serve Oak Cliff, Kessler Park and Bishop Arts}}</p>
+        </div>
+        <table class="hours">
+          <caption class="visually-hidden">Opening hours</caption>
+          <tbody>
+            <tr><th scope="row">Monday–Friday</th><td>9 am – 6 pm</td></tr>
+            <tr><th scope="row">Saturday</th><td>10 am – 4 pm</td></tr>
+            <tr><th scope="row">Sunday</th><td>Closed</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="wrap contact">
+        <div>
+          <h2>{{CONTACT_HEADING e.g. Get a free quote}}</h2>
+          <p>{{CONTACT_INTRO e.g. Tell us what you need and we'll get back to you within one business day.}}</p>
+          <p>Or call <a href="tel:{{PHONE_E164}}">{{PHONE_DISPLAY}}</a></p>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/{{FORMSPREE_ID}}" method="POST" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone <span class="optional">(optional)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="message">How can we help?</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary btn-block" type="submit">Send message</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <p class="footer-name">{{BUSINESS_NAME}}</p>
+        <p>{{STREET}}, {{CITY}}, TX {{ZIP}}</p>
+        <p><a href="tel:{{PHONE_E164}}">{{PHONE_DISPLAY}}</a> &middot; <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="{{FACEBOOK_URL}}">Facebook</a>
+        <a href="{{INSTAGRAM_URL}}">Instagram</a>
+      </div>
+      <p class="credit">&copy; <span data-year>2026</span> {{BUSINESS_NAME}}. Website by <a href="https://trinitywebco.com/">Trinity Web Co.</a></p>
+    </div>
+  </footer>
+
+  <!-- Sticky call bar on phones: the most-used button on most local sites -->
+  <a class="call-bar" href="tel:{{PHONE_E164}}">Call {{PHONE_DISPLAY}}</a>
+
+  <script src="/main.js" defer></script>
+</body>
+</html>

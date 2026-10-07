@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+node_modules/
+.playwright-cli/
+.wrangler/
+.env
+
+# Client site repos live in their own git repos (trinitywebco-sites org)
+clients/*/site/
