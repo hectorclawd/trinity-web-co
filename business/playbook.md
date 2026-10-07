@@ -33,6 +33,9 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Never take a client's site offline for an unpaid care plan; pause edits and care work until it's paid | Taking a site offline hurts the client's business and Hector's reputation more than the unpaid fee is worth | After the first unpaid care plan |
 | 2026-10-07 | If a project ends after kickoff, work done is measured hourly at $75; the client owes the greater of the deposit or hours worked, never more than the project total | Simplest to explain and defend; matches the out-of-scope hourly rate | Attorney review of the contract |
 | 2026-10-07 | If a care plan is unpaid 60 days after its due date, Hector may end it by written notice and hand off the site; unpaid fees and the $150 handoff fee stay owed | Without an end point, a non-paying client's site would stay on Hector's Vercel account forever | Attorney review of the contract |
+| 2026-10-07 | Founding Starter stays 100% upfront at signing; it is the only exception to 50/50 for Starter and Growth | At $900, a second $450 invoice adds admin and protects very little | After 3 founding clients |
+| 2026-10-07 | After any care plan ends, keep hosting the site for 30 days so the client can move it, then remove it from the Vercel account | Gives the client time to move without hosting a site forever | Attorney review of the contract |
+| 2026-10-07 | The client owns the site once the build fees are paid; unpaid care-plan fees stay owed as a debt and don't affect ownership | Otherwise a client behind on care fees couldn't own their site, and the 60-day handoff couldn't happen | Attorney review of the contract |
 
 ### Changelog
 
@@ -57,6 +60,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Master service agreement drafted in `business/sales/` (attorney review pending) |
 | 2026-10-07 | §3, §4, §6: founding Starter deposit is 50% of the upfront payment; never take a site offline for non-payment; work done on termination billed hourly at $75 |
 | 2026-10-07 | §3: a care plan unpaid 60 days can be ended by written notice, followed by a handoff |
+| 2026-10-07 | §4, §6: 30 days of hosting after a care plan ends; ownership passes on payment of the build fees; founding Starter 100% upfront logged as the only 50/50 exception |
 
 ## 1. Business model
 
@@ -292,7 +296,7 @@ The biggest delay in this business is the client not sending content. Protect th
 - Give them a printed or digital QR code that links to their Google review page.
 - Day 7 after launch: ask for the testimonial and Google review.
 - Day 30: send the first results email (visits, calls, form submissions) and ask for one referral.
-- If they decline a care plan: transfer the GitHub repo to their account and walk them through moving hosting. Charge a one-time $150 handoff fee.
+- If they decline a care plan: transfer the GitHub repo to their account and walk them through moving hosting. Charge a one-time $150 handoff fee. Keep hosting the site for 30 days after any care plan ends, then remove it from your Vercel account.
 
 ## 5. Technical build process
 
@@ -445,7 +449,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 3. **Payment:** 50/50 schedule for Starter and Growth (founding Starter paid 100% upfront, 50% of it counts as the deposit), 40/30/30 for Premium; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
 4. **Revisions and change orders:** what a round is; new requests quoted in writing first; hourly rate
 5. **Client responsibilities:** content, accuracy of their claims and licenses, rights to photos and logos they send
-6. **Ownership:** client owns the final site code, content and domain once paid in full; you keep the right to reuse your template and components, and to show the site in your portfolio
+6. **Ownership:** client owns the final site code, content and domain once the build fees are paid in full (unpaid care-plan fees stay owed but don't affect ownership); you keep the right to reuse your template and components, and to show the site in your portfolio
 7. **Hosting and care plan:** what's included, monthly price, 30-day cancellation, what happens on cancellation (handoff)
 8. **Abandonment:** if the client goes silent 30+ days, you may invoice the balance and close or launch the project
 9. **Warranty:** 30 days of free bug fixes after launch (bugs, not new requests)

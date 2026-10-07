@@ -105,7 +105,7 @@ Client will:
 
 6.2 **Designer Tools.** Designer keeps ownership of Designer Tools, even when they're part of the Site. Once Client has paid in full, Client gets a permanent, royalty-free, non-exclusive license to use, copy and change the Designer Tools inside the Site, including after a handoff. Client may not resell the Designer Tools on their own. Designer may reuse Designer Tools, and the general know-how from the project, for other clients.
 
-> **⚖ Attorney review:** the playbook says the client "owns the final site code" and that Designer can reuse its template and components. Sections 6.1 and 6.2 try to do both. Confirm they don't conflict, and whether Texas law needs specific wording to assign copyright (6.1).
+> **⚖ Attorney review:** the playbook says the client "owns the final site code" and that Designer can reuse its template and components. Sections 6.1 and 6.2 try to do both. Confirm they don't conflict, and whether Texas law needs specific wording to assign copyright (6.1). Also confirm that ownership passing on payment of the build fees alone, with unpaid care-plan fees left as a debt, protects Designer enough.
 
 6.3 **Third-party materials.** Stock photos, fonts, plugins and embedded tools stay under their own licenses. Designer uses only materials licensed for commercial use, and tells Client about any license terms Client needs to follow.
 
@@ -267,7 +267,7 @@ By signing, each party agrees to this Agreement. Each signer confirms they have 
 3. **Late fee:** 1.5% a month and Texas usury limits; whether to call it a fee or interest (3.5).
 4. **Sales tax** on care-plan hosting (3.7; also a CPA or Comptroller question).
 5. **Privacy policy and disclaimers:** whether that responsibility sits with Client (5.6).
-6. **Ownership wording:** Client owns the code while Designer keeps and licenses Designer Tools (6.1–6.2).
+6. **Ownership wording:** Client owns the Site once the build fees are paid, and unpaid care-plan fees don't affect ownership; Client owns the code while Designer keeps and licenses Designer Tools (6.1–6.2).
 7. **Automatic renewal and ending for non-payment:** disclosure and consent for the renewal after the 3 included months (7.3); notice, the handoff and collecting unpaid fees when a care plan ends after 60 days unpaid, and the 30-day hosting window afterward (7.6a, 7.8).
 8. **Abandonment:** whether invoicing the full remaining balance is enforceable (8.2).
 9. **Warranty disclaimer, accessibility and the Texas Deceptive Trade Practices Act:** wording, formatting and whether to include a waiver (9.3–9.4).
