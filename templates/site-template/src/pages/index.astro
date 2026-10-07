@@ -12,7 +12,7 @@ import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { site } from '../content/site';
-import { fullAddress } from '../lib/format';
+import { areaPath, fullAddress, servicePath } from '../lib/format';
 
 const address = fullAddress(site);
 const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
@@ -25,7 +25,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
     <div class="wrap">
       <h2 id="services-title">What we do</h2>
       <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {site.services.map((service) => <ServiceCard service={service} href={`/services/${service.slug}/`} />)}
+        {site.services.map((service) => <ServiceCard service={service} href={servicePath(service)} />)}
       </div>
     </div>
   </section>
@@ -69,7 +69,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
               {site.areas.map((area, i) => (
                 <>
                   {i > 0 && (i === site.areas.length - 1 ? ' and ' : ', ')}
-                  <a href={`/areas/${area.slug}/`}>{area.name}</a>
+                  {areaPath(area) ? <a href={areaPath(area)}>{area.name}</a> : area.name}
                 </>
               ))}
               .

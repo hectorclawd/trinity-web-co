@@ -1,4 +1,4 @@
-import type { HoursRow, SiteConfig } from '../content/types';
+import type { Area, HoursRow, Service, SiteConfig } from '../content/types';
 
 /** "09:00" → "9 am", "13:30" → "1:30 pm" */
 export function formatTime(time: string): string {
@@ -15,6 +15,16 @@ export function formatHours(row: HoursRow): string {
 /** True while an endpoint or URL still holds a template placeholder */
 export function isPlaceholder(value: string | undefined): boolean {
   return !value || value.includes('REPLACE_ME');
+}
+
+/** Link to a service's own page, or undefined when it has none (`page: false`) */
+export function servicePath(service: Service): string | undefined {
+  return service.page === false ? undefined : `/services/${service.slug}/`;
+}
+
+/** Link to an area's own page, or undefined when it has none (`page: false`) */
+export function areaPath(area: Area): string | undefined {
+  return area.page === false ? undefined : `/areas/${area.slug}/`;
 }
 
 export function fullAddress(site: SiteConfig): string | undefined {

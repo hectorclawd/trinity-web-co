@@ -15,7 +15,7 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
    - Set `features` for the package (see the README table) and set `seo.title` (under 60 characters) and `seo.description` (under 155).
 4. Remove what the package doesn't include:
    - Starter: delete `src/pages/services/`, `src/pages/areas/`, `src/pages/blog/`, `src/content/blog/` and the collection in `src/content.config.ts`; point service cards at `/#services` or omit `href`.
-   - Growth: delete the blog pages and content; keep at most 2 service or area pages.
+   - Growth: delete the blog pages and content; keep at most 2 service or area pages. List every service and area the client offers, and set `page: false` on the ones without their own page: they still show on the homepage, just without a link.
    - Premium: keep everything; delete the sample post once real posts exist.
    - Keep the page count within the package limit (4 / 7 / 12).
 5. Brand: update `src/styles/tokens.css` (colors, fonts) from the intake's brand answers. Swap the `@fontsource-variable` package if the font changes (`npm install`, update the import). Check every text and button color pair for 4.5:1 contrast.

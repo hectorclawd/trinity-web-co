@@ -29,6 +29,8 @@ export interface Service {
   body: string[];
   /** Shown only if the client publishes prices, e.g. "From $89" */
   priceFrom?: string;
+  /** false = listed on the site but no page of its own (to stay within the package's page limit) */
+  page?: boolean;
 }
 
 export interface Area {
@@ -36,6 +38,8 @@ export interface Area {
   name: string;
   summary: string;
   body: string[];
+  /** false = named on the site but no page of its own (to stay within the package's page limit) */
+  page?: boolean;
 }
 
 export interface Review {

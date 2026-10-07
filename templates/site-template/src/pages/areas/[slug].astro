@@ -5,9 +5,12 @@ import ServiceCard from '../../components/ServiceCard.astro';
 import CTABand from '../../components/CTABand.astro';
 import { site } from '../../content/site';
 import type { Area } from '../../content/types';
+import { areaPath, servicePath } from '../../lib/format';
 
 export const getStaticPaths = (() =>
-  site.areas.map((area) => ({ params: { slug: area.slug }, props: { area } }))) satisfies GetStaticPaths;
+  site.areas
+    .filter((area) => areaPath(area))
+    .map((area) => ({ params: { slug: area.slug }, props: { area } }))) satisfies GetStaticPaths;
 
 const { area } = Astro.props as { area: Area };
 const heading = `${site.primaryService} in ${area.name}`;
@@ -34,7 +37,7 @@ const heading = `${site.primaryService} in ${area.name}`;
     <div class="wrap">
       <h2 id="area-services">Services in {area.name}</h2>
       <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-        {site.services.map((service) => <ServiceCard service={service} href={`/services/${service.slug}/`} />)}
+        {site.services.map((service) => <ServiceCard service={service} href={servicePath(service)} />)}
       </div>
     </div>
   </section>

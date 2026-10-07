@@ -38,6 +38,7 @@ vercel.json                security headers and CSP
 | | Starter | Growth | Premium |
 |---|---|---|---|
 | Pages | index, about, contact (up to 4) | + 2 service or area pages, gallery or FAQ (up to 7) | + up to 4 more service or area pages, and blog (up to 12) |
+| Services and areas without their own page | n/a | `page: false` | `page: false` |
 | `features.quoteForm` | false | true | true (multi-step: extend ContactForm) |
 | `features.booking` | false (link only, in the nav or CTA) | true (embed) | true (embed, styled to match) |
 | `features.blog` | false | false | true |
