@@ -27,6 +27,11 @@ export function areaPath(area: Area): string | undefined {
   return area.page === false ? undefined : `/areas/${area.slug}/`;
 }
 
+/** "Heating repair" → "heating repair" for use mid-sentence; leaves "AC repair" alone */
+export function midSentence(name: string): string {
+  return /^[A-Z][a-z]/.test(name) ? name[0].toLowerCase() + name.slice(1) : name;
+}
+
 export function fullAddress(site: SiteConfig): string | undefined {
   const a = site.address;
   return a ? `${a.street}, ${a.city}, ${a.region} ${a.postalCode}` : undefined;

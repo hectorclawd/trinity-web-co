@@ -1,5 +1,6 @@
 ---
 import type { Service } from '../content/types';
+import { midSentence } from '../lib/format';
 
 interface Props {
   service: Service;
@@ -17,7 +18,7 @@ const { service, href } = Astro.props;
   {
     href && (
       <p class="mt-3 font-semibold">
-        <a href={href}>More about {service.name}</a>
+        <a href={href}>More about {midSentence(service.name)}</a>
       </p>
     )
   }
