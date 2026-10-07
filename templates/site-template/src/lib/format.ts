@@ -32,6 +32,13 @@ export function midSentence(name: string): string {
   return /^[A-Z][a-z]/.test(name) ? name[0].toLowerCase() + name.slice(1) : name;
 }
 
+/** Shortens text to under `max` characters at a word boundary, e.g. for meta descriptions (under 155) */
+export function clip(text: string, max = 155): string {
+  if (text.length < max) return text;
+  const cut = text.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,.;:–—-]+$/, '')}…`;
+}
+
 export function fullAddress(site: SiteConfig): string | undefined {
   const a = site.address;
   return a ? `${a.street}, ${a.city}, ${a.region} ${a.postalCode}` : undefined;

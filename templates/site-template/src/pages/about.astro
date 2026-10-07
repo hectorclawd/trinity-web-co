@@ -4,9 +4,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Reviews from '../components/Reviews.astro';
 import CTABand from '../components/CTABand.astro';
 import { site } from '../content/site';
+import { clip } from '../lib/format';
 ---
 
-<BaseLayout title="About" description={`${site.about.heading}. ${site.about.paragraphs[0]}`.slice(0, 155)}>
+<BaseLayout title="About" description={clip(`${site.about.heading}. ${site.about.paragraphs[0]}`)}>
   <section class="section">
     <div class={`wrap grid items-start gap-10 ${site.about.image ? 'md:grid-cols-[1.3fr_1fr] md:gap-16' : ''}`}>
       <div>
