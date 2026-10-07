@@ -18,7 +18,9 @@ interface Props {
 const { title, description = site.seo.description, ogImage = site.seo.ogImage } = Astro.props;
 // Demo sites are made-up businesses, so keep them out of search results
 const noindex = Astro.props.noindex || site.demo;
-const fullTitle = title ? `${title} | ${site.name}` : site.seo.title;
+const withName = title ? `${title} | ${site.name}` : site.seo.title;
+// Titles stay under 60 characters: a long page title drops the " | business name" suffix
+const fullTitle = title && withName.length >= 60 ? title : withName;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImageUrl = new URL(ogImage, site.url).href;
 const schema = localBusinessSchema(site);
