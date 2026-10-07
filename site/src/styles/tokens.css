@@ -1,0 +1,95 @@
+/* Trinity Web Co. brand tokens (template structure, Trinity values).
+   Ink #13262B, River #1D6B66, River deep #0E3F3C, Limestone #ECEFE9, Paper #FAFBF8, Gold #EDB23A.
+   Type: Archivo with its width axis. Headlines run wide; body text stays at normal width. */
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+
+@theme {
+  --color-brand: #1D6B66;       /* river: links, rules, step markers */
+  --color-brand-dark: #0E3F3C;  /* river deep: niche band, footer, prices */
+  --color-accent: #EDB23A;      /* gold: primary buttons and the founding offer only */
+  --color-accent-dark: #D99A1E;
+  --color-on-accent: #13262B;   /* ink on gold */
+  --color-bg: #ECEFE9;          /* limestone */
+  --color-surface: #FAFBF8;     /* paper */
+  --color-text: #13262B;        /* ink */
+  --color-muted: #3E5458;
+  --color-line: #C6CFC9;
+  --color-error: #B3261E;
+  --color-success: #0E3F3C;
+
+  --font-display: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Archivo Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --radius-card: 10px;
+  --radius-btn: 6px;
+}
+
+:root {
+  color-scheme: light;
+  --step-1: 1.375rem;                                   /* 22 */
+  --step-2: 1.75rem;                                    /* 28 */
+  --step-3: clamp(2rem, 1.4rem + 2.6vw, 3rem);          /* 32–48 */
+  --step-4: clamp(2.6rem, 1.4rem + 4.6vw, 4.75rem);     /* 42–76 */
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  body {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-stretch: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--color-text); line-height: 1.1; }
+  h1 { font-size: var(--step-4); font-weight: 820; font-stretch: 125%; line-height: 0.98; letter-spacing: -0.02em; }
+  h2 { font-size: var(--step-3); font-weight: 780; font-stretch: 116%; letter-spacing: -0.015em; max-width: 22ch; }
+  h3 { font-size: var(--step-1); font-weight: 720; font-stretch: 108%; line-height: 1.25; }
+  a { color: var(--color-brand); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { color: var(--color-brand-dark); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; border-radius: 2px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; }
+  }
+}
+
+@layer components {
+  .wrap { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2.5rem); }
+  .section { padding-block: clamp(4rem, 9vw, 7rem); }
+  .section-lede { max-width: 38rem; margin-top: 1rem; font-size: var(--step-1); line-height: 1.5; color: var(--color-muted); }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 3rem; padding: 0.75rem 1.4rem;
+    border: 2px solid transparent; border-radius: var(--radius-btn);
+    font: inherit; font-size: 1.0625rem; font-weight: 650; font-stretch: 108%; line-height: 1.2;
+    text-decoration: none; cursor: pointer;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .btn-primary { background: var(--color-accent); color: var(--color-on-accent); }
+  .btn-primary:hover { background: var(--color-accent-dark); color: var(--color-on-accent); }
+  .btn-secondary { border-color: var(--color-text); color: var(--color-text); }
+  .btn-secondary:hover { background: var(--color-text); color: var(--color-surface); }
+  .btn-dark { background: var(--color-text); color: var(--color-surface); }
+  .btn-dark:hover { background: var(--color-brand-dark); color: var(--color-surface); }
+  .btn-small { min-height: 2.75rem; padding: 0.45rem 1rem; font-size: 1rem; }
+  .btn-block { width: 100%; }
+
+  .skip-link {
+    position: absolute; left: 1rem; top: -4rem; z-index: 100;
+    padding: 0.6rem 1rem; background: var(--color-text); color: var(--color-surface); border-radius: var(--radius-btn);
+  }
+  .skip-link:focus { top: 1rem; }
+
+  /* Header wordmark */
+  .brand-name { font-size: 1.2rem; font-weight: 800; font-stretch: 118%; letter-spacing: -0.01em; color: var(--color-text); }
+
+  .prose-basic > * + * { margin-top: 1em; }
+  .prose-basic h2 { margin-top: 2em; font-size: var(--step-1); }
+}

@@ -1,0 +1,65 @@
+---
+// Care plans. Names and prices must match business/playbook.md section 3.
+import { offer } from '../../content/site';
+
+const { heading, intro, plans } = offer.care;
+---
+
+<div class="care">
+  <h3 class="care-title">{heading}</h3>
+  <p class="care-intro">{intro}</p>
+  <div class="care-rows">
+    {
+      plans.map((plan) => (
+        <div class="care-row">
+          <p class="care-name">
+            {plan.name}
+            {' '}
+            <span>{plan.price}</span>
+          </p>
+          <p>{plan.includes}</p>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .care {
+    margin-top: 3.5rem;
+  }
+  .care-title {
+    font-size: var(--step-2);
+    font-weight: 760;
+    font-stretch: 114%;
+  }
+  .care-intro {
+    margin-top: 0.5rem;
+    color: var(--color-muted);
+  }
+  .care-rows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: 0 2.5rem;
+    margin-top: 1.25rem;
+  }
+  .care-row {
+    max-width: 34rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+  .care-row p:not(.care-name) {
+    color: var(--color-muted);
+  }
+  .care-name {
+    margin-bottom: 0.35rem;
+    font-size: var(--step-1);
+    font-weight: 720;
+  }
+  .care-name span {
+    margin-left: 0.25rem;
+    font-weight: 550;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-brand-dark);
+  }
+</style>

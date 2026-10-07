@@ -1,0 +1,103 @@
+---
+// Two demo-site slots (playbook section 7, week 1): one per target niche, for made-up
+// businesses, always labeled "Demo". With no url yet, a slot says honestly that the demo
+// is in progress. Add url, image, imageAlt and pageSpeed in site.ts when a demo is live.
+import { Image } from 'astro:assets';
+import { offer } from '../../content/site';
+
+const { heading, lede, slots } = offer.demos;
+---
+
+<section id="demos" class="section pt-0" aria-labelledby="demos-title">
+  <div class="wrap">
+    <h2 id="demos-title">{heading}</h2>
+    <p class="section-lede">{lede}</p>
+    <ul class="demos">
+      {
+        slots.map((slot) => (
+          <li class:list={['demo', { 'demo-pending': !slot.url }]}>
+            <div class="demo-frame">
+              {slot.url && slot.image ? (
+                <Image
+                  src={slot.image}
+                  alt={slot.imageAlt ?? ''}
+                  widths={[480, 800, 1100]}
+                  sizes="(min-width: 48rem) 50vw, 100vw"
+                  class="demo-shot"
+                />
+              ) : (
+                <p class="demo-placeholder">Screenshot coming soon</p>
+              )}
+            </div>
+            <p class="demo-label">Demo site for {slot.niche.toLowerCase()}</p>
+            <h3 class="demo-title">{slot.title}</h3>
+            {slot.url ? (
+              <>
+                {slot.pageSpeed !== undefined && <p class="demo-score">Mobile PageSpeed score: {slot.pageSpeed}</p>}
+                <p class="demo-link">
+                  <a href={slot.url}>
+                    View the {slot.title} demo
+                  </a>
+                </p>
+              </>
+            ) : (
+              <p class="demo-status">In progress. Ask me for a preview on your free call.</p>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .demos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    gap: 2.5rem 3rem;
+    margin-top: 3rem;
+    padding: 0;
+    list-style: none;
+  }
+  .demo-frame {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+  }
+  .demo-pending .demo-frame {
+    border: 2px dashed var(--color-line);
+    background: transparent;
+  }
+  .demo-shot {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+  .demo-placeholder {
+    color: var(--color-muted);
+    font-weight: 600;
+  }
+  .demo-label {
+    margin-top: 1.1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-brand-dark);
+  }
+  .demo-title {
+    margin-top: 0.2rem;
+  }
+  .demo-status,
+  .demo-score {
+    margin-top: 0.4rem;
+    color: var(--color-muted);
+  }
+  .demo-link {
+    margin-top: 0.5rem;
+    font-weight: 650;
+  }
+</style>

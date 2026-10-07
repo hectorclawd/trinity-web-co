@@ -1,0 +1,106 @@
+---
+import { site } from '../content/site';
+
+const path = Astro.url.pathname;
+const cta =
+  site.headerCta ??
+  (site.phone
+    ? { label: `Call ${site.phone.display}`, href: `tel:${site.phone.e164}` }
+    : { label: 'Contact us', href: '/contact/' });
+---
+
+<header class="site-header sticky top-0 z-50 border-b border-line bg-bg">
+  <div class="wrap flex min-h-[4.25rem] items-center justify-between gap-4">
+    <a href="/" class="brand inline-flex items-center gap-2.5 font-display text-xl font-extrabold text-brand no-underline">
+      {site.logo && <img src={site.logo.src} width={site.logo.width} height={site.logo.height} alt="" />}
+      <span class="brand-name">{site.name}</span>
+    </a>
+
+    <button
+      class="nav-toggle btn btn-secondary btn-small md:hidden"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-nav-toggle
+    >
+      Menu
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main" data-nav>
+      {
+        site.nav.map((item) => (
+          <a href={item.href} aria-current={path === item.href ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="btn btn-primary btn-small" href={cta.href}>{cta.label}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .site-nav a:not(.btn) {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .site-nav a:not(.btn):hover,
+  .site-nav a[aria-current='page'] {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 47.99rem) {
+    .site-nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: 0.5rem clamp(1rem, 4vw, 2.5rem) 1.25rem;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-line);
+    }
+    .site-nav.is-open {
+      display: flex;
+    }
+    .site-nav a:not(.btn) {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--color-line);
+    }
+    .site-nav .btn {
+      margin-top: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const nav = document.querySelector<HTMLElement>('[data-nav]');
+
+  if (toggle && nav) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Close' : 'Menu';
+      nav.classList.toggle('is-open', open);
+    };
+    toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    nav.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && nav.classList.contains('is-open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>

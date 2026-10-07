@@ -1,0 +1,46 @@
+---
+import { offer } from '../../content/site';
+
+const { heading, lede, items } = offer.features;
+---
+
+<section id="what-you-get" class="section">
+  <div class="wrap">
+    <h2>{heading}</h2>
+    <p class="section-lede">{lede}</p>
+    <dl class="features">
+      {
+        items.map((item) => (
+          <div>
+            <dt>{item.title}</dt>
+            <dd>{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
+
+<style>
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 0 3rem;
+    margin: 3rem 0 0;
+  }
+  .features > div {
+    padding: 1.5rem 0 1.75rem;
+    border-top: 3px solid var(--color-brand);
+  }
+  dt {
+    font-size: var(--step-1);
+    font-weight: 720;
+    font-stretch: 108%;
+    line-height: 1.25;
+  }
+  dd {
+    margin: 0.5rem 0 0;
+    max-width: 34ch;
+    color: var(--color-muted);
+  }
+</style>

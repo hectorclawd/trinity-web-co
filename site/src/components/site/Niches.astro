@@ -1,0 +1,49 @@
+---
+import { offer } from '../../content/site';
+
+const { heading, items } = offer.niches;
+---
+
+<section class="band" aria-labelledby="who-title">
+  <div class="wrap">
+    <h2 id="who-title" class="band-title">{heading}</h2>
+    <ul class="who-list">
+      {items.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .band {
+    padding-block: clamp(3.5rem, 7vw, 5.5rem);
+    background: var(--color-brand-dark);
+    color: var(--color-bg);
+  }
+  .band-title {
+    max-width: 28ch;
+    font-size: var(--step-1);
+    font-weight: 600;
+    font-stretch: 108%;
+    letter-spacing: 0;
+    color: #b9d3cd;
+  }
+  .who-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2em 0;
+    margin: 1.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: clamp(1.6rem, 1rem + 2.6vw, 3rem);
+    font-weight: 780;
+    font-stretch: 122%;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+  .who-list li:not(:last-child)::after {
+    content: '/';
+    margin-inline: 0.45em;
+    color: var(--color-accent);
+    font-weight: 400;
+  }
+</style>

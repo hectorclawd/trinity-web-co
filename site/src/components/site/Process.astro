@@ -1,0 +1,94 @@
+---
+// The client process is a real sequence, so the steps are numbered.
+import { offer } from '../../content/site';
+
+const { heading, steps } = offer.process;
+---
+
+<section id="process" class="section process">
+  <div class="wrap">
+    <h2>{heading}</h2>
+    <ol class="steps">
+      {
+        steps.map((step) => (
+          <li>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .process {
+    background: var(--color-surface);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    margin: 3rem 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+  }
+  .steps li {
+    position: relative;
+    padding-top: 3.75rem;
+    counter-increment: step;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border: 2px solid var(--color-brand);
+    border-radius: 50%;
+    background: var(--color-surface);
+    font-weight: 750;
+    color: var(--color-brand-dark);
+  }
+  .steps li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 1.3rem;
+    left: 2.6rem;
+    right: -2rem;
+    height: 2px;
+    background: var(--color-line);
+  }
+  .steps p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 60rem) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 0;
+      max-width: 36rem;
+    }
+    .steps li {
+      padding: 0 0 2rem 4rem;
+    }
+    .steps li:not(:last-child)::after {
+      top: 2.6rem;
+      bottom: 0;
+      left: 1.25rem;
+      right: auto;
+      width: 2px;
+      height: auto;
+    }
+    .steps h3 {
+      padding-top: 0.45rem;
+    }
+  }
+</style>

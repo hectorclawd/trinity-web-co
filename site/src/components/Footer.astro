@@ -1,0 +1,49 @@
+---
+import { site } from '../content/site';
+import { fullAddress, isPlaceholder } from '../lib/format';
+
+const year = new Date().getFullYear();
+const address = site.serviceAreaOnly ? undefined : fullAddress(site);
+const social = site.social.filter((link) => !isPlaceholder(link.href));
+---
+
+<footer class="bg-brand-dark py-12 text-base text-white/80">
+  <div class="wrap grid gap-8 sm:grid-cols-[1fr_auto]">
+    <div class="space-y-1">
+      <p class="font-display text-xl font-extrabold text-white">{site.name}</p>
+      {address && <p>{address}</p>}
+      {site.serviceAreaOnly && site.areas.length > 0 && <p>Serving {site.areas.map((a) => a.name).join(', ')}</p>}
+      <p>
+        {site.phone && <a class="text-white" href={`tel:${site.phone.e164}`}>{site.phone.display}</a>}
+        {site.phone && <span aria-hidden="true">{' '}·{' '}</span>}
+        <a class="text-white" href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      {site.licenses?.map((license) => <p class="text-sm">{license}</p>)}
+    </div>
+
+    {
+      social.length > 0 && (
+        <ul class="flex gap-5" aria-label="Social media">
+          {social.map((link) => (
+            <li>
+              <a class="text-white" href={link.href}>{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <p class="text-sm sm:col-span-2">
+      &copy; {year} {(site.legalName ?? site.name).replace(/\.$/, '')}.{' '}
+      <a class="text-white" href="/privacy/">Privacy</a>
+      {
+        site.credit && (
+          <span>
+            {' '}Website by{' '}
+            <a class="text-white" href="https://trinitywebco.com/">Trinity Web Co.</a>
+          </span>
+        )
+      }
+    </p>
+  </div>
+</footer>

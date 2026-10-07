@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTABand from '../components/CTABand.astro';
+import FAQ from '../components/FAQ.astro';
+import ContactForm from '../components/ContactForm.astro';
+import RiverHero from '../components/site/RiverHero.astro';
+import Features from '../components/site/Features.astro';
+import Niches from '../components/site/Niches.astro';
+import Packages from '../components/site/Packages.astro';
+import CarePlans from '../components/site/CarePlans.astro';
+import DemoSlots from '../components/site/DemoSlots.astro';
+import Process from '../components/site/Process.astro';
+import About from '../components/site/About.astro';
+import { site, offer } from '../content/site';
+---
+
+<BaseLayout>
+  <RiverHero />
+  <Features />
+  <Niches />
+
+  <section id="pricing" class="section" aria-labelledby="pricing-title">
+    <div class="wrap">
+      <h2 id="pricing-title">{offer.pricing.heading}</h2>
+      <p class="section-lede">{offer.pricing.lede}</p>
+      <Packages />
+      <CarePlans />
+      <div class="mt-14">
+        <CTABand id="founding" variant="accent" {...offer.founding} />
+      </div>
+    </div>
+  </section>
+
+  <DemoSlots />
+  <Process />
+  <About />
+
+  <div class="bg-surface">
+    <FAQ items={site.faqs} heading="Questions owners ask" />
+  </div>
+
+  <section id="contact" class="section" aria-labelledby="contact-title">
+    <div class="wrap grid items-start gap-12 md:grid-cols-[1fr_1.15fr] md:gap-20">
+      <div>
+        <h2 id="contact-title">{offer.contact.heading}</h2>
+        <p class="mt-5 max-w-md">{offer.contact.text}</p>
+        <p class="mt-5 max-w-md font-semibold">
+          Prefer email?{' '}
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </p>
+        <p class="mt-5 max-w-md text-base text-muted">{offer.contact.area}</p>
+      </div>
+      <ContactForm
+        endpoint={site.forms.contactEndpoint}
+        businessField
+        messageLabel="What do you need help with?"
+        submitLabel="Send my request"
+        successMessage="Request sent. I’ll reply within one business day."
+        fallback={`email ${site.email}`}
+        surface
+      >
+        <div class="mb-4">
+          <label class="mb-1.5 block text-base font-semibold" for="cf-current-site">
+            Current website{' '}<span class="font-normal text-muted">(if you have one)</span>
+          </label>
+          <input
+            class="w-full rounded-btn border-[1.5px] border-[#9AA8A3] bg-white px-3.5 py-3 text-[1.0625rem] text-text"
+            id="cf-current-site"
+            name="current_site"
+            type="text"
+            inputmode="url"
+            placeholder="yourbusiness.com"
+          />
+        </div>
+      </ContactForm>
+    </div>
+  </section>
+</BaseLayout>

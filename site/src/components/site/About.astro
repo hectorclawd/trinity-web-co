@@ -1,0 +1,52 @@
+---
+import { site, offer } from '../../content/site';
+
+const { heading, paragraphs } = site.about;
+---
+
+<section id="about" class="section">
+  <div class="wrap about">
+    <div>
+      <h2>{heading}</h2>
+      {paragraphs.map((paragraph) => <p class="about-p">{paragraph}</p>)}
+    </div>
+    <ul class="promises">
+      {offer.promises.map((promise) => <li>{promise}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+  .about-p {
+    max-width: 36rem;
+    margin-top: 1.25rem;
+  }
+  .promises {
+    margin: 0;
+    padding: 1.75rem;
+    list-style: none;
+    background: var(--color-surface);
+    border-left: 4px solid var(--color-brand);
+    border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+  }
+  .promises li {
+    padding: 0.6rem 0;
+    font-weight: 600;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .promises li:last-child {
+    border-bottom: 0;
+  }
+
+  @media (max-width: 52rem) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

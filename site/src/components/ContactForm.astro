@@ -1,0 +1,159 @@
+---
+// Contact or quote form. Posts to Formspree / Web3Forms (no server code), with a honeypot
+// for spam, text error messages, and a status line announced to screen readers.
+import { isPlaceholder } from '../lib/format';
+
+interface Props {
+  endpoint: string;
+  /** "quote" adds a job-type select and an address/ZIP field (Growth and Premium) */
+  variant?: 'contact' | 'quote';
+  jobTypes?: string[];
+  /** Field labels that differ per business */
+  businessField?: boolean;
+  messageLabel?: string;
+  submitLabel?: string;
+  successMessage?: string;
+  /** Shown if sending fails, e.g. "call (214) 555-0100" */
+  fallback: string;
+  /** Unique per form when a page has more than one */
+  idPrefix?: string;
+  /** Use the surface color for the form background (for sections that already use bg) */
+  surface?: boolean;
+}
+
+const {
+  endpoint,
+  variant = 'contact',
+  jobTypes = [],
+  businessField = false,
+  messageLabel = 'How can we help?',
+  submitLabel = 'Send message',
+  successMessage = 'Message sent. We’ll get back to you soon.',
+  fallback,
+  idPrefix = 'cf',
+  surface = false,
+} = Astro.props;
+
+const id = (name: string) => `${idPrefix}-${name}`;
+const configured = !isPlaceholder(endpoint);
+const fieldClass =
+  'w-full rounded-btn border-[1.5px] border-[#9CA3AF] bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error';
+const labelClass = 'mb-1.5 block text-base font-semibold';
+---
+
+<form
+  class:list={['rounded-card border border-line p-5 sm:p-8', surface ? 'bg-surface' : 'bg-bg']}
+  action={endpoint}
+  method="POST"
+  novalidate
+  data-contact-form
+  data-configured={configured ? 'true' : 'false'}
+  data-success={successMessage}
+  data-fallback={fallback}
+  data-submit-label={submitLabel}
+>
+  <div class="mb-4">
+    <label class={labelClass} for={id('name')}>Your name</label>
+    <input class={fieldClass} id={id('name')} name="name" type="text" autocomplete="name" required />
+  </div>
+  {
+    businessField && (
+      <div class="mb-4">
+        <label class={labelClass} for={id('business')}>Business name</label>
+        <input class={fieldClass} id={id('business')} name="business" type="text" autocomplete="organization" required />
+      </div>
+    )
+  }
+  <div class="mb-4">
+    <label class={labelClass} for={id('email')}>Email</label>
+    <input class={fieldClass} id={id('email')} name="email" type="email" autocomplete="email" required />
+  </div>
+  <div class="mb-4">
+    <label class={labelClass} for={id('phone')}>
+      Phone{' '}<span class="font-normal text-muted">(optional)</span>
+    </label>
+    <input class={fieldClass} id={id('phone')} name="phone" type="tel" autocomplete="tel" />
+  </div>
+  {
+    variant === 'quote' && (
+      <>
+        <div class="mb-4">
+          <label class={labelClass} for={id('job')}>What do you need?</label>
+          <select class={fieldClass} id={id('job')} name="job_type" required>
+            <option value="">Choose one</option>
+            {jobTypes.map((type) => (
+              <option>{type}</option>
+            ))}
+          </select>
+        </div>
+        <div class="mb-4">
+          <label class={labelClass} for={id('zip')}>
+            ZIP code{' '}<span class="font-normal text-muted">(so we know you’re in our area)</span>
+          </label>
+          <input class={fieldClass} id={id('zip')} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
+        </div>
+      </>
+    )
+  }
+  <slot />
+  <div class="mb-4">
+    <label class={labelClass} for={id('message')}>{messageLabel}</label>
+    <textarea class={`${fieldClass} min-h-28 resize-y`} id={id('message')} name="message" rows="4" required></textarea>
+  </div>
+  <input type="text" name="_gotcha" class="absolute -left-[9999px] h-px w-px opacity-0" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <button class="btn btn-primary btn-block" type="submit">{submitLabel}</button>
+  <p class="form-status mt-4 font-semibold empty:hidden" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const { success = '', fallback = '', submitLabel = 'Send' } = form.dataset;
+
+    const show = (message: string, kind: 'error' | 'success') => {
+      status.textContent = message;
+      status.classList.toggle('text-error', kind === 'error');
+      status.classList.toggle('text-success', kind === 'success');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const required = [...form.querySelectorAll<HTMLInputElement>('[required]')];
+      required.forEach((field) => field.removeAttribute('aria-invalid'));
+      const invalid = required.filter((field) => !field.checkValidity());
+      if (invalid.length) {
+        invalid.forEach((field) => field.setAttribute('aria-invalid', 'true'));
+        invalid[0].focus();
+        const names = invalid.map((field) => form.querySelector(`label[for="${field.id}"]`)?.textContent?.trim().toLowerCase().replace(/[?:.]$/, ''));
+        show(`Please fill in: ${names.join(', ')}.`, 'error');
+        return;
+      }
+
+      if (form.dataset.configured !== 'true') {
+        show(`This form isn’t connected yet. Please ${fallback} instead.`, 'error');
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error(res.statusText);
+        form.reset();
+        show(success, 'success');
+        button.textContent = 'Sent';
+        document.dispatchEvent(new CustomEvent('contact-form:sent'));
+      } catch {
+        show(`Your message didn’t go through. Try again, or ${fallback}.`, 'error');
+        button.disabled = false;
+        button.textContent = submitLabel;
+      }
+    });
+  });
+</script>

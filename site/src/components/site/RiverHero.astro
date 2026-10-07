@@ -1,0 +1,152 @@
+---
+// Trinity Web Co. hero: the line drawing of the Trinity River with Dallas neighborhoods
+// along it. The page's one memorable moment; it draws itself once on load.
+import { site } from '../../content/site';
+
+const { headline, lede, primaryCta, secondaryCta } = site.hero;
+const path =
+  'M-30 120 C40 130 80 86 140 88 S280 172 355 168 S440 62 500 64 S640 182 720 178 S810 98 870 96 S1000 156 1070 152 S1170 110 1240 118';
+// Points sit on the path's segment ends; labels go above peaks and below troughs.
+const stops = [
+  { name: 'West Dallas', x: 140, y: 88, labelY: 56 },
+  { name: 'Oak Cliff', x: 355, y: 168, labelY: 212, hideOnPhone: true },
+  { name: 'Trinity Groves', x: 500, y: 64, labelY: 32 },
+  { name: 'Bishop Arts', x: 720, y: 178, labelY: 224 },
+  { name: 'Design District', x: 870, y: 96, labelY: 64, hideOnPhone: true },
+  { name: 'Deep Ellum', x: 1070, y: 152, labelY: 196 },
+];
+---
+
+<section class="hero">
+  <div class="wrap">
+    <h1 class="hero-title">{headline}</h1>
+    <p class="hero-lede">{lede}</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
+      {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
+    </div>
+  </div>
+
+  <div class="river" aria-hidden="true">
+    <svg class="river-svg" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMid meet">
+      <path class="river-bank" d={path}></path>
+      <path class="river-line" pathLength="1" d={path}></path>
+      <g class="river-stops">
+        {
+          stops.map((stop, i) => (
+            <g style={`--i:${i}`} class:list={{ 'hide-on-phone': stop.hideOnPhone }}>
+              <circle cx={stop.x} cy={stop.y} r="8"></circle>
+              <text x={stop.x} y={stop.labelY}>{stop.name}</text>
+            </g>
+          ))
+        }
+      </g>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: clamp(2.5rem, 6vw, 4.5rem);
+    overflow: hidden;
+  }
+  .hero-title {
+    max-width: 15ch;
+  }
+  .hero-lede {
+    max-width: 38rem;
+    margin-top: 1.75rem;
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .river {
+    max-width: 90rem;
+    margin: clamp(2rem, 4vw, 3rem) auto 0;
+    padding-bottom: 1rem;
+  }
+  .river-svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .river-bank {
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-width: 30;
+    stroke-linecap: round;
+    opacity: 0.12;
+  }
+  .river-line {
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .river-stops circle {
+    fill: var(--color-accent);
+    stroke: var(--color-text);
+    stroke-width: 2.5;
+  }
+  .river-stops text {
+    fill: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 650;
+    font-stretch: 110%;
+    text-anchor: middle;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .river-line {
+      stroke-dashoffset: 1;
+      animation: river-draw 2.2s cubic-bezier(0.45, 0.05, 0.25, 1) 0.2s forwards;
+    }
+    .river-stops g {
+      opacity: 0;
+      animation: stop-in 0.45s ease-out forwards;
+      animation-delay: calc(0.55s + var(--i) * 0.3s);
+    }
+  }
+  @keyframes river-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes stop-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* On phones, show the middle stretch of the river at a readable size */
+  @media (max-width: 40rem) {
+    .river {
+      display: flex;
+      justify-content: center;
+    }
+    .river-svg {
+      width: 860px;
+      max-width: none;
+      flex: none;
+    }
+    /* These two labels fall off the screen edges at this width */
+    .hide-on-phone text {
+      display: none;
+    }
+  }
+</style>
