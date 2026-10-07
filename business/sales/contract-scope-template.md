@@ -2,7 +2,7 @@
 
 > **⚠ Template only, not legal advice.** Have a Texas small-business attorney review this once before you use it with any client (playbook §6, about $300–$600). Remove this box after review.
 >
-> This scope page sits alongside the master service agreement. It covers the 12 contract essentials in playbook §6. Fill in every `________` blank and delete the options that don't apply.
+> This scope page sits alongside the master service agreement (`master-service-agreement.md`). The client signs that agreement once, then a scope page for each project or care plan. Sections 1–12 here match sections 1–12 there, one for each contract essential in playbook §6. Fill in every `________` blank and delete the options that don't apply.
 
 ---
 
@@ -151,6 +151,8 @@ A Google review is not part of this exchange. The Designer may ask for one after
 ---
 
 ## Signatures
+
+This project scope is part of the master service agreement between the Designer and the Client dated ________. By signing, both parties agree to this scope under that agreement.
 
 | | Client | Trinity Web Co. |
 | --- | --- | --- |
