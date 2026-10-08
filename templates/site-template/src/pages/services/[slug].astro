@@ -6,7 +6,7 @@ import CTABand from '../../components/CTABand.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { site } from '../../content/site';
 import type { Service } from '../../content/types';
-import { formLabels, servicePath } from '../../lib/format';
+import { formLabels, placeName, servicePath } from '../../lib/format';
 
 export const getStaticPaths = (() =>
   site.services
@@ -14,7 +14,7 @@ export const getStaticPaths = (() =>
     .map((service) => ({ params: { slug: service.slug }, props: { service } }))) satisfies GetStaticPaths;
 
 const { service } = Astro.props as { service: Service };
-const city = site.address?.city ?? site.areas[0]?.name ?? '';
+const city = placeName(site);
 const others = site.services.filter((s) => s.slug !== service.slug);
 const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
 ---

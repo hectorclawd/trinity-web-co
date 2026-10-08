@@ -12,6 +12,7 @@ const social = site.social.filter((link) => !isPlaceholder(link.href));
     <div class="space-y-1">
       <p class="font-display text-xl font-extrabold text-white">{site.name}</p>
       {address && <p>{address}</p>}
+      {!address && site.locality && !site.serviceAreaOnly && <p>{site.locality}</p>}
       {site.serviceAreaOnly && site.areas.length > 0 && <p>Serving {site.areas.map((a) => a.name).join(', ')}</p>}
       <p>
         {site.phone && <a class="text-white" href={`tel:${site.phone.e164}`}>{site.phone.display}</a>}

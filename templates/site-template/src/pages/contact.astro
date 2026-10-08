@@ -39,6 +39,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
             <a href={`mailto:${site.email}`}>{site.email}</a>
           </li>
           {address && !site.serviceAreaOnly && <li>{address}</li>}
+          {!address && site.locality && !site.serviceAreaOnly && <li>{site.locality}</li>}
         </ul>
         <h2 class="mt-10 text-2xl">Hours</h2>
         <div class="mt-3"><HoursList hours={site.hours} /></div>

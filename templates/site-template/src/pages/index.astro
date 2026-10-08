@@ -63,6 +63,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
       <div>
         <h2 id="visit-title">{site.serviceAreaOnly ? 'Hours and service area' : 'Hours and location'}</h2>
         {address && !site.serviceAreaOnly && <address class="mt-4 text-xl not-italic">{address}</address>}
+        {!address && site.locality && !site.serviceAreaOnly && <p class="mt-4 text-xl">{site.locality}</p>}
         {
           site.areas.length > 0 && (
             <p class="mt-4">

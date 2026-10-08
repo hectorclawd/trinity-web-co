@@ -8,6 +8,7 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
 2. Fill `CLAUDE.md`: replace every `{{...}}` placeholder from the intake.
 3. Rewrite `src/content/site.ts` from the intake:
    - Copy facts exactly. Name, address and phone must match the Google Business Profile character for character.
+   - No street address: if the business travels to customers, set `serviceAreaOnly: true`. If it's a shop that doesn't publish its street, leave `serviceAreaOnly: false`, omit `address` and set `locality` (e.g. "Oak Cliff, Dallas").
    - `phone.e164` is `+1` followed by 10 digits. `phone.textable` only if the intake says texts are OK.
    - Pick the most specific schema.org `schemaType` for the niche (HVACBusiness, Plumber, Electrician, HousePainter, HairSalon, BarberShop, NailSalon, BeautySalon, AutoRepair, AutoWash, ExerciseGym, SportsActivityLocation, ...).
    - Reviews: only the ones the client listed, word for word, with the name and source as given. Starter shows 3; Growth and Premium show 6–8. Never write or improve a review.

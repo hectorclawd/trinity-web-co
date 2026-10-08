@@ -74,6 +74,11 @@ export interface SiteConfig {
   address?: { street: string; city: string; region: string; postalCode: string };
   /** True when the business travels to customers and doesn't show a street address */
   serviceAreaOnly: boolean;
+  /**
+   * Where a shop is when it doesn't publish a street address, e.g. "Oak Cliff, Dallas".
+   * Shown in place of the address and used in service-page headings.
+   */
+  locality?: string;
   geo?: { lat: number; lng: number };
   hours: HoursRow[];
 

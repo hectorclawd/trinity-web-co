@@ -48,6 +48,11 @@ export function clip(text: string, max = 155): string {
   return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,.;:–—-]+$/, '')}…`;
 }
 
+/** The place name for headings like "AC repair in Garland": city, then locality, then the first area */
+export function placeName(site: SiteConfig): string {
+  return site.address?.city ?? site.locality ?? site.areas[0]?.name ?? '';
+}
+
 export function fullAddress(site: SiteConfig): string | undefined {
   const a = site.address;
   return a ? `${a.street}, ${a.city}, ${a.region} ${a.postalCode}` : undefined;
