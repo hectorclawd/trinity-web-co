@@ -6,7 +6,7 @@ import CTABand from '../../components/CTABand.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { site } from '../../content/site';
 import type { Service } from '../../content/types';
-import { servicePath } from '../../lib/format';
+import { formLabels, servicePath } from '../../lib/format';
 
 export const getStaticPaths = (() =>
   site.services
@@ -31,7 +31,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
         endpoint={site.forms.contactEndpoint}
         variant={site.features.quoteForm ? 'quote' : 'contact'}
         jobTypes={site.forms.quoteJobTypes}
-        submitLabel={site.features.quoteForm ? 'Request my quote' : 'Send message'}
+        submitLabel={formLabels(site).submit}
         fallback={fallback}
       />
     </div>

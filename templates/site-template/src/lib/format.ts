@@ -17,6 +17,15 @@ export function isPlaceholder(value: string | undefined): boolean {
   return !value || value.includes('REPLACE_ME');
 }
 
+/** Form heading and button text, from site.forms (quote form on Growth and Premium) */
+export function formLabels(site: SiteConfig) {
+  const quote = site.features.quoteForm;
+  return {
+    heading: quote ? (site.forms.quoteHeading ?? 'Get a free quote') : 'Get in touch',
+    submit: quote ? (site.forms.quoteSubmitLabel ?? 'Request my quote') : 'Send message',
+  };
+}
+
 /** Link to a service's own page, or undefined when it has none (`page: false`) */
 export function servicePath(service: Service): string | undefined {
   return service.page === false ? undefined : `/services/${service.slug}/`;

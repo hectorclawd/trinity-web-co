@@ -6,7 +6,7 @@ import { isPlaceholder } from '../lib/format';
 
 interface Props {
   endpoint: string;
-  /** "quote" adds a job-type select and an address/ZIP field (Growth and Premium) */
+  /** "quote" adds a job-type select and, unless site.forms.quoteZip is false, a ZIP field (Growth and Premium) */
   variant?: 'contact' | 'quote';
   jobTypes?: string[];
   /** Field labels that differ per business */
@@ -39,6 +39,7 @@ const id = (name: string) => `${idPrefix}-${name}`;
 const configured = !isPlaceholder(endpoint);
 // Demo sites (site.demo) check the fields, then say nothing was sent
 const demo = site.demo === true;
+const askZip = site.forms.quoteZip !== false;
 const fieldClass =
   // border-muted keeps the field outline at 3:1 or more (WCAG 1.4.11); a light gray like #9CA3AF is only 2.5:1
   'w-full rounded-field border-[1.5px] border-muted bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error';
@@ -91,12 +92,14 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
             ))}
           </select>
         </div>
-        <div class="mb-4">
-          <label class={labelClass} for={id('zip')}>
-            ZIP code{' '}<span class="font-normal text-muted">(so we know you’re in our area)</span>
-          </label>
-          <input class={fieldClass} id={id('zip')} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
-        </div>
+        {askZip && (
+          <div class="mb-4">
+            <label class={labelClass} for={id('zip')}>
+              ZIP code{' '}<span class="font-normal text-muted">(so we know you’re in our area)</span>
+            </label>
+            <input class={fieldClass} id={id('zip')} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
+          </div>
+        )}
       </>
     )
   }

@@ -4,9 +4,10 @@ import ContactForm from '../components/ContactForm.astro';
 import HoursList from '../components/HoursList.astro';
 import MapEmbed from '../components/MapEmbed.astro';
 import { site } from '../content/site';
-import { fullAddress } from '../lib/format';
+import { formLabels, fullAddress } from '../lib/format';
 
 const address = fullAddress(site);
+const labels = formLabels(site);
 const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
 ---
 
@@ -14,7 +15,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
   <section class="section">
     <div class="wrap grid items-start gap-10 md:grid-cols-[1fr_1.2fr] md:gap-16">
       <div>
-        <h1>{site.features.quoteForm ? 'Get a free quote' : 'Contact us'}</h1>
+        <h1>{site.features.quoteForm ? labels.heading : 'Contact us'}</h1>
         <p class="mt-5 max-w-md">Tell us what you need and we’ll get back to you within one business day.</p>
         <ul class="mt-6 space-y-2">
           {
@@ -46,7 +47,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
         endpoint={site.forms.contactEndpoint}
         variant={site.features.quoteForm ? 'quote' : 'contact'}
         jobTypes={site.forms.quoteJobTypes}
-        submitLabel={site.features.quoteForm ? 'Request my quote' : 'Send message'}
+        submitLabel={labels.submit}
         fallback={fallback}
       />
     </div>

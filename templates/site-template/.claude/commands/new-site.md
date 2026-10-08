@@ -12,6 +12,7 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
    - Pick the most specific schema.org `schemaType` for the niche (HVACBusiness, Plumber, Electrician, HousePainter, HairSalon, BarberShop, NailSalon, BeautySalon, AutoRepair, AutoWash, ExerciseGym, SportsActivityLocation, ...).
    - Reviews: only the ones the client listed, word for word, with the name and source as given. Starter shows 3; Growth and Premium show 6–8. Never write or improve a review.
    - Services and areas: write body copy from the intake in the client's tone. Area pages must say something specific to that area, not the same text with the city name swapped.
+   - Quote form (Growth and Premium): the default wording and ZIP field suit trades. For a shop customers visit (barber, salon), set `forms.quoteHeading` and `forms.quoteSubmitLabel` (e.g. "Request a time") and `forms.quoteZip: false`.
    - Set `features` for the package (see the README table) and set `seo.title` (under 60 characters) and `seo.description` (under 155).
 4. Remove what the package doesn't include:
    - Starter: delete `src/pages/services/`, `src/pages/areas/`, `src/pages/blog/`, `src/content/blog/` and the collection in `src/content.config.ts`; point service cards at `/#services` or omit `href`.

@@ -106,6 +106,11 @@ export interface SiteConfig {
     contactEndpoint: string;
     /** Job types for the quote form (Growth and Premium) */
     quoteJobTypes?: string[];
+    /** Quote form wording. Defaults suit trades: "Get a free quote" and "Request my quote" */
+    quoteHeading?: string;
+    quoteSubmitLabel?: string;
+    /** Ask for a ZIP code on the quote form. Default true; false for shops customers visit (barbers, salons) */
+    quoteZip?: boolean;
   };
 
   social: Link[];
