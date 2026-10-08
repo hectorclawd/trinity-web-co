@@ -15,6 +15,7 @@ The playbook's pre-launch QA checklist (section 5). `/qa` fills in what it can c
 | Largest Contentful Paint (mobile) | |
 | Leftover `[Sample` / `REPLACE_ME` / `{{` | |
 | Screenshots (360, 390, 768, 1024, 1440) | |
+| Header on one line (768, 1024, 1280) | |
 
 ## Mobile
 
