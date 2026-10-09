@@ -11,6 +11,7 @@ import CarePlans from '../components/site/CarePlans.astro';
 import DemoSlots from '../components/site/DemoSlots.astro';
 import Process from '../components/site/Process.astro';
 import About from '../components/site/About.astro';
+import ProjectReadiness from '../components/site/ProjectReadiness.astro';
 import { site, offer } from '../content/site';
 ---
 
@@ -39,6 +40,8 @@ import { site, offer } from '../content/site';
     <FAQ items={site.faqs} heading="Questions owners ask" />
   </div>
 
+  <ProjectReadiness />
+
   <section id="contact" class="section" aria-labelledby="contact-title">
     <div class="wrap grid items-start gap-12 md:grid-cols-[1fr_1.15fr] md:gap-20">
       <div>
@@ -64,7 +67,7 @@ import { site, offer } from '../content/site';
             Current website{' '}<span class="font-normal text-muted">(if you have one)</span>
           </label>
           <input
-            class="w-full rounded-btn border-[1.5px] border-[#9AA8A3] bg-white px-3.5 py-3 text-[1.0625rem] text-text"
+            class="w-full rounded-btn border-[1.5px] border-muted bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error"
             id="cf-current-site"
             name="current_site"
             type="text"
