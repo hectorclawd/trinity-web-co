@@ -23,7 +23,7 @@ const headingId = id ? `${id}-title` : undefined;
           {text && <p class="mt-3 text-white/85">{text}</p>}
           <slot />
         </div>
-        <a class="btn btn-primary" href={button.href}>{button.label}</a>
+        <a class="btn btn-primary btn-arrow" href={button.href}>{button.label}</a>
       </div>
     </section>
   ) : (
@@ -37,7 +37,7 @@ const headingId = id ? `${id}-title` : undefined;
         {text && <p class="mt-3 max-w-3xl">{text}</p>}
         <slot />
       </div>
-      <a class="btn btn-dark justify-self-start" href={button.href}>{button.label}</a>
+      <a class="btn btn-dark btn-arrow justify-self-start" href={button.href}>{button.label}</a>
     </aside>
   )
 }

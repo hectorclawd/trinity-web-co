@@ -34,19 +34,41 @@ const { packages, note } = offer.pricing;
     margin-top: 3rem;
     border-top: 2px solid var(--color-text);
   }
+  /* Every row bleeds into the gutter a little, so the hover tint has room and text stays aligned */
   .plan {
     display: grid;
     grid-template-columns: minmax(14rem, 18rem) 1fr;
     gap: 1rem 3rem;
-    padding: 2rem 0;
+    margin-inline: calc(clamp(1rem, 4vw, 2.5rem) * -0.5);
+    padding: 2rem calc(clamp(1rem, 4vw, 2.5rem) * 0.5);
     border-bottom: 1px solid var(--color-line);
+    transition: background-color 0.15s, box-shadow 0.15s;
   }
   .plan-featured {
-    margin-inline: calc(clamp(1rem, 4vw, 2.5rem) * -0.5);
-    padding-inline: calc(clamp(1rem, 4vw, 2.5rem) * 0.5);
     background: var(--color-surface);
     border-bottom-color: transparent;
     box-shadow: inset 4px 0 0 var(--color-brand);
+  }
+
+  /* Comparing plans: a light tint and a thin river edge on the row being read.
+     Growth keeps the paper background and gets a wider edge, so it stays the stronger row. */
+  @media (hover: hover) {
+    .plan:hover {
+      background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+      box-shadow: inset 2px 0 0 color-mix(in srgb, var(--color-brand) 60%, transparent);
+    }
+    .plan-featured:hover {
+      background: var(--color-surface);
+      box-shadow: inset 6px 0 0 var(--color-brand);
+    }
+  }
+  .plan:focus-within {
+    background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+    box-shadow: inset 2px 0 0 color-mix(in srgb, var(--color-brand) 60%, transparent);
+  }
+  .plan-featured:focus-within {
+    background: var(--color-surface);
+    box-shadow: inset 6px 0 0 var(--color-brand);
   }
   .plan-name {
     font-size: var(--step-2);
