@@ -2,12 +2,14 @@
 
 Shown at the start of every Claude Code session in this repo (see `CLAUDE.md`). Tick items off with the date or commit when done, and add new to-dos under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-08
+Last updated: 2026-10-09
 
 ## DONE
 
 - [x] Readiness checklist + spotlight card merged to main (c1a812d, merge 8b325c0)
-- [x] main at 0ff56f4, also includes cosmetic-polish, site-design-notes, ignore-agents-md
+- [x] main at 0ff56f4, also includes cosmetic-polish, site-design-notes, ignore-agents-md (more commits on top since; see git log)
+- [x] Nav links show on phones when JavaScript is off, in site and template (b7eafa1)
+- [x] CLAUDE.md shows this checklist at the start of every session (a270146)
 - [x] Spotlight card + checklist verified at 360px and 1440px after merges (2026-10-08: stacks at 360, two columns at 1440, all 7 items, no sideways scroll)
 - [x] Old "trinity-web-co updates" folder deleted, nothing was unpushed
 - [x] Repo now lives at C:\Users\hlmpr\projects\trinity-web-co; main is the only branch on GitHub
@@ -21,5 +23,4 @@ Last updated: 2026-10-08
 - [ ] Deploy a preview of main, on Cloudflare (Astro site), not Vercel. Note: this conflicts with `CLAUDE.md` and playbook §5, which say the site moved from Cloudflare to Vercel on 2026-10-07. Decide first; if switching back, log it in the playbook decisions log and update `CLAUDE.md`
 - [ ] Before launch: recheck touch, reduced motion, and JS-off
 - [ ] Before launch: check forced-colors mode (Windows high contrast)
-- [ ] Sync focus-forward-site and desktop-tutorial
-- [ ] Restart the dev server if needed (astro dev on port 4321 was stopped during cleanup)
+- [ ] Restart the dev server if needed (`npm run dev --prefix site`, http://localhost:4321/; stopped for low memory on 2026-10-09)
