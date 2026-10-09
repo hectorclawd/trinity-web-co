@@ -20,3 +20,4 @@ Last updated: 2026-10-08
 - [ ] Before launch: recheck touch, reduced motion, and JS-off
 - [ ] Sync focus-forward-site and desktop-tutorial
 - [ ] Restart the dev server if needed (astro dev on port 4321 was stopped during cleanup)
+- [ ] Sync template to trinitywebco-sites (noscript menu fix + CTABand fix)
