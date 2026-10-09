@@ -24,6 +24,8 @@ Last updated: 2026-10-09
 
 In launch order. Items in the same group can run in parallel.
 
+- [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.**
+
 **Business and legal (before the first client signs)**
 - [ ] Confirm and register `trinitywebco.com` in your own registrar account (playbook §6 ownership policy)
 - [ ] Business email `hello@trinitywebco.com` (Google Workspace, about $8/mo); the site and contact form already use this address
