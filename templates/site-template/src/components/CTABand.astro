@@ -5,7 +5,8 @@ interface Props {
   heading: string;
   text?: string;
   button: Link;
-  /** "brand": dark band. "accent": accent-colored panel, e.g. for an offer */
+  /** "brand": dark band. "accent": accent-colored panel, e.g. for an offer.
+      Focus rings inside either one use its text color, so they stay visible on it. */
   variant?: 'brand' | 'accent';
   id?: string;
 }
@@ -16,7 +17,7 @@ const headingId = id ? `${id}-title` : undefined;
 
 {
   variant === 'brand' ? (
-    <section id={id} class="bg-brand py-14 text-white" aria-labelledby={headingId}>
+    <section id={id} class="bg-brand py-14 text-white [&_:focus-visible]:outline-white" aria-labelledby={headingId}>
       <div class="wrap flex flex-wrap items-center justify-between gap-6">
         <div class="max-w-2xl">
           <h2 id={headingId} class="text-white">{heading}</h2>
@@ -29,7 +30,7 @@ const headingId = id ? `${id}-title` : undefined;
   ) : (
     <aside
       id={id}
-      class="grid items-center gap-x-10 gap-y-4 rounded-card bg-accent p-6 text-on-accent sm:p-10 md:grid-cols-[1fr_auto]"
+      class="grid items-center gap-x-10 gap-y-4 rounded-card bg-accent p-6 text-on-accent sm:p-10 [&_:focus-visible]:outline-on-accent md:grid-cols-[1fr_auto]"
       aria-labelledby={headingId}
     >
       <div>
