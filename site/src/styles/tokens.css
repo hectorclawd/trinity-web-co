@@ -81,6 +81,31 @@
   .btn-small { min-height: 2.75rem; padding: 0.45rem 1rem; font-size: 1rem; }
   .btn-block { width: 100%; }
 
+  /* Main calls to action: a small arrow that nudges forward on hover or keyboard focus.
+     The label never moves, the focus ring stays, and the arrow holds still for reduced motion.
+     Below 24rem the arrow would push "Ask about a founding spot" onto two lines, so it's left off. */
+  @media (min-width: 24rem) {
+    .btn-arrow::after {
+      content: "";
+      flex: none;
+      width: 1em;
+      height: 1em;
+      margin-left: 0.5em;
+      background: currentColor;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10h11M11 5.5 15.5 10 11 14.5'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10h11M11 5.5 15.5 10 11 14.5'/%3E%3C/svg%3E") center / contain no-repeat;
+      transition: transform 0.15s ease-out;
+    }
+  }
+  .btn-arrow:disabled::after { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .btn-arrow:hover::after,
+    .btn-arrow:focus-visible::after { transform: translateX(3px); }
+  }
+  @media (forced-colors: active) {
+    .btn-arrow::after { forced-color-adjust: none; background: ButtonText; }
+  }
+
   .skip-link {
     position: absolute; left: 1rem; top: -4rem; z-index: 100;
     padding: 0.6rem 1rem; background: var(--color-text); color: var(--color-surface); border-radius: var(--radius-btn);
