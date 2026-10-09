@@ -39,6 +39,33 @@ const cta =
   </div>
 </header>
 
+<noscript>
+  {/* Without JavaScript the Menu button can't open the nav, so phones get the links as a
+       wrapping row under the logo. The header stops being sticky so the taller bar doesn't
+       cover the page. #site-nav outranks the scoped rules below. */}
+  <style is:inline>
+    @media (max-width: 47.99rem) {
+      [data-nav-toggle] { display: none !important; }
+      .site-header { position: relative; }
+      .site-header > .wrap { flex-wrap: wrap; }
+      .site-header .brand { min-height: 4.25rem; }
+      #site-nav {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+        gap: 0 1.25rem;
+        padding: 0 0 0.85rem;
+        border-bottom: 0;
+      }
+      #site-nav a:not(.btn) { padding: 0.6rem 0; border-bottom: 0; }
+      #site-nav .btn { margin-top: 0.25rem; }
+    }
+  </style>
+</noscript>
+
 <style>
   .site-nav {
     display: flex;
