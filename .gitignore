@@ -15,3 +15,6 @@ dist/
 
 .vercel
 .env*
+
+# Codex copy of CLAUDE.md, kept local and not maintained
+/AGENTS.md
