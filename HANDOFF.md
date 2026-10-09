@@ -1,19 +1,28 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-08. Written for a fresh Claude Code session picking this up with no other context.
-Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything.
+Last updated: 2026-10-08 (after the branch cleanup). Written for a fresh Claude Code session picking this up with no other context.
+Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list and is shown at the start of every session.
 
 ## Where things stand
 
-**Paused 2026-10-08 at Hector's request** (too many sessions open). Nothing is half-done: every repo below is committed and pushed, and no local servers are running.
+**Paused 2026-10-08 at Hector's request** (too many sessions open). Nothing is half-done: every repo below is committed and pushed, `main` is the only branch, and no local servers are running. What to do next is in `CHECKLIST.md`.
 
-**Unanswered question:** Hector's last message before pausing said "thn do 2". I asked what "2" meant and got no answer. My guesses were Focus Forward checklist item 2 (Instagram Week 0 setup, which belongs to the Focus Forward folder, not here) or a Trinity open item. **Ask him; don't guess.**
+(An earlier "do 2" message was meant for a different tab. Ignore it.)
+
+## Cleanup on 2026-10-08
+
+- **Two copies of this repo had drifted.** A second clone, `projects/trinity-web-co updates`, held another session's work on two branches: `project-readiness-checklist` (a project-readiness checklist in a spotlight card, `c1a812d`) and `cosmetic-polish` (process timeline, plan rows and `.btn-arrow` buttons, `4b116ea`), plus two untracked docs.
+- **Committed the loose files on their own branches.** The docs went on `site-design-notes` (`5cd7375`); `21st-dev-feature-suggestions.md.md` was renamed to `.md`. The ignore rule for the local Codex `AGENTS.md` went on `ignore-agents-md` (`dea1a9d`).
+- **Merged all four into `main` in that order**, with merge commits `8b325c0`, `6215e4a`, `712ab00` and `0ff56f4`. There were no conflicts. `npm run check` and `npm run build` in `site/` passed before the push. The spotlight card was then checked at 360 and 1440px.
+- **Deleted the four merged branches** locally and on GitHub, after confirming each was in `main`. `main` is the only branch.
+- **Deleted the `trinity-web-co updates` folder** after confirming it had no unpushed commits, stashes or untracked files. An `astro dev --port 4321` server from that folder was still running; it was stopped so the folder could be deleted.
+- **The repo now lives only at `C:\Users\hlmpr\projects\trinity-web-co`.** Don't make a second clone; use branches here instead.
 
 ## Repos and deploys
 
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
-| This repo (business docs, template source, our site) | `trinity-web-co/` | `hectorclawd/trinity-web-co` (last commit 8066884) | `trinity-web-co-site`, previews only until launch |
+| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, previews only until launch |
 | Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through 25dffa2 (org commit 3d6c56c) | n/a |
 | Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands` | Same name. Preview: https://site-purple-martin-air-lake-highlands-q0uia6ac5-hlm10.vercel.app |
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff` | Same name. Preview: https://site-good-oak-barbers-oak-cliff-6x34a2xt4-hlm10.vercel.app |
@@ -51,15 +60,17 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - Demos score SEO 69 because of the intentional `noindex`.
   - The occasional outlier run (65, 79) has been machine load. Rerun, and record both sets.
 - **The header check snippet** lives in `templates/site-template/.claude/commands/qa.md` and the demos' copies. `site/.claude/commands/qa.md` doesn't have it; `site/` has its own `/qa` that isn't synced from the template.
-- **`AGENTS.md`** in the repo root is untracked. It's a Codex copy of `CLAUDE.md` from 2026-10-07, so it's already out of date. I left it alone; ask Hector whether to keep, update or delete it.
+- **`AGENTS.md`** in the repo root is a Codex copy of `CLAUDE.md` from 2026-10-07 and is out of date. At Hector's request it's ignored in `.gitignore` (kept on disk, never committed).
+- **The site's hosting is in question.** `CHECKLIST.md` asks for a preview of `main` on Cloudflare, not Vercel. `CLAUDE.md` and playbook §5 say the site moved from Cloudflare to Vercel on 2026-10-07. Settle that with Hector before deploying, and log any change in the playbook decisions log.
 
 ## Next up
 
-1. Get an answer on "do 2".
-2. Open items in `CLAUDE.md` that block launch: domain (`trinitywebco.com`), Formspree form ID, headshot and About story, Vercel Pro, business setup (playbook §6), and the attorney review before the first client signs.
-3. Launch day, from the launch checklist in `CLAUDE.md`:
-   - Move to Vercel Pro, add the domain, deploy `site/` to production.
+The live to-do list is `CHECKLIST.md`. Beyond it:
+
+1. Open items in `CLAUDE.md` that block launch: domain (`trinitywebco.com`), Formspree form ID, headshot and About story, Vercel Pro, business setup (playbook §6), and the attorney review before the first client signs.
+2. Launch day, from the launch checklist in `CLAUDE.md`:
+   - Move to Vercel Pro (or whichever host is decided; see the hosting question above), add the domain, deploy `site/` to production.
    - Deploy both demos to production (`npx vercel deploy --prod` in each demo repo).
    - Run PageSpeed Insights (mobile) on each production URL.
    - Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt and pageSpeed, with titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop".
-4. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).
+3. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).
