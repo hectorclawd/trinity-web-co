@@ -15,6 +15,7 @@ The playbook's pre-launch QA checklist (section 5). `/qa` fills in what it can c
 | Largest Contentful Paint (mobile) | 1.7–1.8 s |
 | Leftover `[Sample` / `REPLACE_ME` / `{{` | 1 left: Formspree ID (`REPLACE_ME`) in `site.ts`; the form says "not connected yet" until it is set |
 | Screenshots (360, 390, 768, 1024, 1440) | Checked at 360, 390 and 1440: no sideways scroll; mobile menu opens and closes (Esc too); form validation and the not-connected message work |
+| Header on one line (768, 1024, 1280) | Pass (2026-10-08, commit 259d7ff): the business name, nav links and header button each sit on one line at all three widths. The Menu button shows up to 1023px (337ad90), so 768 checks the name and the Menu button; 1024 and 1280 check the full nav |
 
 ## Mobile
 
