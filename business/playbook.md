@@ -36,6 +36,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | Founding Starter stays 100% upfront at signing; it is the only exception to 50/50 for Starter and Growth | At $900, a second $450 invoice adds admin and protects very little | After 3 founding clients |
 | 2026-10-07 | After any care plan ends, keep hosting the site for 30 days so the client can move it, then remove it from the Vercel account | Gives the client time to move without hosting a site forever | Attorney review of the contract |
 | 2026-10-07 | The client owns the site once the build fees are paid; unpaid care-plan fees stay owed as a debt and don't affect ownership | Otherwise a client behind on care fees couldn't own their site, and the 60-day handoff couldn't happen | Attorney review of the contract |
+| 2026-10-09 | Reviewed switching to Cloudflare. Staying on Vercel Pro | Savings (~$240/yr) don't justify losing the call/text/form event tracking that care-plan reports rely on, plus ~30 files of rework | At 25+ clients |
 
 ### Changelog
 

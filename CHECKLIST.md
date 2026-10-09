@@ -20,6 +20,6 @@ Last updated: 2026-10-09
 
 ## TO DO
 
-- [ ] Deploy a preview of main, on Cloudflare (Astro site), not Vercel. Note: this conflicts with `CLAUDE.md` and playbook §5, which say the site moved from Cloudflare to Vercel on 2026-10-07. Decide first; if switching back, log it in the playbook decisions log and update `CLAUDE.md`
+- [ ] Deploy a Vercel preview of main
 - [ ] Before launch: recheck touch, reduced motion, and JS-off
 - [ ] Before launch: check forced-colors mode (Windows high contrast)

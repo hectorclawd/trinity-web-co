@@ -61,7 +61,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - The occasional outlier run (65, 79) has been machine load. Rerun, and record both sets.
 - **The header check snippet** lives in `templates/site-template/.claude/commands/qa.md` and the demos' copies. `site/.claude/commands/qa.md` doesn't have it; `site/` has its own `/qa` that isn't synced from the template.
 - **`AGENTS.md`** in the repo root is a Codex copy of `CLAUDE.md` from 2026-10-07 and is out of date. At Hector's request it's ignored in `.gitignore` (kept on disk, never committed).
-- **The site's hosting is in question.** `CHECKLIST.md` asks for a preview of `main` on Cloudflare, not Vercel. `CLAUDE.md` and playbook §5 say the site moved from Cloudflare to Vercel on 2026-10-07. Settle that with Hector before deploying, and log any change in the playbook decisions log.
+- **Hosting is settled: Vercel Pro.** On 2026-10-09 Hector reviewed switching to Cloudflare and decided to stay (playbook decisions log). Revisit at 25+ clients.
 
 ## Next up
 
