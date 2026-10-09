@@ -45,6 +45,7 @@ Rules for using it:
   <client-slug>/admin  Contract, invoices, intake; never in the site repo
   _template/admin/     Starting docs for a new client (copy to <client-slug>/)
 /site          The Trinity Web Co. website (Astro, built from site-template; see site/CLAUDE.md)
+HANDOFF.md     Where things stand, for a fresh session: repos, deploys, gotchas, next up
 ```
 
 ## Brand (our own site)
