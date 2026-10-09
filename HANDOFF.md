@@ -23,7 +23,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
 | This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, previews only until launch |
-| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through 25dffa2 (org commit 3d6c56c) | n/a |
+| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through c10974f (org commit c84dc98) | n/a |
 | Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands` | Same name. Preview: https://site-purple-martin-air-lake-highlands-q0uia6ac5-hlm10.vercel.app |
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff` | Same name. Preview: https://site-good-oak-barbers-oak-cliff-6x34a2xt4-hlm10.vercel.app |
 

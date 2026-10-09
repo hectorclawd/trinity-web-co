@@ -14,6 +14,7 @@ Last updated: 2026-10-08
 - [x] Delete the merged local branch project-readiness-checklist if it still exists (already deleted in both folders and on GitHub, 2026-10-08)
 - [x] Check the cosmetic-polish .btn-arrow buttons (2026-10-08: 360px and 1440px, hover, keyboard focus, reduced motion; arrow hidden below 384px by design, labels stay on one line)
 - [x] Fixed CTABand focus ring in site and template (2026-10-08: rings inside a band use its text color; ink on the gold founding card, 3.3:1 to 8.2:1; white on the brand band)
+- [x] Sync template to trinitywebco-sites (noscript menu fix b7eafa1 + CTABand fix c10974f; org commit c84dc98, 2026-10-08)
 
 ## TO DO
 
@@ -22,4 +23,3 @@ Last updated: 2026-10-08
 - [ ] Before launch: check forced-colors mode (Windows high contrast)
 - [ ] Sync focus-forward-site and desktop-tutorial
 - [ ] Restart the dev server if needed (astro dev on port 4321 was stopped during cleanup)
-- [ ] Sync template to trinitywebco-sites (noscript menu fix + CTABand fix)
