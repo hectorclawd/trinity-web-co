@@ -1,0 +1,101 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['spotlight-card', className]} data-spotlight>
+  <slot />
+</div>
+
+<style>
+  .spotlight-card {
+    position: relative;
+    isolation: isolate;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background-color: var(--color-surface);
+    box-shadow: 0 1rem 2rem -1rem rgb(19 38 43 / 0.2);
+  }
+
+  @supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+    .spotlight-card::before {
+      position: absolute;
+      z-index: 1;
+      inset: -1px;
+      padding: 1px;
+      border-radius: inherit;
+      background: radial-gradient(
+        170px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+        color-mix(in srgb, var(--color-brand) 75%, transparent),
+        transparent 75%
+      );
+      content: '';
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .spotlight-card::after {
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          190px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+          color-mix(in srgb, var(--color-brand) 10%, transparent),
+          transparent 75%
+        );
+        content: '';
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 160ms ease;
+      }
+
+      .spotlight-card[data-spotlight-active]::before {
+        opacity: 0.8;
+      }
+
+      .spotlight-card[data-spotlight-active]::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spotlight-card::before,
+    .spotlight-card::after {
+      content: none;
+    }
+  }
+</style>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('[data-spotlight]');
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (finePointer && !reducedMotion) {
+    cards.forEach((card) => {
+      card.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch') return;
+
+        const bounds = card.getBoundingClientRect();
+        card.style.setProperty('--spotlight-x', `${event.clientX - bounds.left}px`);
+        card.style.setProperty('--spotlight-y', `${event.clientY - bounds.top}px`);
+        card.dataset.spotlightActive = '';
+      });
+
+      card.addEventListener('pointerleave', () => {
+        delete card.dataset.spotlightActive;
+      });
+    });
+  }
+</script>
