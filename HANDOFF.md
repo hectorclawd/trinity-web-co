@@ -62,7 +62,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Size of each option** (mentions / files, excluding build output and lockfiles):
   - Keep "Trinity Web Co.", change the domain: `trinitywebco.com` appears 29 / 17 (8 / 6 of those are `hello@trinitywebco.com`). Mostly find-and-replace, then a template sync and both demos.
   - Rename the business: add "Trinity Web Co." 96 / 53 (site 17/12, template 13/8, business docs 23/10, root docs 7/3, clients template 1/1, demo 1 18/10, demo 2 17/9). Also `og-image.png`, probably the logo and favicon, and the demo screenshots. The GitHub org `trinitywebco-sites` (32 / 14) and Vercel project names are private and can wait.
-- **Must change before the demos go to production, whatever is decided:** the "Built by Trinity Web Co." credit in `Footer.astro` and the demo banner in `BaseLayout.astro` link to `https://trinitywebco.com/`, the stranger's site. That's in `templates/site-template/` and both demo repos. `site/src/components/Footer.astro` has the same link.
+- **Credit link removed (2026-10-12, 00b8ca1):** the "Built by Trinity Web Co." demo banner (`BaseLayout.astro`) and the "Website by" footer credit (`Footer.astro`) linked to `https://trinitywebco.com/`, the stranger's site. The text stays, the link is gone, in `templates/site-template/`, both demo repos and `site/`. Put the link back once the new domain is live. `site.url` in `site/src/content/site.ts` (canonical, `og:url`, schema) still says `trinitywebco.com` and changes with the domain decision.
 - Root `CLAUDE.md` still lists "Domain. The site assumes `trinitywebco.com`" as an open item; update it once the decision is made.
 
 ## Gotchas (learned the hard way)
@@ -88,7 +88,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **Next focus: finish the two demos for the site.** Fix the footer/banner credit link (above), move Vercel to Pro, deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL, then fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt and pageSpeed, with titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop".
+1. **Next focus: finish the two demos for the site.** Move Vercel to Pro (the credit link is fixed), deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL, then fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt and pageSpeed, with titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop".
 2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, headshot and About story, business setup (playbook §6), and the attorney review before the first client signs.
 4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, deploy `site/` to production, test the live form and analytics.
