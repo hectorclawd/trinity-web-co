@@ -2,7 +2,7 @@
 
 Shown at the start of every Claude Code session in this repo (see `CLAUDE.md`). Tick items off with the date or commit when done, and add new to-dos under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-09
+Last updated: 2026-10-12
 
 ## DONE
 
@@ -19,16 +19,24 @@ Last updated: 2026-10-09
 - [x] Sync template to trinitywebco-sites (noscript menu fix b7eafa1 + CTABand fix c10974f; org commit c84dc98, 2026-10-08)
 - [x] Deploy a Vercel preview of main (2026-10-09: https://trinity-web-co-site-1zdt40gd6-hlm10.vercel.app, behind Vercel login; production still 404)
 - [x] Pre-launch checks at 360px and 1440px on the production build and the deployed preview: touch, reduced motion, JS-off, forced colors (2026-10-09: all pass; real CSP blocks nothing; Vercel Analytics is not enabled on the project, see TO DO)
+- [x] Checked the business name and domain (2026-10-09): trinitywebco.com and trinityweb.co are someone else's; shortlist and the size of each option are in HANDOFF.md
 
 ## TO DO
 
 In launch order. Items in the same group can run in parallel.
 
-- [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.**
+**Next focus: finish the two demos for the site**
+- [ ] Change the "Built by Trinity Web Co." credit link in the footer and the demo banner: it points to `https://trinitywebco.com/`, which someone else owns. It's in `templates/site-template/` (Footer.astro, BaseLayout.astro) and both demo repos, plus `site/` Footer.astro. Use the new domain once decided, or drop the link until then; sync the template after
+- [ ] Move the Vercel account from Hobby to Pro (production demos are commercial use, which Hobby doesn't allow)
+- [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL
+- [ ] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop")
+
+**On hold: business name and domain**
+- [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying
+- [ ] After deciding: register the domain in your own registrar account (playbook §6 ownership policy), then update the name/domain across this repo, the template (sync it) and both demos, and the root `CLAUDE.md` open item
 
 **Business and legal (before the first client signs)**
-- [ ] Confirm and register `trinitywebco.com` in your own registrar account (playbook §6 ownership policy)
-- [ ] Business email `hello@trinitywebco.com` (Google Workspace, about $8/mo); the site and contact form already use this address
+- [ ] Business email `hello@` on the chosen domain (Google Workspace, about $8/mo); the site and contact form use `hello@trinitywebco.com` until it's renamed
 - [ ] Texas LLC (Form 205 on SOSDirect, about $300), then a free EIN, then a business checking account (playbook §6)
 - [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing)
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
@@ -37,26 +45,23 @@ In launch order. Items in the same group can run in parallel.
 
 **Site content**
 - [ ] Headshot and a short personal story for the About section
-- [ ] Formspree: create the form with `hello@trinitywebco.com` as the inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
+- [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
 
 **Vercel**
-- [ ] Move the Vercel account from Hobby to Pro (Hobby doesn't allow commercial sites)
-- [ ] Turn on Web Analytics for `trinity-web-co-site` and redeploy. On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"), so no visits or call/text/form events are recorded yet
-- [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL
-- [ ] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop")
+- [ ] Turn on Web Analytics for `trinity-web-co-site` (Hector, in the dashboard), then redeploy. On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"). Hobby records page views only; call/text/form events need Pro
 
 **Final QA (after content and demos are in)**
 - [ ] Run `/qa` (playbook §5 QA checklist) into `site/docs/qa-report.md`, including a real iPhone (Safari) and a real Android phone (Chrome), and Lighthouse mobile 90+
 - [ ] Optional forced-colors polish: the checklist progress bar and the How it works connector line disappear, and the founding card loses its panel edge. The text still carries the meaning, so this doesn't block launch
 
 **Launch day**
-- [ ] Add `trinitywebco.com` to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other
+- [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other
 - [ ] Deploy `site/` to production
-- [ ] Send a test form submission on the live site and confirm it reaches `hello@trinitywebco.com`
+- [ ] Send a test form submission on the live site and confirm it reaches your business inbox
 - [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
 
 **Right after launch (playbook §7 Week 1)**
 - [ ] Google Search Console: verify the domain and submit `sitemap.xml`
-- [ ] Google Business Profile for Trinity Web Co., with the site as its website link
+- [ ] Google Business Profile for the business, with the site as its website link
 - [ ] Cal.com booking link and a one-page PDF price sheet
 - [ ] Then outreach, playbook §7 weeks 2–4 (`business/sales/prospect-tracker.csv`)
