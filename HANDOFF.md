@@ -1,7 +1,7 @@
 # Trinity Web Co.: handoff
 
 Last updated: 2026-10-12 (after the 2026-10-09 hosting, pre-launch and domain checks). Written for a fresh Claude Code session picking this up with no other context.
-Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list and is shown at the start of every session.
+Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 

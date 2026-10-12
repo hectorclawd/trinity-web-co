@@ -1,6 +1,6 @@
 # Trinity Web Co. checklist
 
-Shown at the start of every Claude Code session in this repo (see `CLAUDE.md`). Tick items off with the date or commit when done, and add new to-dos under TO DO. Longer context is in `HANDOFF.md`.
+Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
 Last updated: 2026-10-12
 
@@ -20,6 +20,7 @@ Last updated: 2026-10-12
 - [x] Deploy a Vercel preview of main (2026-10-09: https://trinity-web-co-site-1zdt40gd6-hlm10.vercel.app, behind Vercel login; production still 404)
 - [x] Pre-launch checks at 360px and 1440px on the production build and the deployed preview: touch, reduced motion, JS-off, forced colors (2026-10-09: all pass; real CSP blocks nothing; Vercel Analytics is not enabled on the project, see TO DO)
 - [x] Checked the business name and domain (2026-10-09): trinitywebco.com and trinityweb.co are someone else's; shortlist and the size of each option are in HANDOFF.md
+- [x] Session-start hook shows this checklist (top 3 + group counts) in place of the CLAUDE.md rule; the Focus Forward hook now shows only in Focus Forward folders (2026-10-12)
 
 ## TO DO
 

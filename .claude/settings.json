@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/hlmpr/projects/trinity-web-co/.claude/hooks/checklist.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

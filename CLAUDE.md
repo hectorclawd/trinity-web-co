@@ -6,9 +6,9 @@ Trinity Web Co. is Hector's web design business for owner-operated Dallas busine
 
 This business is separate from Focus Forward. Don't mix its checklist, brand, or files into this folder.
 
-## Start of every session: show the checklist
+## The checklist
 
-**Before anything else in a new session, even before answering Hector's first message, show Hector the contents of `CHECKLIST.md` (the DONE and TO DO lists, as written).** Then carry on with what he asked. When an item gets done, tick it (`- [x]`) with the date or commit, add new to-dos under TO DO, and update its "Last updated" date. Longer context for a fresh session is in `HANDOFF.md`.
+A SessionStart hook (`.claude/settings.json`, script `.claude/hooks/checklist.js`) shows Hector a summary of `CHECKLIST.md` when a session starts, so don't show it again. When an item gets done, tick it in place inside its group (`- [x]`) with the date or commit, so the group's done count moves; don't move it to DONE, which holds older history. Add new to-dos to the right group under TO DO, and update its "Last updated" date. Longer context for a fresh session is in `HANDOFF.md`.
 
 ## Follow the playbook
 
@@ -50,7 +50,7 @@ Rules for using it:
   _template/admin/     Starting docs for a new client (copy to <client-slug>/)
 /site          The Trinity Web Co. website (Astro, built from site-template; see site/CLAUDE.md)
 HANDOFF.md     Where things stand, for a fresh session: repos, deploys, gotchas, next up
-CHECKLIST.md   DONE / TO DO list, shown at the start of every session
+CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude/
 ```
 
 ## Brand (our own site)
