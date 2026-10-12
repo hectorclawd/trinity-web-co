@@ -88,7 +88,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **Next focus: finish the two demos for the site.** Move Vercel to Pro (the credit link is fixed), deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL, then fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt and pageSpeed, with titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop".
+1. **Next focus: finish the two demos for the site, previews only.** On 2026-10-12 Hector put Vercel Pro and all production deploys on hold until the name and domain are decided. Improve each demo, deploy fresh previews, then fill both demo slots in `site/src/content/site.ts` (url, image, imageAlt, pageSpeed; titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop") on the `fill-demo-slots` branch, not `main`. Production deploys and PageSpeed Insights on production URLs wait for launch day.
 2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, headshot and About story, business setup (playbook §6), and the attorney review before the first client signs.
 4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, deploy `site/` to production, test the live form and analytics.

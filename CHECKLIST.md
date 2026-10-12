@@ -28,13 +28,13 @@ In launch order. Items in the same group can run in parallel.
 
 **Next focus: finish the two demos for the site**
 - [x] Change the "Built by Trinity Web Co." credit link in the footer and the demo banner: it pointed to `https://trinitywebco.com/`, which someone else owns. Link dropped, text kept, in the template, both demos and `site/` (2026-10-12: 00b8ca1; demos a4f85c2 and af6fd1d; template synced, org commit 2789f32)
-- [ ] Move the Vercel account from Hobby to Pro (production demos are commercial use, which Hobby doesn't allow)
 - [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL
 - [ ] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop")
 
 **On hold: business name and domain**
 - [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying
 - [ ] After deciding: register the domain in your own registrar account (playbook §6 ownership policy), then update the name/domain across this repo, the template (sync it) and both demos, and the root `CLAUDE.md` open item. Put the "Built by" / "Website by" credit link back on the new domain (removed 2026-10-12, 00b8ca1)
+- [ ] Move the Vercel account from Hobby to Pro before launch (production demos are commercial use, which Hobby doesn't allow). Not needed while everything is preview-only (2026-10-12: Hector is holding Pro and production deploys until the name and domain are decided)
 
 **Business and legal (before the first client signs)**
 - [ ] Business email `hello@` on the chosen domain (Google Workspace, about $8/mo); the site and contact form use `hello@trinitywebco.com` until it's renamed
