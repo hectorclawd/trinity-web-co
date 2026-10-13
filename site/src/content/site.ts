@@ -1,4 +1,6 @@
 import type { SiteConfig, StudioOffer } from './types';
+import demoPurpleMartin from '../assets/demo-purple-martin.jpg';
+import demoGoodOak from '../assets/demo-good-oak.jpg';
 
 // SINGLE source of truth for trinitywebco.com. Prices, packages and care plans must match
 // business/playbook.md sections 2 and 3: change the playbook first, then this file.
@@ -179,10 +181,27 @@ export const offer: StudioOffer = {
   demos: {
     heading: 'Demo sites',
     lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo.',
-    // Playbook section 7, week 1: one demo per target niche. Add url, image and pageSpeed when each is live.
+    // Playbook section 7, week 1: one demo per target niche.
+    // The urls are Vercel previews behind Vercel login, for Hector's review on the fill-demo-slots
+    // branch only. On launch day, swap in the production urls and add pageSpeed (mobile PageSpeed
+    // Insights on the production url) before this goes to main.
     slots: [
-      { niche: 'Home services', title: 'North Texas HVAC' },
-      { niche: 'Barbers and salons', title: 'Oak Cliff barbershop' },
+      {
+        niche: 'Home services',
+        title: 'Demo: Purple Martin Heating & Air',
+        url: 'https://site-purple-martin-air-lake-highlands-h10ea2kti-hlm10.vercel.app',
+        image: demoPurpleMartin,
+        imageAlt:
+          'Homepage of the Purple Martin Heating & Air demo: “Heating and air repair for East Dallas homes,” call, quote and text buttons, and an illustration of a ranch house with an AC unit',
+      },
+      {
+        niche: 'Barbers and salons',
+        title: 'Demo: Good Oak Barbershop',
+        url: 'https://site-good-oak-barbers-oak-cliff-8xn49iw6z-hlm10.vercel.app',
+        image: demoGoodOak,
+        imageAlt:
+          'Homepage of the Good Oak Barbershop demo: “Sharp cuts and hot towel shaves in Oak Cliff,” call and text buttons, “Open now · until 7 pm,” and an illustration of a corner barbershop',
+      },
     ],
   },
   process: {

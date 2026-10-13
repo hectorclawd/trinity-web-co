@@ -36,7 +36,7 @@ const { heading, lede, slots } = offer.demos;
                 {slot.pageSpeed !== undefined && <p class="demo-score">Mobile PageSpeed score: {slot.pageSpeed}</p>}
                 <p class="demo-link">
                   <a href={slot.url}>
-                    View the {slot.title} demo
+                    View the {slot.title.replace(/^Demo:\s*/, '')} demo
                   </a>
                 </p>
               </>
