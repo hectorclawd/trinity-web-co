@@ -12,6 +12,8 @@ interface Props {
   imageAlt?: string;
 }
 
+// Extra buttons (e.g. "Text us") go in the "buttons" slot, next to the others; anything
+// else goes in the default slot, below them.
 const { headline, lede, primaryCta, secondaryCta, image, imageAlt = '' } = Astro.props;
 ---
 
@@ -23,6 +25,7 @@ const { headline, lede, primaryCta, secondaryCta, image, imageAlt = '' } = Astro
       <div class="mt-8 flex flex-wrap gap-3" data-call-cta>
         <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
         {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
+        <slot name="buttons" />
       </div>
       <slot />
     </div>
