@@ -28,8 +28,8 @@ In launch order. Items in the same group can run in parallel.
 
 **Next focus: finish the two demos for the site**
 - [x] Change the "Built by Trinity Web Co." credit link in the footer and the demo banner: it pointed to `https://trinitywebco.com/`, which someone else owns. Link dropped, text kept, in the template, both demos and `site/` (2026-10-12: 00b8ca1; demos a4f85c2 and af6fd1d; template synced, org commit 2789f32)
-- [ ] Review the improved demos (previews in HANDOFF.md), then merge `improve-demo` into `main` in both demo repos. Built 2026-10-12: Call/Text bar on phones, alternating sections; Purple Martin Text us, "How a visit works", compact services; Good Oak price menu, text-first booking, "Open now"
-- [ ] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop") (2026-10-12: filled on branch `fill-demo-slots`, b8fb054, with preview links and new screenshots; on launch day swap in the production urls and scores, then merge)
+- [x] Review the improved demos (previews in HANDOFF.md), then merge `improve-demo` into `main` in both demo repos. Built 2026-10-12: Call/Text bar on phones, alternating sections; Purple Martin Text us, "How a visit works", compact services; Good Oak price menu, text-first booking, "Open now" (2026-10-13: reviewed and merged; Purple Martin 7397e1e, Good Oak 2f48792; branches deleted)
+- [x] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop") (2026-10-13: merged into main, c836c1e, with preview links and new screenshots; production URLs and PageSpeed come with the launch-day swap below)
 
 **On hold: business name and domain**
 - [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying
@@ -59,7 +59,7 @@ In launch order. Items in the same group can run in parallel.
 **Launch day**
 - [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other
 - [ ] Launch day: re-enable production deploys from main. Clear the Ignored Build Step in `trinity-web-co-site` → Settings → Git, set on 2026-10-12 to pause production builds
-- [ ] Swap the demo slot links from preview URLs to production URLs (the `fill-demo-slots` links need a Vercel login): set each slot's `url` to the demo's production URL and add its mobile `pageSpeed`, then merge `fill-demo-slots` into `main` before deploying `site/`
+- [ ] Swap the demo slot links from preview URLs to production URLs (the links on `main` need a Vercel login): set each slot's `url` in `site/src/content/site.ts` to the demo's production URL and add its mobile `pageSpeed`, before deploying `site/`
 - [ ] Deploy `site/` to production
 - [ ] Send a test form submission on the live site and confirm it reaches your business inbox
 - [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
