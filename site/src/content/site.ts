@@ -189,7 +189,7 @@ export const offer: StudioOffer = {
       {
         niche: 'Home services',
         title: 'Demo: Purple Martin Heating & Air',
-        url: 'https://site-purple-martin-air-lake-highlands-h10ea2kti-hlm10.vercel.app',
+        url: 'https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app',
         image: demoPurpleMartin,
         imageAlt:
           'Homepage of the Purple Martin Heating & Air demo: “Heating and air repair for East Dallas homes,” call, quote and text buttons, and an illustration of a ranch house with an AC unit',
@@ -197,7 +197,7 @@ export const offer: StudioOffer = {
       {
         niche: 'Barbers and salons',
         title: 'Demo: Good Oak Barbershop',
-        url: 'https://site-good-oak-barbers-oak-cliff-8xn49iw6z-hlm10.vercel.app',
+        url: 'https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app',
         image: demoGoodOak,
         imageAlt:
           'Homepage of the Good Oak Barbershop demo: “Sharp cuts and hot towel shaves in Oak Cliff,” call and text buttons, “Open now · until 7 pm,” and an illustration of a corner barbershop',
