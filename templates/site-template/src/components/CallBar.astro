@@ -11,7 +11,7 @@ import { site } from '../content/site';
 
 const phone = site.phone;
 const second = phone?.textable
-  ? { label: 'Text', href: `sms:${phone.e164}`, ariaLabel: `Text ${phone.display}` }
+  ? { label: 'Text us', href: `sms:${phone.e164}`, ariaLabel: `Text us at ${phone.display}` }
   : site.hero.secondaryCta;
 ---
 
