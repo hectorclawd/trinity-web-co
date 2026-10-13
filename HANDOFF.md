@@ -23,9 +23,9 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
 | This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`: `main`, plus `fill-demo-slots` (demo slots filled, merge on launch day) | `trinity-web-co-site`, Git-connected, production builds paused. `fill-demo-slots` preview (2026-10-12, b8fb054): https://trinity-web-co-site-eotvorfkp-hlm10.vercel.app |
-| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through 89fc6d7 (org commit 55282ea) | n/a |
-| Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-purple-martin-air-lake-highlands-h10ea2kti-hlm10.vercel.app |
-| Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-good-oak-barbers-oak-cliff-8xn49iw6z-hlm10.vercel.app |
+| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through b987cd0 (org commit f2aa882) | n/a |
+| Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app |
+| Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
 
 - `clients/*/site/` are separate git repos and are git-ignored here. Commit and push each one on its own.
 - Every Vercel project serves previews only, behind Vercel Authentication (a Vercel login). Prospects can't open the demos yet. That's deliberate: the demos go to production on launch day (see the launch checklist in `CLAUDE.md`).
@@ -74,6 +74,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - 97790b7: homepage sections alternate backgrounds based on which ones show.
   - 06404d9: a "buttons" slot in `Hero` and `CTABand` for extra buttons like Text us.
   - 89fc6d7: `forms.replyNote` replaces the hard-coded "within one business day" line.
+  - b987cd0 (2026-10-13, org f2aa882): the bar's text button reads "Text us". Both bar buttons fit side by side on one line at 360 and 320px. Tabbing through 4 pages of each demo at 360px never left a focused item hidden behind the bar once scrolling settled; during the smooth scroll it passes under the bar for a moment.
 - **Purple Martin (`improve-demo`):** Text us buttons, a "How a visit works" section with 4 promises, and a compact "We also do" list. Its bar runs up to 1023px to match its Menu button.
 - **Good Oak (`improve-demo`):** a price menu in place of the service cards, "Text to hold a chair" as the second hero button, a reply line that fits a barber, and "Open now" worked out in America/Chicago time.
 - **Both demos:** they had missed some earlier template fixes (b7eafa1 no-JS menu, c10974f call band focus ring; Purple Martin also 6e6a34b and dd68bcd). Those are in now. QA results are in each demo's `docs/qa-report.md`: mobile Lighthouse 99 / 100, with the call bar checked at 360 to 1440px.
