@@ -78,12 +78,13 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Good Oak (`improve-demo`):** a price menu in place of the service cards, "Text to hold a chair" as the second hero button, a reply line that fits a barber, and "Open now" worked out in America/Chicago time.
 - **Both demos:** they had missed some earlier template fixes (b7eafa1 no-JS menu, c10974f call band focus ring; Purple Martin also 6e6a34b and dd68bcd). Those are in now. QA results are in each demo's `docs/qa-report.md`: mobile Lighthouse 99 / 100, with the call bar checked at 360 to 1440px.
 - **Demo slots:** filled on `fill-demo-slots` with the preview links and fresh 1440x900 screenshots (`site/src/assets/demo-*.jpg`). Titles are "Demo: ...". There's no PageSpeed score until launch. On launch day, swap in the production URLs and scores, then merge.
+- **Screenshots:** each demo's `docs/screenshots/` has the homepage at 1440px (first screen and full page) and 360px (first screen, full page, and with the call bar), taken 2026-10-13 on `improve-demo`.
 
 ## Production is paused (2026-10-12)
 
 - **What happened:** `trinity-web-co-site` turned out to be connected to GitHub (`hectorclawd/trinity-web-co`, production branch `main`), so every push to `main` deployed to production. trinity-web-co-site.vercel.app was public with no `noindex`. There were 9 production deployments, the oldest 3 days old.
 - **The fix, with Hector's OK:** the project's Ignored Build Step (Settings → Git) is now `if [ "$VERCEL_ENV" = "production" ]; then echo "Production deploys paused until launch"; exit 0; fi; exit 1`. Pushes to `main` are skipped, and other branches still build previews. Git stays connected.
-- **Cleanup:** the 6 production deployments from 2026-10-12 were removed, and trinity-web-co-site.vercel.app returns 404 again. Three older ones remain (`pblsb5cae`, `ken7pwfyq`, `jnpfycdsq`); they need a Vercel login and aren't served on the production URL.
+- **Cleanup:** all 9 production deployments were removed: the 6 from 2026-10-12 that day, and the 3 older ones (`pblsb5cae`, `ken7pwfyq`, `jnpfycdsq`) on 2026-10-13. trinity-web-co-site.vercel.app returns 404 again. The only production entry left is a Canceled one, from the test push that showed the Ignored Build Step works.
 - **Launch day:** clear the Ignored Build Step to deploy production again (in `CHECKLIST.md`).
 
 ## Gotchas (learned the hard way)
