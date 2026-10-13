@@ -11,15 +11,17 @@ interface Props {
   /** Iframe URL if the provider supports embedding (Growth and Premium) */
   embedUrl?: string;
   heading?: string;
+  /** Tinted background; the homepage alternates it between sections */
+  surface?: boolean;
 }
 
-const { provider, url, embedUrl, heading = 'Book online' } = Astro.props;
+const { provider, url, embedUrl, heading = 'Book online', surface = true } = Astro.props;
 const ready = !isPlaceholder(url);
 ---
 
 {
   ready && (
-    <section id="book" class="section bg-surface" aria-labelledby="book-title">
+    <section id="book" class:list={['section', { 'bg-surface': surface }]} aria-labelledby="book-title">
       <div class="wrap">
         <h2 id="book-title">{heading}</h2>
         {embedUrl && (

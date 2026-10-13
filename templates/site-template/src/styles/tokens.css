@@ -50,6 +50,13 @@
   a:hover { color: var(--color-brand-dark); }
   :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 
+  /* Room for the phone Call/Text bar (CallBar.astro), so it never covers the footer or the
+     end of a page: its padding, 3rem buttons, border and the phone's safe area */
+  @media (max-width: 47.99rem) {
+    body.has-call-bar { padding-bottom: calc(4.5rem + 1px + max(0rem, env(safe-area-inset-bottom) - 0.75rem)); }
+    html:has(> body.has-call-bar) { scroll-padding-bottom: 5.5rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }

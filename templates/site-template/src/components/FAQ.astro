@@ -2,14 +2,16 @@
 interface Props {
   items: { question: string; answer: string }[];
   heading?: string;
+  /** Tinted background; the homepage alternates it between sections */
+  surface?: boolean;
 }
 
-const { items, heading = 'Questions customers ask' } = Astro.props;
+const { items, heading = 'Questions customers ask', surface = false } = Astro.props;
 ---
 
 {
   items.length > 0 && (
-    <section class="section" aria-labelledby="faq-title">
+    <section class:list={['section', { 'bg-surface': surface }]} aria-labelledby="faq-title">
       <div class="wrap">
         <h2 id="faq-title">{heading}</h2>
         <div class="faq mt-8 max-w-3xl border-t-2 border-text">

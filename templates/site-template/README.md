@@ -21,7 +21,7 @@ src/content/site.ts        all business facts (single source of truth)
 src/content/types.ts       the shape of site.ts
 src/content/blog/          Markdown posts (Premium only)
 src/components/            Header, Footer, Hero, ServiceCard, Reviews, MapEmbed, ContactForm,
-                           BookingEmbed, CTABand, FAQ, Gallery, HoursList
+                           BookingEmbed, CTABand, FAQ, Gallery, HoursList, CallBar
 src/layouts/BaseLayout.astro  meta tags, Open Graph, LocalBusiness schema, analytics
 src/pages/                 index, about, contact, services/[slug], areas/[slug], blog, privacy, 404,
                            robots.txt (generated from site.ts)

@@ -8,20 +8,22 @@ interface Props {
   reviews: Review[];
   heading?: string;
   googleReviewUrl?: string;
+  /** Tinted background; the homepage alternates it between sections */
+  surface?: boolean;
 }
 
-const { reviews, heading = 'What customers say', googleReviewUrl } = Astro.props;
+const { reviews, heading = 'What customers say', googleReviewUrl, surface = false } = Astro.props;
 const headingId = 'reviews-title';
 ---
 
 {
   reviews.length > 0 && (
-    <section class="section" aria-labelledby={headingId}>
+    <section class:list={['section', { 'bg-surface': surface }]} aria-labelledby={headingId}>
       <div class="wrap">
         <h2 id={headingId}>{heading}</h2>
         <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review) => (
-            <figure class="m-0 rounded-card border-l-4 border-accent bg-surface p-6">
+            <figure class:list={['m-0 rounded-card border-l-4 border-accent p-6', surface ? 'bg-bg' : 'bg-surface']}>
               <blockquote class="text-lg">
                 <p>{review.text}</p>
               </blockquote>

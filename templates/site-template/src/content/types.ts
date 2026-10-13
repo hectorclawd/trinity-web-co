@@ -133,6 +133,8 @@ export interface SiteConfig {
     map: boolean;
     gallery: boolean;
     quoteForm: boolean;
+    /** Call and Text bar pinned to the bottom of the screen on phones. On unless set to false; needs a phone */
+    callBar?: boolean;
   };
   /** "Website by Trinity Web Co." in the footer */
   credit: boolean;

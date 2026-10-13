@@ -23,8 +23,9 @@ Run the playbook's pre-launch QA (section 5) and record the results in `docs/qa-
        })
        .map((el) => el.textContent.trim());
      ```
-     Anything it returns fails "Header on one line". The usual fix is to show the Menu button up to 1023px: in `src/components/Header.astro`, change `md:hidden` to `lg:hidden` and `max-width: 47.99rem` to `max-width: 63.99rem`, then check again. Don't shorten the business name to make it fit.
+     Anything it returns fails "Header on one line". The usual fix is to show the Menu button up to 1023px: in `src/components/Header.astro`, change `md:hidden` to `lg:hidden` and `max-width: 47.99rem` to `max-width: 63.99rem`. Move the call bar's breakpoint to match, so it still shows wherever the header button is folded into the menu: `min-width: 48rem` to `64rem` in `src/components/CallBar.astro`, and `max-width: 47.99rem` to `63.99rem` on the call bar rule in `src/styles/tokens.css`. Then check again. Don't shorten the business name to make it fit.
    - On a phone width: the main call to action is visible without scrolling, the menu opens and closes, and `tel:` links are present.
+   - Call bar (unless `features.callBar` is false): at 360px it's hidden while the hero buttons or the call band are on screen, shows once you scroll past them, hides while a form field has focus, and never covers the footer or the form's submit button when scrolled to them. Without JavaScript it stays visible. At 1440px it never shows.
    - Keyboard: tab through the homepage and confirm focus is always visible.
 6. Check every page's built HTML for: one `<h1>`, a title under 60 characters, a description under 155, a canonical URL, and an `og:image`.
 7. Check that `dist/` has no inline executable `<script>` (only `application/ld+json` may be inline), so the CSP in `vercel.json` won't block anything.

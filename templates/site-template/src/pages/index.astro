@@ -12,17 +12,31 @@ import FAQ from '../components/FAQ.astro';
 import CTABand from '../components/CTABand.astro';
 import ContactForm from '../components/ContactForm.astro';
 import { site } from '../content/site';
-import { areaPath, formLabels, fullAddress, servicePath } from '../lib/format';
+import { areaPath, formLabels, fullAddress, isPlaceholder, servicePath } from '../lib/format';
 
 const address = fullAddress(site);
 const labels = formLabels(site);
 const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email}`;
+
+// Sections between the hero and the call band alternate tinted and plain backgrounds.
+// List the ones that actually show, so two neighbors never share a background
+// (with no reviews or gallery, services and about used to run together).
+const shown = [
+  'services',
+  site.reviews.length > 0 && 'reviews',
+  site.features.gallery && site.gallery.length > 0 && 'gallery',
+  'about',
+  site.features.booking && site.booking && !isPlaceholder(site.booking.url) && 'booking',
+  'visit',
+  site.faqs.length > 0 && 'faq',
+].filter(Boolean);
+const surface = (section: string) => shown.indexOf(section) % 2 === 0;
 ---
 
 <BaseLayout>
   <Hero {...site.hero} />
 
-  <section id="services" class="section bg-surface" aria-labelledby="services-title">
+  <section id="services" class:list={['section', { 'bg-surface': surface('services') }]} aria-labelledby="services-title">
     <div class="wrap">
       <h2 id="services-title">What we do</h2>
       <div class="mt-8 grid gap-x-12 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
@@ -31,11 +45,11 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
     </div>
   </section>
 
-  <Reviews reviews={site.reviews} googleReviewUrl={site.googleReviewUrl} />
+  <Reviews reviews={site.reviews} googleReviewUrl={site.googleReviewUrl} surface={surface('reviews')} />
 
-  {site.features.gallery && <Gallery images={site.gallery} />}
+  {site.features.gallery && <Gallery images={site.gallery} surface={surface('gallery')} />}
 
-  <section class="section bg-surface" aria-labelledby="about-title">
+  <section class:list={['section', { 'bg-surface': surface('about') }]} aria-labelledby="about-title">
     <div class={`wrap grid items-center gap-10 ${site.about.image ? 'md:grid-cols-[1fr_1.3fr] md:gap-16' : ''}`}>
       {
         site.about.image && (
@@ -56,9 +70,9 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
     </div>
   </section>
 
-  {site.features.booking && site.booking && <BookingEmbed {...site.booking} />}
+  {site.features.booking && site.booking && <BookingEmbed {...site.booking} surface={surface('booking')} />}
 
-  <section id="visit" class="section" aria-labelledby="visit-title">
+  <section id="visit" class:list={['section', { 'bg-surface': surface('visit') }]} aria-labelledby="visit-title">
     <div class="wrap grid items-start gap-10 md:grid-cols-2 md:gap-16">
       <div>
         <h2 id="visit-title">{site.serviceAreaOnly ? 'Hours and service area' : 'Hours and location'}</h2>
@@ -84,7 +98,7 @@ const fallback = site.phone ? `call ${site.phone.display}` : `email ${site.email
     </div>
   </section>
 
-  <FAQ items={site.faqs} />
+  <FAQ items={site.faqs} surface={surface('faq')} />
 
   <CTABand {...site.cta} />
 

@@ -134,6 +134,6 @@ export const site: SiteConfig = {
     ogImage: '/og-image.jpg',
   },
 
-  features: { blog: false, booking: false, map: true, gallery: true, quoteForm: true },
+  features: { blog: false, booking: false, map: true, gallery: true, quoteForm: true, callBar: true },
   credit: true,
 };

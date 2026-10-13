@@ -20,7 +20,7 @@ const { headline, lede, primaryCta, secondaryCta, image, imageAlt = '' } = Astro
     <div>
       <h1>{headline}</h1>
       <p class="mt-5 max-w-xl text-xl text-muted">{lede}</p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <div class="mt-8 flex flex-wrap gap-3" data-call-cta>
         <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
         {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
       </div>

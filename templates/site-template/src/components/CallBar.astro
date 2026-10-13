@@ -1,0 +1,99 @@
+---
+// Call and Text buttons pinned to the bottom of the screen on phones (below 768px, where the
+// header's call button is tucked inside the menu). Turn off with `features.callBar: false`.
+// - Hidden while any [data-call-cta] block is on screen (the hero buttons, the call band),
+//   so the page never shows two sets of call buttons at once.
+// - Hidden while a form field has focus, so it can't float over the field above the keyboard.
+// - BaseLayout pads the bottom of the page by the bar's height, so it never covers the
+//   footer, a form's submit button or the last lines of content.
+// - Starts hidden so it doesn't flash over the hero on load. Without JavaScript it stays visible.
+import { site } from '../content/site';
+
+const phone = site.phone;
+const second = phone?.textable
+  ? { label: 'Text', href: `sms:${phone.e164}`, ariaLabel: `Text ${phone.display}` }
+  : site.hero.secondaryCta;
+---
+
+{
+  phone && (
+    <aside class="call-bar is-hidden" aria-label={phone.textable ? 'Call or text' : 'Call'} data-call-bar>
+      <a class="btn btn-primary" href={`tel:${phone.e164}`} aria-label={`Call ${phone.display}`}>Call</a>
+      {second && (
+        <a class="btn btn-secondary" href={second.href} aria-label={'ariaLabel' in second ? second.ariaLabel : undefined}>
+          {second.label}
+        </a>
+      )}
+    </aside>
+  )
+}
+
+<noscript>
+  <style is:inline>
+    [data-call-bar] { transform: none !important; visibility: visible !important; }
+  </style>
+</noscript>
+
+<style>
+  .call-bar {
+    position: fixed;
+    inset: auto 0 0 0;
+    z-index: 40;
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem clamp(1rem, 4vw, 2.5rem) max(0.75rem, env(safe-area-inset-bottom));
+    background: var(--color-bg);
+    border-top: 1px solid var(--color-line);
+    box-shadow: 0 -0.25rem 1rem rgb(0 0 0 / 0.08);
+    transition: transform 0.2s, visibility 0.2s;
+  }
+  .call-bar > .btn {
+    flex: 1;
+  }
+  .call-bar.is-hidden {
+    transform: translateY(100%);
+    visibility: hidden;
+  }
+  @media (min-width: 48rem) {
+    .call-bar {
+      display: none;
+    }
+  }
+  @media print {
+    .call-bar {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const bar = document.querySelector<HTMLElement>('[data-call-bar]');
+
+  if (bar) {
+    const ctasOnScreen = new Set<Element>();
+    let fieldFocused = false;
+    const update = () => bar.classList.toggle('is-hidden', ctasOnScreen.size > 0 || fieldFocused);
+
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) ctasOnScreen.add(entry.target);
+        else ctasOnScreen.delete(entry.target);
+      }
+      update();
+    });
+    const ctas = document.querySelectorAll('[data-call-cta]');
+    ctas.forEach((el) => observer.observe(el));
+    // With nothing to watch, show it now; otherwise the observer's first report decides
+    if (ctas.length === 0) update();
+
+    const isField = (el: EventTarget | null) => el instanceof Element && el.matches('input, select, textarea');
+    document.addEventListener('focusin', (event) => {
+      fieldFocused = isField(event.target);
+      update();
+    });
+    document.addEventListener('focusout', () => {
+      fieldFocused = false;
+      update();
+    });
+  }
+</script>

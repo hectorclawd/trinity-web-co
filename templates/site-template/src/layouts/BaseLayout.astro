@@ -4,6 +4,7 @@ import '../styles/tokens.css';
 import Analytics from '@vercel/analytics/astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CallBar from '../components/CallBar.astro';
 import { site } from '../content/site';
 import { localBusinessSchema } from '../lib/format';
 
@@ -24,6 +25,7 @@ const fullTitle = title && withName.length >= 60 ? title : withName;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImageUrl = new URL(ogImage, site.url).href;
 const schema = localBusinessSchema(site);
+const callBar = site.features.callBar !== false && Boolean(site.phone);
 ---
 
 <!doctype html>
@@ -49,7 +51,7 @@ const schema = localBusinessSchema(site);
     <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
     <slot name="head" />
   </head>
-  <body>
+  <body class:list={{ 'has-call-bar': callBar }}>
     <a class="skip-link" href="#main">Skip to content</a>
     {
       site.demo && (
@@ -67,6 +69,7 @@ const schema = localBusinessSchema(site);
       <slot />
     </main>
     <Footer />
+    {callBar && <CallBar />}
     <Analytics />
   </body>
 </html>
