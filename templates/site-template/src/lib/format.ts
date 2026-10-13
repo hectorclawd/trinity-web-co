@@ -17,12 +17,13 @@ export function isPlaceholder(value: string | undefined): boolean {
   return !value || value.includes('REPLACE_ME');
 }
 
-/** Form heading and button text, from site.forms (quote form on Growth and Premium) */
+/** Form heading, button text and the line next to the form, from site.forms (quote form on Growth and Premium) */
 export function formLabels(site: SiteConfig) {
   const quote = site.features.quoteForm;
   return {
     heading: quote ? (site.forms.quoteHeading ?? 'Get a free quote') : 'Get in touch',
     submit: quote ? (site.forms.quoteSubmitLabel ?? 'Request my quote') : 'Send message',
+    note: site.forms.replyNote ?? 'Tell us what you need and we’ll get back to you within one business day.',
   };
 }
 

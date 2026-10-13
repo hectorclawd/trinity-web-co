@@ -116,6 +116,8 @@ export interface SiteConfig {
     quoteSubmitLabel?: string;
     /** Ask for a ZIP code on the quote form. Default true; false for shops customers visit (barbers, salons) */
     quoteZip?: boolean;
+    /** Line next to the form. Default: "Tell us what you need and we’ll get back to you within one business day." */
+    replyNote?: string;
   };
 
   social: Link[];
