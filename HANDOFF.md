@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-12 (after the 2026-10-09 hosting, pre-launch and domain checks). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-12 (evening: demo improvements, template call bar, and production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**Paused 2026-10-12 at Hector's request.** Nothing is half-done: every repo below is committed and pushed, `main` is the only branch, and no local servers are running. What to do next is in `CHECKLIST.md`: the next focus is finishing the two demos, while the business name and domain decision is on hold (see below).
+**2026-10-12 evening.** Both demos were improved on `improve-demo` branches, waiting for Hector's review before they're merged to `main`. Both demo slots on our site are filled on the `fill-demo-slots` branch, which isn't merged until launch day. Production deploys of our site are paused (see "Production is paused" below). No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -22,14 +22,15 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
-| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, previews only until launch. Latest preview (2026-10-09, `main` at `e67a953`): https://trinity-web-co-site-1zdt40gd6-hlm10.vercel.app |
-| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through 00b8ca1 (org commit 2789f32) | n/a |
-| Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands` | Same name. Preview: https://site-purple-martin-air-lake-highlands-q0uia6ac5-hlm10.vercel.app |
-| Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff` | Same name. Preview: https://site-good-oak-barbers-oak-cliff-6x34a2xt4-hlm10.vercel.app |
+| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`: `main`, plus `fill-demo-slots` (demo slots filled, merge on launch day) | `trinity-web-co-site`, Git-connected, production builds paused. `fill-demo-slots` preview (2026-10-12, b8fb054): https://trinity-web-co-site-eotvorfkp-hlm10.vercel.app |
+| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through 89fc6d7 (org commit 55282ea) | n/a |
+| Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-purple-martin-air-lake-highlands-h10ea2kti-hlm10.vercel.app |
+| Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`: `main`, plus `improve-demo` (2026-10-12, waiting for review) | Same name, not Git-connected. Preview of `improve-demo`: https://site-good-oak-barbers-oak-cliff-8xn49iw6z-hlm10.vercel.app |
 
 - `clients/*/site/` are separate git repos and are git-ignored here. Commit and push each one on its own.
-- Every Vercel project has previews only, behind Vercel Authentication (a Vercel login). Prospects can't open the demos yet. That's deliberate: the demos go to production on launch day (see the launch checklist in `CLAUDE.md`).
-- Vercel account: team `hlm10` (`team_BAKR7LKO83CePY1tgdUydUiI`), still on **Hobby** (non-commercial). Moving to Pro is the first launch-checklist item.
+- Every Vercel project serves previews only, behind Vercel Authentication (a Vercel login). Prospects can't open the demos yet. That's deliberate: the demos go to production on launch day (see the launch checklist in `CLAUDE.md`).
+- **Only `trinity-web-co-site` is connected to GitHub.** Pushing a branch builds a preview by itself. Pushing `main` is skipped (see below). The demo projects deploy only when you run `npx vercel deploy` in the demo repo.
+- Vercel account: team `hlm10` (`team_BAKR7LKO83CePY1tgdUydUiI`), still on **Hobby** (non-commercial). Moving to Pro waits for the name and domain decision.
 
 ## What happened on 2026-10-07 and 10-08
 
@@ -65,6 +66,26 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Credit link removed (2026-10-12, 00b8ca1):** the "Built by Trinity Web Co." demo banner (`BaseLayout.astro`) and the "Website by" footer credit (`Footer.astro`) linked to `https://trinitywebco.com/`, the stranger's site. The text stays, the link is gone, in `templates/site-template/`, both demo repos and `site/`. Put the link back once the new domain is live. `site.url` in `site/src/content/site.ts` (canonical, `og:url`, schema) still says `trinitywebco.com` and changes with the domain decision.
 - Root `CLAUDE.md` still lists "Domain. The site assumes `trinitywebco.com`" as an open item; update it once the decision is made.
 
+## What happened on 2026-10-12
+
+- **Credit link:** the "Built by Trinity Web Co." demo banner and footer credit no longer link to trinitywebco.com (someone else's). The text stays. Template 00b8ca1.
+- **Template (synced, org commits 426326c and 55282ea):**
+  - 97790b7: a Call/Text bar pinned to the bottom of the screen on phones (`CallBar.astro`, `features.callBar`). It hides while the hero buttons or the call band are on screen and while a form field has focus. The page gets bottom padding the bar's height, plus the safe area. It stays visible with JavaScript off.
+  - 97790b7: homepage sections alternate backgrounds based on which ones show.
+  - 06404d9: a "buttons" slot in `Hero` and `CTABand` for extra buttons like Text us.
+  - 89fc6d7: `forms.replyNote` replaces the hard-coded "within one business day" line.
+- **Purple Martin (`improve-demo`):** Text us buttons, a "How a visit works" section with 4 promises, and a compact "We also do" list. Its bar runs up to 1023px to match its Menu button.
+- **Good Oak (`improve-demo`):** a price menu in place of the service cards, "Text to hold a chair" as the second hero button, a reply line that fits a barber, and "Open now" worked out in America/Chicago time.
+- **Both demos:** they had missed some earlier template fixes (b7eafa1 no-JS menu, c10974f call band focus ring; Purple Martin also 6e6a34b and dd68bcd). Those are in now. QA results are in each demo's `docs/qa-report.md`: mobile Lighthouse 99 / 100, with the call bar checked at 360 to 1440px.
+- **Demo slots:** filled on `fill-demo-slots` with the preview links and fresh 1440x900 screenshots (`site/src/assets/demo-*.jpg`). Titles are "Demo: ...". There's no PageSpeed score until launch. On launch day, swap in the production URLs and scores, then merge.
+
+## Production is paused (2026-10-12)
+
+- **What happened:** `trinity-web-co-site` turned out to be connected to GitHub (`hectorclawd/trinity-web-co`, production branch `main`), so every push to `main` deployed to production. trinity-web-co-site.vercel.app was public with no `noindex`. There were 9 production deployments, the oldest 3 days old.
+- **The fix, with Hector's OK:** the project's Ignored Build Step (Settings → Git) is now `if [ "$VERCEL_ENV" = "production" ]; then echo "Production deploys paused until launch"; exit 0; fi; exit 1`. Pushes to `main` are skipped, and other branches still build previews. Git stays connected.
+- **Cleanup:** the 6 production deployments from 2026-10-12 were removed, and trinity-web-co-site.vercel.app returns 404 again. Three older ones remain (`pblsb5cae`, `ken7pwfyq`, `jnpfycdsq`); they need a Vercel login and aren't served on the production URL.
+- **Launch day:** clear the Ignored Build Step to deploy production again (in `CHECKLIST.md`).
+
 ## Gotchas (learned the hard way)
 
 - **Vercel's first deploy always goes to production.** A deploy to a project with *no deployments* lands on Production even with `--target=preview`; once any deployment exists, the flag works. `/new-site` step 9 handles this: deploy, deploy again, remove the production one. Never remove a project's last deployment.
@@ -88,8 +109,8 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **Next focus: finish the two demos for the site, previews only.** On 2026-10-12 Hector put Vercel Pro and all production deploys on hold until the name and domain are decided. Improve each demo, deploy fresh previews, then fill both demo slots in `site/src/content/site.ts` (url, image, imageAlt, pageSpeed; titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop") on the `fill-demo-slots` branch, not `main`. Production deploys and PageSpeed Insights on production URLs wait for launch day.
+1. **Next focus: Hector reviews the demo previews** (table above). Then merge both `improve-demo` branches to `main` in the demo repos. `fill-demo-slots` waits for launch day (production URLs and PageSpeed scores). Vercel Pro and every production deploy are on hold until the name and domain are decided.
 2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, headshot and About story, business setup (playbook §6), and the attorney review before the first client signs.
-4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, deploy `site/` to production, test the live form and analytics.
+4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, re-enable production deploys from `main` (clear the Ignored Build Step), deploy `site/` to production, test the live form and analytics.
 5. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).
