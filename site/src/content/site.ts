@@ -25,9 +25,13 @@ export const site: SiteConfig = {
   },
   about: {
     heading: 'A neighbor, not an agency',
+    // Hector's own story, approved 2026-10-13
     paragraphs: [
-      'I’m Hector, and Trinity Web Co. is my one-person studio here in Dallas. When you hire me, you work with me from the first call to the last edit. No account managers, no handoffs, no outsourcing.',
-      'I started Trinity Web Co. because too many great local businesses are hard to find online. Some have a website from 2014, some just have a Facebook page, and some have nothing at all. You shouldn’t need a marketing department to fix that.',
+      'I’m Hector, a Dallas local. I build websites for the small businesses that make this city what it is: the barbershops, the HVAC crews, the salons and the shops you drive past every day.',
+      'I didn’t start out in web design. I’ve done network installation jobs in businesses all over DFW, and I started paying attention to how customers actually find the places I was working in. A lot of great local businesses are hard to find online, and that felt like a fixable problem.',
+      'I’m also studying marketing and economics, so I think about websites the way a business owner does: does this get you more calls? Every site I build is fast, easy to use on a phone, and set up so customers can call, text or book in one tap.',
+      'When you work with me, you work with me, not an agency or a call center. I’ll explain things in plain English, keep your site up to date, and answer your texts, usually the same day.',
+      'Right now I’m taking on my first three founding clients at a lower price, in exchange for a short testimonial and letting me show their site as an example. If your business deserves a better website, let’s talk.',
     ],
   },
 
@@ -182,9 +186,9 @@ export const offer: StudioOffer = {
     heading: 'Demo sites',
     lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo.',
     // Playbook section 7, week 1: one demo per target niche.
-    // The urls are Vercel previews behind Vercel login, for Hector's review on the fill-demo-slots
-    // branch only. On launch day, swap in the production urls and add pageSpeed (mobile PageSpeed
-    // Insights on the production url) before this goes to main.
+    // The urls are Vercel previews behind Vercel login until launch. On launch day, swap in the
+    // production urls and add pageSpeed (mobile PageSpeed Insights on the production url) before
+    // deploying this site (CHECKLIST.md, launch day).
     slots: [
       {
         niche: 'Home services',
