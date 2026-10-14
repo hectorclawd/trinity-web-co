@@ -54,7 +54,7 @@ In launch order. Items in the same group can run in parallel.
 
 **Final QA (after content and demos are in)**
 - [ ] Run `/qa` (playbook §5 QA checklist) into `site/docs/qa-report.md`, including a real iPhone (Safari) and a real Android phone (Chrome), and Lighthouse mobile 90+
-- [ ] Optional forced-colors polish: the checklist progress bar and the How it works connector line disappear, and the founding card loses its panel edge. The text still carries the meaning, so this doesn't block launch
+- [x] Optional forced-colors polish: the checklist progress bar and the How it works connector line disappear, and the founding card loses its panel edge. The text still carries the meaning, so this doesn't block launch (2026-10-13: fixed with system colors in site/ and the template CTABand; checked at 360 and 1440px with high contrast on and off)
 
 **Launch day**
 - [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other
