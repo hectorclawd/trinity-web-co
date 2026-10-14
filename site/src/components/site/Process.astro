@@ -68,6 +68,14 @@ const { heading, steps } = offer.process;
     color: var(--color-muted);
   }
 
+  /* High contrast mode wipes background colors, so draw the connector in the text color */
+  @media (forced-colors: active) {
+    .steps li:not(:last-child)::after {
+      forced-color-adjust: none;
+      background: CanvasText;
+    }
+  }
+
   /* Wide screens: one row of five steps with a horizontal connector */
   @media (min-width: 68rem) {
     .steps {

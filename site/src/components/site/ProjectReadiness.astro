@@ -122,6 +122,25 @@ const items = [
     border-radius: 999px;
     background: var(--color-brand);
   }
+  /* High contrast mode wipes background colors, which is all the bar is made of:
+     outline the track and fill the value with the system highlight color */
+  @media (forced-colors: active) {
+    .readiness-progress {
+      forced-color-adjust: none;
+      border: 1px solid CanvasText;
+      background: Canvas;
+    }
+    .readiness-progress::-webkit-progress-bar {
+      background: Canvas;
+    }
+    /* Separate rules: a browser drops a whole selector list if it doesn't know one pseudo-element */
+    .readiness-progress::-webkit-progress-value {
+      background: Highlight;
+    }
+    .readiness-progress::-moz-progress-bar {
+      background: Highlight;
+    }
+  }
   .readiness-saved-note {
     margin-top: 0.45rem;
     font-size: 0.875rem;
