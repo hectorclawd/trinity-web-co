@@ -23,7 +23,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
 | This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, Git-connected, production builds paused (pushes to `main` show as Canceled). Latest preview (2026-10-13, the demo slots, same content as `main`): https://trinity-web-co-site-no38yka9k-hlm10.vercel.app |
-| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through b987cd0 (org commit f2aa882) | n/a |
+| Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through ff9eef7 (org commit a9772d0) | n/a |
 | Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 7397e1e): https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app |
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 2f48792): https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
 
