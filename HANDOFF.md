@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-13 (demo improvements and demo slots merged; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-14 (About copy merged; headshot still to come; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**2026-10-13.** Hector reviewed the demo improvements and they're merged: both demos' `improve-demo` and this repo's `fill-demo-slots` are in `main`, and the branches are deleted. Every repo has only `main`, in sync with GitHub, with nothing uncommitted. Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
+**2026-10-14.** The demo improvements, the demo slots and Hector's About copy are all merged, and every working branch is deleted. Every repo has only `main`, in sync with GitHub, with nothing uncommitted. Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -81,6 +81,13 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Demo slots:** filled with the preview links and fresh 1440x900 screenshots (`site/src/assets/demo-*.jpg`), merged into `main` on 2026-10-13 (c836c1e). Titles are "Demo: ...". There's no PageSpeed score yet. On launch day, swap in the production URLs and the scores (in `CHECKLIST.md`).
 - **Screenshots:** each demo's `docs/screenshots/` has the homepage at 1440px (first screen and full page) and 360px (first screen, full page, and with the call bar), taken 2026-10-13.
 
+## What happened on 2026-10-13 and 10-14
+
+- **iPhone check:** Hector reviewed both demos and our site on an iPhone, and everything looked good. Both demo QA reports have it ticked; the Android (Chrome) line is still open.
+- **High contrast mode:** the checklist progress bar, the How it works connector and the founding card stay visible with forced colors on (site 3b27ca5). The founding card fix is in the template's `CTABand` (ff9eef7, org a9772d0).
+- **About copy:** Hector's own story replaces the placeholder (62ce5b4). It came from Hector's draft, checked against the playbook: salons in place of restaurants (§1 says skip restaurants for now), the founding terms as in §2 (first three clients, testimonial and case study), and "answer your texts, usually the same day" in place of "pick up when you call". No neighborhood or bilingual line for now; either can be added later.
+- **Headshot, still to come:** save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging.
+
 ## Production is paused (2026-10-12)
 
 - **What happened:** `trinity-web-co-site` turned out to be connected to GitHub (`hectorclawd/trinity-web-co`, production branch `main`), so every push to `main` deployed to production. trinity-web-co-site.vercel.app was public with no `noindex`. There were 9 production deployments, the oldest 3 days old.
@@ -112,8 +119,8 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **The demos are done for now** (merged 2026-10-13). What's left that doesn't wait on the name and domain: Web Analytics on `trinity-web-co-site`, the headshot and About story, the Formspree form, the tax question on care-plan hosting, and Stripe. Vercel Pro and every production deploy are on hold until the name and domain are decided.
+1. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. Vercel Pro and every production deploy are on hold until the name and domain are decided.
 2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
-3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, headshot and About story, business setup (playbook §6), and the attorney review before the first client signs.
+3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.
 4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, re-enable production deploys from `main` (clear the Ignored Build Step), deploy `site/` to production, test the live form and analytics.
 5. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).

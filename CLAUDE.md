@@ -74,7 +74,7 @@ CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude
 
 ## Launch checklist (our own site)
 
-Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID, About content):
+Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID, headshot):
 
 - [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebco.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again.
 - [ ] Deploy the demos to production on Pro, run PageSpeed Insights (mobile) on each production URL, then swap the demo slots in `site/src/content/site.ts` from their preview URLs to the production URLs and add `pageSpeed` (titles, images and alt text are already in). Both demos are preview-only now, so the production deploy is `npx vercel deploy --prod` in each demo repo.
@@ -100,7 +100,8 @@ Other open items:
 - [x] Vercel project `trinity-web-co-site` created (root directory `site`, Astro preset, Node 24) and linked with the CLI from the repo root; `.vercelignore` uploads only `site/` (2026-10-07). Preview deployments only for now: the first deploy went to production by default and was removed, so `trinity-web-co-site.vercel.app` returns 404 until launch. Since then the project has been connected to GitHub (production branch `main`). Since 2026-10-12 its Ignored Build Step skips production builds, so pushes to `main` don't deploy and other branches still build previews. Clear it on launch day.
 - [ ] Formspree form ID. Replace `REPLACE_ME` in `site.forms.contactEndpoint` in `site/src/content/site.ts`.
 - [x] Social share image: `site/public/og-image.png` (1200×630).
-- [ ] Headshot and a short personal story for the About section.
+- [x] Short personal story for the About section (2026-10-14, 62ce5b4).
+- [ ] Headshot for the About section (`site/src/assets/headshot.jpg`, JPG, 4:5, at least 1200 × 1500 px). Add it on a new branch with a preview for Hector's OK.
 - [ ] Business setup per playbook §6 (LLC, EIN, bank account, sales tax question on hosting).
 - [ ] Attorney review (playbook §6, about $300–$600) of `business/sales/master-service-agreement.md` and `business/sales/contract-scope-template.md` before the first client signs. Bring the "Attorney review list" at the end of the agreement. It covers:
   1. Order of precedence between the agreement and a scope page.

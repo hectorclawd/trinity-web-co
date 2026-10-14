@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-13
+Last updated: 2026-10-14
 
 ## DONE
 
@@ -46,7 +46,8 @@ In launch order. Items in the same group can run in parallel.
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)
 
 **Site content**
-- [ ] Headshot and a short personal story for the About section
+- [x] Short personal story for the About section (2026-10-14: Hector's own copy, merged 62ce5b4)
+- [ ] Headshot for the About section: save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging
 - [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
 
 **Vercel**
