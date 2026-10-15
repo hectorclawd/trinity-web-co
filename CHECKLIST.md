@@ -40,7 +40,7 @@ In launch order. Items in the same group can run in parallel.
 **Business and legal (before the first client signs)**
 - [ ] Business email `hello@` on the chosen domain (Google Workspace, about $8/mo); the site and contact form use `hello@trinitywebco.com` until it's renamed
 - [ ] Texas LLC (Form 205 on SOSDirect, about $300), then a free EIN, then a business checking account (playbook §6)
-- [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing)
+- [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing). Step-by-step guide in `business/stripe-setup.md` (2026-10-14); it needs the name, the LLC and EIN, and the business bank account first, then about 30 minutes plus a test-mode dry run
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
 - [ ] Attorney review of `business/sales/master-service-agreement.md` and `contract-scope-template.md`, using the 14-point list in `CLAUDE.md`
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)

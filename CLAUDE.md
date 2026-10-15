@@ -40,6 +40,7 @@ Rules for using it:
 ```
 /business      How the business runs
   playbook.md          The full playbook (source of truth, see above)
+  stripe-setup.md      Stripe setup guide: fees, account settings, product catalog, invoicing and care-plan billing
   sales/               Price sheet, discovery call, outreach scripts, master service agreement + scope template, intake form, prospect tracker
   archive/             Old pricing, contracts, outreach scripts and lead list, superseded by the playbook (see its README)
 /templates     Reusable starting points for client work

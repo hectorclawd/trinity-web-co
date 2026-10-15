@@ -119,7 +119,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. Vercel Pro and every production deploy are on hold until the name and domain are decided.
+1. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. The Stripe setup is written up and ready in `business/stripe-setup.md` (2026-10-14); it waits on the name, the LLC and EIN, and the bank account. Vercel Pro and every production deploy are on hold until the name and domain are decided.
 2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.
 4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, re-enable production deploys from `main` (clear the Ignored Build Step), deploy `site/` to production, test the live form and analytics.
