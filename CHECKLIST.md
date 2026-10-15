@@ -65,6 +65,12 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Send a test form submission on the live site and confirm it reaches your business inbox
 - [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
 
+**Instagram (plan: "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`)**
+- [ ] Create the Instagram business account and send the handle
+- [ ] Answer the doc's "Still open" questions (whose voice, Spanish follow-up, one account or two)
+- [ ] Add the Apple design skill, then build the brand kit and the 20 pieces in English and Spanish with HyperFrames on the PC (founding-offer carousel built but held)
+- [ ] Post on the doc's 6-week order; R2 waits on the demos' production PageSpeed scores
+
 **Right after launch (playbook §7 Week 1)**
 - [ ] Google Search Console: verify the domain and submit `sitemap.xml`
 - [ ] Google Business Profile for the business, with the site as its website link

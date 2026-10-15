@@ -37,6 +37,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | After any care plan ends, keep hosting the site for 30 days so the client can move it, then remove it from the Vercel account | Gives the client time to move without hosting a site forever | Attorney review of the contract |
 | 2026-10-07 | The client owns the site once the build fees are paid; unpaid care-plan fees stay owed as a debt and don't affect ownership | Otherwise a client behind on care fees couldn't own their site, and the 60-day handoff couldn't happen | Attorney review of the contract |
 | 2026-10-09 | Reviewed switching to Cloudflare. Staying on Vercel Pro | Savings (~$240/yr) don't justify losing the call/text/form event tracking that care-plan reports rely on, plus ~30 files of rework | At 25+ clients |
+| 2026-10-15 | Instagram content speaks to small restaurants and other small businesses as well as the two default niches, in English and Spanish. Outreach stays on the §1 default niches | Hector wants the account to reach any small local business; content costs nothing per niche, while outreach time is limited | After the first 20 posts, or when a restaurant asks for a quote |
 
 ### Changelog
 
@@ -62,6 +63,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | §3, §4, §6: founding Starter deposit is 50% of the upfront payment; never take a site offline for non-payment; work done on termination billed hourly at $75 |
 | 2026-10-07 | §3: a care plan unpaid 60 days can be ended by written notice, followed by a handoff |
 | 2026-10-07 | §4, §6: 30 days of hosting after a care plan ends; ownership passes on payment of the build fees; founding Starter 100% upfront logged as the only 50/50 exception |
+| 2026-10-15 | Decisions log: Instagram content also covers small restaurants and other small businesses (outreach niches unchanged) |
 | 2026-10-15 | §6: Stripe cost now includes the ACH fee, the 0.4% Invoicing fee and the 0.7% Billing fee (checked on stripe.com/pricing 2026-10-14); links to `business/stripe-setup.md` |
 
 ## 1. Business model
