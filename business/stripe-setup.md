@@ -37,8 +37,6 @@ What that means on real invoices:
 | Care Standard, $99/mo | about $3.86 | about $1.48 |
 | Care Plus, $199/mo | about $7.46 | about $2.98 |
 
-The playbook's cost column lists only the card fee. The 0.4% and 0.7% come on top.
-
 Two things follow from the table:
 
 - **Ask for ACH on build invoices.** Keep cards on as a fallback, and add a line to each invoice: "Paying by bank transfer (ACH) is easiest for both of us."

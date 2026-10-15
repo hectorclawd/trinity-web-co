@@ -62,6 +62,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | §3, §4, §6: founding Starter deposit is 50% of the upfront payment; never take a site offline for non-payment; work done on termination billed hourly at $75 |
 | 2026-10-07 | §3: a care plan unpaid 60 days can be ended by written notice, followed by a handoff |
 | 2026-10-07 | §4, §6: 30 days of hosting after a care plan ends; ownership passes on payment of the build fees; founding Starter 100% upfront logged as the only 50/50 exception |
+| 2026-10-15 | §6: Stripe cost now includes the ACH fee, the 0.4% Invoicing fee and the 0.7% Billing fee (checked on stripe.com/pricing 2026-10-14); links to `business/stripe-setup.md` |
 
 ## 1. Business model
 
@@ -462,7 +463,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 
 | Job | Default tool | Cost |
 | --- | --- | --- |
-| Invoices, deposits and recurring care-plan billing | Stripe (Invoicing + Billing subscriptions) | Card about 2.9% + 30¢; offer ACH bank transfer for big invoices (much cheaper) |
+| Invoices, deposits and recurring care-plan billing | Stripe (Invoicing + Billing subscriptions) | Card about 2.9% + 30¢, ACH 0.8% capped at $5; plus 0.4% per paid invoice (Invoicing) and 0.7% of care-plan billing (Billing). Offer ACH for big invoices (much cheaper). Setup in `business/stripe-setup.md` |
 | Bookkeeping | Wave, or a simple spreadsheet until you pass about 10 clients | Free |
 | Contracts and e-signature | A free e-sign tier (Dropbox Sign, Docusign free) or a PDF signed by email to start | Free |
 | Intake and forms | Tally | Free |
