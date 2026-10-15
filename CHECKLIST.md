@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-14
+Last updated: 2026-10-15
 
 ## DONE
 
@@ -51,7 +51,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
 
 **Vercel**
-- [ ] Turn on Web Analytics for `trinity-web-co-site` (Hector, in the dashboard), then redeploy. On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"). Hobby records page views only; call/text/form events need Pro
+- [x] Turn on Web Analytics for `trinity-web-co-site` (Hector, in the dashboard). On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"). Hobby records page views only; call/text/form events need Pro (2026-10-15: turned on; the next deploy picks it up, and the launch-day analytics check confirms it)
 
 **Final QA (after content and demos are in)**
 - [ ] Run `/qa` (playbook §5 QA checklist) into `site/docs/qa-report.md`, including a real iPhone (Safari) and a real Android phone (Chrome), and Lighthouse mobile 90+
