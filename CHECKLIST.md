@@ -66,8 +66,8 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
 
 **Instagram (plan: "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`)**
-- [ ] Create the Instagram business account and send the handle
-- [ ] Answer the doc's "Still open" questions (whose voice, Spanish follow-up, one account or two)
+- [x] Create the Instagram business account and send the handle (2026-10-15: @trinitywebco)
+- [ ] Answer the doc's "Still open" questions (Spanish follow-up, one account or two, restaurant demo). Voice is settled: a narrator speaks for Trinity Web Co., and no script uses Hector's name
 - [ ] Add the Apple design skill, then build the brand kit and the 20 pieces in English and Spanish with HyperFrames on the PC (founding-offer carousel built but held)
 - [ ] Post on the doc's 6-week order; R2 waits on the demos' production PageSpeed scores
 
