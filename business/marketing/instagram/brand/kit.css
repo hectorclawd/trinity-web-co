@@ -1,0 +1,191 @@
+/* Trinity Web Co. Instagram kit: tokens and shared components.
+   Colors match site/src/styles/tokens.css. Gold is only for primary buttons and the
+   founding offer, so nothing here uses it except .twc-button-primary.
+
+   Each composition also declares Archivo's @font-face inline (HyperFrames' lint only
+   reads @font-face from the composition file itself). Copy it from compositions/end-card.html. */
+
+:root {
+  /* Color */
+  --ink: #13262b;
+  --river: #1d6b66;
+  --river-deep: #0e3f3c;
+  --limestone: #ecefe9; /* page background */
+  --paper: #fafbf8;
+  --gold: #edb23a; /* primary buttons and the founding offer only */
+  --muted: #3e5458;
+  --line: #c6cfc9;
+
+  --font: "Archivo Variable", system-ui, sans-serif;
+
+  /* Type scale for 1080-wide frames. Sizes step by about 4:3. Tracking tightens and
+     leading closes as size grows; headlines run wide (125%), body stays at 100%. */
+  --fs-hero: 192px;
+  --fs-display: 144px;
+  --fs-headline: 104px;
+  --fs-title: 72px;
+  --fs-lead: 54px;
+  --fs-body: 42px;
+  --fs-label: 30px;
+
+  /* Spacing, on an 8px grid */
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 48px;
+  --s6: 64px;
+  --s7: 88px;
+  --s8: 120px;
+  --s9: 160px;
+  --pad: 88px; /* side margin on every frame */
+
+  /* Instagram safe zones (see compositions/safe-zones in kit.js) */
+  --safe-top: 250px; /* 9:16: profile row and progress bar */
+  --safe-bottom: 350px; /* 9:16: caption, audio and reply bar */
+  --rail-x: 880px; /* Reels: like/comment/share column sits right of this... */
+  --rail-y: 1060px; /* ...from about this height down */
+  --grid-crop: 34px; /* 4:5 slides: the 3:4 profile grid trims this from each side */
+
+  /* Shape */
+  --radius-card: 28px;
+  --radius-pill: 999px;
+  --rule: 3px;
+}
+
+/* Text styles. Use one per element; color comes from the frame. */
+.t-hero,
+.t-display,
+.t-headline,
+.t-title,
+.t-lead,
+.t-body,
+.t-label {
+  margin: 0;
+  font-family: var(--font);
+  font-kerning: normal;
+  text-wrap: balance;
+}
+.t-hero { font-size: var(--fs-hero); line-height: 0.9; letter-spacing: -0.035em; font-stretch: 125%; font-weight: 820; }
+.t-display { font-size: var(--fs-display); line-height: 0.93; letter-spacing: -0.03em; font-stretch: 125%; font-weight: 820; }
+.t-headline { font-size: var(--fs-headline); line-height: 0.98; letter-spacing: -0.025em; font-stretch: 125%; font-weight: 800; }
+.t-title { font-size: var(--fs-title); line-height: 1.06; letter-spacing: -0.015em; font-stretch: 116%; font-weight: 760; }
+.t-lead { font-size: var(--fs-lead); line-height: 1.2; letter-spacing: -0.005em; font-stretch: 108%; font-weight: 620; }
+.t-body { font-size: var(--fs-body); line-height: 1.32; letter-spacing: 0; font-stretch: 100%; font-weight: 450; text-wrap: pretty; }
+.t-label { font-size: var(--fs-label); line-height: 1.2; letter-spacing: 0.01em; font-stretch: 108%; font-weight: 650; }
+
+.t-muted { color: var(--muted); }
+.t-river { color: var(--river); }
+
+/* Frames */
+.twc-bg { position: absolute; inset: 0; background: var(--limestone); }
+.twc-bg--paper { background: var(--paper); }
+.twc-bg--deep { background: var(--river-deep); }
+
+/* "Demo" and "Example" badges. Stay on screen the whole time a demo or a made-up
+   example is visible (plan, rules). Ink pill, readable over any screenshot. */
+.twc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font);
+  font-size: 34px;
+  line-height: 1;
+  font-stretch: 112%;
+  font-weight: 720;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  box-shadow: 0 0 0 4px rgba(250, 251, 248, 0.9); /* paper halo keeps it clear of dark footage */
+}
+
+/* Message bubbles: the DM keyword, and the texts in R1. Outgoing = river, incoming = paper. */
+.twc-bubble {
+  display: inline-block;
+  padding: 0.16em 0.42em 0.2em;
+  border-radius: 0.36em 0.36em 0.1em 0.36em;
+  background: var(--river);
+  color: var(--paper);
+  font-family: var(--font);
+  white-space: nowrap;
+}
+.twc-bubble--in {
+  border-radius: 0.36em 0.36em 0.36em 0.1em;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 0 0 3px var(--line);
+}
+
+/* Burned-in captions for Reels: one short phrase at a time, each line its own ink pill,
+   centered in the caption zone above Instagram's bottom bar and left of the button column. */
+.twc-captions {
+  position: absolute;
+  left: 150px;
+  right: 230px; /* ends 30 px short of the Reel buttons */
+  bottom: calc(var(--safe-bottom) + 40px);
+  height: 300px;
+  pointer-events: none;
+}
+.twc-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font);
+  font-size: 54px;
+  line-height: 1.42;
+  font-stretch: 100%;
+  font-weight: 680;
+  letter-spacing: 0;
+  text-wrap: balance;
+  opacity: 0;
+}
+.twc-caption span {
+  padding: 0.06em 0.36em 0.1em;
+  border-radius: 0.3em;
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Primary button style. Gold, so only for a real primary action or the founding offer. */
+.twc-button-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5em 1em;
+  border-radius: 16px;
+  background: var(--gold);
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 700;
+  font-stretch: 108%;
+}
+
+/* Safe-zone guides. Preview only: turned on with the `guides` variable, never in a delivery render.
+   Magenta on purpose, so a guide can't be mistaken for brand content. */
+.twc-guides { position: absolute; inset: 0; pointer-events: none; z-index: 1000; }
+.twc-guide {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px dashed rgba(214, 51, 108, 0.9);
+  background: rgba(214, 51, 108, 0.16);
+}
+.twc-guide--soft { border-style: dotted; background: rgba(214, 51, 108, 0.08); }
+.twc-guide--line { background: none; border-width: 0 0 0 2px; border-color: rgba(214, 51, 108, 0.55); }
+.twc-guide b {
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(214, 51, 108, 0.95);
+  color: #fff;
+  font: 650 24px/1.2 var(--font);
+  font-stretch: 100%;
+  white-space: nowrap;
+}

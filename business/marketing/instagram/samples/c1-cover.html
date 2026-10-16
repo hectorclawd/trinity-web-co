@@ -1,0 +1,135 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- Sample: C1's cover slide (1080×1350) on the shared slide frame. Hook text from the plan.
+         Render: node scripts/render.mjs samples/c1-cover.html --still -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      #c1-cover {
+        position: absolute;
+        inset: 0;
+      }
+      .c1-hook {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 236px;
+      }
+      .c1-title {
+        max-width: 860px;
+        text-wrap: balance;
+      }
+      .c1-aside {
+        margin-top: 40px;
+        font-size: 58px;
+        line-height: 1.15;
+        font-stretch: 108%;
+        font-weight: 680;
+        letter-spacing: -0.005em;
+        text-wrap: balance;
+      }
+      .c1-aside s {
+        text-decoration-color: var(--river);
+        text-decoration-thickness: 0.11em;
+      }
+      .c1-river {
+        position: absolute;
+        left: 40px;
+        top: 888px;
+        width: 1000px;
+      }
+      .c1-river svg {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="c1-cover" data-start="0" data-duration="1" data-width="1080" data-height="1350">
+      <div
+        id="el-frame"
+        data-composition-id="carousel-slide"
+        data-composition-src="compositions/carousel-slide.html"
+        data-variable-values='{"tone":"light","swipe":1}'
+        data-start="0"
+        data-duration="1"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1350"
+      ></div>
+      <section id="c1-cover" class="clip" data-start="0" data-duration="1" data-track-index="1">
+        <div class="c1-hook">
+          <h1 class="c1-title t-display"></h1>
+          <p class="c1-aside"></p>
+        </div>
+        <div class="c1-river"></div>
+      </section>
+    </div>
+    <script>
+      // Hook text from the plan's "20 pieces at a glance" table.
+      const COPY = {
+        en: { title: "What a website costs", before: "(no “", struck: "call for a quote", after: "”)" },
+        es: { title: "Cuánto cuesta una página web", before: "(sin “", struck: "llámenos para cotizar", after: "”)" },
+      };
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      const copy = COPY[lang];
+      const title = document.querySelector(".c1-title");
+      const aside = document.querySelector(".c1-aside");
+      title.textContent = copy.title;
+      aside.append(copy.before);
+      aside.appendChild(document.createElement("s")).textContent = copy.struck;
+      aside.append(copy.after);
+      const river = TWC.river(document.querySelector(".c1-river"), { width: 1000, stops: "phone" });
+      TWC.showRiver(river);
+
+      document.fonts.ready.then(() => {
+        TWC.fit(title, { max: 144, min: 96, maxHeight: 420 });
+        window.__timelines["c1-cover"] = gsap.timeline({ paused: true });
+      });
+    </script>
+  </body>
+</html>
