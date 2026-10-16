@@ -68,7 +68,8 @@ In launch order. Items in the same group can run in parallel.
 **Instagram (plan: "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`)**
 - [x] Create the Instagram business account and send the handle (2026-10-15: @trinitywebco)
 - [x] Answer the doc's "Still open" questions (2026-10-15/16: narrator speaks for Trinity Web Co. and never names Hector; checks and calls in English or Spanish; both languages on @trinitywebco; no restaurant demo, R6 keeps its "Example" menu)
-- [ ] Add the Apple design skill, then build the brand kit and the 20 pieces in English and Spanish with HyperFrames on the PC (founding-offer carousel built but held)
+- [x] Add the Apple design skill, then build the brand kit with HyperFrames on the PC (2026-10-15: `business/marketing/instagram/`, 76f6eb7 on branch `instagram-brand-kit`; samples of R1's end card in both languages and C1's cover approved; white river dots and a river-green DM bubble, no gold)
+- [ ] Build the 20 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
 - [ ] Post on the doc's 6-week order; R2 waits on the demos' production PageSpeed scores
 
 **Right after launch (playbook §7 Week 1)**
