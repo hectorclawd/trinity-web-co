@@ -1,0 +1,177 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- The Reel end card (1080×1920). Every Reel ends on it (plan, "Reel scripts"):
+         the bridge logo, "Trinity Web Co. · Dallas", the DM line, "@trinitywebco", "English · Español".
+         Mount it from a Reel's entry file for 4 s or more; it settles by 2 s, then only the river moves. -->
+  </head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="brand/kit.css" />
+      <style>
+        @font-face {
+          font-family: "Archivo Variable";
+          src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+          font-weight: 100 900;
+          font-stretch: 62% 125%;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo Variable";
+          src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+          font-weight: 100 900;
+          font-stretch: 62% 125%;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--ink);
+          font-family: var(--font);
+        }
+        /* Everything sits between the top 250 px and the bottom 350 px, left of the Reel buttons. */
+        .ec-brand {
+          position: absolute;
+          left: var(--pad);
+          top: 292px;
+        }
+        .ec-logo svg {
+          display: block;
+        }
+        .ec-name {
+          margin-top: 30px;
+          font-size: 58px;
+          font-stretch: 116%;
+          font-weight: 760;
+          letter-spacing: -0.01em;
+          line-height: 1.1;
+          white-space: nowrap;
+        }
+        .ec-river {
+          position: absolute;
+          left: 0;
+          top: 618px;
+          width: 1080px;
+        }
+        .ec-river svg {
+          display: block;
+        }
+        .ec-cta {
+          position: absolute;
+          left: var(--pad);
+          top: 888px;
+          width: calc(var(--rail-x) - var(--pad));
+        }
+        .ec-before,
+        .ec-after {
+          font-weight: 680;
+        }
+        .ec-key {
+          display: block;
+          margin: 22px 0 26px;
+        }
+        .ec-key .twc-bubble {
+          font-size: 120px;
+          line-height: 1;
+          font-stretch: 125%;
+          font-weight: 820;
+          letter-spacing: 0.01em;
+        }
+        .ec-info {
+          position: absolute;
+          left: var(--pad);
+          top: 1352px;
+          width: calc(var(--rail-x) - var(--pad));
+        }
+        .ec-rule {
+          height: var(--rule);
+          background: var(--line);
+        }
+        .ec-handle {
+          margin-top: 34px;
+          font-size: 66px;
+        }
+        .ec-langs {
+          margin-top: 10px;
+          font-size: 44px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="end-card" data-width="1080" data-height="1920">
+        <div class="twc-bg"></div>
+        <div class="ec-brand">
+          <div class="ec-logo"></div>
+          <p class="ec-name"></p>
+        </div>
+        <div class="ec-river"></div>
+        <div class="ec-cta">
+          <p class="ec-before t-lead"></p>
+          <div class="ec-key"></div>
+          <p class="ec-after t-lead"></p>
+        </div>
+        <div class="ec-info">
+          <div class="ec-rule"></div>
+          <p class="ec-handle t-title"></p>
+          <p class="ec-langs t-lead t-muted"></p>
+        </div>
+      </div>
+
+      <script src="brand/generated.js"></script>
+      <script src="brand/kit.js"></script>
+      <script>
+        (function () {
+          const { lang, guides } = TWC.vars(window.__hyperframes.getVariables());
+          const root = [...document.querySelectorAll('[data-composition-id="end-card"]')].pop();
+          const $ = (s) => root.querySelector(s);
+
+          const logo = TWC.logo($(".ec-logo"), { width: 240 });
+          const river = TWC.river($(".ec-river"), { width: 1080 });
+          $(".ec-name").textContent = `${TWC.t("business.name")} · ${TWC.t("business.city")}`;
+          const line = TWC.dm("endCard", lang);
+          $(".ec-before").textContent = line.before;
+          const key = TWC.bubble(line.keyword);
+          $(".ec-key").appendChild(key);
+          $(".ec-after").textContent = line.after;
+          $(".ec-handle").textContent = TWC.t("business.handle");
+          $(".ec-langs").textContent = TWC.t("business.languages");
+          if (guides) TWC.guides(root, "reel").setAttribute("data-layout-ignore", "");
+
+          document.fonts.ready.then(() => {
+            // The keyword runs as large as it can while clearing the Reel buttons (REVISAR is wider than CHECK).
+            const room = $(".ec-cta").offsetWidth;
+            for (let size = 120; size > 88 && key.offsetWidth > room; size -= 2) key.style.fontSize = `${size - 2}px`;
+
+            // Draw the river and build the bridge, then the words settle in, top to bottom.
+            const { motion } = TWC;
+            const tl = gsap.timeline({ paused: true });
+            TWC.drawRiver(tl, river, 0.05, { duration: 1.5 });
+            TWC.drawLogo(tl, logo, 0.15);
+            TWC.rise(tl, $(".ec-name"), 0.55);
+            TWC.rise(tl, $(".ec-before"), 0.9, { spring: motion.snappy });
+            // The keyword arrives like a sent message: up from the bottom left, no bounce.
+            tl.fromTo(key, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, 0.98);
+            tl.fromTo(
+              key,
+              { scale: 0.9, y: 30, transformOrigin: "0% 100%" },
+              { scale: 1, y: 0, duration: motion.snappy.duration, ease: motion.snappy.ease },
+              0.98,
+            );
+            TWC.rise(tl, $(".ec-after"), 1.1, { spring: motion.snappy });
+            tl.fromTo($(".ec-rule"), { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: motion.move.duration, ease: motion.move.ease }, 1.3);
+            TWC.rise(tl, $(".ec-handle"), 1.38);
+            TWC.rise(tl, $(".ec-langs"), 1.46);
+            window.__timelines["end-card"] = tl;
+          });
+        })();
+      </script>
+    </template>
+  </body>
+</html>

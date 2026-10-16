@@ -1,0 +1,68 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- The caption track for Reels (1080×1920, transparent). Most people watch with the sound
+         off, so every Reel burns captions in. Mount it on its own track over the scenes, from the
+         first word until the end card starts (the end card carries its own words).
+         Word timings come from the entry file: TWC.init(vars, { transcript }), where transcript
+         is `hyperframes transcribe` output for that language's ElevenLabs voiceover. -->
+  </head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="brand/kit.css" />
+      <style>
+        @font-face {
+          font-family: "Archivo Variable";
+          src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+          font-weight: 100 900;
+          font-stretch: 62% 125%;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+      </style>
+
+      <div id="root" data-composition-id="captions" data-width="1080" data-height="1920"></div>
+
+      <script src="brand/generated.js"></script>
+      <script src="brand/kit.js"></script>
+      <script>
+        (function () {
+          const { lang, guides } = TWC.vars(window.__hyperframes.getVariables());
+          const root = [...document.querySelectorAll('[data-composition-id="captions"]')].pop();
+
+          // Preview only: R1's opening line with evenly spaced placeholder timings, used when no
+          // transcript was passed in. A real Reel always passes its voiceover's transcript.
+          const SAMPLE = {
+            en: "What if you could just text your website guy? Trinity Web Co. builds fast websites for Dallas businesses.",
+            es: "¿Y si pudieras mandarle un mensaje al que hizo tu página web? Trinity Web Co. hace páginas web rápidas para negocios de Dallas.",
+          };
+          let words = TWC.transcript();
+          if (!words) {
+            let t = 0.3;
+            words = SAMPLE[lang].split(" ").map((text) => {
+              const w = { text, start: t, end: t + 0.3 };
+              t += TWC.endsSentence(text) ? 0.8 : 0.36;
+              return w;
+            });
+          }
+
+          const tl = gsap.timeline({ paused: true });
+          TWC.captions(tl, root, words);
+          if (guides) TWC.guides(root, "reel").setAttribute("data-layout-ignore", "");
+          window.__timelines["captions"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

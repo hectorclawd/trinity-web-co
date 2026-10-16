@@ -1,0 +1,5 @@
+# Rendered video and stills are large; they live on Hector's PC only
+out/
+renders/
+snapshots/
+.hyperframes/

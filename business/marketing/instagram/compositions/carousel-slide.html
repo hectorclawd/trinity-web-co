@@ -1,0 +1,127 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false},
+    {"id":"tone","type":"enum","label":"Background","default":"light","options":[{"value":"light","label":"Limestone"},{"value":"paper","label":"Paper"},{"value":"deep","label":"River deep"}]},
+    {"id":"swipe","type":"number","label":"Show the swipe cue for (s)","default":1,"min":0,"step":1,"unit":"s"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- The carousel slide frame (1080×1350, 4:5): background, a small brand header, the handle,
+         and a swipe cue on the cover. A carousel's entry file mounts it once under all its slides
+         (one slide per second, rendered as one PNG per slide) and lays each slide's content on top,
+         inside the content box: 88 px sides, 200 px top, 170 px bottom. -->
+  </head>
+  <body>
+    <template>
+      <link rel="stylesheet" href="brand/kit.css" />
+      <style>
+        @font-face {
+          font-family: "Archivo Variable";
+          src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+          font-weight: 100 900;
+          font-stretch: 62% 125%;
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+          font-family: "Archivo Variable";
+          src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+          font-weight: 100 900;
+          font-stretch: 62% 125%;
+          unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          color: var(--ink);
+          font-family: var(--font);
+          --frame-muted: var(--muted);
+        }
+        #root.cs-deep {
+          color: var(--paper);
+          --frame-muted: rgba(250, 251, 248, 0.78);
+        }
+        .cs-head {
+          position: absolute;
+          left: var(--pad);
+          top: 76px;
+          display: flex;
+          align-items: center;
+          gap: 18px;
+        }
+        .cs-head svg {
+          display: block;
+        }
+        .cs-name {
+          font-size: 32px;
+          font-stretch: 116%;
+          font-weight: 760;
+          letter-spacing: -0.005em;
+        }
+        .cs-foot {
+          position: absolute;
+          left: var(--pad);
+          right: var(--pad);
+          bottom: 72px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          color: var(--frame-muted);
+        }
+        .cs-swipe {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          color: var(--ink);
+        }
+        #root.cs-deep .cs-swipe {
+          color: var(--paper);
+        }
+      </style>
+
+      <div id="root" data-composition-id="carousel-slide" data-width="1080" data-height="1350">
+        <div class="twc-bg"></div>
+        <div class="cs-head"><span class="cs-name"></span></div>
+        <div class="cs-foot">
+          <span class="cs-handle t-label"></span>
+          <span class="cs-swipe t-label"></span>
+        </div>
+      </div>
+
+      <script src="brand/generated.js"></script>
+      <script src="brand/kit.js"></script>
+      <script>
+        (function () {
+          const own = window.__hyperframes.getVariables();
+          const { lang, guides } = TWC.vars(own);
+          const root = [...document.querySelectorAll('[data-composition-id="carousel-slide"]')].pop();
+          const $ = (s) => root.querySelector(s);
+          const deep = own.tone === "deep";
+          root.classList.toggle("cs-deep", deep);
+          $(".twc-bg").classList.toggle("twc-bg--deep", deep);
+          $(".twc-bg").classList.toggle("twc-bg--paper", own.tone === "paper");
+
+          const logo = TWC.logo($(".cs-head"), { width: 72, color: deep ? "var(--paper)" : "var(--river-deep)" });
+          $(".cs-head").insertBefore(logo, $(".cs-name"));
+          TWC.showLogo(logo);
+          $(".cs-name").textContent = TWC.t("business.name");
+          $(".cs-handle").textContent = TWC.t("business.handle");
+          const swipe = $(".cs-swipe");
+          swipe.textContent = TWC.t("labels.swipe", lang);
+          swipe.appendChild(TWC.arrow("1.1em"));
+          if (guides) TWC.guides(root, "carousel").setAttribute("data-layout-ignore", "");
+
+          // Static frame. The swipe cue shows on the cover only: the first `swipe` seconds.
+          const tl = gsap.timeline({ paused: true });
+          const showFor = Number(own.swipe) || 0;
+          tl.fromTo(swipe, { opacity: showFor > 0 ? 1 : 0 }, { opacity: 0, duration: 0.001 }, Math.max(showFor, 0.001));
+          window.__timelines["carousel-slide"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 32" width="48" height="32">
+  <!-- Margaret Hunt Hill Bridge arch with three cables: the "Trinity" -->
+  <g fill="none" stroke="#0E3F3C" stroke-linecap="round">
+    <path d="M3 28 Q24 -6 45 28" stroke-width="3.2"/>
+    <path d="M14 28 L18 11 M24 28 L24 6.5 M34 28 L30 11" stroke-width="2"/>
+    <path d="M1 28 H47" stroke-width="3.2"/>
+  </g>
+</svg>

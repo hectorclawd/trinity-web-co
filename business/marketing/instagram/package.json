@@ -1,0 +1,14 @@
+{
+  "name": "instagram",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync-config.mjs",
+    "dev": "npm run sync && npx --yes hyperframes@0.8.140 preview",
+    "check": "npm run sync && npx --yes hyperframes@0.8.140 check",
+    "render": "npx --yes hyperframes@0.8.140 render",
+    "piece": "node scripts/render.mjs",
+    "samples": "node scripts/render.mjs --samples",
+    "publish": "npx --yes hyperframes@0.8.140 publish"
+  }
+}
