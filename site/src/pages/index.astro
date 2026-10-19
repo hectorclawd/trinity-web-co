@@ -13,6 +13,13 @@ import Process from '../components/site/Process.astro';
 import About from '../components/site/About.astro';
 import ProjectReadiness from '../components/site/ProjectReadiness.astro';
 import { site, offer } from '../content/site';
+
+// Extra contact form fields, styled like the ones inside ContactForm
+const fieldClass =
+  'w-full rounded-btn border-[1.5px] border-muted bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error';
+const labelClass = 'mb-1.5 block text-base font-semibold';
+// Formspree joins checked boxes that share a name into one comma-separated value
+const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in person'];
 ---
 
 <BaseLayout>
@@ -63,17 +70,38 @@ import { site, offer } from '../content/site';
         surface
       >
         <div class="mb-4">
-          <label class="mb-1.5 block text-base font-semibold" for="cf-current-site">
+          <label class={labelClass} for="cf-current-site">
             Current website{' '}<span class="font-normal text-muted">(if you have one)</span>
           </label>
           <input
-            class="w-full rounded-btn border-[1.5px] border-muted bg-white px-3.5 py-3 text-[1.0625rem] text-text aria-[invalid=true]:border-error"
+            class={fieldClass}
             id="cf-current-site"
             name="current_site"
             type="text"
             inputmode="url"
             placeholder="yourbusiness.com"
           />
+        </div>
+        <fieldset class="mb-4">
+          <legend class={labelClass}>
+            What should your site get customers to do?{' '}<span class="font-normal text-muted">(optional)</span>
+          </legend>
+          <div class="grid gap-x-6 sm:grid-cols-2">
+            {
+              goals.map((goal, index) => (
+                <label class="flex min-h-11 cursor-pointer items-center gap-3" for={`cf-goal-${index}`}>
+                  <input class="size-5 flex-none accent-brand" id={`cf-goal-${index}`} name="goal" type="checkbox" value={goal} />
+                  {goal}
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <div class="mb-4">
+          <label class={labelClass} for="cf-timing">
+            When would you like it live?{' '}<span class="font-normal text-muted">(optional)</span>
+          </label>
+          <input class={fieldClass} id="cf-timing" name="timing" type="text" />
         </div>
       </ContactForm>
     </div>
