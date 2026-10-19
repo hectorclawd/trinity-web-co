@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-16
+Last updated: 2026-10-18
 
 ## DONE
 
@@ -49,6 +49,7 @@ In launch order. Items in the same group can run in parallel.
 - [x] Short personal story for the About section (2026-10-14: Hector's own copy, merged 62ce5b4)
 - [ ] Headshot for the About section: save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging
 - [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
+- [ ] Optional: hero river dots in white (paper fill, ink ring) instead of gold, to match the Instagram kit and the gold-only rule in `CLAUDE.md` (`site/src/components/site/RiverHero.astro`, site-only, no template sync). On a branch with a preview for Hector's OK
 
 **Vercel**
 - [x] Turn on Web Analytics for `trinity-web-co-site` (Hector, in the dashboard). On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"). Hobby records page views only; call/text/form events need Pro (2026-10-15: turned on; the next deploy picks it up, and the launch-day analytics check confirms it)
@@ -68,8 +69,11 @@ In launch order. Items in the same group can run in parallel.
 **Instagram (plan: "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`)**
 - [x] Create the Instagram business account and send the handle (2026-10-15: @trinitywebco)
 - [x] Answer the doc's "Still open" questions (2026-10-15/16: narrator speaks for Trinity Web Co. and never names Hector; checks and calls in English or Spanish; both languages on @trinitywebco; no restaurant demo, R6 keeps its "Example" menu)
-- [x] Add the Apple design skill, then build the brand kit with HyperFrames on the PC (2026-10-15: `business/marketing/instagram/`, 76f6eb7 on branch `instagram-brand-kit`; samples of R1's end card in both languages and C1's cover approved; white river dots and a river-green DM bubble, no gold)
-- [ ] Build the 20 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
+- [x] Add the Apple design skill, then build the brand kit with HyperFrames on the PC (2026-10-15: `business/marketing/instagram/`, 76f6eb7, merged into `main` as bd1b45b; samples of R1's end card in both languages and C1's cover approved; white river dots and a river-green DM bubble, no gold; Spanish labels approved)
+- [ ] C1 prices carousel: 7 slides from the plan, English, then Spanish once Hector checks the slide text. No audio, so it can start now. It's the kit's first multi-slide render: check that each second gives exactly one slide
+- [ ] R1 intro Reel: move the ElevenLabs key from `motion-studio/.env` into Bitwarden, pick one multilingual narrator voice, and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then run `hyperframes transcribe` on each for the captions and time the scenes and end card to the audio
+- [ ] Decide on the untracked `motion-studio/` folder (a 24 s site showcase video side project with its own git repo and an ElevenLabs key in `.env`; details in HANDOFF.md): move it out of the repo (recommended), ignore it, or delete it. Don't commit it
+- [ ] Build the other 18 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
 - [ ] Post on the doc's 6-week order; R2 waits on the demos' production PageSpeed scores
 
 **Right after launch (playbook §7 Week 1)**

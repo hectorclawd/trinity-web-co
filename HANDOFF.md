@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-14 (About copy merged; headshot still to come; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-18 (Instagram brand kit merged; next is C1, R1 or the hero dots; `motion-studio/` awaits a decision; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**2026-10-14.** The demo improvements, the demo slots and Hector's About copy are all merged, and every working branch is deleted. Every repo has only `main`, in sync with GitHub, with nothing uncommitted. Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
+**2026-10-18.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Every repo has only `main`, in sync with GitHub. The one loose item is the untracked `motion-studio/` folder in this repo, which Hector will decide on (see "`motion-studio/`" below); don't commit it. Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -88,6 +88,27 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **About copy:** Hector's own story replaces the placeholder (62ce5b4). It came from Hector's draft, checked against the playbook: salons in place of restaurants (§1 says skip restaurants for now), the founding terms as in §2 (first three clients, testimonial and case study), and "answer your texts, usually the same day" in place of "pick up when you call". No neighborhood or bilingual line for now; either can be added later.
 - **Headshot, still to come:** save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging.
 
+## Instagram (2026-10-15 to 10-18)
+
+- **The plan** is Hector's Claude Docs document "Instagram content plan" (https://claude.ai/code/artifact/fe017b40-4a71-4b18-b05c-3a262a2285b6, linked from `business/marketing/instagram-content-plan.md`). It holds 20 pieces (7 Reels, 9 carousels, 4 story sets, plus the held founding-offer carousel H1), each in English and Spanish, with scripts, rules and the 6-week posting order. Settled: account @trinitywebco for both languages; a neutral ElevenLabs narrator speaks for Trinity Web Co. and never names Hector; nobody on camera; free checks and calls in English or Spanish; no restaurant demo (R6 uses an "Example" badge). Instagram content also covers small restaurants (playbook decisions log, 2026-10-15); outreach niches are unchanged.
+- **The brand kit** is in `business/marketing/instagram/`: a HyperFrames project. Its `README.md` maps everything. In short:
+  - `config.ts` holds every fact a piece shows (name, handle, CHECK / REVISAR, prices, `[score]` / `[load time]`). `npm run sync` writes `brand/generated.js`, pulls the river and bridge logo straight from the site, and stops if a price differs from playbook §2–3.
+  - `brand/` holds Archivo, the color tokens, type scale, Apple-style springs, the self-drawing river and logo, the Demo and Example badges, and safe-zone guides.
+  - `compositions/` holds the shared pieces: Reel end card, caption track, carousel slide frame (1080×1350), story frame (1080×1920).
+  - `npm run piece -- <entry.html> --lang both [--still] [--guides]` renders into the git-ignored `out/`.
+- **Approved on 2026-10-15:** R1's end card in English and Spanish and C1's cover (samples in `samples/`). Hector chose white river dots (paper fill, ink ring) and a river-green DM keyword bubble: no gold anywhere except primary buttons and the founding offer. The Spanish labels are approved: "Ejemplo", "Desliza", "al mes", and "Demo" unchanged.
+- **Commits (2026-10-15):** kit 76f6eb7, checklist 3b7532c, merged into `main` as bd1b45b and pushed; branch `instagram-brand-kit` deleted.
+- **How it was built:** the Apple design skill (layout, spacing, type scale, springs) and the HyperFrames skills, with the brand's fonts and colors winning over both. HyperFrames is installed as a Claude Code plugin (0.8.140): run it through the plugin's launcher, not a bare `npx hyperframes` (the kit's npm scripts pin `hyperframes@0.8.140`; `scripts/render.mjs` takes `HYPERFRAMES_CLI` to use the launcher).
+- **Safe zones used:** 9:16 frames keep text out of the top 250 px and bottom 350 px (the plan's rule), and Reels keep clear of x > 880 below y 1060 (the like/comment/share buttons). 4:5 slides keep text inside 88 px margins, since the profile grid trims 34 px from each side. Published guides disagree and none are official from Meta, so check the first real post on a phone.
+- **Gotchas (also in the kit's README):** paths in compositions are from the kit folder, even in `samples/`; each composition repeats Archivo's `@font-face` (lint only reads it from the file itself); sub-compositions can't see the entry's variables, so entry files call `TWC.init()` to pass the language and transcript; strokes draw from `getTotalLength()` (SVG `pathLength="1"` didn't animate smoothly); Archivo's Latin subset has no → glyph (`TWC.arrow()`). **Untested so far:** a multi-slide carousel render (one slide per second, one PNG each) and captions from a real transcript; C1 and R1 are the first real tests.
+
+## `motion-studio/` (untracked, waiting on Hector, 2026-10-18)
+
+- **What it is:** a separate side project from 2026-10-15: a 24-second "Trinity Web Co. site showcase" video, built by following `motion-studio/TRINITY_VIDEO_GUIDE.md` (a guide written for the MacBook, adapted for Windows). It has its own git repo inside it (5 local commits, no remote), a custom Playwright renderer, an ElevenLabs voiceover, synthesized music, Instagram and LinkedIn captions, and the finished video at `motion-studio/out/final.mp4`.
+- **Size:** 585 MB, mostly `.venv` (415 MB), renders in `out/` (120 MB) and `node_modules`.
+- **A live ElevenLabs API key** is in `motion-studio/.env`. Its own `.gitignore` excludes `.env`, and the key was never committed there. The repo rule is credentials in Bitwarden, never in files, so the key belongs in Bitwarden either way.
+- **Don't commit it to this repo:** git would add the nested repo as an embedded repo pointer, not its files, and the folder is large and holds the key. Don't delete it without Hector's OK: it holds the only copy of the showcase video and its history. Recommended: move it out to `C:\Users\hlmpr\projects\motion-studio` (it's already its own repo), or add `/motion-studio/` to `.gitignore`. Its tooling overlaps the new HyperFrames kit; use the kit for Instagram pieces.
+
 ## Production is paused (2026-10-12)
 
 - **What happened:** `trinity-web-co-site` turned out to be connected to GitHub (`hectorclawd/trinity-web-co`, production branch `main`), so every push to `main` deployed to production. trinity-web-co-site.vercel.app was public with no `noindex`. There were 9 production deployments, the oldest 3 days old.
@@ -119,8 +140,13 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 The live to-do list is `CHECKLIST.md`. Beyond it:
 
-1. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. The Stripe setup is written up and ready in `business/stripe-setup.md` (2026-10-14); it waits on the name, the LLC and EIN, and the bank account. Vercel Pro and every production deploy are on hold until the name and domain are decided.
-2. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
-3. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.
-4. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, re-enable production deploys from `main` (clear the Ignored Build Step), deploy `site/` to production, test the live form and analytics.
-5. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).
+1. **Next options, any order** (none waits on the name and domain):
+   - **C1, the prices carousel:** 7 slides from the plan, in English, then Spanish once Hector checks the slide text. No audio, so it can start right away. It's the first multi-slide render, so check that each second gives exactly one slide.
+   - **R1, the intro Reel** (about 25 s): text bubbles, the river with neighborhoods, three cards, then the end card. It needs the ElevenLabs voiceover first, in English and Spanish, with one multilingual voice (not chosen yet). Hector checks the Spanish script before it renders. Move the ElevenLabs key into Bitwarden first. Then run `hyperframes transcribe` on each voiceover for the caption timings, and time the scenes to the audio.
+   - **White hero river dots on the site:** `site/src/components/site/RiverHero.astro` still fills the neighborhood dots with gold (`--color-accent`), against the gold-only rule in `CLAUDE.md`. To match the Instagram kit: paper fill, ink ring. It's a site-only component (no template sync). Do it on a branch with a preview for Hector's OK.
+   - **Decide on `motion-studio/`** (above).
+2. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. The Stripe setup is written up and ready in `business/stripe-setup.md` (2026-10-14); it waits on the name, the LLC and EIN, and the bank account. Vercel Pro and every production deploy are on hold until the name and domain are decided.
+3. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
+4. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.
+5. Launch day, from `CHECKLIST.md`: add the chosen domain to Vercel, re-enable production deploys from `main` (clear the Ignored Build Step), deploy `site/` to production, test the live form and analytics. After launch, put the demos' real PageSpeed score and load time into the Instagram kit's `config.ts` in place of `[score]` and `[load time]`, and re-render (R2 waits on this).
+6. After launch, playbook §7 weeks 2–4: build the prospect list and start outreach (`business/sales/prospect-tracker.csv`).
