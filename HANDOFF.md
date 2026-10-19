@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-18 (Instagram brand kit merged; next is C1, R1 or the hero dots; `motion-studio/` awaits a decision; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-18 (Instagram brand kit merged; next is C1, R1 or the hero dots; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**2026-10-18.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Every repo has only `main`, in sync with GitHub. The one loose item is the untracked `motion-studio/` folder in this repo, which Hector will decide on (see "`motion-studio/`" below); don't commit it. Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
+**2026-10-18.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Every repo has only `main`, in sync with GitHub, with nothing untracked. The `motion-studio` side project now lives outside this repo at `C:\Users\hlmpr\projects\motion-studio` (see "`motion-studio`" below). Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -102,12 +102,18 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Safe zones used:** 9:16 frames keep text out of the top 250 px and bottom 350 px (the plan's rule), and Reels keep clear of x > 880 below y 1060 (the like/comment/share buttons). 4:5 slides keep text inside 88 px margins, since the profile grid trims 34 px from each side. Published guides disagree and none are official from Meta, so check the first real post on a phone.
 - **Gotchas (also in the kit's README):** paths in compositions are from the kit folder, even in `samples/`; each composition repeats Archivo's `@font-face` (lint only reads it from the file itself); sub-compositions can't see the entry's variables, so entry files call `TWC.init()` to pass the language and transcript; strokes draw from `getTotalLength()` (SVG `pathLength="1"` didn't animate smoothly); Archivo's Latin subset has no → glyph (`TWC.arrow()`). **Untested so far:** a multi-slide carousel render (one slide per second, one PNG each) and captions from a real transcript; C1 and R1 are the first real tests.
 
-## `motion-studio/` (untracked, waiting on Hector, 2026-10-18)
+## `motion-studio` (moved out of this repo on 2026-10-18)
 
-- **What it is:** a separate side project from 2026-10-15: a 24-second "Trinity Web Co. site showcase" video, built by following `motion-studio/TRINITY_VIDEO_GUIDE.md` (a guide written for the MacBook, adapted for Windows). It has its own git repo inside it (5 local commits, no remote), a custom Playwright renderer, an ElevenLabs voiceover, synthesized music, Instagram and LinkedIn captions, and the finished video at `motion-studio/out/final.mp4`.
-- **Size:** 585 MB, mostly `.venv` (415 MB), renders in `out/` (120 MB) and `node_modules`.
-- **A live ElevenLabs API key** is in `motion-studio/.env`. Its own `.gitignore` excludes `.env`, and the key was never committed there. The repo rule is credentials in Bitwarden, never in files, so the key belongs in Bitwarden either way.
-- **Don't commit it to this repo:** git would add the nested repo as an embedded repo pointer, not its files, and the folder is large and holds the key. Don't delete it without Hector's OK: it holds the only copy of the showcase video and its history. Recommended: move it out to `C:\Users\hlmpr\projects\motion-studio` (it's already its own repo), or add `/motion-studio/` to `.gitignore`. Its tooling overlaps the new HyperFrames kit; use the kit for Instagram pieces.
+- **Where:** `C:\Users\hlmpr\projects\motion-studio`. Until 2026-10-18 it sat untracked inside this repo as `motion-studio/`; Hector chose to move it out.
+- **What it is:** a separate side project from 2026-10-15: a 24-second "Trinity Web Co. site showcase" video, built by following its `TRINITY_VIDEO_GUIDE.md` (written for the MacBook, adapted for Windows). It's its own git repo (branch `master`, 5 commits, no remote). It has a custom Playwright renderer, an ElevenLabs voiceover, synthesized music, and Instagram and LinkedIn captions. The finished video is `out/final.mp4`, with a smaller email copy at `out/email/trinity-showcase.mp4`. It takes 585 MB, mostly `.venv` (415 MB) and renders in `out/` (120 MB). Its tooling overlaps the HyperFrames kit; use the kit for Instagram pieces.
+- **The move:** nothing in its own files depended on the old path; they all use relative paths. Its Python `.venv` did. The activate scripts, `pyvenv.cfg` and the `numba` script were rewritten to the new path. The `.exe` tools were regenerated by reinstalling pip, numpy, cffi, idna and charset-normalizer at their same versions, with `--no-deps`. Git, the Python audio libraries and the Node modules were all checked from the new path. Its Claude Code history moved with it: `~/.claude/projects/C--Users-hlmpr-projects-motion-studio` (the memory folder was empty). Compiled Python caches still name the old path, which only shows up in error tracebacks.
+- **A live ElevenLabs API key** is in its `.env`, untouched by the move. Its `.gitignore` excludes `.env`, and the key was never committed. Hector is moving the key into Bitwarden himself (credentials live in Bitwarden, never in files). Never upload `.env` anywhere.
+- **Back up to Google Drive** (its git repo has no remote, so this disk holds the only copy):
+  - `out/final.mp4` (25 MB) and `out/email/trinity-showcase.mp4` (8.9 MB): the finished video and its email copy.
+  - `audio/voiceover.mp3` and `audio/voiceover.timing.json`: the ElevenLabs take and its word timings. A new take costs credits and reads differently.
+  - `docs/caption.txt` (Instagram and LinkedIn captions) and `docs/voiceover.txt` (the script).
+  - Everything else git tracks (code, the guide, the site screenshots it was built from, about 7 MB) is easiest as one file: `git bundle create motion-studio.bundle --all` in the folder.
+  - Skip `.venv`, `node_modules`, `out/silent.mp4`, `out/stills/`, `out/review/` and `audio/*.wav`: all reinstallable or regenerated by its scripts.
 
 ## Production is paused (2026-10-12)
 
@@ -144,7 +150,6 @@ The live to-do list is `CHECKLIST.md`. Beyond it:
    - **C1, the prices carousel:** 7 slides from the plan, in English, then Spanish once Hector checks the slide text. No audio, so it can start right away. It's the first multi-slide render, so check that each second gives exactly one slide.
    - **R1, the intro Reel** (about 25 s): text bubbles, the river with neighborhoods, three cards, then the end card. It needs the ElevenLabs voiceover first, in English and Spanish, with one multilingual voice (not chosen yet). Hector checks the Spanish script before it renders. Move the ElevenLabs key into Bitwarden first. Then run `hyperframes transcribe` on each voiceover for the caption timings, and time the scenes to the audio.
    - **White hero river dots on the site:** `site/src/components/site/RiverHero.astro` still fills the neighborhood dots with gold (`--color-accent`), against the gold-only rule in `CLAUDE.md`. To match the Instagram kit: paper fill, ink ring. It's a site-only component (no template sync). Do it on a branch with a preview for Hector's OK.
-   - **Decide on `motion-studio/`** (above).
 2. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. The Stripe setup is written up and ready in `business/stripe-setup.md` (2026-10-14); it waits on the name, the LLC and EIN, and the bank account. Vercel Pro and every production deploy are on hold until the name and domain are decided.
 3. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 4. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.
