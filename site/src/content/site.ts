@@ -53,12 +53,26 @@ export const site: SiteConfig = {
       answer: 'Starter takes 10 business days, Growth 15 and Premium 25, counted from the day your photos and business details are in. You’ll get a checklist and a due date at kickoff, because waiting on content is the most common delay.',
     },
     {
+      // Matches the service agreement section 4 and the scope page section 4
+      question: 'What counts as a round of revisions?',
+      answer: 'When I send you the preview link, you have 5 business days to send back one list with all your changes. That list is one round, and I make the changes in about 2 to 3 business days. New pages, new features or a new design direction aren’t revisions. I quote those in writing, and work starts only after you approve the quote. Each extra round beyond the ones in your package is $150.',
+    },
+    {
       question: 'I already have a website. Can you redo it?',
       answer: 'Yes. I’ll keep what’s working, fix what isn’t, and set up redirects from your old pages so you don’t lose the Google traffic you already have.',
     },
     {
+      // No add-on price here: playbook section 2 sells add-ons once the package is agreed
+      question: 'Can my site be in Spanish too?',
+      answer: 'Yes, and the free call can be in English or Spanish too. A Spanish version of your site is an add-on I’ll quote with your package.',
+    },
+    {
       question: 'Do I have to sign up for a care plan?',
       answer: 'Every build includes the first 3 months of Care Standard, so you can see what it does. After that it continues at $99/mo, and you can switch plans or cancel with 30 days’ notice. If you’d rather host the site yourself, I’ll transfer the code to you and help move the hosting for a one-time $150.',
+    },
+    {
+      question: 'Can you build an online store?',
+      answer: 'Not right now. I build sites for businesses that get customers by phone, booking or quote requests. If you already sell online with something like Square or Shopify, your site can link to your store.',
     },
     {
       question: 'Can you guarantee I’ll rank first on Google?',
@@ -131,6 +145,7 @@ export const offer: StudioOffer = {
           'Contact form, tap-to-call and text buttons, map and hours',
           'A link to your booking tool, plus your 3 best reviews',
           'Google basics: page titles, descriptions, sitemap and Search Console',
+          'Simple visitor stats, so you can see how many people visit',
           'You supply the words, and I edit and polish them',
           '2 rounds of revisions',
         ],
@@ -212,7 +227,7 @@ export const offer: StudioOffer = {
     heading: 'How it works',
     steps: [
       { title: 'Free call', text: '20 minutes on the phone or over coffee. You tell me about the business and what’s not working.' },
-      { title: 'Proposal', text: 'Within 24 hours you get a fixed price, a timeline and a list of what I’ll need from you.' },
+      { title: 'Proposal', text: 'Within 24 hours you get a fixed price, a timeline and a list of what I’ll need from you. If it looks right, you sign online, pay to hold your spot and fill in a form about your business.' },
       { title: 'Design and build', text: 'I send a preview link you can open on your phone. You give feedback, and I make the changes.' },
       { title: 'Launch', text: 'The site goes live on your domain, and your Google, Yelp and social links get updated to point to it.' },
       { title: 'Care', text: 'Text or email when something needs to change. I keep the site fast, secure and up to date.' },

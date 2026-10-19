@@ -48,7 +48,8 @@ In launch order. Items in the same group can run in parallel.
 **Site content**
 - [x] Short personal story for the About section (2026-10-14: Hector's own copy, merged 62ce5b4)
 - [ ] Headshot for the About section: save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging
-- [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam)
+- [ ] Review the `faq-form-process` preview, then merge it into `main` (built 2026-10-18): two optional contact form questions (what the site should get customers to do, when to go live), FAQs on revision rounds, Spanish and online stores, the sign-and-pay step under How it works, and visitor stats in Starter
+- [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam). The test should tick a couple of the "What should your site get customers to do?" boxes: Formspree should join them into one comma-separated `goal` value
 - [ ] Optional: hero river dots in white (paper fill, ink ring) instead of gold, to match the Instagram kit and the gold-only rule in `CLAUDE.md` (`site/src/components/site/RiverHero.astro`, site-only, no template sync). On a branch with a preview for Hector's OK
 
 **Vercel**
