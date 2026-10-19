@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-18 (site FAQ, contact form and How it works additions merged; Instagram brand kit merged; next is C1, R1 or the hero dots; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-19 (white hero river dots merged; site FAQ, contact form and How it works additions merged; Instagram brand kit merged; next is C1 or R1; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**2026-10-18.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Later the same day, a few additions to our site (contact form questions, three FAQs, the sign-and-pay step, Starter visitor stats) were merged too (merge 55211e6, see "Site additions" below), and that branch is deleted as well. Every repo has only `main`, in sync with GitHub, with nothing untracked. The `motion-studio` side project now lives outside this repo at `C:\Users\hlmpr\projects\motion-studio` (see "`motion-studio`" below). Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
+**2026-10-18 and 10-19.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Later the same day, a few additions to our site (contact form questions, three FAQs, the sign-and-pay step, Starter visitor stats) were merged too (merge 55211e6, see "Site additions" below), and that branch is deleted as well. On 2026-10-19 the hero river dots turned white, paper with an ink ring, to match the Instagram kit (merge a9abd3e), and that branch is deleted too. The share image `site/public/og-image.png` still has gold dots; it gets redrawn with the final name (`CHECKLIST.md`, name and domain group). Every repo has only `main`, in sync with GitHub, with nothing untracked. The `motion-studio` side project now lives outside this repo at `C:\Users\hlmpr\projects\motion-studio` (see "`motion-studio`" below). Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -22,7 +22,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
-| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, Git-connected, production builds paused (pushes to `main` show as Canceled). Latest preview (2026-10-18, branch `faq-form-process`, same content as `main`): https://trinity-web-co-site-g406i1gel-hlm10.vercel.app |
+| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, Git-connected, production builds paused (pushes to `main` show as Canceled). Latest preview (2026-10-19, branch `hero-white-dots`, same content as `main`): https://trinity-web-co-site-1no4g0yq5-hlm10.vercel.app |
 | Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through ff9eef7 (org commit a9772d0) | n/a |
 | Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 7397e1e): https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app |
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 2f48792): https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
@@ -62,7 +62,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Rename shortlist, each with an available `.com`:** Elm Fork Web (elmforkweb.com; the Elm Fork is a branch of the Trinity in Dallas, so the river story and logo survive), Riverline Sites (riverlinesites.com), Limestone Web (limestoneweb.com), Bridgeline Sites (bridgelinesites.com), Bluebonnet Sites (bluebonnetsites.com).
 - **Size of each option** (mentions / files, excluding build output and lockfiles):
   - Keep "Trinity Web Co.", change the domain: `trinitywebco.com` appears 29 / 17 (8 / 6 of those are `hello@trinitywebco.com`). Mostly find-and-replace, then a template sync and both demos.
-  - Rename the business: add "Trinity Web Co." 96 / 53 (site 17/12, template 13/8, business docs 23/10, root docs 7/3, clients template 1/1, demo 1 18/10, demo 2 17/9). Also `og-image.png`, probably the logo and favicon, and the demo screenshots. The GitHub org `trinitywebco-sites` (32 / 14) and Vercel project names are private and can wait.
+  - Rename the business: add "Trinity Web Co." 96 / 53 (site 17/12, template 13/8, business docs 23/10, root docs 7/3, clients template 1/1, demo 1 18/10, demo 2 17/9). Also `og-image.png` (redraw it with the white river dots at the same time), probably the logo and favicon, and the demo screenshots. The GitHub org `trinitywebco-sites` (32 / 14) and Vercel project names are private and can wait.
 - **Credit link removed (2026-10-12, 00b8ca1):** the "Built by Trinity Web Co." demo banner (`BaseLayout.astro`) and the "Website by" footer credit (`Footer.astro`) linked to `https://trinitywebco.com/`, the stranger's site. The text stays, the link is gone, in `templates/site-template/`, both demo repos and `site/`. Put the link back once the new domain is live. `site.url` in `site/src/content/site.ts` (canonical, `og:url`, schema) still says `trinitywebco.com` and changes with the domain decision.
 - Root `CLAUDE.md` still lists "Domain. The site assumes `trinitywebco.com`" as an open item; update it once the decision is made.
 
@@ -115,7 +115,13 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - Everything else git tracks (code, the guide, the site screenshots it was built from, about 7 MB) is easiest as one file: `git bundle create motion-studio.bundle --all` in the folder.
   - Skip `.venv`, `node_modules`, `out/silent.mp4`, `out/stills/`, `out/review/` and `audio/*.wav`: all reinstallable or regenerated by its scripts.
 
-## Site additions (2026-10-18)
+## Site additions (2026-10-18 and 10-19)
+
+- **Hero river dots (2026-10-19, 3c29a12, merge a9abd3e):**
+  - The neighborhood dots in `site/src/components/site/RiverHero.astro` are now paper (`--color-surface`) with the same 2.5px ink ring. That matches the Instagram kit (`brand/kit.js`, and the hero copy in `scripts/sync-config.mjs`), and gold is back to primary buttons and the founding offer only.
+  - Checked at 360 and 1440px, with motion off, after the fade-in with motion on, and with forced colors on.
+  - The kit's `npm run sync` reads only the river path and the stops from that file, not the colors, so it's unaffected.
+  - `og-image.png` still has gold dots. Hector chose to redraw it after the name decision (`CHECKLIST.md`).
 
 - **Where they came from:** another AI wrote a prompt to add pricing, pages, a new hero, a trust strip, a process, a work section, FAQs and intake questions to our site. Hector had it compared with the site, the playbook and the service agreement first, and it wasn't applied as written. Most of it was already on the site. Its prices conflict with playbook §2–3: a "Launch" package at $750–$1,250, Growth at $1,500–$2,500, and one optional care plan at $50–$99. So do its e-commerce add-on, the "local small businesses" niche, sending the intake form at the intro call, and "this site as case study #1" with empty client slots. If that prompt turns up again, don't apply it.
 - **What was built and merged** (76c64f1, merge 55211e6):
@@ -153,6 +159,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - In Git Bash, prefix commands with `MSYS_NO_PATHCONV=1` when passing URL paths like `/`.
   - Lighthouse runs as `npx -y lighthouse`.
   - `astro preview` listened on IPv6 only (`[::1]`) on 2026-10-18, so `curl http://localhost:<port>/` failed with exit code 7. Use `http://[::1]:<port>/` for curl and Playwright.
+  - Playwright element screenshots stop at the bottom of the window. The hero is 957px tall at 1440px wide, so a 900px-tall window cut off the labels under the river. Use a window taller than the element before judging what's clipped.
   - Files in the client repos are checked out with CRLF line endings, so regexes over them need `\r?\n`.
 - **Local Lighthouse quirks:**
   - Best Practices is 96 locally because `/_vercel/insights/script.js` 404s on `astro preview`. As of 2026-10-09 it also 404s on Vercel, because Web Analytics isn't enabled on the projects yet.
@@ -169,7 +176,6 @@ The live to-do list is `CHECKLIST.md`. Beyond it:
 1. **Next options, any order** (none waits on the name and domain):
    - **C1, the prices carousel:** 7 slides from the plan, in English, then Spanish once Hector checks the slide text. No audio, so it can start right away. It's the first multi-slide render, so check that each second gives exactly one slide.
    - **R1, the intro Reel** (about 25 s): text bubbles, the river with neighborhoods, three cards, then the end card. It needs the ElevenLabs voiceover first, in English and Spanish, with one multilingual voice (not chosen yet). Hector checks the Spanish script before it renders. Move the ElevenLabs key into Bitwarden first. Then run `hyperframes transcribe` on each voiceover for the caption timings, and time the scenes to the audio.
-   - **White hero river dots on the site:** `site/src/components/site/RiverHero.astro` still fills the neighborhood dots with gold (`--color-accent`), against the gold-only rule in `CLAUDE.md`. To match the Instagram kit: paper fill, ink ring. It's a site-only component (no template sync). Do it on a branch with a preview for Hector's OK.
 2. **What's left that doesn't wait on the name and domain:** the headshot (see above), Web Analytics on `trinity-web-co-site`, the tax question on care-plan hosting, and the Android check of both demos. The Formspree form needs the business inbox; Stripe and the attorney review are better after the name is settled. The Stripe setup is written up and ready in `business/stripe-setup.md` (2026-10-14); it waits on the name, the LLC and EIN, and the bank account. Vercel Pro and every production deploy are on hold until the name and domain are decided.
 3. **On hold: the business name and domain** (above). It blocks the LLC, business email, PO box and outreach.
 4. Other open items in `CLAUDE.md` that block launch: Formspree form ID, the headshot, business setup (playbook §6), and the attorney review before the first client signs.

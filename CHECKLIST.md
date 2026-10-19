@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-18
+Last updated: 2026-10-19
 
 ## DONE
 
@@ -34,6 +34,7 @@ In launch order. Items in the same group can run in parallel.
 **On hold: business name and domain**
 - [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying
 - [ ] After deciding: register the domain in your own registrar account (playbook §6 ownership policy), then update the name/domain across this repo, the template (sync it) and both demos, and the root `CLAUDE.md` open item. Put the "Built by" / "Website by" credit link back on the new domain (removed 2026-10-12, 00b8ca1)
+- [ ] Redraw og-image (white dots + final name): `site/public/og-image.png`, 1200×630, still has the old gold river dots and "Trinity Web Co." (left as is on 2026-10-19)
 - [ ] Move the Vercel account from Hobby to Pro before launch (production demos are commercial use, which Hobby doesn't allow). Not needed while everything is preview-only (2026-10-12: Hector is holding Pro and production deploys until the name and domain are decided)
 - [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL. Needs Pro first; on hold with the name and domain (2026-10-13)
 
@@ -50,7 +51,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Headshot for the About section: save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging
 - [x] Review the `faq-form-process` preview, then merge it into `main` (built 2026-10-18): two optional contact form questions (what the site should get customers to do, when to go live), FAQs on revision rounds, Spanish and online stores, the sign-and-pay step under How it works, and visitor stats in Starter (2026-10-18: reviewed and merged, 55211e6; branch deleted)
 - [ ] Formspree: create the form with your business inbox, replace `REPLACE_ME` in `site.forms.contactEndpoint`, and send a test that arrives (check spam). The test should tick a couple of the "What should your site get customers to do?" boxes: Formspree should join them into one comma-separated `goal` value
-- [ ] Optional: hero river dots in white (paper fill, ink ring) instead of gold, to match the Instagram kit and the gold-only rule in `CLAUDE.md` (`site/src/components/site/RiverHero.astro`, site-only, no template sync). On a branch with a preview for Hector's OK
+- [x] Optional: hero river dots in white (paper fill, ink ring) instead of gold, to match the Instagram kit and the gold-only rule in `CLAUDE.md` (`site/src/components/site/RiverHero.astro`, site-only, no template sync). On a branch with a preview for Hector's OK (2026-10-19: reviewed and merged, 3c29a12, merge a9abd3e; branch deleted. The share image keeps its gold dots until it's redrawn with the final name, see the name and domain group)
 
 **Vercel**
 - [x] Turn on Web Analytics for `trinity-web-co-site` (Hector, in the dashboard). On the 2026-10-09 preview the script 404'd ("Be sure to enable Web Analytics for your project"). Hobby records page views only; call/text/form events need Pro (2026-10-15: turned on; the next deploy picks it up, and the launch-day analytics check confirms it)
