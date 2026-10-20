@@ -125,7 +125,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - **Demo previews:** each demo frame (`.demo-window` in `DemoSlots.astro`) is a scrollable window, with `tabindex="0"` and `role="region"`, onto the demo's whole homepage. Hector first got a version where the screenshots panned as the page scrolled, and asked for this instead: scrolling the page must not move the demos, and scrolling on a demo scrolls it. The images (`site/src/assets/demo-*-scroll.jpg`) are copies of each demo's `docs/screenshots/home-1440-full.jpg` from 2026-10-13, and the generated WebP files are 190 KB at most. Copy them again if a demo changes.
   - **Shorter pricing on phones:** tighter rows and 16px lists, 3731 → 3394px at 390px wide.
   - **Fix:** the How it works connector never drew on scroll (see the Lightning CSS gotcha below).
-  - **Not changed:** the Instagram kit's `config.ts` and `business/sales/price-sheet.html` still write prices with commas. Hector hasn't said whether they should match.
+  - **Commas only come off on the website** (Hector, 2026-10-19). The price sheet (`business/sales/price-sheet.html`) and the Instagram kit keep them; the kit writes `$1,500` from plain numbers in `config.ts` (`brand/kit.js`).
   - **Checked:**
     - `npm run check` and `npm run build` passed.
     - In Chrome at 360, 390, 768 and 1440px there was no sideways scroll.
