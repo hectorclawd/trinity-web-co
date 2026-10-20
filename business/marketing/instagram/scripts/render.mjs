@@ -1,10 +1,12 @@
 // Renders a piece into out/ in one or both languages.
 //
-//   node scripts/render.mjs <entry.html> [--lang en|es|both] [--still] [--guides] [--quality draft|looks|delivery]
+//   node scripts/render.mjs <entry.html> [--lang en|es|both] [--still] [--split <seconds>] [--guides] [--quality draft|looks|delivery]
 //   node scripts/render.mjs --samples        (the kit's review samples)
 //
 // Videos become <name>-<lang>.mp4 plus a <name>-<lang>.png of the last frame.
 // --still renders one PNG per second of the timeline (carousels: one slide per second).
+// --split N cuts the video into N-second parts, <name>-<lang>-1.mp4 and up, each with a PNG of its
+// last frame (story sets: one frame per part).
 // --guides draws Instagram's safe zones on top; those files get a -guides suffix and never post.
 // Runs `npm run sync` first, so config.ts changes are always in.
 import { spawnSync } from 'node:child_process';
@@ -25,7 +27,7 @@ function run(cmd, args) {
   }
 }
 
-function render(entry, { lang = 'en', still = false, guides = false, quality = 'looks' } = {}) {
+function render(entry, { lang = 'en', still = false, split = 0, guides = false, quality = 'looks' } = {}) {
   const name = `${basename(entry, '.html')}-${lang}${guides ? '-guides' : ''}`;
   const outDir = join(root, 'out', dirname(entry) === '.' ? '' : dirname(entry));
   mkdirSync(join(root, 'out', '.vars'), { recursive: true });
@@ -50,6 +52,17 @@ function render(entry, { lang = 'en', still = false, guides = false, quality = '
     run(cli, [...common, '--output', video]);
     run('ffmpeg', ['-y', '-loglevel', 'error', '-sseof', '-0.1', '-i', `"${video}"`, '-frames:v', '1', '-update', '1', `"${join(outDir, `${name}.png`)}"`]);
     console.log(`render: out/${dirname(entry)}/${name}.mp4 and .png (last frame)`);
+    if (split > 0) {
+      // Re-encode each part so it starts on its own first frame, not on the nearest keyframe
+      const total = Number(readFileSync(join(root, entry), 'utf8').match(/data-duration="([\d.]+)"/)[1]);
+      const parts = Math.round(total / split);
+      for (let i = 0; i < parts; i++) {
+        const part = join(outDir, `${name}-${i + 1}`);
+        run('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(i * split), '-t', String(split), '-i', `"${video}"`, '-c:v', 'libx264', '-crf', '18', '-pix_fmt', 'yuv420p', '-an', `"${part}.mp4"`]);
+        run('ffmpeg', ['-y', '-loglevel', 'error', '-ss', String(i * split + split - 0.1), '-i', `"${video}"`, '-frames:v', '1', '-update', '1', `"${part}.png"`]);
+      }
+      console.log(`render: split into ${parts} parts of ${split} s → out/${dirname(entry)}/${name}-N.mp4 and .png`);
+    }
   }
 }
 
@@ -73,6 +86,6 @@ if (flag('--samples')) {
   }
   const lang = value('--lang', 'en');
   for (const l of lang === 'both' ? ['en', 'es'] : [lang]) {
-    render(entry, { lang: l, still: flag('--still'), guides: flag('--guides'), quality: value('--quality', 'looks') });
+    render(entry, { lang: l, still: flag('--still'), split: Number(value('--split', 0)), guides: flag('--guides'), quality: value('--quality', 'looks') });
   }
 }
