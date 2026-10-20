@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-19
+Last updated: 2026-10-20
 
 ## DONE
 
@@ -69,15 +69,19 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Send a test form submission on the live site and confirm it reaches your business inbox
 - [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
 
-**Instagram (plan: "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`)**
+**Instagram (plans: the "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`, and the "Instagram growth plan" doc, https://claude.ai/code/artifact/70864e6b-70ca-4105-82dc-38346fe34ea6, which holds the schedule and steps)**
 - [x] Create the Instagram business account and send the handle (2026-10-15: @trinitywebco)
 - [x] Answer the doc's "Still open" questions (2026-10-15/16: narrator speaks for Trinity Web Co. and never names Hector; checks and calls in English or Spanish; both languages on @trinitywebco; no restaurant demo, R6 keeps its "Example" menu)
 - [x] Add the Apple design skill, then build the brand kit with HyperFrames on the PC (2026-10-15: `business/marketing/instagram/`, 76f6eb7, merged into `main` as bd1b45b; samples of R1's end card in both languages and C1's cover approved; white river dots and a river-green DM bubble, no gold; Spanish labels approved)
-- [ ] C1 prices carousel: 7 slides from the plan, English, then Spanish once Hector checks the slide text. No audio, so it can start now. It's the kit's first multi-slide render: check that each second gives exactly one slide
+- [ ] C1 prices carousel: 7 slides from the plan, English, then Spanish once Hector checks the slide text. No audio, so it can start now. It's the kit's first multi-slide render: check that each second gives exactly one slide (2026-10-19: English slides built in `business/marketing/instagram/c1/c1.html` and rendered, one PNG per slide; the slide frame's swipe cue no longer leaks onto slide 2. Waiting on Hector's OK; not committed yet)
+- [ ] Growth plan setup before posting starts on 2026-11-02 (the doc's "Before posting starts" list): profile, the kit's DESIGN.md (impeccable's documenter agent), weeks 1 and 2 built in both languages with captions, finish-reviewer pass, week 1 scheduled
+- [ ] Approve the 24 new pieces for weeks 7 to 12 in the growth plan by 2026-10-31, then write their scripts into the content plan doc
 - [ ] R1 intro Reel: move the ElevenLabs key from `C:\Users\hlmpr\projects\motion-studio\.env` into Bitwarden, pick one multilingual narrator voice, and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then run `hyperframes transcribe` on each for the captions and time the scenes and end card to the audio
 - [x] Decide on the untracked `motion-studio/` folder (a 24 s site showcase video side project with its own git repo and an ElevenLabs key in `.env`; details in HANDOFF.md) (2026-10-18: moved out to `C:\Users\hlmpr\projects\motion-studio`, venv paths fixed; Hector backs up the files listed in HANDOFF.md to Google Drive)
 - [ ] Build the other 18 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
-- [ ] Post on the doc's 6-week order; R2 waits on the demos' production PageSpeed scores
+- [ ] Post on the growth plan's 12-week schedule, starting 2026-11-02, with its weekly routine (Monday review, build two weeks ahead, Spanish check, captions, 20 minutes a day of local engagement); R2 waits on the demos' production PageSpeed scores
+- [ ] Reset the growth plan's starting targets after week 4 (2026-11-30)
+- [ ] 12-week review in week 12 (from 2027-01-18), and draft the next 12 weeks from what worked
 
 **Right after launch (playbook §7 Week 1)**
 - [ ] Google Search Console: verify the domain and submit `sitemap.xml`
