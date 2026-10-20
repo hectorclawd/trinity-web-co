@@ -1,11 +1,11 @@
 # Trinity Web Co.: handoff
 
-Last updated: 2026-10-19 (white hero river dots merged; site FAQ, contact form and How it works additions merged; Instagram brand kit merged; next is C1 or R1; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+Last updated: 2026-10-19 (site polish merged: price type, phone booking bar, section highlight, scrollable demos; white hero river dots merged; site FAQ, contact form and How it works additions merged; Instagram brand kit merged; next is C1 or R1; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand
 
-**2026-10-18 and 10-19.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Later the same day, a few additions to our site (contact form questions, three FAQs, the sign-and-pay step, Starter visitor stats) were merged too (merge 55211e6, see "Site additions" below), and that branch is deleted as well. On 2026-10-19 the hero river dots turned white, paper with an ink ring, to match the Instagram kit (merge a9abd3e), and that branch is deleted too. The share image `site/public/og-image.png` still has gold dots; it gets redrawn with the final name (`CHECKLIST.md`, name and domain group). Every repo has only `main`, in sync with GitHub, with nothing untracked. The `motion-studio` side project now lives outside this repo at `C:\Users\hlmpr\projects\motion-studio` (see "`motion-studio`" below). Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
+**2026-10-18 and 10-19.** The Instagram brand kit is built, approved and merged into `main` (merge bd1b45b, see "Instagram" below), and its branch is deleted. Later the same day, a few additions to our site (contact form questions, three FAQs, the sign-and-pay step, Starter visitor stats) were merged too (merge 55211e6, see "Site additions" below), and that branch is deleted as well. On 2026-10-19 the hero river dots turned white, paper with an ink ring, to match the Instagram kit (merge a9abd3e), and that branch is deleted too. The share image `site/public/og-image.png` still has gold dots; it gets redrawn with the final name (`CHECKLIST.md`, name and domain group). Later on 2026-10-19 a polish pass was merged (merge dfae98f, see "Site additions" below): prices without commas in a new wide style, a "Book a free call" bar on phones and tablets, the header link for the section being read underlined, scrollable demo previews, shorter pricing on phones, and a fix for the How it works line; its branch is deleted too. Every repo has only `main`, in sync with GitHub, with nothing untracked. The `motion-studio` side project now lives outside this repo at `C:\Users\hlmpr\projects\motion-studio` (see "`motion-studio`" below). Production deploys of our site stay paused until launch (see "Production is paused" below), so the demo-slot links on `main` point to previews that need a Vercel login. No local servers are running. What to do next is in `CHECKLIST.md`.
 
 (An earlier "do 2" message was meant for a different tab. Ignore it.)
 
@@ -22,7 +22,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 | What | Local path | GitHub | Vercel |
 |---|---|---|---|
-| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, Git-connected, production builds paused (pushes to `main` show as Canceled). Latest preview (2026-10-19, branch `hero-white-dots`, same content as `main`): https://trinity-web-co-site-1no4g0yq5-hlm10.vercel.app |
+| This repo (business docs, template source, our site) | `C:\Users\hlmpr\projects\trinity-web-co` (the only local copy) | `hectorclawd/trinity-web-co`, `main` is the only branch | `trinity-web-co-site`, Git-connected, production builds paused (pushes to `main` show as Canceled). Latest preview (2026-10-19, branch `site-polish`, same content as `main`): https://trinity-web-co-site-ih4l1y5ou-hlm10.vercel.app |
 | Client template | `templates/site-template/` (source of truth) | `trinitywebco-sites/site-template`, private template repo, synced through ff9eef7 (org commit a9772d0) | n/a |
 | Demo 1: Purple Martin Heating & Air (HVAC) | `clients/purple-martin-air-lake-highlands/site` | `trinitywebco-sites/site-purple-martin-air-lake-highlands`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 7397e1e): https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app |
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 2f48792): https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
@@ -117,6 +117,20 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 
 ## Site additions (2026-10-18 and 10-19)
 
+- **Site polish (2026-10-19, 18b6ed2 and 195d51a, merge dfae98f).** Hector asked to make the site look better. He chose to keep Archivo and refine it (over Overpass, Zilla Slab or Bricolage Grotesque), to drop the commas from prices, and to add all four scroll features suggested from the UX and UI design skills:
+  - **Prices:** no commas anywhere on the site ($1500, $2800, $4800, founding $900 and $1800, and "from $1500" in the meta description). Package prices are wide and heavy like the headlines (`font-stretch: 125%`, weight 820, proportional figures). Care plan prices sit on their own line in the same style, smaller.
+  - **Line breaks:** headlines use `text-wrap: balance`, and paragraphs and list items use `text-wrap: pretty` (`tokens.css`). Demo titles use `pretty`, since balance split "Purple / Martin" on phones, and "Heating & Air" has non-breaking spaces.
+  - **Booking bar:** `site/src/components/site/BookBar.astro`, adapted from the template's `CallBar`, with one "Book a free call" button. It shows below 1024px, where the header button is inside the menu. It hides while any `[data-book-cta]` block is on screen (the hero buttons, `#contact`) and while a form field has focus. The footer gets extra bottom padding for it.
+  - **Section highlight:** `site/src/components/site/CurrentSection.astro` sets `aria-current="location"` on the header link for the section crossing a band 40–45% down the screen. Its style goes through `#site-nav` to outrank the header's scoped styles.
+  - **Demo previews:** each demo frame (`.demo-window` in `DemoSlots.astro`) is a scrollable window, with `tabindex="0"` and `role="region"`, onto the demo's whole homepage. Hector first got a version where the screenshots panned as the page scrolled, and asked for this instead: scrolling the page must not move the demos, and scrolling on a demo scrolls it. The images (`site/src/assets/demo-*-scroll.jpg`) are copies of each demo's `docs/screenshots/home-1440-full.jpg` from 2026-10-13, and the generated WebP files are 190 KB at most. Copy them again if a demo changes.
+  - **Shorter pricing on phones:** tighter rows and 16px lists, 3731 → 3394px at 390px wide.
+  - **Fix:** the How it works connector never drew on scroll (see the Lightning CSS gotcha below).
+  - **Not changed:** the Instagram kit's `config.ts` and `business/sales/price-sheet.html` still write prices with commas. Hector hasn't said whether they should match.
+  - **Checked:**
+    - `npm run check` and `npm run build` passed.
+    - In Chrome at 360, 390, 768 and 1440px there was no sideways scroll.
+    - The bar shows and hides as intended, each linked section underlines its header link, and the "How it works" line now draws in.
+    - Mouse wheel and keyboard scroll a demo without moving the page, and scrolling the page doesn't move the demos.
 - **Hero river dots (2026-10-19, 3c29a12, merge a9abd3e):**
   - The neighborhood dots in `site/src/components/site/RiverHero.astro` are now paper (`--color-surface`) with the same 2.5px ink ring. That matches the Instagram kit (`brand/kit.js`, and the hero copy in `scripts/sync-config.mjs`), and gold is back to primary buttons and the founding offer only.
   - Checked at 360 and 1440px, with motion off, after the fade-in with motion on, and with forced colors on.
@@ -160,6 +174,8 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - Lighthouse runs as `npx -y lighthouse`.
   - `astro preview` listened on IPv6 only (`[::1]`) on 2026-10-18, so `curl http://localhost:<port>/` failed with exit code 7. Use `http://[::1]:<port>/` for curl and Playwright.
   - Playwright element screenshots stop at the bottom of the window. The hero is 957px tall at 1440px wide, so a 900px-tall window cut off the labels under the river. Use a window taller than the element before judging what's clipped.
+- **Lightning CSS (the minifier in the Tailwind/Vite build) breaks scroll-driven animations written in one rule.** It folds `animation-timeline` into the `animation` shorthand, which browsers reject, so the animation silently never runs. Put `animation-timeline` and `animation-range` in a separate rule (see `Process.astro`), then check the built CSS in `site/dist/_astro/`.
+- **Other Claude sessions open in this folder hold back `git add`, `commit` and `checkout`** ("Sync light"). Hector types `/sync allow` to let git run alongside them.
   - Files in the client repos are checked out with CRLF line endings, so regexes over them need `\r?\n`.
 - **Local Lighthouse quirks:**
   - Best Practices is 96 locally because `/_vercel/insights/script.js` 404s on `astro preview`. As of 2026-10-09 it also 404s on Vercel, because Web Analytics isn't enabled on the projects yet.
