@@ -16,19 +16,27 @@ const { heading, lede, slots } = offer.demos;
       {
         slots.map((slot) => (
           <li class:list={['demo', { 'demo-pending': !slot.url }]}>
-            <div class="demo-frame">
-              {slot.url && slot.image ? (
+            {slot.url && slot.image ? (
+              <div
+                class="demo-frame demo-window"
+                tabindex="0"
+                role="region"
+                aria-label={`${slot.title} homepage preview, scrollable`}
+              >
                 <Image
                   src={slot.image}
                   alt={slot.imageAlt ?? ''}
-                  widths={[480, 800, 1100]}
-                  sizes="(min-width: 48rem) 50vw, 100vw"
+                  widths={[480, 800, 1040]}
+                  sizes="(min-width: 72rem) 32rem, (min-width: 48rem) 45vw, 100vw"
+                  quality={70}
                   class="demo-shot"
                 />
-              ) : (
+              </div>
+            ) : (
+              <div class="demo-frame">
                 <p class="demo-placeholder">Screenshot coming soon</p>
-              )}
-            </div>
+              </div>
+            )}
             <p class="demo-label">Demo site for {slot.niche.toLowerCase()}</p>
             <h3 class="demo-title">{slot.title}</h3>
             {slot.url ? (
@@ -72,35 +80,19 @@ const { heading, lede, slots } = offer.demos;
     border: 2px dashed var(--color-line);
     background: transparent;
   }
-  /* Each screenshot is the top three screens of the demo's homepage, 1440x2880, so the 16:10
-     frame shows 0.3125 of its height. While the whole frame is on screen, the screenshot slides
-     up to its bottom edge (-68.75% = the part below the frame), as if scrolling the demo.
-     With reduced motion, or in browsers without scroll-driven animations, it shows the top. */
-  .demo-frame {
-    view-timeline-name: --demo;
+  /* A live demo's frame is a small window onto its whole homepage. The page scrolls past it
+     as usual; scrolling with the pointer or a finger on it scrolls the demo, and at either end
+     the scroll carries on to the page. Keyboard users can tab to it and use the arrow keys. */
+  .demo-window {
+    display: block;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-brand) transparent;
   }
   .demo-shot {
-    align-self: start;
+    display: block;
     width: 100%;
     height: auto;
-  }
-  /* The timeline sits in its own rule: in one rule, the CSS minifier folds animation-timeline
-     into the animation shorthand, which browsers reject, and nothing moves */
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .demo-shot {
-        animation: demo-scroll linear both;
-      }
-      .demo-frame .demo-shot {
-        animation-timeline: --demo;
-        animation-range: contain 0% contain 100%;
-      }
-    }
-  }
-  @keyframes demo-scroll {
-    to {
-      transform: translateY(-68.75%);
-    }
   }
   .demo-placeholder {
     color: var(--color-muted);
@@ -112,8 +104,10 @@ const { heading, lede, slots } = offer.demos;
     font-weight: 600;
     color: var(--color-brand-dark);
   }
+  /* Balanced lines split the business name on phones ("Demo: Purple / Martin Heating & Air") */
   .demo-title {
     margin-top: 0.2rem;
+    text-wrap: pretty;
   }
   .demo-status,
   .demo-score {

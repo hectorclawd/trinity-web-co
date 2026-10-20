@@ -1,5 +1,5 @@
 import type { SiteConfig, StudioOffer } from './types';
-// The top three screens of each demo's homepage (1440x2880); DemoSlots pans through them on scroll
+// Each demo's whole homepage at 1440px wide; DemoSlots shows it in a small scrollable window
 import demoPurpleMartin from '../assets/demo-purple-martin-scroll.jpg';
 import demoGoodOak from '../assets/demo-good-oak-scroll.jpg';
 
@@ -200,7 +200,7 @@ export const offer: StudioOffer = {
   },
   demos: {
     heading: 'Demo sites',
-    lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo.',
+    lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo. Scroll inside a preview to see its whole homepage.',
     // Playbook section 7, week 1: one demo per target niche.
     // The urls are Vercel previews behind Vercel login until launch. On launch day, swap in the
     // production urls and add pageSpeed (mobile PageSpeed Insights on the production url) before
@@ -208,7 +208,8 @@ export const offer: StudioOffer = {
     slots: [
       {
         niche: 'Home services',
-        title: 'Demo: Purple Martin Heating & Air',
+        // Non-breaking spaces keep "Heating & Air" on one line on phones
+        title: 'Demo: Purple Martin Heating & Air',
         url: 'https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app',
         image: demoPurpleMartin,
         imageAlt:
