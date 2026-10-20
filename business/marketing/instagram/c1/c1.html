@@ -1,0 +1,342 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- C1 · What a website costs: a 7-slide carousel (1080×1350), one slide per second.
+         Slide text is the plan's ("Carousel scripts", C1); prices, page counts and the CTA come from
+         config.ts. English only for now: the Spanish copy gets added once Hector checks it.
+         Render: npm run piece -- c1/c1.html --lang en --still -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .c1-slide {
+        position: absolute;
+        inset: 0;
+      }
+      /* Each slide's content sits in the frame's content box: 88 px sides, from 236 px down */
+      .c1-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 236px;
+      }
+
+      /* 1 · Cover (the approved sample) */
+      .c1-title {
+        max-width: 860px;
+        text-wrap: balance;
+      }
+      .c1-aside {
+        margin-top: 40px;
+        font-size: 58px;
+        line-height: 1.15;
+        font-stretch: 108%;
+        font-weight: 680;
+        letter-spacing: -0.005em;
+        text-wrap: balance;
+      }
+      .c1-aside s {
+        text-decoration-color: var(--river);
+        text-decoration-thickness: 0.11em;
+      }
+      .c1-river {
+        position: absolute;
+        left: 40px;
+        top: 888px;
+        width: 1000px;
+      }
+      .c1-river svg {
+        display: block;
+      }
+
+      /* 2–4 · Packages: name, the price as the hero, page count, then what's in it */
+      .c1-name {
+        margin: 0;
+      }
+      .c1-price {
+        margin: 20px 0 0;
+        color: var(--river-deep);
+        font-variant-numeric: lining-nums proportional-nums;
+      }
+      .c1-pages {
+        margin: 28px 0 0;
+      }
+      /* One small page shape per page in the package (4, 7, 12), so the three slides compare at a glance */
+      .c1-sheets {
+        display: flex;
+        gap: 12px;
+        margin: 22px 0 0;
+      }
+      .c1-sheets span {
+        width: 44px;
+        height: 56px;
+        box-sizing: border-box;
+        border: 4px solid var(--river);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+      .c1-list {
+        margin: 44px 0 0;
+        padding: 40px 0 0;
+        border-top: var(--rule) solid var(--ink);
+        list-style: none;
+      }
+      .c1-list li {
+        position: relative;
+        padding-left: 56px;
+      }
+      .c1-list li + li {
+        margin-top: 18px;
+      }
+      .c1-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 30px;
+        height: 7px;
+        border-radius: 4px;
+        background: var(--river);
+      }
+      /* Growth's line from the plan: a river edge, like the featured row on the site */
+      .c1-note {
+        margin: 48px 0 0;
+        padding: 6px 0 8px 32px;
+        border-left: 10px solid var(--river);
+        color: var(--river-deep);
+      }
+
+      /* 5 · Care: "3 months" as the hero, then the plain terms */
+      .c1-big {
+        margin: 0;
+        color: var(--river-deep);
+      }
+      .c1-sub {
+        margin: 24px 0 0;
+        max-width: 880px;
+        text-wrap: balance;
+      }
+      .c1-detail {
+        margin: 56px 0 0;
+        padding-top: 40px;
+        border-top: var(--rule) solid var(--ink);
+        max-width: 880px;
+      }
+
+      /* 6 · Ownership */
+      .c1-head {
+        margin: 0;
+        max-width: 900px;
+        text-wrap: balance;
+      }
+
+      /* 7 · CTA: the keyword is a river message bubble, the river closes the carousel */
+      .c1-cta {
+        margin: 0;
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c1-ask {
+        margin: 28px 0 0;
+      }
+      .c1-ask .twc-bubble {
+        margin-left: 0.18em;
+      }
+      .c1-langs {
+        margin: 44px 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="c1" data-start="0" data-duration="7" data-width="1080" data-height="1350">
+      <div
+        id="el-frame"
+        data-composition-id="carousel-slide"
+        data-composition-src="compositions/carousel-slide.html"
+        data-variable-values='{"tone":"light","swipe":1}'
+        data-start="0"
+        data-duration="7"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1350"
+      ></div>
+
+      <section id="c1-s1" class="clip c1-slide" data-start="0" data-duration="1" data-track-index="1">
+        <div class="c1-body">
+          <h1 class="c1-title t-display"></h1>
+          <p class="c1-aside"></p>
+        </div>
+        <div class="c1-river"></div>
+      </section>
+
+      <section id="c1-s2" class="clip c1-slide c1-package" data-package="starter" data-start="1" data-duration="1" data-track-index="1">
+        <div class="c1-body"></div>
+      </section>
+      <section id="c1-s3" class="clip c1-slide c1-package" data-package="growth" data-start="2" data-duration="1" data-track-index="1">
+        <div class="c1-body"></div>
+      </section>
+      <section id="c1-s4" class="clip c1-slide c1-package" data-package="premium" data-start="3" data-duration="1" data-track-index="1">
+        <div class="c1-body"></div>
+      </section>
+
+      <section id="c1-s5" class="clip c1-slide" data-start="4" data-duration="1" data-track-index="1">
+        <div class="c1-body">
+          <p class="c1-big t-hero"></p>
+          <p class="c1-sub t-title"></p>
+          <p class="c1-detail t-body t-muted"></p>
+        </div>
+      </section>
+
+      <section id="c1-s6" class="clip c1-slide" data-start="5" data-duration="1" data-track-index="1">
+        <div class="c1-body">
+          <h2 class="c1-head t-headline"></h2>
+          <ul class="c1-list t-lead"></ul>
+        </div>
+      </section>
+
+      <section id="c1-s7" class="clip c1-slide" data-start="6" data-duration="1" data-track-index="1">
+        <div class="c1-body">
+          <p class="c1-cta t-display"></p>
+          <p class="c1-ask t-headline"></p>
+          <p class="c1-langs t-label t-muted"></p>
+        </div>
+        <div class="c1-river"></div>
+      </section>
+    </div>
+    <script>
+      // Slide text from the plan. Prices, page counts, the care price and the CTA come from config.ts.
+      // English only for now: add `es` once Hector has checked the Spanish slide text.
+      const COPY = {
+        en: {
+          cover: { title: "What a website costs", before: "(no “", struck: "call for a quote", after: "”)" },
+          pages: (n) => `Up to ${n} pages`,
+          packages: {
+            starter: { includes: ["Contact form", "Click to call and text", "Google Maps"] },
+            growth: { includes: ["Online booking", "A quote form", "Google Business Profile setup"], note: "Most local businesses fit here." },
+            premium: { includes: ["A blog", "A multi-step quote form"] },
+          },
+          care: {
+            big: (months) => `${months} months`,
+            sub: "of care, included with every build",
+            detail: (plan, price) => `Hosting, security updates, backups and small edits. After that, ${plan} is ${price}. Switch plans or cancel with 30 days’ notice.`,
+          },
+          own: {
+            head: "You own your domain and accounts",
+            items: ["Your domain, in your name", "Your Google Business Profile", "Your visitor stats"],
+          },
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`C1 has no "${lang}" copy yet. Add it once Hector has checked the slide text.`);
+      const copy = COPY[lang];
+      const $ = (s, root = document) => root.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+
+      // 1 · Cover
+      fill($("#c1-s1 .c1-title"), copy.cover.title);
+      const aside = $("#c1-s1 .c1-aside");
+      aside.append(copy.cover.before);
+      aside.appendChild(document.createElement("s")).textContent = copy.cover.struck;
+      aside.append(copy.cover.after);
+      TWC.showRiver(TWC.river($("#c1-s1 .c1-river"), { width: 1000, stops: "phone" }));
+
+      // 2–4 · Packages
+      const packages = TWC.t("packages");
+      document.querySelectorAll(".c1-package").forEach((slide) => {
+        const pkg = packages.find((p) => p.id === slide.dataset.package);
+        const text = copy.packages[pkg.id];
+        const body = $(".c1-body", slide);
+        body.append(
+          make("p", "c1-name t-title", pkg.name),
+          make("p", "c1-price t-hero", TWC.price(pkg.price)),
+          make("p", "c1-pages t-lead", copy.pages(pkg.pages)),
+        );
+        const sheets = body.appendChild(make("div", "c1-sheets"));
+        sheets.setAttribute("aria-hidden", "true");
+        for (let i = 0; i < pkg.pages; i++) sheets.appendChild(make("span"));
+        const list = body.appendChild(make("ul", "c1-list t-body"));
+        text.includes.forEach((item) => list.appendChild(make("li", "", item)));
+        if (text.note) body.appendChild(make("p", "c1-note t-lead", text.note));
+      });
+
+      // 5 · Care
+      const standard = TWC.t("carePlans").find((p) => p.id === "standard");
+      fill($("#c1-s5 .c1-big"), copy.care.big(TWC.t("includedCareMonths")));
+      fill($("#c1-s5 .c1-sub"), copy.care.sub);
+      fill($("#c1-s5 .c1-detail"), copy.care.detail(standard.name, TWC.monthly(standard.monthly, lang)));
+
+      // 6 · Ownership
+      fill($("#c1-s6 .c1-head"), copy.own.head);
+      copy.own.items.forEach((item) => $("#c1-s6 .c1-list").appendChild(make("li", "", item)));
+
+      // 7 · CTA: "Free site check:" as the headline, then "DM" + the keyword bubble on its own line
+      // (the last word before the keyword is the verb: DM / manda), then the languages
+      const cta = TWC.dm("carouselCta", lang);
+      const verbAt = cta.before.lastIndexOf(" ");
+      const ctaLine = fill($("#c1-s7 .c1-cta"), cta.before.slice(0, verbAt));
+      const ask = $("#c1-s7 .c1-ask");
+      ask.append(make("span", "c1-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
+      if (cta.after) ask.append(` ${cta.after}`);
+      fill($("#c1-s7 .c1-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c1-s7 .c1-river"), { width: 1000, stops: "phone" }));
+
+      document.fonts.ready.then(() => {
+        TWC.fit($("#c1-s1 .c1-title"), { max: 144, min: 96, maxHeight: 420 });
+        TWC.fit($("#c1-s6 .c1-head"), { max: 104, min: 80, maxHeight: 340 });
+        TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
+        // Stills: one frame per slide, so nothing moves
+        window.__timelines["c1"] = gsap.timeline({ paused: true });
+      });
+    </script>
+  </body>
+</html>

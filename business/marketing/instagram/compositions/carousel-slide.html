@@ -116,9 +116,11 @@
           if (guides) TWC.guides(root, "carousel").setAttribute("data-layout-ignore", "");
 
           // Static frame. The swipe cue shows on the cover only: the first `swipe` seconds.
+          // It's gone by the `swipe` mark itself, because --still captures each slide exactly on its
+          // second: hiding it at 1 s left the cue on slide 2.
           const tl = gsap.timeline({ paused: true });
           const showFor = Number(own.swipe) || 0;
-          tl.fromTo(swipe, { opacity: showFor > 0 ? 1 : 0 }, { opacity: 0, duration: 0.001 }, Math.max(showFor, 0.001));
+          tl.fromTo(swipe, { opacity: showFor > 0 ? 1 : 0 }, { opacity: 0, duration: 0.001 }, Math.max(showFor - 0.001, 0));
           window.__timelines["carousel-slide"] = tl;
         })();
       </script>

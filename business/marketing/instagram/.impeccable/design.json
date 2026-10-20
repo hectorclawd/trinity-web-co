@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-20T00:00:00.000Z",
+  "title": "Design System: Trinity Web Co. Instagram",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#13262B",
+        "oklch": "oklch(25.5% 0.027 216.5)",
+        "tonalRamp": [
+          "#000E12",
+          "#15282D",
+          "#32464B",
+          "#51656B",
+          "#71878D",
+          "#93AAB0",
+          "#B7CED4",
+          "#DCF3FA"
+        ]
+      },
+      "river": {
+        "role": "primary",
+        "displayName": "River",
+        "canonical": "#1D6B66",
+        "oklch": "oklch(48.1% 0.074 188.7)",
+        "tonalRamp": [
+          "#000F0E",
+          "#002C29",
+          "#004D49",
+          "#226F69",
+          "#48918B",
+          "#6CB4AE",
+          "#90D9D3",
+          "#B7FFF8"
+        ]
+      },
+      "river-deep": {
+        "role": "primary",
+        "displayName": "River deep",
+        "canonical": "#0E3F3C",
+        "oklch": "oklch(33.5% 0.051 189.1)",
+        "tonalRamp": [
+          "#000F0E",
+          "#002C2A",
+          "#1C4B47",
+          "#3D6B67",
+          "#5E8D88",
+          "#80B0AB",
+          "#A4D4D0",
+          "#C9FAF5"
+        ]
+      },
+      "limestone": {
+        "role": "neutral",
+        "displayName": "Limestone",
+        "canonical": "#ECEFE9",
+        "oklch": "oklch(94.8% 0.009 128.6)",
+        "tonalRamp": [
+          "#0A0C08",
+          "#242622",
+          "#41433E",
+          "#60625D",
+          "#81837E",
+          "#A3A6A0",
+          "#C7CAC4",
+          "#EDF0EA"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#FAFBF8",
+        "oklch": "oklch(98.6% 0.004 121.6)",
+        "tonalRamp": [
+          "#0B0B0A",
+          "#252523",
+          "#414240",
+          "#61625F",
+          "#828380",
+          "#A4A5A3",
+          "#C8C9C7",
+          "#EEEFEC"
+        ]
+      },
+      "gold": {
+        "role": "secondary",
+        "displayName": "Gold",
+        "canonical": "#EDB23A",
+        "oklch": "oklch(79.8% 0.146 80.9)",
+        "tonalRamp": [
+          "#130900",
+          "#332100",
+          "#573D00",
+          "#7F5A00",
+          "#A87905",
+          "#D39A10",
+          "#FABE49",
+          "#FFECCC"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "canonical": "#3E5458",
+        "oklch": "oklch(42.9% 0.028 209.9)",
+        "tonalRamp": [
+          "#000E12",
+          "#14292C",
+          "#31464A",
+          "#4F666A",
+          "#70878B",
+          "#92AAAF",
+          "#B5CED3",
+          "#DAF4F9"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "canonical": "#C6CFC9",
+        "oklch": "oklch(84.6% 0.013 157.0)",
+        "tonalRamp": [
+          "#070D09",
+          "#202723",
+          "#3D443F",
+          "#5C635E",
+          "#7C857F",
+          "#9FA8A2",
+          "#C3CCC6",
+          "#E8F1EB"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "hero": {
+        "displayName": "Hero",
+        "purpose": "One number or word that is the whole point of a frame, such as a price."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Cover hooks and the CTA headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "A statement slide's headline; the DM CHECK line."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Package names and secondary headlines, at 116% width."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Page counts, highlighted lines, short lists that carry the slide."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Detail text and list items, at normal width."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "The handle, the swipe cue, the languages line. Sentence case."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "move",
+        "value": "critically damped spring, response 0.4 s",
+        "purpose": "Anything settling into place."
+      },
+      {
+        "name": "snappy",
+        "value": "critically damped spring, response 0.3 s",
+        "purpose": "Small things: labels, badges, bubbles, dots."
+      },
+      {
+        "name": "momentum",
+        "value": "spring, response 0.4 s, damping 0.8",
+        "purpose": "Only after a flick, like a phone scroll."
+      },
+      {
+        "name": "fade",
+        "value": "0.3 s, power1.out",
+        "purpose": "Opacity changes."
+      },
+      {
+        "name": "draw",
+        "value": "cubic-bezier(0.45, 0.05, 0.25, 1)",
+        "purpose": "The site's river-draw curve, for the river line."
+      },
+      {
+        "name": "stagger",
+        "value": "0.08 s",
+        "purpose": "Between related items; keep a whole group under 0.5 s."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "carousel-slide",
+        "value": "1080x1350"
+      },
+      {
+        "name": "reel-and-story",
+        "value": "1080x1920"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "DM keyword bubble",
+      "kind": "chip",
+      "refersTo": "dm-bubble",
+      "description": "The keyword to send, in a River message bubble; one per frame.",
+      "html": "<p class=\"ds-cta\">DM <span class=\"ds-bubble\">CHECK</span></p>",
+      "css": ".ds-cta { font-family: 'Archivo Variable', system-ui, sans-serif; font-size: 52px; font-weight: 800; font-stretch: 125%; letter-spacing: -0.025em; color: #13262B; margin: 0; } .ds-bubble { display: inline-block; margin-left: 0.18em; padding: 0.16em 0.42em 0.2em; border-radius: 0.36em 0.36em 0.1em 0.36em; background: #1D6B66; color: #FAFBF8; white-space: nowrap; }"
+    },
+    {
+      "name": "Incoming message",
+      "kind": "chip",
+      "refersTo": "message-in",
+      "description": "A text from a customer in R1's message thread.",
+      "html": "<span class=\"ds-msg-in\">Are you open Saturday?</span>",
+      "css": ".ds-msg-in { font-family: 'Archivo Variable', system-ui, sans-serif; display: inline-block; font-size: 32px; font-weight: 520; padding: 0.16em 0.42em 0.2em; border-radius: 0.36em 0.36em 0.36em 0.1em; background: #FAFBF8; color: #13262B; box-shadow: 0 0 0 3px #C6CFC9; }"
+    },
+    {
+      "name": "Demo badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Marks a demo or made-up example for as long as it is on screen.",
+      "html": "<span class=\"ds-badge\">Demo</span>",
+      "css": ".ds-badge { font-family: 'Archivo Variable', system-ui, sans-serif; display: inline-flex; align-items: center; padding: 14px 28px 16px; border-radius: 999px; background: #13262B; color: #FAFBF8; font-size: 34px; line-height: 1; font-stretch: 112%; font-weight: 720; letter-spacing: 0.01em; box-shadow: 0 0 0 4px rgba(250, 251, 248, 0.9); }"
+    },
+    {
+      "name": "Caption pill",
+      "kind": "custom",
+      "refersTo": "caption",
+      "description": "One short burned-in caption phrase on a Reel.",
+      "html": "<p class=\"ds-caption\"><span>Text us anytime</span></p>",
+      "css": ".ds-caption { font-family: 'Archivo Variable', system-ui, sans-serif; margin: 0; font-size: 54px; line-height: 1.42; font-weight: 680; text-align: center; } .ds-caption span { padding: 0.06em 0.36em 0.1em; border-radius: 0.3em; background: #13262B; color: #FAFBF8; box-decoration-break: clone; -webkit-box-decoration-break: clone; }"
+    },
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Gold, only for a real primary action or the founding offer.",
+      "html": "<button class=\"ds-btn-primary\">Ask about a founding spot</button>",
+      "css": ".ds-btn-primary { font-family: 'Archivo Variable', system-ui, sans-serif; display: inline-flex; align-items: center; padding: 0.5em 1em; border: 0; border-radius: 16px; background: #EDB23A; color: #13262B; font-size: 36px; font-weight: 700; font-stretch: 108%; cursor: pointer; transition: background-color 0.15s; } .ds-btn-primary:hover { background: #D99A1E; } .ds-btn-primary:focus-visible { outline: 4px solid #13262B; outline-offset: 4px; }"
+    },
+    {
+      "name": "Price block",
+      "kind": "custom",
+      "refersTo": "hero",
+      "description": "A package name over its price, the price set as the hero, as on C1.",
+      "html": "<div class=\"ds-price\"><p class=\"ds-price-name\">Growth</p><p class=\"ds-price-figure\">$2,800</p><p class=\"ds-price-pages\">Up to 7 pages</p></div>",
+      "css": ".ds-price { font-family: 'Archivo Variable', system-ui, sans-serif; color: #13262B; } .ds-price p { margin: 0; } .ds-price-name { font-size: 48px; font-weight: 760; font-stretch: 116%; letter-spacing: -0.015em; } .ds-price-figure { margin-top: 8px; font-size: 128px; line-height: 0.9; font-weight: 820; font-stretch: 125%; letter-spacing: -0.035em; color: #0E3F3C; } .ds-price-pages { margin-top: 16px; font-size: 36px; font-weight: 620; font-stretch: 108%; }"
+    },
+    {
+      "name": "River list item",
+      "kind": "custom",
+      "refersTo": "body",
+      "description": "A list line with the short River bar marker used on slides.",
+      "html": "<ul class=\"ds-list\"><li>Online booking</li><li>A quote form</li></ul>",
+      "css": ".ds-list { font-family: 'Archivo Variable', system-ui, sans-serif; list-style: none; margin: 0; padding: 0; font-size: 36px; line-height: 1.32; color: #13262B; } .ds-list li { position: relative; padding-left: 48px; } .ds-list li + li { margin-top: 14px; } .ds-list li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 26px; height: 6px; border-radius: 3px; background: #1D6B66; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Neighbor's Text",
+    "overview": "Every post should feel like a message from someone down the street who builds websites: plain words, one clear point, and one easy thing to do next. The look borrows from a phone's message thread without copying its chrome. The ask (\"DM CHECK\") sits in a River message bubble, and everything around it stays quiet so the bubble is what the eye lands on.\n\nThe ground is calm and light: Limestone or Paper, with River deep for the occasional dark frame. Type does the work. Headlines run wide and heavy in Archivo, body text sits at normal width, and there is one family only. The Trinity River line drawing and the bridge logo recur as the brand's two drawings; they draw themselves in on Reels and sit still on slides. Mood: calm, plain, specific.\n\nDensity is low. A frame carries one idea, at sizes readable on a phone held at arm's length, inside Instagram's safe zones.",
+    "keyCharacteristics": [
+      "Archivo only: wide (125%) heavy headlines, normal-width body.",
+      "Light, flat ground: Limestone, Paper, or River deep. No shadows.",
+      "One River message bubble per frame for the DM keyword.",
+      "The river drawing and the bridge logo as recurring signatures.",
+      "Gold appears only on a primary button or the founding offer."
+    ],
+    "rules": [
+      {
+        "name": "The Gold Rule",
+        "body": "Gold is a promise of action. It appears on a primary button or the founding offer and nowhere else; the DM bubble is River, not Gold.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Bubble Rule",
+        "body": "A frame has at most one River message bubble, and it holds the keyword the viewer should send.",
+        "section": "colors"
+      },
+      {
+        "name": "The Wide Headline Rule",
+        "body": "Anything read first runs at 125% width; anything read through stays at 100%. Never set body text wide.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Every line is sentence case, including labels and the swipe cue. The DM keyword is the only word in capitals, because it's what people type.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Ground Rule",
+        "body": "No drop shadows, glows or gradients. If something needs to stand apart, change its tone or give it space.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do set headlines in Archivo at 125% width and weight 800–820, and body at 100%.",
+      "Do keep frames on Limestone, Paper or River deep, and keep them flat.",
+      "Do put the DM keyword in the River bubble, once per frame.",
+      "Do keep text inside the safe zones and check every render with `--guides`.",
+      "Do keep the Demo or Example badge on screen for as long as a demo or made-up example is visible.",
+      "Do read every price, name and keyword from `config.ts` through the kit, never typed in."
+    ],
+    "donts": [
+      "Don't use Gold anywhere except a primary button or the founding offer.",
+      "Don't add drop shadows, glows, gradients or outlines for decoration.",
+      "Don't use a second typeface, all-caps labels, or wide body text.",
+      "Don't put two message bubbles or two buttons on one frame.",
+      "Don't show a demo or made-up example without its badge."
+    ]
+  }
+}
