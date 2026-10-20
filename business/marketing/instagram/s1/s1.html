@@ -1,0 +1,296 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- S1 · How fast is your site?: a 4-frame story set (1080×1920), 5 seconds a frame.
+         Frame text from the plan ("Story sets", S1), with Hector's 2026-10-20 changes: frame 3 is a
+         built how-to instead of a screen recording (no live site to test yet, and no real business
+         gets tested), and frame 4 says which score. The poll (frame 1) and link (frame 2) stickers
+         are added in the Instagram app, inside the frame's sticker area. English only for now.
+         Render: npm run piece -- s1/s1.html --lang en --split 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .s1-frame {
+        position: absolute;
+        inset: 0;
+      }
+      /* Content sits between the top safe zone (250 px) and the sticker area (from 1060 px) */
+      .s1-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 300px;
+      }
+      .s1-body > * {
+        margin: 0;
+      }
+      .s1-head {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+
+      /* 1 · The poll: the river draws across like a page loading. The river spans the 88 px
+         margins (904 px) so its neighborhood labels stay inside them */
+      .s1-loading {
+        position: absolute;
+        left: var(--pad);
+        top: 800px;
+        width: 904px;
+      }
+      .s1-loading svg {
+        display: block;
+      }
+
+      /* 2 · The link: the address types itself out */
+      /* One line inside the 88 px margins. No underline: story text can't be tapped, and the
+         link sticker below is what people tap */
+      .s1-url {
+        margin-top: 56px;
+        font-size: 76px;
+        line-height: 1.1;
+        font-weight: 800;
+        font-stretch: 116%;
+        letter-spacing: -0.02em;
+        color: var(--river-deep);
+        white-space: nowrap;
+      }
+      .s1-tap {
+        margin-top: 56px;
+        max-width: 860px;
+      }
+
+      /* 3 · Three steps: a real sequence, so the numbers stay */
+      .s1-steps {
+        margin-top: 72px;
+        padding: 0;
+        list-style: none;
+      }
+      .s1-steps li {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        column-gap: 36px;
+        align-items: start;
+      }
+      .s1-steps li + li {
+        margin-top: 56px;
+      }
+      .s1-num {
+        display: grid;
+        place-items: center;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: var(--river);
+        color: var(--paper);
+        font-size: 48px;
+        font-weight: 820;
+        font-stretch: 116%;
+        font-variant-numeric: lining-nums;
+      }
+      .s1-step {
+        padding-top: 14px;
+        text-wrap: pretty;
+      }
+
+      /* 4 · The ask */
+      .s1-ask {
+        margin-top: 48px;
+      }
+      .s1-ask .twc-bubble {
+        margin-left: 0.18em;
+      }
+      .s1-promise {
+        margin-top: 48px;
+        max-width: 860px;
+        text-wrap: pretty;
+      }
+      .s1-langs {
+        margin-top: 40px;
+      }
+      .s1-river {
+        position: absolute;
+        left: var(--pad);
+        top: 1110px;
+        width: 904px;
+      }
+      .s1-river svg {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="s1" data-start="0" data-duration="20" data-width="1080" data-height="1920">
+      <div
+        id="el-frame"
+        data-composition-id="story-frame"
+        data-composition-src="compositions/story-frame.html"
+        data-variable-values='{"tone":"light","brand":true}'
+        data-start="0"
+        data-duration="20"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <section id="s1-f1" class="clip s1-frame" data-start="0" data-duration="5" data-track-index="1">
+        <div class="s1-body">
+          <h1 class="s1-head t-headline"></h1>
+        </div>
+        <div class="s1-loading"></div>
+      </section>
+
+      <section id="s1-f2" class="clip s1-frame" data-start="5" data-duration="5" data-track-index="1">
+        <div class="s1-body">
+          <h2 class="s1-head t-headline"></h2>
+          <p class="s1-url"></p>
+          <p class="s1-tap t-lead"></p>
+        </div>
+      </section>
+
+      <section id="s1-f3" class="clip s1-frame" data-start="10" data-duration="5" data-track-index="1">
+        <div class="s1-body">
+          <h2 class="s1-head t-headline"></h2>
+          <ol class="s1-steps"></ol>
+        </div>
+      </section>
+
+      <section id="s1-f4" class="clip s1-frame" data-start="15" data-duration="5" data-track-index="1">
+        <div class="s1-body">
+          <h2 class="s1-head t-display"></h2>
+          <p class="s1-ask t-headline"></p>
+          <p class="s1-promise t-lead"></p>
+          <p class="s1-langs t-label t-muted"></p>
+        </div>
+        <div class="s1-river"></div>
+      </section>
+    </div>
+    <script>
+      // Frame text from the plan, with the 2026-10-20 changes. The DM keyword and the languages line
+      // come from config.ts. English only for now: add `es` once Hector has checked the Spanish.
+      const COPY = {
+        en: {
+          poll: "How long does your site take on your phone?",
+          check: "Check it in 30 seconds",
+          url: "pagespeed.web.dev",
+          tap: "Tap the link below and test your own site.",
+          stepsHead: "Three steps, all on your phone",
+          steps: ["Open pagespeed.web.dev", "Paste your website’s address and tap Analyze", "Read the Mobile score. 90 or more is good; under 50 is poor."],
+          askHead: "Mobile score under 50?",
+          promise: "We’ll send a free 2-minute video with 3 fixes.",
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`S1 has no "${lang}" copy yet. Add it once Hector has checked the Spanish.`);
+      const copy = COPY[lang];
+      const motion = TWC.motion;
+      const $ = (s) => document.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+
+      // 1 · Poll
+      fill($("#s1-f1 .s1-head"), copy.poll);
+      const loading = TWC.river($("#s1-f1 .s1-loading"), { width: 904, stops: "phone" });
+
+      // 2 · Link: one span per character, so the address can type itself out
+      fill($("#s1-f2 .s1-head"), copy.check);
+      const url = $("#s1-f2 .s1-url");
+      const chars = [...copy.url].map((ch) => url.appendChild(make("span", "", ch)));
+      fill($("#s1-f2 .s1-tap"), copy.tap);
+
+      // 3 · Steps
+      fill($("#s1-f3 .s1-head"), copy.stepsHead);
+      const steps = copy.steps.map((text, i) => {
+        const li = $("#s1-f3 .s1-steps").appendChild(make("li"));
+        li.append(make("span", "s1-num", String(i + 1)), make("p", "s1-step t-lead", text));
+        return li;
+      });
+
+      // 4 · Ask: "DM" + the keyword bubble (the last word of the CTA line is the verb: DM / manda)
+      fill($("#s1-f4 .s1-head"), copy.askHead);
+      const cta = TWC.dm("carouselCta", lang);
+      const verb = cta.before.slice(cta.before.lastIndexOf(" ") + 1);
+      const bubble = TWC.bubble(cta.keyword);
+      $("#s1-f4 .s1-ask").append(make("span", "", verb), bubble);
+      fill($("#s1-f4 .s1-promise"), copy.promise);
+      fill($("#s1-f4 .s1-langs"), TWC.t("business.languages"));
+      const river = TWC.river($("#s1-f4 .s1-river"), { width: 904, stops: "phone" });
+      TWC.showRiver(river);
+
+      document.fonts.ready.then(() => {
+        TWC.fit($("#s1-f1 .s1-head"), { max: 116, min: 88, maxHeight: 440 });
+        TWC.fit($("#s1-f3 .s1-head"), { max: 104, min: 80, maxHeight: 230 });
+        TWC.fit($("#s1-f4 .s1-head"), { max: 144, min: 104, maxHeight: 300 });
+
+        // One moment per frame: the river loading, the address typing, the steps arriving, the CHECK bubble.
+        const tl = gsap.timeline({ paused: true });
+
+        TWC.rise(tl, $("#s1-f1 .s1-head"), 0.15);
+        TWC.drawRiver(tl, loading, 0.7, { duration: 2.8 });
+
+        TWC.rise(tl, $("#s1-f2 .s1-head"), 5.15);
+        chars.forEach((span, i) => tl.fromTo(span, { opacity: 0 }, { opacity: 1, duration: 0.001 }, 5.7 + i * 0.07));
+        TWC.rise(tl, $("#s1-f2 .s1-tap"), 5.7 + chars.length * 0.07 + 0.2);
+
+        TWC.rise(tl, $("#s1-f3 .s1-head"), 10.15);
+        steps.forEach((li, i) => TWC.rise(tl, li, 10.75 + i * 0.6));
+
+        TWC.rise(tl, $("#s1-f4 .s1-head"), 15.15);
+        TWC.rise(tl, $("#s1-f4 .s1-ask"), 15.5);
+        tl.fromTo(bubble, { scale: 0.86, transformOrigin: "50% 60%" }, { scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, 15.75);
+        TWC.rise(tl, [$("#s1-f4 .s1-promise"), $("#s1-f4 .s1-langs")], 16.15);
+
+        window.__timelines["s1"] = tl;
+      });
+    </script>
+  </body>
+</html>
