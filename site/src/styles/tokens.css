@@ -45,7 +45,9 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3 { font-family: var(--font-display); color: var(--color-text); line-height: 1.1; }
+  /* Headlines balance their lines; paragraphs and list items avoid a lone word on the last line */
+  h1, h2, h3 { font-family: var(--font-display); color: var(--color-text); line-height: 1.1; text-wrap: balance; }
+  p, li { text-wrap: pretty; }
   h1 { font-size: var(--step-4); font-weight: 820; font-stretch: 125%; line-height: 0.98; letter-spacing: -0.02em; }
   h2 { font-size: var(--step-3); font-weight: 780; font-stretch: 116%; letter-spacing: -0.015em; max-width: 22ch; }
   h3 { font-size: var(--step-1); font-weight: 720; font-stretch: 108%; line-height: 1.25; }

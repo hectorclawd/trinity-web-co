@@ -1,6 +1,7 @@
 import type { SiteConfig, StudioOffer } from './types';
-import demoPurpleMartin from '../assets/demo-purple-martin.jpg';
-import demoGoodOak from '../assets/demo-good-oak.jpg';
+// Each demo's whole homepage at 1440px wide; DemoSlots shows it in a small scrollable window
+import demoPurpleMartin from '../assets/demo-purple-martin-scroll.jpg';
+import demoGoodOak from '../assets/demo-good-oak-scroll.jpg';
 
 // SINGLE source of truth for trinitywebco.com. Prices, packages and care plans must match
 // business/playbook.md sections 2 and 3: change the playbook first, then this file.
@@ -99,7 +100,7 @@ export const site: SiteConfig = {
   logo: { src: '/logo-mark.svg', width: 42, height: 28 },
   seo: {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',
-    description: 'Fast, mobile-friendly websites for Dallas contractors, cleaning crews, salons and barbers. Fixed prices from $1,500, set up for Google from day one.',
+    description: 'Fast, mobile-friendly websites for Dallas contractors, cleaning crews, salons and barbers. Fixed prices from $1500, set up for Google from day one.',
     ogImage: '/og-image.png',
   },
 
@@ -137,7 +138,7 @@ export const offer: StudioOffer = {
     packages: [
       {
         name: 'Starter',
-        price: '$1,500',
+        price: '$1500',
         turnaround: 'Ready in 10 business days',
         bestFor: 'For new or very small businesses that need to look legit online.',
         includes: [
@@ -152,7 +153,7 @@ export const offer: StudioOffer = {
       },
       {
         name: 'Growth',
-        price: '$2,800',
+        price: '$2800',
         turnaround: 'Ready in 15 business days',
         bestFor: 'For established businesses that want more calls and bookings. This is the one I recommend most often.',
         featured: true,
@@ -168,7 +169,7 @@ export const offer: StudioOffer = {
       },
       {
         name: 'Premium',
-        price: '$4,800',
+        price: '$4800',
         turnaround: 'Ready in 25 business days',
         bestFor: 'For businesses with many services or service areas, ready to invest in content.',
         includes: [
@@ -194,12 +195,12 @@ export const offer: StudioOffer = {
   },
   founding: {
     heading: 'Founding-client prices',
-    text: 'My first three clients get Starter for $900 or Growth for $1,800 (Premium isn’t included). In return, you agree to a short written testimonial and to let me show your site as a case study. Founding Starter is paid in full upfront, and founding builds include the same 3 months of Care Standard as every build.',
+    text: 'My first three clients get Starter for $900 or Growth for $1800 (Premium isn’t included). In return, you agree to a short written testimonial and to let me show your site as a case study. Founding Starter is paid in full upfront, and founding builds include the same 3 months of Care Standard as every build.',
     button: { label: 'Ask about a founding spot', href: '#contact' },
   },
   demos: {
     heading: 'Demo sites',
-    lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo.',
+    lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo. Scroll inside a preview to see its whole homepage.',
     // Playbook section 7, week 1: one demo per target niche.
     // The urls are Vercel previews behind Vercel login until launch. On launch day, swap in the
     // production urls and add pageSpeed (mobile PageSpeed Insights on the production url) before
@@ -207,7 +208,8 @@ export const offer: StudioOffer = {
     slots: [
       {
         niche: 'Home services',
-        title: 'Demo: Purple Martin Heating & Air',
+        // Non-breaking spaces keep "Heating & Air" on one line on phones
+        title: 'Demo: Purple Martin Heating & Air',
         url: 'https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app',
         image: demoPurpleMartin,
         imageAlt:

@@ -12,6 +12,8 @@ import DemoSlots from '../components/site/DemoSlots.astro';
 import Process from '../components/site/Process.astro';
 import About from '../components/site/About.astro';
 import ProjectReadiness from '../components/site/ProjectReadiness.astro';
+import BookBar from '../components/site/BookBar.astro';
+import CurrentSection from '../components/site/CurrentSection.astro';
 import { site, offer } from '../content/site';
 
 // Extra contact form fields, styled like the ones inside ContactForm
@@ -49,7 +51,7 @@ const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in perso
 
   <ProjectReadiness />
 
-  <section id="contact" class="section" aria-labelledby="contact-title">
+  <section id="contact" class="section" aria-labelledby="contact-title" data-book-cta>
     <div class="wrap grid items-start gap-12 md:grid-cols-[1fr_1.15fr] md:gap-20">
       <div>
         <h2 id="contact-title">{offer.contact.heading}</h2>
@@ -106,4 +108,7 @@ const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in perso
       </ContactForm>
     </div>
   </section>
+
+  <BookBar />
+  <CurrentSection />
 </BaseLayout>
