@@ -52,14 +52,30 @@ const { heading, intro, plans } = offer.care;
     color: var(--color-muted);
   }
   .care-name {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
     font-size: var(--step-1);
     font-weight: 720;
+    font-stretch: 108%;
   }
+  /* The price sits on its own line, set like the package prices at a smaller size */
   .care-name span {
-    margin-left: 0.25rem;
-    font-weight: 550;
-    font-variant-numeric: tabular-nums;
+    display: block;
+    margin-top: 0.2rem;
+    font-size: var(--step-2);
+    font-weight: 820;
+    font-stretch: 125%;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums proportional-nums;
     color: var(--color-brand-dark);
+  }
+  /* Phones: tighter rows and 16px text, like the packages above */
+  @media (max-width: 44rem) {
+    .care-row {
+      padding-block: 1rem;
+    }
+    .care-row p:not(.care-name) {
+      font-size: 1rem;
+    }
   }
 </style>

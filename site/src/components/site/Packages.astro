@@ -76,11 +76,16 @@ const { packages, note } = offer.pricing;
     font-stretch: 120%;
     letter-spacing: -0.01em;
   }
+  /* Prices set like the headlines: wide and heavy. Proportional figures, since tabular ones
+     leave a gap after the 1 at this size */
   .plan-price {
-    margin-top: 0.4rem;
-    font-size: var(--step-2);
-    font-weight: 650;
-    font-variant-numeric: tabular-nums;
+    margin-top: 0.5rem;
+    font-size: clamp(2.25rem, 1.8rem + 1.6vw, 3rem);
+    font-weight: 820;
+    font-stretch: 125%;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: lining-nums proportional-nums;
     color: var(--color-brand-dark);
   }
   .plan-time {
@@ -111,9 +116,22 @@ const { packages, note } = offer.pricing;
     color: var(--color-muted);
   }
 
+  /* Phones: one column, tighter rows and 16px lists, so the three packages take less scrolling */
   @media (max-width: 44rem) {
     .plan {
       grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding-block: 1.5rem;
+    }
+    .plan-for,
+    .plan-list {
+      font-size: 1rem;
+    }
+    .plan-list {
+      margin-top: 0.5rem;
+    }
+    .plan-list li {
+      margin-bottom: 0.15rem;
     }
   }
 </style>

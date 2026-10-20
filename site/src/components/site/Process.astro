@@ -134,11 +134,15 @@ const { heading, steps } = offer.process;
   }
 
   /* The connector draws in as each step scrolls into view. Browsers without scroll-driven
-     animations, and anyone who prefers reduced motion, see it fully drawn. */
+     animations, and anyone who prefers reduced motion, see it fully drawn. The timeline sits
+     in its own rule: in one rule, the CSS minifier folds animation-timeline into the animation
+     shorthand, which browsers reject, and the line never animates. */
   @supports (animation-timeline: view()) {
     @media (prefers-reduced-motion: no-preference) {
       .steps li:not(:last-child)::after {
         animation: step-connect linear both;
+      }
+      .steps > li:not(:last-child)::after {
         animation-timeline: --step;
         animation-range: entry 40% entry 100%;
       }

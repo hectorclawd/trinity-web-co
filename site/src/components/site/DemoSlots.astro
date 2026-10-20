@@ -72,11 +72,35 @@ const { heading, lede, slots } = offer.demos;
     border: 2px dashed var(--color-line);
     background: transparent;
   }
+  /* Each screenshot is the top three screens of the demo's homepage, 1440x2880, so the 16:10
+     frame shows 0.3125 of its height. While the whole frame is on screen, the screenshot slides
+     up to its bottom edge (-68.75% = the part below the frame), as if scrolling the demo.
+     With reduced motion, or in browsers without scroll-driven animations, it shows the top. */
+  .demo-frame {
+    view-timeline-name: --demo;
+  }
   .demo-shot {
+    align-self: start;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
+    height: auto;
+  }
+  /* The timeline sits in its own rule: in one rule, the CSS minifier folds animation-timeline
+     into the animation shorthand, which browsers reject, and nothing moves */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .demo-shot {
+        animation: demo-scroll linear both;
+      }
+      .demo-frame .demo-shot {
+        animation-timeline: --demo;
+        animation-range: contain 0% contain 100%;
+      }
+    }
+  }
+  @keyframes demo-scroll {
+    to {
+      transform: translateY(-68.75%);
+    }
   }
   .demo-placeholder {
     color: var(--color-muted);

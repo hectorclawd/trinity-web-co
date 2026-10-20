@@ -1,0 +1,43 @@
+---
+// Underlines the header link for the section being read, so people know where they are on a
+// long page. A section counts as current while it crosses a thin band 40-45% down the screen;
+// between linked sections (the niche band, the FAQ, the contact form) no link is underlined.
+// The header's own styles are scoped, so the rule below goes through #site-nav to outrank them.
+---
+
+<style is:global>
+  #site-nav a[aria-current='location']:not(.btn) {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+</style>
+
+<script>
+  // Nav order matches page order, so when a boundary puts two sections in the band, the later one wins
+  const links = new Map<Element, HTMLAnchorElement>();
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav] a[href^="#"]:not(.btn)').forEach((link) => {
+    const section = document.getElementById(link.hash.slice(1));
+    if (section) links.set(section, link);
+  });
+
+  if (links.size > 0) {
+    const inBand = new Set<Element>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) inBand.add(entry.target);
+          else inBand.delete(entry.target);
+        }
+        let current: HTMLAnchorElement | undefined;
+        for (const [section, link] of links) if (inBand.has(section)) current = link;
+        for (const link of links.values()) {
+          if (link === current) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        }
+      },
+      { rootMargin: '-40% 0px -55% 0px' },
+    );
+    links.forEach((_, section) => observer.observe(section));
+  }
+</script>
