@@ -39,6 +39,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-09 | Reviewed switching to Cloudflare. Staying on Vercel Pro | Savings (~$240/yr) don't justify losing the call/text/form event tracking that care-plan reports rely on, plus ~30 files of rework | At 25+ clients |
 | 2026-10-15 | Instagram content speaks to small restaurants and other small businesses as well as the two default niches, in English and Spanish. Outreach stays on the §1 default niches | Hector wants the account to reach any small local business; content costs nothing per niche, while outreach time is limited | After the first 20 posts, or when a restaurant asks for a quote |
 | 2026-10-20 | The client owns the domain, Google Business Profile and Google Search Console; "analytics" is no longer on the ownership list | Section 6 said the client owns their analytics, but section 5 runs Vercel Web Analytics on Trinity's own Vercel team, which the client can't own. Posts and contracts can't promise it | If a client asks for an analytics account of their own, or at the attorney review |
+| 2026-10-21 | Keep the name Trinity Web Co.; the domain is trinitywebdallas.com, and the business email hello@trinitywebdallas.com | trinitywebco.com belongs to someone else. Keeping the name keeps the logo, @trinitywebco and the Instagram posts and voiceovers; the domain change is a find-and-replace | If a "Trinity Web" business launches in DFW, or the SOSDirect or USPTO search turns up a conflict |
 
 ### Changelog
 
@@ -67,6 +68,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-15 | Decisions log: Instagram content also covers small restaurants and other small businesses (outreach niches unchanged) |
 | 2026-10-15 | §6: Stripe cost now includes the ACH fee, the 0.4% Invoicing fee and the 0.7% Billing fee (checked on stripe.com/pricing 2026-10-14); links to `business/stripe-setup.md` |
 | 2026-10-20 | §6: domain and hosting ownership policy names Google Search Console instead of "analytics"; the agreement (6.6) and scope template match |
+| 2026-10-21 | Decisions log: the business keeps its name, on trinitywebdallas.com |
 
 ## 1. Business model
 

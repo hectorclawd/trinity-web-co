@@ -3,18 +3,18 @@ import type { SiteConfig, StudioOffer } from './types';
 import demoPurpleMartin from '../assets/demo-purple-martin-scroll.jpg';
 import demoGoodOak from '../assets/demo-good-oak-scroll.jpg';
 
-// SINGLE source of truth for trinitywebco.com. Prices, packages and care plans must match
+// SINGLE source of truth for trinitywebdallas.com. Prices, packages and care plans must match
 // business/playbook.md sections 2 and 3: change the playbook first, then this file.
 
 export const site: SiteConfig = {
   name: 'Trinity Web Co.',
   slug: 'trinity-web-co',
-  url: 'https://trinitywebco.com/',
+  url: 'https://trinitywebdallas.com/',
   primaryService: 'Websites for local businesses',
   schemaType: 'ProfessionalService',
   foundingYear: 2026,
 
-  email: 'hello@trinitywebco.com',
+  email: 'hello@trinitywebdallas.com',
   serviceAreaOnly: true,
   hours: [],
 

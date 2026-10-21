@@ -29,5 +29,5 @@
 
 ## Access (share through the password manager or a call, never by plain email)
 - [ ] Domain registrar (or "I don't have a domain yet")
-- [ ] Google Business Profile: add hello@trinitywebco.com as a manager
+- [ ] Google Business Profile: add hello@trinitywebdallas.com as a manager
 - [ ] Existing website login (if replacing a site)
