@@ -73,16 +73,16 @@ CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude
 - **Credentials live in Bitwarden,** never in files, email or texts. Reference them by item name.
 - **Contracts are templates, not legal advice.** Hector should have a Texas attorney review them once before first use.
 
-## ECC rules
+## ECC and other plugin rules
 
-The ECC plugin loads general coding rules from `~/.claude/rules/ecc/`. In this repo, the playbook and this file win where they disagree:
+The ECC plugin loads general coding rules from `~/.claude/rules/ecc/`, and other plugins (such as agent-skills) bring their own process skills. In this repo, the playbook and this file win over all of them where they disagree:
 
 - **Commits:** verb first, plain English, e.g. `Add Garland service-area page` (playbook §5 naming conventions). No `feat:` or `fix:` prefixes.
 - **Tests:** no test-first rule and no coverage target. Sites are checked with `/qa` and the §5 pre-launch QA checklist. Don't add unit, integration or end-to-end test suites unless Hector asks.
 - **Planning:** build from the template and `site.ts`, with plan mode for anything bigger than one component (playbook §5). Skip ECC's research step (GitHub and package searches) and its planning documents.
-- **Agents:** don't start ECC agents (planner, code reviewer, TDD guide or any other) on your own. Use one only when Hector asks for it.
+- **Agents:** don’t start plugin agents (ECC’s planner, code reviewer and TDD guide, or any other plugin’s) on your own. Use one only when Hector asks for it.
 
-The rest of the ECC rules still apply.
+The rest of those rules still apply.
 
 ## Launch checklist (our own site)
 
