@@ -33,7 +33,8 @@ In launch order. Items in the same group can run in parallel.
 
 **On hold: business name and domain**
 - [x] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying (2026-10-21: keep "Trinity Web Co.", domain trinitywebdallas.com, still available that day; playbook decisions log)
-- [ ] Register trinitywebdallas.com in your own registrar account (Cloudflare Registrar, Porkbun or Namecheap; playbook §6 ownership policy). Search "Trinity Web Co." on SOSDirect and the USPTO trademark search too, since the LLC will use the name
+- [x] Register trinitywebdallas.com in your own registrar account (Cloudflare Registrar, Porkbun or Namecheap; playbook §6 ownership policy) (2026-10-21: Cloudflare Registrar, expires 2027-10-21, Cloudflare DNS; keep auto-renew on, and confirm the registrant email Cloudflare sent)
+- [ ] Search "Trinity Web Co." on SOSDirect and the USPTO trademark search, since the LLC will use the name
 - [x] Update the domain across this repo: `site/` (url, email), docs, the client admin template and the root `CLAUDE.md` open item. The site template and both demos never named the domain, so they need no change or sync (2026-10-21, on branch `domain-trinitywebdallas` for Hector's OK)
 - [ ] Once the domain is live: put the "Built by" / "Website by" credit link back on it in the template (then sync), both demos and `site/` (removed 2026-10-12, 00b8ca1)
 - [ ] Redraw og-image (white dots + final name): `site/public/og-image.png`, 1200×630, still has the old gold river dots and "Trinity Web Co." (left as is on 2026-10-19)
