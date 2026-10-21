@@ -16,7 +16,7 @@
 <script>
   // Nav order matches page order, so when a boundary puts two sections in the band, the later one wins
   const links = new Map<Element, HTMLAnchorElement>();
-  document.querySelectorAll<HTMLAnchorElement>('[data-nav] a[href^="#"]:not(.btn)').forEach((link) => {
+  document.querySelectorAll<HTMLAnchorElement>('[data-nav] a[href^="/#"]:not(.btn)').forEach((link) => {
     const section = document.getElementById(link.hash.slice(1));
     if (section) links.set(section, link);
   });

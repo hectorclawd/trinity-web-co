@@ -90,13 +90,14 @@ export const site: SiteConfig = {
 
   social: [],
   nav: [
-    { label: 'What you get', href: '#what-you-get' },
-    { label: 'Pricing', href: '#pricing' },
-    { label: 'Demos', href: '#demos' },
-    { label: 'How it works', href: '#process' },
-    { label: 'About', href: '#about' },
+    // Root-relative, so the header still works on /privacy/ and the 404 page
+    { label: 'What you get', href: '/#what-you-get' },
+    { label: 'Pricing', href: '/#pricing' },
+    { label: 'Demos', href: '/#demos' },
+    { label: 'How it works', href: '/#process' },
+    { label: 'About', href: '/#about' },
   ],
-  headerCta: { label: 'Book a free call', href: '#contact' },
+  headerCta: { label: 'Book a free call', href: '/#contact' },
   logo: { src: '/logo-mark.svg', width: 42, height: 28 },
   seo: {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',
