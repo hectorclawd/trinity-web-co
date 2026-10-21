@@ -60,3 +60,14 @@ Slash commands (in `.claude/commands/`):
 - `round-1` and `round-2` are revision rounds.
 - `care/<yyyy-mm>` holds monthly care-plan edits.
 - One task per session, one commit per task. Commit messages are verb first, in plain English, e.g. "Add Garland service-area page".
+
+## ECC rules
+
+If the ECC plugin's rules are loaded (`~/.claude/rules/ecc/`), this file and the Trinity Web Co. playbook win where they disagree:
+
+- **Commits:** follow "Branches and commits" above. No `feat:` or `fix:` prefixes.
+- **Tests:** no test-first rule and no coverage target. `/qa` and the playbook's pre-launch QA checklist are the checks. Don't add unit, integration or end-to-end test suites unless Hector asks.
+- **Planning:** build from `site.ts` and the existing components, with plan mode for anything bigger than one component. Skip ECC's research step (GitHub and package searches) and its planning documents.
+- **Agents:** don't start ECC agents (planner, code reviewer, TDD guide or any other) on your own. Use one only when Hector asks for it.
+
+The rest of the ECC rules still apply.
