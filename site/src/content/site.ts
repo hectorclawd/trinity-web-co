@@ -86,7 +86,7 @@ export const site: SiteConfig = {
     button: { label: 'Book a free call', href: '#contact' },
   },
 
-  forms: { contactEndpoint: 'https://formspree.io/f/REPLACE_ME' },
+  forms: { contactEndpoint: 'https://formspree.io/f/xvkzedbz' },
 
   social: [],
   nav: [
