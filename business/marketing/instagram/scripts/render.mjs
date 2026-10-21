@@ -8,7 +8,8 @@
 // --split N cuts the video into N-second parts, <name>-<lang>-1.mp4 and up, each with a PNG of its
 // last frame (story sets: one frame per part).
 // --guides draws Instagram's safe zones on top; those files get a -guides suffix and never post.
-// Runs `npm run sync` first, so config.ts changes are always in.
+// Runs `npm run sync` first, so config.ts changes are always in. --no-sync skips it, for several
+// renders running at once (run `npm run sync` once before them).
 import { spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
@@ -70,7 +71,7 @@ const args = process.argv.slice(2);
 const flag = (f) => args.includes(f);
 const value = (f, fallback) => (args.includes(f) ? args[args.indexOf(f) + 1] : fallback);
 
-run('node', ['scripts/sync-config.mjs']);
+if (!flag('--no-sync')) run('node', ['scripts/sync-config.mjs']);
 
 if (flag('--samples')) {
   render('samples/r1-end-card.html', { lang: 'en' });

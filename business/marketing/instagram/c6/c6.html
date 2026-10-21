@@ -1,0 +1,308 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- C6 · 4 things you should own (not your web guy): an 8-slide carousel (1080×1350), one slide
+         per second. Slide text is the plan's ("Carousel scripts", C6); the ownership facts are
+         playbook §6 ("Domain and hosting ownership policy" and contract essential 6). The business
+         name and the CTA come from config.ts. English only for now: the Spanish copy gets added
+         once Hector checks it.
+         Render: npm run piece -- c6/c6.html --lang en --still -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .c6-slide {
+        position: absolute;
+        inset: 0;
+      }
+      /* Each slide's content sits in the frame's content box: 88 px sides, from 236 px down */
+      .c6-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 236px;
+      }
+      .c6-body > * {
+        margin: 0;
+      }
+
+      /* 1 · Cover, laid out like C1's: the hook, the aside under it, the river below */
+      /* Display's 0.93 leading let the g in "things" touch the d in "should" */
+      .c6-title {
+        max-width: 904px;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+      .c6-aside {
+        margin-top: 40px;
+        font-size: 58px;
+        line-height: 1.15;
+        font-stretch: 108%;
+        font-weight: 680;
+        letter-spacing: -0.005em;
+        text-wrap: balance;
+      }
+      /* The river spans the 88 px margins (904 px), so its neighborhood labels stay inside them */
+      .c6-river {
+        position: absolute;
+        left: var(--pad);
+        top: 896px;
+        width: 904px;
+      }
+      .c6-river svg {
+        display: block;
+      }
+      /* The cover's river sits closer to the hook, so the slide doesn't look top-heavy */
+      #c6-s1 .c6-river {
+        top: 800px;
+      }
+
+      /* 2–5 · The four things: the number in a River circle, the thing, then one plain line */
+      .c6-num {
+        display: grid;
+        place-items: center;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--river);
+        color: var(--paper);
+        font-size: var(--fs-lead);
+        line-height: 1;
+        font-weight: 820;
+        font-stretch: 116%;
+        font-variant-numeric: lining-nums;
+      }
+      .c6-thing {
+        margin-top: 48px;
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c6-line {
+        margin-top: 56px;
+        padding-top: 40px;
+        border-top: var(--rule) solid var(--ink);
+        max-width: 880px;
+        text-wrap: pretty;
+      }
+
+      /* 6 · The statement, alone and large */
+      .c6-statement {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+
+      /* 7 · With us: the promise as the headline, then what's yours and when under the rule, as on 2–5 */
+      .c6-yours {
+        max-width: 904px;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+
+      /* 8 · CTA, as C1's slide 7: the keyword is a river message bubble, the river closes the carousel */
+      .c6-cta {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c6-ask {
+        margin-top: 28px;
+      }
+      .c6-ask .twc-bubble {
+        margin-left: 0.18em;
+      }
+      .c6-langs {
+        margin-top: 44px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="c6" data-start="0" data-duration="8" data-width="1080" data-height="1350">
+      <div
+        id="el-frame"
+        data-composition-id="carousel-slide"
+        data-composition-src="compositions/carousel-slide.html"
+        data-variable-values='{"tone":"light","swipe":1}'
+        data-start="0"
+        data-duration="8"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1350"
+      ></div>
+
+      <section id="c6-s1" class="clip c6-slide" data-start="0" data-duration="1" data-track-index="1">
+        <div class="c6-body">
+          <h1 class="c6-title t-display"></h1>
+          <p class="c6-aside"></p>
+        </div>
+        <div class="c6-river"></div>
+      </section>
+
+      <section id="c6-s2" class="clip c6-slide c6-own" data-thing="0" data-start="1" data-duration="1" data-track-index="1">
+        <div class="c6-body"></div>
+      </section>
+      <section id="c6-s3" class="clip c6-slide c6-own" data-thing="1" data-start="2" data-duration="1" data-track-index="1">
+        <div class="c6-body"></div>
+      </section>
+      <section id="c6-s4" class="clip c6-slide c6-own" data-thing="2" data-start="3" data-duration="1" data-track-index="1">
+        <div class="c6-body"></div>
+      </section>
+      <section id="c6-s5" class="clip c6-slide c6-own" data-thing="3" data-start="4" data-duration="1" data-track-index="1">
+        <div class="c6-body"></div>
+      </section>
+
+      <section id="c6-s6" class="clip c6-slide" data-start="5" data-duration="1" data-track-index="1">
+        <div class="c6-body">
+          <h2 class="c6-statement t-display"></h2>
+        </div>
+      </section>
+
+      <section id="c6-s7" class="clip c6-slide" data-start="6" data-duration="1" data-track-index="1">
+        <div class="c6-body">
+          <h2 class="c6-yours t-headline"></h2>
+          <p class="c6-line t-body t-muted"></p>
+        </div>
+      </section>
+
+      <section id="c6-s8" class="clip c6-slide" data-start="7" data-duration="1" data-track-index="1">
+        <div class="c6-body">
+          <p class="c6-cta t-display"></p>
+          <p class="c6-ask t-headline"></p>
+          <p class="c6-langs t-label t-muted"></p>
+        </div>
+        <div class="c6-river"></div>
+      </section>
+    </div>
+    <script>
+      // Slide text from the plan. The ownership lines say only what playbook §6 promises: the client owns
+      // the domain, Google Business Profile and Google Search Console (Hector, 2026-10-20: not "analytics",
+      // since the visitor stats live in Vercel Web Analytics on Trinity's account).
+      // The business name, the CTA and the languages line come from config.ts.
+      // English only for now: add `es` once Hector has checked the Spanish slide text.
+      const COPY = {
+        en: {
+          cover: { title: (n) => `${n} things you should own`, aside: "(not your web guy)" },
+          things: [
+            { head: "Your domain", line: "The address people type to find you. It’s registered in your own account, in your name." },
+            { head: "Your Google Business Profile", line: "Your listing on Google Search and Maps. You’re the owner, and your web person is added as a manager." },
+            { head: "Your website, once it’s paid for", line: "The code, words and photos made for your site. When the build is paid in full, they’re yours." },
+            { head: "Your Google Search Console", line: "Google’s record of how your site shows up in search, in your own Google account. Your web person is only added as a user." },
+          ],
+          statement: "If someone else owns these, leaving gets expensive.",
+          yours: (name, together) => `${together(`With ${name},`)} you own all four.`,
+          site: "The domain, profile and Search Console from day one, and the site once the build is paid.",
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`C6 has no "${lang}" copy yet. Add it once Hector has checked the slide text.`);
+      const copy = COPY[lang];
+      const $ = (s, root = document) => root.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+      // TWC.fit only measures height, so a single wide word could still run past the margin:
+      // step the size down until nothing is wider than the box.
+      const fitWidth = (node, min) => {
+        let size = parseFloat(node.style.fontSize);
+        while (size > min && node.scrollWidth > node.clientWidth) node.style.fontSize = `${(size -= 2)}px`;
+      };
+
+      // 1 · Cover
+      fill($("#c6-s1 .c6-title"), copy.cover.title(copy.things.length));
+      fill($("#c6-s1 .c6-aside"), copy.cover.aside);
+      TWC.showRiver(TWC.river($("#c6-s1 .c6-river"), { width: 904, stops: "phone" }));
+
+      // 2–5 · The four things
+      const things = [...document.querySelectorAll(".c6-own")].map((slide) => {
+        const i = Number(slide.dataset.thing);
+        const thing = copy.things[i];
+        const body = $(".c6-body", slide);
+        const num = make("p", "c6-num", String(i + 1));
+        const head = make("h2", "c6-thing t-headline", thing.head);
+        body.append(num, head, make("p", "c6-line t-body t-muted", thing.line));
+        return head;
+      });
+
+      // 6 · Statement
+      const statement = fill($("#c6-s6 .c6-statement"), copy.statement);
+
+      // 7 · With us: "With" and the business name stay together on the first line
+      const together = (text) => text.replace(/ /g, String.fromCharCode(160)); // no-break spaces
+      const yours = fill($("#c6-s7 .c6-yours"), copy.yours(TWC.t("business.name"), together));
+      fill($("#c6-s7 .c6-line"), copy.site);
+
+      // 8 · CTA, as C1's slide 7: "Free site check:" as the headline, then "DM" + the keyword bubble
+      // on its own line (the last word before the keyword is the verb: DM / manda), then the languages
+      const cta = TWC.dm("carouselCta", lang);
+      const verbAt = cta.before.lastIndexOf(" ");
+      const ctaLine = fill($("#c6-s8 .c6-cta"), cta.before.slice(0, verbAt));
+      const ask = $("#c6-s8 .c6-ask");
+      ask.append(make("span", "c6-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
+      if (cta.after) ask.append(` ${cta.after}`);
+      fill($("#c6-s8 .c6-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c6-s8 .c6-river"), { width: 904, stops: "phone" }));
+
+      document.fonts.ready.then(() => {
+        // The cover hook on two lines, so "own" never sits alone
+        TWC.fit($("#c6-s1 .c6-title"), { max: 144, min: 96, maxHeight: 300 });
+        // The four things at one size, so the slides match as you swipe
+        const thingSize = Math.min(...things.map((head) => TWC.fit(head, { max: 104, min: 80, maxHeight: 320 })));
+        things.forEach((head) => ((head.style.fontSize = `${thingSize}px`), fitWidth(head, 72)));
+        // 124 px or less sets the statement as "If someone / else owns / these, / leaving gets / expensive."
+        TWC.fit(statement, { max: 124, min: 104, maxHeight: 820 });
+        TWC.fit(yours, { max: 104, min: 72, maxHeight: 560 });
+        TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
+        [$("#c6-s1 .c6-title"), statement, ctaLine].forEach((node) => fitWidth(node, 72));
+        fitWidth(yours, 64);
+        // Stills: one frame per slide, so nothing moves
+        window.__timelines["c6"] = gsap.timeline({ paused: true });
+      });
+    </script>
+  </body>
+</html>

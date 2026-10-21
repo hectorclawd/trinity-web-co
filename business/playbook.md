@@ -38,6 +38,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | The client owns the site once the build fees are paid; unpaid care-plan fees stay owed as a debt and don't affect ownership | Otherwise a client behind on care fees couldn't own their site, and the 60-day handoff couldn't happen | Attorney review of the contract |
 | 2026-10-09 | Reviewed switching to Cloudflare. Staying on Vercel Pro | Savings (~$240/yr) don't justify losing the call/text/form event tracking that care-plan reports rely on, plus ~30 files of rework | At 25+ clients |
 | 2026-10-15 | Instagram content speaks to small restaurants and other small businesses as well as the two default niches, in English and Spanish. Outreach stays on the §1 default niches | Hector wants the account to reach any small local business; content costs nothing per niche, while outreach time is limited | After the first 20 posts, or when a restaurant asks for a quote |
+| 2026-10-20 | The client owns the domain, Google Business Profile and Google Search Console; "analytics" is no longer on the ownership list | Section 6 said the client owns their analytics, but section 5 runs Vercel Web Analytics on Trinity's own Vercel team, which the client can't own. Posts and contracts can't promise it | If a client asks for an analytics account of their own, or at the attorney review |
 
 ### Changelog
 
@@ -65,6 +66,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-07 | §4, §6: 30 days of hosting after a care plan ends; ownership passes on payment of the build fees; founding Starter 100% upfront logged as the only 50/50 exception |
 | 2026-10-15 | Decisions log: Instagram content also covers small restaurants and other small businesses (outreach niches unchanged) |
 | 2026-10-15 | §6: Stripe cost now includes the ACH fee, the 0.4% Invoicing fee and the 0.7% Billing fee (checked on stripe.com/pricing 2026-10-14); links to `business/stripe-setup.md` |
+| 2026-10-20 | §6: domain and hosting ownership policy names Google Search Console instead of "analytics"; the agreement (6.6) and scope template match |
 
 ## 1. Business model
 
@@ -480,7 +482,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 Put this in your contract and on your website's FAQ. Clients trust it, and it ends the most common web-designer horror story.
 
 - **The client always owns their domain.** They register or keep it in *their own* registrar account (Cloudflare Registrar, Porkbun or Namecheap; avoid GoDaddy upsells). They add you as a delegate or share DNS access. You never register a client's domain in your name.
-- **The client owns their Google Business Profile, Search Console and analytics.** You're added as a manager, never the only owner.
+- **The client owns their Google Business Profile and Google Search Console.** You're added as a manager or user, never the only owner. Visitor stats come from Vercel Web Analytics on your Vercel team (section 5), so they reach the client in the monthly report (Care Standard and Plus), not as an account they own.
 - **You host the site on your Vercel Pro team while they're on a care plan.** Hosting is included in the plan, not resold separately.
 - **The code transfers on request** once the project is paid in full: you transfer the GitHub repo to their account and help them move hosting (one-time $150 handoff fee).
 - **Logins live in a password manager** (Bitwarden free) using shared items, never in email or texts.
