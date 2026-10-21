@@ -42,7 +42,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL. Needs Pro first; on hold with the name and domain (2026-10-13)
 
 **Business and legal (before the first client signs)**
-- [ ] Business email `hello@trinitywebdallas.com` (Google Workspace, about $8/mo); the site and contact form already use it (2026-10-21)
+- [x] Business email `hello@trinitywebdallas.com` (Google Workspace, about $8/mo); the site and contact form already use it (2026-10-21: Google Workspace Business Starter, user `hello@`; MX, SPF, DKIM and DMARC (`p=none`) records in Cloudflare, checked through public DNS; plain-text signature in Gmail. Tighten DMARC to `p=quarantine` after a few weeks of clean reports, before outreach)
 - [ ] Texas LLC (Form 205 on SOSDirect, about $300), then a free EIN, then a business checking account (playbook §6)
 - [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing). Step-by-step guide in `business/stripe-setup.md` (2026-10-14); it needs the name, the LLC and EIN, and the business bank account first, then about 30 minutes plus a test-mode dry run
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
