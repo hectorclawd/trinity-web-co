@@ -29,7 +29,7 @@ Hector runs the business solo and part-time. Posts are built from the HyperFrame
 - Prices, packages, care plans and add-ons come only from `business/playbook.md` §2–3 (in the kit, through `config.ts`).
 - The website isn't live yet: the site and both demos are previews behind a Vercel login, so posts ask for a DM, never "link in bio", until launch.
 - The demos have no production PageSpeed results yet; scores and load times stay `[score]` and `[load time]` until launch day.
-- The business name may still change: trinitywebco.com belongs to someone else, and the decision is open.
+- The name stays Trinity Web Co.; the domain is trinitywebdallas.com (Hector, 2026-10-21), because trinitywebco.com belongs to someone else.
 - A Spanish post is a translation, not an offer of a Spanish website (that's an add-on).
 - Nobody appears on camera. Reel voiceovers are an ElevenLabs narrator who speaks for Trinity Web Co. and never names Hector; Instagram's AI info label goes on when they post.
 

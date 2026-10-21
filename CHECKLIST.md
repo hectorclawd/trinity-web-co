@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-20
+Last updated: 2026-10-21
 
 ## DONE
 
@@ -32,14 +32,16 @@ In launch order. Items in the same group can run in parallel.
 - [x] Fill both demo slots in `site/src/content/site.ts`: url, image, imageAlt, pageSpeed (titles "Demo: Purple Martin Heating & Air" and "Demo: Good Oak Barbershop") (2026-10-13: merged into main, c836c1e, with preview links and new screenshots; production URLs and PageSpeed come with the launch-day swap below)
 
 **On hold: business name and domain**
-- [ ] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying
-- [ ] After deciding: register the domain in your own registrar account (playbook §6 ownership policy), then update the name/domain across this repo, the template (sync it) and both demos, and the root `CLAUDE.md` open item. Put the "Built by" / "Website by" credit link back on the new domain (removed 2026-10-12, 00b8ca1)
+- [x] **Decide business name + domain (trinitywebco.com is taken) — blocks LLC, email, PO box, outreach.** Shortlist, DFW name overlap and the size of each option are in HANDOFF.md. Check the pick on SOSDirect and the USPTO trademark search before buying (2026-10-21: keep "Trinity Web Co.", domain trinitywebdallas.com, still available that day; playbook decisions log)
+- [ ] Register trinitywebdallas.com in your own registrar account (Cloudflare Registrar, Porkbun or Namecheap; playbook §6 ownership policy). Search "Trinity Web Co." on SOSDirect and the USPTO trademark search too, since the LLC will use the name
+- [x] Update the domain across this repo: `site/` (url, email), docs, the client admin template and the root `CLAUDE.md` open item. The site template and both demos never named the domain, so they need no change or sync (2026-10-21, on branch `domain-trinitywebdallas` for Hector's OK)
+- [ ] Once the domain is live: put the "Built by" / "Website by" credit link back on it in the template (then sync), both demos and `site/` (removed 2026-10-12, 00b8ca1)
 - [ ] Redraw og-image (white dots + final name): `site/public/og-image.png`, 1200×630, still has the old gold river dots and "Trinity Web Co." (left as is on 2026-10-19)
 - [ ] Move the Vercel account from Hobby to Pro before launch (production demos are commercial use, which Hobby doesn't allow). Not needed while everything is preview-only (2026-10-12: Hector is holding Pro and production deploys until the name and domain are decided)
 - [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL. Needs Pro first; on hold with the name and domain (2026-10-13)
 
 **Business and legal (before the first client signs)**
-- [ ] Business email `hello@` on the chosen domain (Google Workspace, about $8/mo); the site and contact form use `hello@trinitywebco.com` until it's renamed
+- [ ] Business email `hello@trinitywebdallas.com` (Google Workspace, about $8/mo); the site and contact form already use it (2026-10-21)
 - [ ] Texas LLC (Form 205 on SOSDirect, about $300), then a free EIN, then a business checking account (playbook §6)
 - [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing). Step-by-step guide in `business/stripe-setup.md` (2026-10-14); it needs the name, the LLC and EIN, and the business bank account first, then about 30 minutes plus a test-mode dry run
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
@@ -77,7 +79,7 @@ In launch order. Items in the same group can run in parallel.
 - [x] Weeks 1 and 2 in English: S1 speed-check story set (2026-10-20, 9eb5335, with PRODUCT.md); C2 slow-site carousel, C6 own-it carousel, and S3 ask-us story with its reusable answer frame (2026-10-20, approved, merged with this update). They're in Drive, "Trinity Web Co. Instagram posts", in weekly folders with posting notes. C6's caption must name the one-time $150 handoff fee. Posts promise Google Search Console, not analytics (playbook decisions log, 2026-10-20). R5, week 2's Reel, waits on the narrator voice
 - [ ] Growth plan setup before posting starts on 2026-11-02 (the doc's "Before posting starts" list): profile, the kit's DESIGN.md (impeccable's documenter agent), weeks 1 and 2 built in both languages with captions, finish-reviewer pass, week 1 scheduled
 - [ ] Approve the 24 new pieces for weeks 7 to 12 in the growth plan by 2026-10-31, then write their scripts into the content plan doc
-- [ ] R1 intro Reel: move the ElevenLabs key from `C:\Users\hlmpr\projects\motion-studio\.env` into Bitwarden (2026-10-20: done), pick one multilingual narrator voice, and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then run `hyperframes transcribe` on each for the captions and time the scenes and end card to the audio
+- [ ] R1 intro Reel: move the ElevenLabs key from `C:\Users\hlmpr\projects\motion-studio\.env` into Bitwarden (2026-10-20: done), pick one multilingual narrator voice (2026-10-20: Chris, in the kit's `config.ts`), and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then time the scenes and end card to the audio (2026-10-20: `scripts/voiceover.mjs` makes each take plus its word timings for the captions; English voiceovers done for R1, R3, R4 and R5; R1, R4 and R5 are being built; Spanish waits on Hector's check of each `script-es.txt`)
 - [x] Decide on the untracked `motion-studio/` folder (a 24 s site showcase video side project with its own git repo and an ElevenLabs key in `.env`; details in HANDOFF.md) (2026-10-18: moved out to `C:\Users\hlmpr\projects\motion-studio`, venv paths fixed; Hector backs up the files listed in HANDOFF.md to Google Drive)
 - [ ] Build the other 18 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
 - [ ] Post on the growth plan's 12-week schedule, starting 2026-11-02, with its weekly routine (Monday review, build two weeks ahead, Spanish check, captions, 20 minutes a day of local engagement); R2 waits on the demos' production PageSpeed scores

@@ -88,7 +88,7 @@ The rest of the ECC rules still apply.
 
 Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID, headshot):
 
-- [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebco.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again.
+- [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebdallas.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again.
 - [ ] Deploy the demos to production on Pro, run PageSpeed Insights (mobile) on each production URL, then swap the demo slots in `site/src/content/site.ts` from their preview URLs to the production URLs and add `pageSpeed` (titles, images and alt text are already in). Both demos are preview-only now, so the production deploy is `npx vercel deploy --prod` in each demo repo.
 
 ## Open items (Hector to confirm)
@@ -107,7 +107,7 @@ Files built before the playbook was added, which now conflict with it:
 
 Other open items:
 
-- [ ] Domain. The site assumes `trinitywebco.com` and `hello@trinitywebco.com`.
+- [ ] Domain. Decided 2026-10-21: keep the name Trinity Web Co. and use `trinitywebdallas.com` (`trinitywebco.com` belongs to someone else). The site now uses `trinitywebdallas.com` and `hello@trinitywebdallas.com`. Still to do: Hector registers it in his own registrar account (playbook §6) and sets up the `hello@` mailbox.
 - [x] `trinitywebco-sites` GitHub org created; `templates/site-template/` pushed to `trinitywebco-sites/site-template` as a private template repository with fresh history (52 files, exported from commit 24bdeed; 2026-10-07).
 - [x] Vercel project `trinity-web-co-site` created (root directory `site`, Astro preset, Node 24) and linked with the CLI from the repo root; `.vercelignore` uploads only `site/` (2026-10-07). Preview deployments only for now: the first deploy went to production by default and was removed, so `trinity-web-co-site.vercel.app` returns 404 until launch. Since then the project has been connected to GitHub (production branch `main`). Since 2026-10-12 its Ignored Build Step skips production builds, so pushes to `main` don't deploy and other branches still build previews. Clear it on launch day.
 - [ ] Formspree form ID. Replace `REPLACE_ME` in `site.forms.contactEndpoint` in `site/src/content/site.ts`.

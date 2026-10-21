@@ -1,4 +1,4 @@
-# QA report: Trinity Web Co. (trinitywebco.com)
+# QA report: Trinity Web Co. (trinitywebdallas.com)
 
 The playbook's pre-launch QA checklist (section 5). `/qa` fills in what it can check automatically. Hector checks the rest by hand. **Don't launch until every box is ticked** and the playbook section 4 launch checklist is done.
 
