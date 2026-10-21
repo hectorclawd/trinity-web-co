@@ -46,7 +46,8 @@
   h1 { font-size: clamp(2.25rem, 1.5rem + 3.4vw, 3.75rem); font-weight: 800; letter-spacing: -0.01em; }
   h2 { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 750; }
   h3 { font-size: 1.3rem; font-weight: 700; }
-  a { color: var(--color-brand); text-underline-offset: 0.18em; }
+  /* Underlined, not just colored (WCAG 1.4.1). Tailwind's preflight removes it otherwise */
+  a { color: var(--color-brand); text-decoration-line: underline; text-underline-offset: 0.18em; }
   a:hover { color: var(--color-brand-dark); }
   :focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
 

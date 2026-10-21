@@ -58,6 +58,7 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
   data-fallback={fallback}
   data-submit-label={submitLabel}
 >
+  <p class="mb-4 text-muted">Every field is required unless it says optional.</p>
   <div class="mb-4">
     <label class={labelClass} for={id('name')}>Your name</label>
     <input class={fieldClass} id={id('name')} name="name" type="text" autocomplete="name" required />
@@ -95,7 +96,7 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
         {askZip && (
           <div class="mb-4">
             <label class={labelClass} for={id('zip')}>
-              ZIP code{' '}<span class="font-normal text-muted">(so we know you’re in our area)</span>
+              ZIP code{' '}<span class="font-normal text-muted">(optional, so we know you’re in our area)</span>
             </label>
             <input class={fieldClass} id={id('zip')} name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
           </div>
@@ -125,17 +126,42 @@ const labelClass = 'mb-1.5 block text-base font-semibold';
       status.classList.toggle('text-success', kind === 'success');
     };
 
+    // Each error sits under its field and is tied to it with aria-describedby, so a screen
+    // reader reads it when focus lands on the field (WCAG 3.3.1)
+    const errorText = (field: HTMLInputElement) =>
+      field.type === 'email' && field.validity.typeMismatch ? 'Enter an email like name@example.com.' : 'Please fill this in.';
+    const markInvalid = (field: HTMLInputElement) => {
+      const error = document.createElement('p');
+      error.id = `${field.id}-error`;
+      error.className = 'mt-1.5 font-semibold text-error';
+      error.textContent = errorText(field);
+      field.after(error);
+      field.setAttribute('aria-describedby', error.id);
+      field.setAttribute('aria-invalid', 'true');
+    };
+    const clearInvalid = (field: HTMLInputElement) => {
+      document.getElementById(`${field.id}-error`)?.remove();
+      field.removeAttribute('aria-describedby');
+      field.removeAttribute('aria-invalid');
+    };
+
+    // Clear a field's error as soon as it's fixed
+    form.addEventListener('input', (event) => {
+      const field = event.target as HTMLInputElement;
+      if (field.getAttribute('aria-invalid') === 'true' && field.checkValidity()) clearInvalid(field);
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       const required = [...form.querySelectorAll<HTMLInputElement>('[required]')];
-      required.forEach((field) => field.removeAttribute('aria-invalid'));
+      required.forEach(clearInvalid);
       const invalid = required.filter((field) => !field.checkValidity());
       if (invalid.length) {
-        invalid.forEach((field) => field.setAttribute('aria-invalid', 'true'));
-        invalid[0].focus();
+        invalid.forEach(markInvalid);
         const names = invalid.map((field) => form.querySelector(`label[for="${field.id}"]`)?.textContent?.trim().toLowerCase().replace(/[?:.]$/, ''));
-        show(`Please fill in: ${names.join(', ')}.`, 'error');
+        show(`Please check: ${names.join(', ')}.`, 'error');
+        invalid[0].focus();
         return;
       }
 
