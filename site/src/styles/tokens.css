@@ -34,7 +34,10 @@
 }
 
 @layer base {
-  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  html { scroll-padding-top: 5rem; }
+  /* Smooth only after load (BaseLayout adds the class). Arriving from another page at /#pricing jumps
+     straight there: a smooth scroll that starts while fonts and images load can stop in the wrong place */
+  html.smooth-scroll { scroll-behavior: smooth; }
   body {
     background: var(--color-bg);
     color: var(--color-text);
@@ -51,12 +54,13 @@
   h1 { font-size: var(--step-4); font-weight: 820; font-stretch: 125%; line-height: 0.98; letter-spacing: -0.02em; }
   h2 { font-size: var(--step-3); font-weight: 780; font-stretch: 116%; letter-spacing: -0.015em; max-width: 22ch; }
   h3 { font-size: var(--step-1); font-weight: 720; font-stretch: 108%; line-height: 1.25; }
-  a { color: var(--color-brand); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  /* Underlined, not just colored: River on Ink text is only 2.5:1 (WCAG 1.4.1). Tailwind's preflight removes it otherwise */
+  a { color: var(--color-brand); text-decoration-line: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
   a:hover { color: var(--color-brand-dark); text-decoration-thickness: 2px; }
   :focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; border-radius: 2px; }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
+    html, html.smooth-scroll { scroll-behavior: auto; }
     *, *::before, *::after { transition: none !important; }
   }
 }

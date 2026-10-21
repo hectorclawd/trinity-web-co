@@ -67,3 +67,11 @@ const schema = localBusinessSchema(site);
   });
   document.addEventListener('contact-form:sent', () => track('Form submit'));
 </script>
+
+<script>
+  // Smooth scrolling starts once the page has loaded (see tokens.css), so arriving at /#pricing
+  // from another page jumps straight to the section
+  const smooth = () => document.documentElement.classList.add('smooth-scroll');
+  if (document.readyState === 'complete') smooth();
+  else addEventListener('load', smooth, { once: true });
+</script>
