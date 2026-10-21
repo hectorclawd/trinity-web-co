@@ -1,0 +1,202 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false},
+    {"id":"question","type":"string","label":"Question","default":"How long does a new site take?","placeholder":"The question, as the follower sent it","maxLength":140},
+    {"id":"example","type":"boolean","label":"Sample (shows the Example badge)","default":true},
+    {"id":"answer","type":"string","label":"Answer","default":"Starter takes 10 business days, Growth 15 and Premium 25, counted from the day your photos and business details are in.","placeholder":"Our answer, in a sentence or two","maxLength":260}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- S3 · Answer frame: the reusable 5-second story (1080×1920) for answering the questions from
+         the S3 question sticker (week 5). The question shows as an incoming message, the answer
+         rises under it. Both are variables; the defaults are a made-up sample (the answer is the
+         site's FAQ), never a real follower's question, and the Example badge shows while the
+         sample does. Set "example" to false for a real question. No sticker on answer frames.
+         Render: npm run piece -- s3/s3-answer.html --lang en --split 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .s3a-frame {
+        position: absolute;
+        inset: 0;
+      }
+      /* Content sits between the top safe zone (250 px) and the river (from 1110 px) */
+      .s3a-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 300px;
+      }
+      .s3a-body > * {
+        margin: 0;
+      }
+      /* The Example badge sits above the question while the frame shows the made-up sample */
+      .s3a-body .s3a-badge {
+        margin-bottom: 40px;
+      }
+
+      /* The question: the kit's incoming bubble (Paper fill, Ink text, 3 px Line ring, the tight
+         corner bottom left), opened up for a sentence that wraps. Title type, so it reads first */
+      .s3a-body .s3a-bubble {
+        box-sizing: border-box;
+        max-width: 100%;
+        padding: 0.3em 0.5em 0.36em;
+        white-space: normal;
+        font-size: var(--fs-title);
+        line-height: 1.1;
+        letter-spacing: -0.015em;
+        font-stretch: 116%;
+        font-weight: 760;
+        text-wrap: pretty;
+      }
+
+      /* The answer: Lead type, left-aligned under the bubble, breaking where the sentence does */
+      .s3a-body .s3a-answer {
+        margin-top: 64px;
+        max-width: 880px;
+        text-wrap: pretty;
+      }
+
+      .s3a-river {
+        position: absolute;
+        left: var(--pad);
+        top: 1110px;
+        width: 904px;
+      }
+      .s3a-river svg {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="s3-answer" data-start="0" data-duration="5" data-width="1080" data-height="1920">
+      <div
+        id="el-frame"
+        data-composition-id="story-frame"
+        data-composition-src="compositions/story-frame.html"
+        data-variable-values='{"tone":"light","brand":true}'
+        data-start="0"
+        data-duration="5"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <section id="s3a-f1" class="clip s3a-frame" data-start="0" data-duration="5" data-track-index="1">
+        <div class="s3a-body">
+          <div class="s3a-badge" hidden></div>
+          <div class="s3a-q"></div>
+          <p class="s3a-answer t-lead"></p>
+        </div>
+        <div class="s3a-river"></div>
+      </section>
+    </div>
+    <script>
+      // This frame has no fixed text of its own: the question and answer are the composition's
+      // variables, and their defaults (in data-composition-variables above) are a made-up sample.
+      // English only for now: add `es` once Hector has checked the Spanish.
+      const COPY = {
+        en: {},
+      };
+
+      const vars = window.__hyperframes.getVariables();
+      const { lang } = TWC.init(vars);
+      if (!COPY[lang]) throw new Error(`S3's answer frame has no "${lang}" copy yet. Add it once Hector has checked the Spanish.`);
+      const question = String(vars.question || "").trim();
+      const answer = String(vars.answer || "").trim();
+      if (!question || !answer) throw new Error("S3's answer frame needs both a question and an answer.");
+      const $ = (s) => document.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      // No-break spaces keep a number on the line with the word after it ("10 business", never
+      // "10 / business") and the last two words together, so the text never ends on one word
+      const NBSP = String.fromCharCode(160);
+      const keep = (text) => text.replace(/(\d)\s+/g, "$1" + NBSP).replace(/\s+(\S+)$/, NBSP + "$1");
+
+      // The question as an incoming message (the One Bubble Rule: this is the frame's only bubble,
+      // and it isn't the River DM bubble)
+      const bubble = TWC.bubble(keep(question), "in");
+      bubble.classList.add("s3a-bubble");
+      $("#s3a-f1 .s3a-q").appendChild(bubble);
+      fill($("#s3a-f1 .s3a-answer"), keep(answer));
+      // A made-up sample is labeled "Example" the whole time it's on screen (no invented questions)
+      const example = vars.example !== false && vars.example !== "false";
+      const badgeBox = $("#s3a-f1 .s3a-badge");
+      if (example) {
+        badgeBox.appendChild(TWC.badge("example", lang));
+        badgeBox.hidden = false;
+      }
+      TWC.showRiver(TWC.river($("#s3a-f1 .s3a-river"), { width: 904, stops: "phone" }));
+
+      // A wrapped inline-block keeps the full width, so the bubble would read like a card: size it to
+      // its longest line, the way a text message hugs its words. Rects are divided by the page's
+      // scale, so it also holds in a scaled preview.
+      const hug = (node) => {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        const box = node.getBoundingClientRect();
+        const scale = box.width / node.offsetWidth;
+        const style = getComputedStyle(node);
+        const padX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const textLeft = box.left + parseFloat(style.paddingLeft) * scale;
+        const textRight = Math.max(...[...range.getClientRects()].map((r) => r.right));
+        node.style.width = `${Math.ceil((textRight - textLeft) / scale + padX) + 2}px`;
+      };
+
+      document.fonts.ready.then(() => {
+        // Real questions and answers vary in length: step the type down so both stay above the river
+        TWC.fit(bubble, { max: 72, min: 54, maxHeight: 300 });
+        hug(bubble);
+        const answerEl = $("#s3a-f1 .s3a-answer");
+        TWC.fit(answerEl, { max: 54, min: 42, maxHeight: 1060 - 300 - answerEl.offsetTop });
+
+        // One moment: the question arrives, then the answer rises under it and holds.
+        const tl = gsap.timeline({ paused: true });
+        TWC.rise(tl, $("#s3a-f1 .s3a-q"), 0.15);
+        TWC.rise(tl, answerEl, 0.85);
+
+        window.__timelines["s3-answer"] = tl;
+      });
+    </script>
+  </body>
+</html>

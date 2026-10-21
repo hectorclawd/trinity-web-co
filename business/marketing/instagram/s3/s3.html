@@ -1,0 +1,158 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- S3 · Ask us anything about your website: the question story (1080×1920), one 5-second frame.
+         The Question sticker is added in the Instagram app inside the frame's sticker area
+         (y 1060 to 1390), so nothing here goes there. The answers follow in week 5 on the
+         reusable answer frame, s3/s3-answer.html. English only for now.
+         Render: npm run piece -- s3/s3.html --lang en --split 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .s3-frame {
+        position: absolute;
+        inset: 0;
+      }
+      /* Content sits between the top safe zone (250 px) and the sticker area (from 1060 px) */
+      .s3-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 300px;
+      }
+      .s3-body > * {
+        margin: 0;
+      }
+      .s3-head {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      /* One sentence per line, so neither breaks in the middle */
+      .s3-body .s3-line {
+        margin-top: 48px;
+      }
+      .s3-line span {
+        display: block;
+      }
+      /* The one moment: a River arrow drops toward the Question sticker and stays. The wrapper
+         moves; the rotation that points it down sits on the svg inside, so the two never fight.
+         It ends above y 1060, where the sticker area starts */
+      .s3-body .s3-arrow {
+        margin-top: 24px;
+        width: 88px;
+        height: 88px;
+        color: var(--river);
+      }
+      .s3-arrow svg {
+        display: block;
+        transform: rotate(90deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="s3" data-start="0" data-duration="5" data-width="1080" data-height="1920">
+      <div
+        id="el-frame"
+        data-composition-id="story-frame"
+        data-composition-src="compositions/story-frame.html"
+        data-variable-values='{"tone":"light","brand":true}'
+        data-start="0"
+        data-duration="5"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <section id="s3-f1" class="clip s3-frame" data-start="0" data-duration="5" data-track-index="1">
+        <div class="s3-body">
+          <h1 class="s3-head t-headline"></h1>
+          <p class="s3-line t-lead"></p>
+          <div class="s3-arrow" aria-hidden="true"></div>
+        </div>
+      </section>
+    </div>
+    <script>
+      // Frame text from the plan (S3). No date for the answers: they come when they come.
+      // English only for now: add `es` once Hector has checked the Spanish.
+      const COPY = {
+        en: {
+          head: "Ask us anything about your website",
+          line: ["Type it in the box below.", "We’ll answer in our stories."],
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`S3 has no "${lang}" copy yet. Add it once Hector has checked the Spanish.`);
+      const copy = COPY[lang];
+      const $ = (s) => document.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+
+      fill($("#s3-f1 .s3-head"), copy.head);
+      copy.line.forEach((sentence) => $("#s3-f1 .s3-line").appendChild(make("span", "", sentence)));
+      const arrow = $("#s3-f1 .s3-arrow");
+      arrow.appendChild(TWC.arrow("88px"));
+
+      document.fonts.ready.then(() => {
+        TWC.fit($("#s3-f1 .s3-head"), { max: 128, min: 96, maxHeight: 480 });
+
+        // One moment: the headline and line arrive, then the arrow drops toward the sticker and holds.
+        const tl = gsap.timeline({ paused: true });
+        TWC.rise(tl, $("#s3-f1 .s3-head"), 0.15);
+        TWC.rise(tl, $("#s3-f1 .s3-line"), 0.5);
+        TWC.rise(tl, arrow, 0.95, { y: -40 });
+
+        window.__timelines["s3"] = tl;
+      });
+    </script>
+  </body>
+</html>

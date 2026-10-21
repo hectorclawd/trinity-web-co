@@ -113,7 +113,7 @@ Client will:
 
 6.5 **Portfolio.** Designer may show the finished Site, its URL and screenshots in Designer's portfolio and marketing. Designer will only publish a testimonial or case study that Client wrote or approved, attributed the way Client approves.
 
-6.6 **Domain and accounts.** Client always owns the domain, registered in Client's own registrar account. Designer never registers a client domain in its own name. Client also owns its Google Business Profile, Google Search Console and analytics accounts. Designer is added as a manager, never as the only owner.
+6.6 **Domain and accounts.** Client always owns the domain, registered in Client's own registrar account. Designer never registers a client domain in its own name. Client also owns its Google Business Profile and Google Search Console accounts. Designer is added as a manager or user, never as the only owner. Visitor statistics from the hosting provider's analytics stay on Designer's hosting account and are shared with Client in the care plan's reports.
 
 ## 7. Hosting and care plan
 

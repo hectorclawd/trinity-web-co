@@ -98,7 +98,7 @@ The Client will:
 - Once paid in full, the Client owns the final site code, content and domain.
 - The Designer keeps the right to reuse its own templates, components and know-how on other projects.
 - The Designer may show the finished site in its portfolio.
-- **The Client always owns their domain**, registered in the Client's own registrar account. The Client also owns their Google Business Profile, Search Console and analytics; the Designer is added as a manager, never the only owner.
+- **The Client always owns their domain**, registered in the Client's own registrar account. The Client also owns their Google Business Profile and Google Search Console; the Designer is added as a manager or user, never the only owner. Visitor stats from the hosting analytics are shared in the care plan's reports.
 - Logins are shared through a password manager, never by email or text.
 
 ## 7. Hosting and care plan

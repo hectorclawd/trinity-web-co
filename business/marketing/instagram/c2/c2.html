@@ -1,0 +1,342 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- C2 · 5 reasons your site is slow on phones: an 8-slide carousel (1080×1350), one slide per second.
+         Slide text is the plan's ("Carousel scripts", C2). The CTA slide is C1's slide 7, built the same
+         way from config.ts. English only for now: the Spanish copy gets added once Hector checks it.
+         Render: npm run piece -- c2/c2.html --lang en --still -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .c2-slide {
+        position: absolute;
+        inset: 0;
+      }
+      /* Each slide's content sits in the frame's content box: 88 px sides, from 236 px down */
+      .c2-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 236px;
+      }
+      .c2-body > * {
+        margin: 0;
+      }
+      /* The river spans the 88 px margins (904 px), so its neighborhood labels stay inside them */
+      .c2-river {
+        position: absolute;
+        left: var(--pad);
+        top: 896px;
+        width: 904px;
+      }
+      .c2-river svg {
+        display: block;
+      }
+
+      /* 1 · Cover: the hook, then the river */
+      /* Display's 0.93 leading let the y in "your" touch the dot of the i in "is" */
+      .c2-title {
+        max-width: 904px;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+
+      /* 2–6 · Reasons: the count in a River circle, the reason, then why it's slow and what to do */
+      .c2-num {
+        display: grid;
+        place-items: center;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--river);
+        color: var(--paper);
+        font-size: var(--fs-lead);
+        line-height: 1;
+        font-weight: 820;
+        font-stretch: 116%;
+        font-variant-numeric: lining-nums;
+      }
+      .c2-reason-head {
+        margin-top: 48px;
+        max-width: 904px;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+      .c2-nowrap {
+        white-space: nowrap;
+      }
+      .c2-detail {
+        max-width: 880px;
+        margin-top: 48px;
+        padding-top: 40px;
+        border-top: var(--rule) solid var(--ink);
+      }
+      .c2-why {
+        color: var(--muted);
+      }
+      .c2-fix {
+        font-weight: 620;
+      }
+
+      /* 7 · How we build: the light approach, as three items with River bar markers (C1's list) */
+      .c2-head {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c2-sub {
+        margin-top: 64px;
+        max-width: 880px;
+        text-wrap: balance;
+      }
+      .c2-list {
+        margin-top: 48px;
+        padding: 40px 0 0;
+        border-top: var(--rule) solid var(--ink);
+        list-style: none;
+      }
+      .c2-list li {
+        position: relative;
+        padding-left: 56px;
+      }
+      .c2-list li + li {
+        margin-top: 18px;
+      }
+      .c2-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 30px;
+        height: 7px;
+        border-radius: var(--radius-pill);
+        background: var(--river);
+      }
+
+      /* 8 · CTA, as C1's slide 7: the keyword is a river message bubble, the river closes the carousel */
+      .c2-cta {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c2-ask {
+        margin-top: 28px;
+      }
+      .c2-ask .twc-bubble {
+        margin-left: 0.18em;
+      }
+      .c2-langs {
+        margin-top: 44px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="c2" data-start="0" data-duration="8" data-width="1080" data-height="1350">
+      <div
+        id="el-frame"
+        data-composition-id="carousel-slide"
+        data-composition-src="compositions/carousel-slide.html"
+        data-variable-values='{"tone":"light","swipe":1}'
+        data-start="0"
+        data-duration="8"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1350"
+      ></div>
+
+      <section id="c2-s1" class="clip c2-slide" data-start="0" data-duration="1" data-track-index="1">
+        <div class="c2-body">
+          <h1 class="c2-title t-display"></h1>
+        </div>
+        <div class="c2-river"></div>
+      </section>
+
+      <section id="c2-s2" class="clip c2-slide c2-reason" data-start="1" data-duration="1" data-track-index="1">
+        <div class="c2-body"></div>
+      </section>
+      <section id="c2-s3" class="clip c2-slide c2-reason" data-start="2" data-duration="1" data-track-index="1">
+        <div class="c2-body"></div>
+      </section>
+      <section id="c2-s4" class="clip c2-slide c2-reason" data-start="3" data-duration="1" data-track-index="1">
+        <div class="c2-body"></div>
+      </section>
+      <section id="c2-s5" class="clip c2-slide c2-reason" data-start="4" data-duration="1" data-track-index="1">
+        <div class="c2-body"></div>
+      </section>
+      <section id="c2-s6" class="clip c2-slide c2-reason" data-start="5" data-duration="1" data-track-index="1">
+        <div class="c2-body"></div>
+      </section>
+
+      <section id="c2-s7" class="clip c2-slide" data-start="6" data-duration="1" data-track-index="1">
+        <div class="c2-body">
+          <h2 class="c2-head t-headline"></h2>
+          <p class="c2-sub t-lead t-muted"></p>
+          <ul class="c2-list t-lead"></ul>
+        </div>
+      </section>
+
+      <section id="c2-s8" class="clip c2-slide" data-start="7" data-duration="1" data-track-index="1">
+        <div class="c2-body">
+          <p class="c2-cta t-display"></p>
+          <p class="c2-ask t-headline"></p>
+          <p class="c2-langs t-label t-muted"></p>
+        </div>
+        <div class="c2-river"></div>
+      </section>
+    </div>
+    <script>
+      // Slide text from the plan. The CTA and the languages line come from config.ts.
+      // English only for now: add `es` once Hector has checked the Spanish slide text.
+      // Each reason's line says why it slows a phone, then what to do instead.
+      // `keep` lists words that must not break across lines (a hyphenated word).
+      const COPY = {
+        en: {
+          cover: "5 reasons your site is slow on phones",
+          reasons: [
+            {
+              head: "Giant photos nobody shrank",
+              why: "A phone downloads every photo at full size, even when the photo shows small.",
+              fix: "Instead, shrink each photo to the size it’s shown at.",
+            },
+            {
+              head: "Page builders loading code for features you don’t use",
+              why: "A phone has to load all of that code before the page works.",
+              fix: "Instead, turn off every feature your site doesn’t use.",
+            },
+            {
+              head: "Too many plugins and widgets",
+              why: "Each one adds its own code, and a phone loads it on every page.",
+              fix: "Instead, keep the ones you use and delete the rest.",
+            },
+            {
+              head: "Autoplay videos and sliders",
+              why: "A phone starts downloading the video and every slide before anyone asks.",
+              fix: "Instead, use a good still photo and let people tap to play.",
+            },
+            {
+              head: "Pop-ups on top of pop-ups",
+              keep: ["pop-ups", "Pop-ups"],
+              why: "Each one loads more code and covers the page people came to see.",
+              fix: "Instead, put your offer on the page itself.",
+            },
+          ],
+          build: {
+            head: "How we build instead",
+            sub: "Hand-coded and light, so it loads fast on a phone.",
+            items: ["Photos sized for phones", "Only the code each page uses", "No heavy page builder"],
+          },
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`C2 has no "${lang}" copy yet. Add it once Hector has checked the slide text.`);
+      const copy = COPY[lang];
+      const $ = (s, root = document) => root.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+      // Text with some words kept on one line (so "pop-ups" never splits at its hyphen)
+      const fillKeeping = (node, text, keep = []) => {
+        if (!keep.length) return fill(node, text);
+        const pattern = new RegExp(`(${keep.map((w) => w.replace(/[-]/g, "\\-")).join("|")})`, "g");
+        text.split(pattern).forEach((part) => {
+          if (!part) return;
+          node.append(keep.includes(part) ? make("span", "c2-nowrap", part) : part);
+        });
+        return node;
+      };
+
+      // 1 · Cover
+      fill($("#c2-s1 .c2-title"), copy.cover);
+      TWC.showRiver(TWC.river($("#c2-s1 .c2-river"), { width: 904, stops: "phone" }));
+
+      // 2–6 · Reasons, numbered by their place in the list (a real count, 1 to 5)
+      const reasonSlides = [...document.querySelectorAll(".c2-reason")];
+      if (reasonSlides.length !== copy.reasons.length) throw new Error("C2: one reason slide per reason");
+      const reasonHeads = reasonSlides.map((slide, i) => {
+        const reason = copy.reasons[i];
+        const body = $(".c2-body", slide);
+        const num = body.appendChild(make("p", "c2-num", String(i + 1)));
+        num.setAttribute("aria-hidden", "true");
+        const head = body.appendChild(fillKeeping(make("h2", "c2-reason-head t-headline"), reason.head, reason.keep));
+        const detail = body.appendChild(make("p", "c2-detail t-body"));
+        detail.append(make("span", "c2-why", reason.why), " ", make("span", "c2-fix", reason.fix));
+        return head;
+      });
+
+      // 7 · How we build
+      fill($("#c2-s7 .c2-head"), copy.build.head);
+      fill($("#c2-s7 .c2-sub"), copy.build.sub);
+      copy.build.items.forEach((item) => $("#c2-s7 .c2-list").appendChild(make("li", "", item)));
+
+      // 8 · CTA, as C1's slide 7: "Free site check:" as the headline, then "DM" + the keyword bubble on
+      // its own line (the last word before the keyword is the verb: DM / manda), then the languages
+      const cta = TWC.dm("carouselCta", lang);
+      const verbAt = cta.before.lastIndexOf(" ");
+      const ctaLine = fill($("#c2-s8 .c2-cta"), cta.before.slice(0, verbAt));
+      const ask = $("#c2-s8 .c2-ask");
+      ask.append(make("span", "c2-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
+      if (cta.after) ask.append(` ${cta.after}`);
+      fill($("#c2-s8 .c2-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c2-s8 .c2-river"), { width: 904, stops: "phone" }));
+
+      document.fonts.ready.then(() => {
+        TWC.fit($("#c2-s1 .c2-title"), { max: 144, min: 96, maxHeight: 560 });
+        // The five reasons share one headline size (the size the longest one fits at), so the
+        // slides read as a set when swiped. 96 px, not 104, so "Autoplay videos" stays on one line
+        const size = Math.min(...reasonHeads.map((head) => TWC.fit(head, { max: 96, min: 80, maxHeight: 380 })));
+        reasonHeads.forEach((head) => (head.style.fontSize = `${size}px`));
+        TWC.fit($("#c2-s7 .c2-head"), { max: 104, min: 80, maxHeight: 210 });
+        TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
+        // Stills: one frame per slide, so nothing moves
+        window.__timelines["c2"] = gsap.timeline({ paused: true });
+      });
+    </script>
+  </body>
+</html>
