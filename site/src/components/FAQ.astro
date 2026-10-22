@@ -33,6 +33,8 @@ const { items, heading = 'Questions customers ask' } = Astro.props;
   }
   .faq summary::after {
     content: '+';
+    /* Empty alt text hides the decorative + from screen readers; browsers without it keep the line above */
+    content: '+' / '';
     flex: none;
     font-size: 1.6rem;
     font-weight: 400;

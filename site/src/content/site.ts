@@ -20,7 +20,7 @@ export const site: SiteConfig = {
 
   hero: {
     headline: 'Websites that bring Dallas customers to your door.',
-    lede: 'Trinity Web Co. builds fast, good-looking websites for local contractors, cleaning crews, salons, barbers and studios. Your site gets set up for Google from day one, and I look after it every month so you don’t have to.',
+    lede: 'Trinity Web Co. does web design for Dallas businesses: fast, good-looking websites for local contractors, cleaning crews, salons, barbers and studios. Your site gets set up for Google from day one, and I look after it every month so you don’t have to.',
     primaryCta: { label: 'Book a free 20-minute call', href: '#contact' },
     secondaryCta: { label: 'See pricing', href: '#pricing' },
   },
@@ -37,7 +37,7 @@ export const site: SiteConfig = {
   },
 
   services: [],
-  areas: [{ slug: 'dallas', name: 'Dallas', summary: '', body: [] }],
+  areas: [{ slug: 'dallas-fort-worth', name: 'Dallas–Fort Worth', summary: '', body: [] }],
   reviews: [],
   gallery: [],
   faqs: [
@@ -103,6 +103,7 @@ export const site: SiteConfig = {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',
     description: 'Fast, mobile-friendly websites for Dallas contractors, cleaning crews, salons and barbers. Fixed prices from $1500, set up for Google from day one.',
     ogImage: '/og-image.png',
+    ogImageAlt: 'Trinity Web Co.: “Websites that bring Dallas customers to your door,” above a line drawing of the Trinity River',
   },
 
   features: { blog: false, booking: false, map: false, gallery: false, quoteForm: false },
@@ -246,6 +247,6 @@ export const offer: StudioOffer = {
   contact: {
     heading: 'Book a free 20-minute call',
     text: 'Tell me a little about your business, and I’ll reply within one business day to set up a time. No pressure, no sales pitch.',
-    area: 'Based in Dallas, Texas. We can meet in person around Dallas or by video call.',
+    area: 'Based in Dallas, working with businesses across Dallas–⁠Fort Worth. We can meet in person around Dallas or by video call.',
   },
 };

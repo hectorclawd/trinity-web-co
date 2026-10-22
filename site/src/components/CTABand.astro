@@ -29,7 +29,7 @@ const headingId = id ? `${id}-title` : undefined;
       </div>
     </section>
   ) : (
-    <aside
+    <section
       id={id}
       class="grid items-center gap-x-10 gap-y-4 rounded-card bg-accent p-6 text-on-accent sm:p-10 [&_:focus-visible]:outline-on-accent forced-colors:border-2 forced-colors:border-solid forced-colors:border-[color:CanvasText] md:grid-cols-[1fr_auto]"
       aria-labelledby={headingId}
@@ -40,6 +40,6 @@ const headingId = id ? `${id}-title` : undefined;
         <slot />
       </div>
       <a class="btn btn-dark btn-arrow justify-self-start" href={button.href}>{button.label}</a>
-    </aside>
+    </section>
   )
 }

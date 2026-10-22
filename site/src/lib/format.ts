@@ -24,11 +24,22 @@ export function fullAddress(site: SiteConfig): string | undefined {
 
 /** LocalBusiness JSON-LD. Name, address and phone must match the Google Business Profile exactly. */
 export function localBusinessSchema(site: SiteConfig) {
+  const hours = site.hours
+    .filter((row) => row.opens && row.closes)
+    .map((row) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: row.days,
+      opens: row.opens,
+      closes: row.closes,
+    }));
+  const sameAs = site.social.map((link) => link.href).filter((href) => !isPlaceholder(href));
   return {
     '@context': 'https://schema.org',
     '@type': site.schemaType,
     name: site.name,
+    description: site.seo.description,
     url: site.url,
+    ...(site.logo && { logo: new URL(site.logo.src, site.url).href }),
     email: site.email,
     ...(site.phone && { telephone: site.phone.e164 }),
     image: new URL(site.seo.ogImage, site.url).href,
@@ -47,16 +58,11 @@ export function localBusinessSchema(site: SiteConfig) {
       geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
     }),
     ...(site.areas.length && {
-      areaServed: site.areas.map((area) => ({ '@type': 'City', name: area.name })),
+      // Place, not the template's City: this site serves the Dallas–Fort Worth area, which isn't a city
+      areaServed: site.areas.map((area) => ({ '@type': 'Place', name: area.name })),
     }),
-    openingHoursSpecification: site.hours
-      .filter((row) => row.opens && row.closes)
-      .map((row) => ({
-        '@type': 'OpeningHoursSpecification',
-        dayOfWeek: row.days,
-        opens: row.opens,
-        closes: row.closes,
-      })),
-    sameAs: site.social.map((link) => link.href).filter((href) => !isPlaceholder(href)),
+    // Empty arrays are left out: they add nothing and the Rich Results Test flags them
+    ...(hours.length > 0 && { openingHoursSpecification: hours }),
+    ...(sameAs.length > 0 && { sameAs }),
   };
 }
