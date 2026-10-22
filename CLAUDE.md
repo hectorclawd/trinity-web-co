@@ -50,6 +50,7 @@ Rules for using it:
   <client-slug>/admin  Contract, invoices, intake; never in the site repo
   _template/admin/     Starting docs for a new client (copy to <client-slug>/)
 /site          The Trinity Web Co. website (Astro, built from site-template; see site/CLAUDE.md)
+AGENTS.md      Codex's instructions: it fixes, Claude builds (see "Codex fixes, Claude builds")
 HANDOFF.md     Where things stand, for a fresh session: repos, deploys, gotchas, next up
 CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude/
 ```
@@ -80,9 +81,19 @@ The ECC plugin loads general coding rules from `~/.claude/rules/ecc/`, and other
 - **Commits:** verb first, plain English, e.g. `Add Garland service-area page` (playbook §5 naming conventions). No `feat:` or `fix:` prefixes.
 - **Tests:** no test-first rule and no coverage target. Sites are checked with `/qa` and the §5 pre-launch QA checklist. Don't add unit, integration or end-to-end test suites unless Hector asks.
 - **Planning:** build from the template and `site.ts`, with plan mode for anything bigger than one component (playbook §5). Skip ECC's research step (GitHub and package searches) and its planning documents.
-- **Agents:** don’t start plugin agents (ECC’s planner, code reviewer and TDD guide, or any other plugin’s) on your own. Use one only when Hector asks for it.
+- **Agents:** don’t start plugin agents (ECC’s planner, code reviewer and TDD guide, or any other plugin’s) on your own. Use one only when Hector asks for it. The one exception is Codex, for the fix work below.
 
 The rest of those rules still apply.
+
+## Codex fixes, Claude builds
+
+Codex (OpenAI's coding agent, through the Codex plugin) takes the fix work so Claude can keep building (playbook §5). Its instructions are in `AGENTS.md`, which Codex loads on every run.
+
+- **Hand these to Codex on your own,** through the `codex:codex-rescue` agent: security fixes, a failing build or `npm run check`, `npm audit` findings, broken links, QA or `/impeccable audit` findings that are code defects, and bugs you notice outside your current task. One fix per run: say what's wrong, where, and what done looks like.
+- **Keep for yourself:** new pages, components, copy, design, `site.ts` content and business docs.
+- Run Codex in the background only when it won't touch the files you're editing; otherwise wait for it.
+- Read Codex's diff before you commit it, as you would your own, and tell Hector in one line what it fixed.
+- Second opinions are Hector's to start (Claude can't run them): `/codex:review` on a finished change, `/codex:adversarial-review` for forms, headers and anything touching customer data.
 
 ## Launch checklist (our own site)
 

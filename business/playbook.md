@@ -42,6 +42,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | Keep the name Trinity Web Co.; the domain is trinitywebdallas.com, and the business email hello@trinitywebdallas.com | trinitywebco.com belongs to someone else. Keeping the name keeps the logo, @trinitywebco and the Instagram posts and voiceovers; the domain change is a find-and-replace | If a "Trinity Web" business launches in DFW, or the SOSDirect or USPTO search turns up a conflict |
 | 2026-10-21 | Private previews for a real shop with no website are allowed as an outreach tactic, under the rules in section 7: private, noindex, shown in person, deleted after a no | A shop sees its own site, not a stranger's demo; the design guide's case study built one in an evening | After 10 previews, or the first time an owner objects |
 | 2026-10-21 | AI-made images on client sites only for general scenes, with the owner's written OK; never as photos of their products, food or work | Customers should see what they'll actually get; AI product photos would misrepresent a real business | At the attorney review, or when a client asks for AI product photos |
+| 2026-10-21 | Claude Code builds; Codex fixes (security, failing builds, dependency alerts, QA defects) and gives second-opinion reviews. Codex's rules are in `AGENTS.md`, tracked in git | Claude's time goes to building, and a second model catches what the first one missed | If Codex's fixes often need redoing, or its usage limits get in the way |
 
 ### Changelog
 
@@ -72,6 +73,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-20 | §6: domain and hosting ownership policy names Google Search Console instead of "analytics"; the agreement (6.6) and scope template match |
 | 2026-10-21 | Decisions log: the business keeps its name, on trinitywebdallas.com |
 | 2026-10-21 | §5: design toolkit and build recipe (Taste, Playwright CLI, Impeccable, optional DESIGN.md and img2threejs) and the scroll-played clip; §7: private previews for shops with no website; decisions log: previews and AI images |
+| 2026-10-21 | §5: Claude builds, Codex fixes (step 9 of "Using Claude Code efficiently"); decisions log: the Codex split |
 
 ## 1. Business model
 
@@ -340,6 +342,7 @@ Build every client site from one starter template where all business facts live 
 6. **Have Claude check its own work visually.** Ask it to screenshot pages at 390px and 1440px with Playwright and fix what looks off.
 7. **Improve the template, not just the site.** When you build a component worth reusing (e.g. a before/after slider), copy it back into the template repo the same week.
 8. **You review every diff.** You are the one accountable to the client. Read what changed before you push.
+9. **Claude builds, Codex fixes.** Claude hands security fixes, failing builds, dependency alerts and QA defects to Codex through the Codex plugin, and keeps building. Codex's rules are in the repo's `AGENTS.md`. Before you show a client, run `/codex:review` on the change, or `/codex:adversarial-review` when it touches forms or customer data.
 
 **Default plan:** Claude Pro ($20/mo) to start. Move to Max (about $100/mo) once you regularly hit usage limits mid-build, usually around client 4 or 5.
 
