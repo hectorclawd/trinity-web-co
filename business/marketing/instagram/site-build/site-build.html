@@ -1,0 +1,401 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- Site build clip: the website's How it works section plays this as you scroll (it never plays
+         on its own), one 2-second beat per step: free call, proposal, design and build, launch, care.
+         A drawn phone holds every beat; the demo is Purple Martin, labeled "Demo" the whole time it
+         shows. Not an Instagram post: no frame, handle or safe zones. English only for now.
+         Render: node scripts/render.mjs site-build/site-build.html --lang en
+         Then encode for the site (see HANDOFF.md, "Site build clip"). -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        /* Paper, the How it works section's own ground, so the clip has no visible edge on the page */
+        background: var(--paper);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      .sb-stage {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* The phone: drawn flat, an Ink ring with round corners, no device photo and no shadow */
+      .sb-phone {
+        position: absolute;
+        left: 266px;
+        top: 132px;
+        width: 548px;
+        height: 1086px;
+        box-sizing: border-box;
+        border: 5px solid var(--ink);
+        border-radius: 64px;
+        padding: 14px;
+        background: var(--paper);
+      }
+      .sb-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 48px;
+        background: var(--limestone);
+      }
+      .sb-beat {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* 1 and 5 · A text thread */
+      .sb-thread {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 28px;
+        padding: 0 36px 150px;
+      }
+      .sb-typing {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        bottom: 34px;
+        padding: 20px 30px 22px;
+        border-radius: var(--radius-pill);
+        background: var(--paper);
+        box-shadow: 0 0 0 3px var(--line);
+        color: var(--muted);
+        font-size: 34px;
+        font-weight: 500;
+      }
+      .sb-thread .twc-bubble {
+        max-width: 380px;
+        box-sizing: border-box;
+        padding: 0.42em 0.62em 0.48em;
+        white-space: normal;
+        font-size: 40px;
+        line-height: 1.18;
+        font-weight: 600;
+        text-wrap: balance;
+      }
+      .sb-thread .twc-bubble--in {
+        align-self: flex-start;
+      }
+      .sb-thread .twc-bubble:not(.twc-bubble--in) {
+        align-self: flex-end;
+      }
+
+      /* 2 · The proposal: a page, three lines that tick, the button to sign */
+      .sb-card {
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 240px;
+        padding: 44px 40px 48px;
+        border-radius: var(--radius-card);
+        background: var(--paper);
+        box-shadow: 0 0 0 3px var(--line);
+      }
+      .sb-card-title {
+        margin: 0 0 36px;
+        font-size: 64px;
+        line-height: 1;
+        font-weight: 800;
+        font-stretch: 125%;
+        letter-spacing: -0.02em;
+      }
+      .sb-ticks {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .sb-ticks li {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-size: 38px;
+        line-height: 1.15;
+        font-weight: 600;
+      }
+      .sb-ticks li + li {
+        margin-top: 26px;
+      }
+      .sb-tick {
+        flex: none;
+        width: 52px;
+        height: 52px;
+      }
+      .sb-sign {
+        display: inline-block;
+        margin-top: 44px;
+        padding: 18px 34px 20px;
+        border-radius: 14px;
+        background: var(--river);
+        color: var(--paper);
+        font-size: 36px;
+        font-weight: 700;
+        font-stretch: 108%;
+      }
+
+      /* 3 and 4 · The site: a wireframe draws, then the demo fills the screen */
+      .sb-wire,
+      .sb-demo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .sb-demo {
+        display: block;
+        height: auto;
+      }
+      .sb-badge {
+        position: absolute;
+        right: 236px;
+        top: 104px;
+      }
+      .sb-addr {
+        position: absolute;
+        left: 24px;
+        right: 24px;
+        top: 24px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 26px 20px;
+        border-radius: var(--radius-pill);
+        background: var(--paper);
+        box-shadow: 0 0 0 3px var(--line);
+        font-size: 36px;
+        font-weight: 650;
+      }
+      .sb-lock {
+        flex: none;
+        width: 30px;
+        height: 36px;
+      }
+      .sb-launch {
+        top: auto;
+        bottom: 30px;
+        padding: 36px 36px 40px;
+      }
+      .sb-launch .sb-ticks li {
+        font-size: 34px;
+      }
+      .sb-launch .sb-tick {
+        width: 46px;
+        height: 46px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="site-build" data-start="0" data-duration="10" data-width="1080" data-height="1350">
+      <section id="sb-stage" class="clip sb-stage" data-start="0" data-duration="10" data-track-index="0">
+        <div class="sb-phone">
+          <div class="sb-screen">
+            <div class="sb-beat sb-thread" data-beat="call"></div>
+            <div class="sb-beat" data-beat="proposal">
+              <div class="sb-card">
+                <p class="sb-card-title"></p>
+                <ul class="sb-ticks"></ul>
+                <span class="sb-sign"></span>
+              </div>
+            </div>
+            <div class="sb-beat" data-beat="site">
+              <svg class="sb-wire" viewBox="0 0 720 1480" aria-hidden="true"></svg>
+              <img class="sb-demo" src="site-build/img/purple-martin-top.jpg" alt="" />
+              <div class="sb-addr"></div>
+              <div class="sb-card sb-launch"><ul class="sb-ticks"></ul></div>
+            </div>
+            <div class="sb-beat sb-thread" data-beat="care"></div>
+          </div>
+        </div>
+        <div class="sb-badge"></div>
+      </section>
+    </div>
+    <script>
+      // The clip's words. Its story is the website's How it works steps (site/src/content/site.ts,
+      // offer.process), so change both together. Facts only: no price, no promise of results.
+      const NB = String.fromCharCode(8209); // a hyphen that never breaks the line ("20-minute")
+      const COPY = {
+        en: {
+          typing: "Text message",
+          call: { in: "Can you build us a website?", out: `Sure. Free 20${NB}minute call this week?` },
+          proposal: { title: "Proposal", lines: ["Fixed price", "Timeline", "What I need from you"], sign: "Sign online" },
+          address: "yourbusiness.com",
+          launch: ["Fast on a phone", "Every link works", "Forms reach your inbox"],
+          care: { in: "Can you change our Saturday hours?", out: "Done. Take a look." },
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`The site build clip has no "${lang}" copy yet.`);
+      const copy = COPY[lang];
+      const SVG = "http://www.w3.org/2000/svg";
+      const $ = (s, root = document) => root.querySelector(s);
+      const beat = (name) => $(`[data-beat="${name}"]`);
+      // The last two words stay together, so no line ends on a lone word
+      const keep = (text) => text.replace(/\s+(\S+)$/, String.fromCharCode(160) + "$1");
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = keep(text);
+        return node;
+      };
+      const svgEl = (tag, attrs, parent) => {
+        const node = document.createElementNS(SVG, tag);
+        for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+        if (parent) parent.appendChild(node);
+        return node;
+      };
+      // A check in a River ring; its stroke draws in when the line ticks
+      const tick = () => {
+        const svg = svgEl("svg", { class: "sb-tick", viewBox: "0 0 52 52", "aria-hidden": "true" });
+        svgEl("circle", { cx: 26, cy: 26, r: 23, fill: "none", stroke: "var(--line)", "stroke-width": 3 }, svg);
+        svgEl("path", { d: "M15 27 L23 35 L38 18", fill: "none", stroke: "var(--river)", "stroke-width": 5, "stroke-linecap": "round", "stroke-linejoin": "round" }, svg);
+        return svg;
+      };
+      const tickList = (list, lines) =>
+        lines.map((text) => {
+          const li = list.appendChild(make("li"));
+          li.append(tick(), make("span", "", text));
+          return li;
+        });
+
+      // 1 · Free call
+      const callIn = beat("call").appendChild(TWC.bubble(keep(copy.call.in), "in"));
+      const callOut = beat("call").appendChild(TWC.bubble(keep(copy.call.out)));
+      for (const name of ["call", "care"]) beat(name).appendChild(make("div", "sb-typing", copy.typing));
+
+      // 2 · Proposal
+      $(".sb-card-title", beat("proposal")).textContent = copy.proposal.title;
+      const proposalRows = tickList($(".sb-ticks", beat("proposal")), copy.proposal.lines);
+      $(".sb-sign", beat("proposal")).textContent = copy.proposal.sign;
+
+      // 3 · The wireframe: the demo's own layout, sketched in River before the page arrives
+      const wire = $(".sb-wire");
+      const wireParts = [
+        "M0 198 H720", // header rule
+        "M36 132 h72", "M134 104 h270", "M134 160 h256", // logo and name
+        "M578 87 h67 a43 43 0 0 1 0 86 h-67 a43 43 0 0 1 0 -86 z", // menu button
+        "M36 320 h510", "M36 405 h484", "M36 488 h450", // headline
+        "M36 600 h500", "M36 656 h570", "M36 712 h580", "M36 768 h530", "M36 824 h626", // lede
+        "M81 914 h325 a48 48 0 0 1 0 96 h-325 a48 48 0 0 1 0 -96 z", // call button
+        "M80 1035 h270 a47.5 47.5 0 0 1 0 95 h-270 a47.5 47.5 0 0 1 0 -95 z", // quote button
+        "M470 1035 h120 a47.5 47.5 0 0 1 0 95 h-120 a47.5 47.5 0 0 1 0 -95 z", // text button
+        "M73 1210 h575 a40 40 0 0 1 40 40 v230 h-655 v-230 a40 40 0 0 1 40 -40 z", // picture
+      ].map((d) => svgEl("path", { d, fill: "none", stroke: "var(--river)", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" }, wire));
+      const demo = $(".sb-demo");
+      $(".sb-badge").appendChild(TWC.badge("demo", lang));
+
+      // 4 · Launch: the address bar and the launch checks
+      const addr = $(".sb-addr");
+      const lock = svgEl("svg", { class: "sb-lock", viewBox: "0 0 30 36", "aria-hidden": "true" }, addr);
+      svgEl("path", { d: "M7 16 V11 a8 8 0 0 1 16 0 V16", fill: "none", stroke: "var(--ink)", "stroke-width": 4, "stroke-linecap": "round" }, lock);
+      svgEl("rect", { x: 2, y: 15, width: 26, height: 19, rx: 4, fill: "var(--ink)" }, lock);
+      addr.append(make("span", "", copy.address));
+      const launch = $(".sb-launch");
+      const launchRows = tickList($(".sb-ticks", launch), copy.launch);
+
+      // 5 · Care
+      const careIn = beat("care").appendChild(TWC.bubble(keep(copy.care.in), "in"));
+      const careOut = beat("care").appendChild(TWC.bubble(keep(copy.care.out)));
+
+      document.fonts.ready.then(() => {
+        const { motion } = TWC;
+        const tl = gsap.timeline({ paused: true });
+        const show = (target, at) => tl.fromTo(target, { opacity: 0 }, { opacity: 1, ...motion.fade }, at);
+        const hide = (target, at) => tl.to(target, { opacity: 0, ...motion.fade }, at);
+        // A pen stroke, as brand/kit.js draws one: the hidden offset adds one stroke width, so a
+        // round cap never shows as a dot before the pen starts
+        const pen = (path, at, duration, ease) => {
+          const len = path.getTotalLength();
+          const hidden = len + +path.getAttribute("stroke-width");
+          tl.fromTo(path, { strokeDasharray: `${len} ${hidden + len}`, strokeDashoffset: hidden }, { strokeDashoffset: 0, duration, ease }, at);
+        };
+        const pop = (target, at) => tl.fromTo(target, { scale: 0.86, transformOrigin: "50% 60%" }, { scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, at);
+        // Each check draws in like a pen stroke as its line arrives
+        const drawTicks = (rows, at) =>
+          rows.forEach((li, i) => {
+            const t = at + i * 0.3;
+            TWC.rise(tl, li, t, { y: 16, spring: motion.snappy });
+            pen(li.querySelector("path"), t + 0.1, 0.35, motion.pen);
+          });
+
+        // One beat per How it works step, two seconds each. The page scrubs this timeline with the
+        // scroll, so every frame has to read on its own: each beat settles quickly and then holds.
+        // 0–2 · Free call
+        TWC.rise(tl, callIn, 0.15);
+        TWC.rise(tl, callOut, 0.7);
+        pop(callOut, 0.7);
+        hide(beat("call"), 1.7);
+
+        // 2–4 · Proposal
+        TWC.rise(tl, $(".sb-card", beat("proposal")), 2.05);
+        drawTicks(proposalRows, 2.45);
+        TWC.rise(tl, $(".sb-sign", beat("proposal")), 3.35, { y: 12, spring: motion.snappy });
+        hide(beat("proposal"), 3.7);
+
+        // 4–6 · Design and build: the sketch draws, then the real page lands on top of it
+        show(beat("site"), 4);
+        wireParts.forEach((path, i) => pen(path, 4.05 + i * 0.05, 0.5, motion.draw));
+        // The page fills in over its own sketch from the top down (a wipe, not a fade, so a
+        // half-scrolled frame never shows sketch lines through the text). The Demo badge arrives
+        // with it and stays as long as the demo shows.
+        tl.fromTo(demo, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: motion.draw }, 5.0);
+        TWC.rise(tl, $(".sb-badge"), 5.0, { y: 12, spring: motion.snappy });
+        tl.set(wire, { opacity: 0 }, 5.35); // fully under the page by now
+        tl.set(wire, { opacity: 1 }, 0); // and back for a scrub to the start
+
+        // 6–8 · Launch: the address bar slides in and the page makes room for it, then the checks tick
+        TWC.rise(tl, addr, 6.1, { y: -20 });
+        tl.fromTo(demo, { y: 0 }, { y: 96, duration: motion.move.duration, ease: motion.move.ease }, 6.1);
+        TWC.rise(tl, launch, 6.45);
+        drawTicks(launchRows, 6.7);
+        hide([beat("site"), $(".sb-badge")], 7.7);
+
+        // 8–10 · Care: a quick text, a quick fix (the thread stays hidden until its turn)
+        show(beat("care"), 7.85);
+        TWC.rise(tl, careIn, 8.15);
+        TWC.rise(tl, careOut, 8.75);
+        pop(careOut, 8.75);
+
+        window.__timelines["site-build"] = tl;
+      });
+    </script>
+  </body>
+</html>
