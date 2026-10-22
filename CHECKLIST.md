@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-21
+Last updated: 2026-10-22
 
 ## DONE
 
@@ -37,7 +37,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Search "Trinity Web Co." on SOSDirect and the USPTO trademark search, since the LLC will use the name
 - [x] Update the domain across this repo: `site/` (url, email), docs, the client admin template and the root `CLAUDE.md` open item. The site template and both demos never named the domain, so they need no change or sync (2026-10-21, on branch `domain-trinitywebdallas` for Hector's OK)
 - [ ] Once the domain is live: put the "Built by" / "Website by" credit link back on it in the template (then sync), both demos and `site/` (removed 2026-10-12, 00b8ca1)
-- [ ] Redraw og-image (white dots + final name): `site/public/og-image.png`, 1200×630, still has the old gold river dots and "Trinity Web Co." (left as is on 2026-10-19)
+- [x] Redraw og-image (white dots + final name): `site/public/og-image.png`, 1200×630, still has the old gold river dots and "Trinity Web Co." (left as is on 2026-10-19) (2026-10-22: redrawn with white dots and the new headline "Websites that bring Dallas customers in.", on branch `hero-river` for Hector's OK)
 - [ ] Move the Vercel account from Hobby to Pro before launch (production demos are commercial use, which Hobby doesn't allow). Not needed while everything is preview-only (2026-10-12: Hector is holding Pro and production deploys until the name and domain are decided)
 - [ ] Deploy both demos to production (`npx vercel deploy --prod` in each demo repo), run PageSpeed Insights (mobile) on each production URL. Needs Pro first; on hold with the name and domain (2026-10-13)
 
