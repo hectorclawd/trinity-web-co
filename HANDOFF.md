@@ -198,7 +198,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
   - Demos score SEO 69 because of the intentional `noindex`.
   - The occasional outlier run (65, 79) has been machine load. Rerun, and record both sets.
 - **The header check snippet** lives in `templates/site-template/.claude/commands/qa.md` and the demos' copies. `site/.claude/commands/qa.md` doesn't have it; `site/` has its own `/qa` that isn't synced from the template.
-- **`AGENTS.md`** in the repo root is a Codex copy of `CLAUDE.md` from 2026-10-07 and is out of date. At Hector's request it's ignored in `.gitignore` (kept on disk, never committed).
+- **`AGENTS.md`** in the repo root is Codex's standing prompt (2026-10-21): Codex fixes, Claude builds. It points at `CLAUDE.md` and the playbook instead of copying them, so it doesn't go stale, and it's tracked in git now. It replaced the old ignored local copy of `CLAUDE.md`; that copy's still-correct notes were folded in.
 - **Hosting is settled: Vercel Pro.** On 2026-10-09 Hector reviewed switching to Cloudflare and decided to stay (playbook decisions log). Revisit at 25+ clients.
 
 ## Next up
