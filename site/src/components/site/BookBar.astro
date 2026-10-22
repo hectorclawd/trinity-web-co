@@ -15,11 +15,11 @@ const cta = site.headerCta;
 
 {
   cta && (
-    <aside class="book-bar is-hidden" aria-label="Book a call" data-book-bar>
+    <div class="book-bar is-hidden" data-book-bar>
       <a class="btn btn-primary" href={cta.href}>
         {cta.label}
       </a>
-    </aside>
+    </div>
   )
 }
 

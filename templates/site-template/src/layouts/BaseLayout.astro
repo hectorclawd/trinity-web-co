@@ -46,6 +46,10 @@ const callBar = site.features.callBar !== false && Boolean(site.phone);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={site.seo.ogImageAlt ?? site.name} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />

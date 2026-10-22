@@ -21,7 +21,7 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
    - Premium: keep everything; delete the sample post once real posts exist.
    - Keep the page count within the package limit (4 / 7 / 12).
 5. Brand: update `src/styles/tokens.css` (colors, fonts) from the intake's brand answers. Swap the `@fontsource-variable` package if the font changes (`npm install`, update the import). Check every text and button color pair for 4.5:1 contrast.
-6. Images: put the client's photos in `src/assets/` (keep each under ~2,000px; Astro outputs WebP), update the imports in `site.ts`, and write real alt text. Replace `public/favicon.svg` and `public/og-image.jpg` (1200×630).
+6. Images: put the client's photos in `src/assets/` (keep each under ~2,000px; Astro outputs WebP), update the imports in `site.ts`, and write real alt text. Replace `public/favicon.svg` and `public/og-image.jpg` (1200×630), and describe the new share image in `seo.ogImageAlt`.
 7. If there's a booking embed or another iframe, add its host to `frame-src` in `vercel.json`. If the form uses Web3Forms, it's already allowed.
 8. Run `npm run check` and `npm run build`. Fix every error.
 9. Vercel, previews only until launch day. A deploy to a project with **no deployments** always goes to production, even with `--target=preview` (seen on every new project so far). Once any deployment exists, `--target=preview` is honored. So set up a new project like this:

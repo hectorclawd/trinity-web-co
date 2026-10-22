@@ -115,8 +115,8 @@ const cta =
 
   if (toggle && nav) {
     const setOpen = (open: boolean) => {
+      // The label stays "Menu"; aria-expanded tells screen readers whether it's open
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.textContent = open ? 'Close' : 'Menu';
       nav.classList.toggle('is-open', open);
     };
     toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));

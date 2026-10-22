@@ -126,7 +126,8 @@ export interface SiteConfig {
   headerCta?: Link;
   /** Logo mark shown before the name in the header, e.g. "/logo-mark.svg" */
   logo?: { src: string; width: number; height: number };
-  seo: { title: string; description: string; ogImage: string };
+  /** ogImageAlt describes the share image for screen readers (og:image:alt); defaults to the business name */
+  seo: { title: string; description: string; ogImage: string; ogImageAlt?: string };
 
   /** Turn sections on or off to match the package (playbook section 2) */
   features: {
