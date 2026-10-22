@@ -1,0 +1,104 @@
+---
+// The How it works clip: a drawn phone runs through the five steps as you scroll; it never plays
+// on its own. Made with the Instagram kit (business/marketing/instagram/site-build/, see
+// HANDOFF.md), encoded with a keyframe every 2 frames so seeking stays smooth. Screen readers
+// skip it: the steps beside it already say everything it shows. With reduced motion or without
+// JavaScript it shows its poster, the finished state, and the video never downloads.
+---
+
+<div class="build-clip" data-build-clip>
+  <video
+    src="/media/build-clip.mp4"
+    poster="/media/build-clip-poster.webp"
+    width="628"
+    height="1166"
+    muted
+    playsinline
+    disablepictureinpicture
+    preload="none"
+    aria-hidden="true"
+    tabindex="-1"
+  ></video>
+</div>
+
+<style>
+  .build-clip {
+    width: min(100%, 22rem);
+    margin: 2.5rem auto 0;
+  }
+  .build-clip video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  /* Wide screens: the clip stays in view beside the steps while they scroll past */
+  @media (min-width: 68rem) {
+    .build-clip {
+      position: sticky;
+      top: 6rem;
+      width: 100%;
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-build-clip]');
+  const video = root?.querySelector('video');
+  const steps = document.querySelector<HTMLElement>('#process .steps');
+
+  if (root && video && steps && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let ready = false;
+    let queued = false;
+
+    // Beside the steps (wide screens), the clip follows the reader down the list. Above them
+    // (phones), it plays as the clip itself crosses the screen.
+    const progress = () => {
+      const vh = window.innerHeight;
+      if (getComputedStyle(root).position === 'sticky') {
+        const r = steps.getBoundingClientRect();
+        return (vh * 0.55 - r.top) / r.height;
+      }
+      const r = root.getBoundingClientRect();
+      return (vh - r.top) / (vh + r.height);
+    };
+    const update = () => {
+      queued = false;
+      if (!ready) return;
+      const p = Math.min(1, Math.max(0, progress()));
+      const time = p * (video.duration - 0.05);
+      if (Math.abs(video.currentTime - time) > 0.02) video.currentTime = time;
+    };
+    const queue = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    };
+
+    video.addEventListener(
+      'loadedmetadata',
+      () => {
+        ready = true;
+        queue();
+      },
+      { once: true },
+    );
+    // Load the video only when How it works is close
+    new IntersectionObserver(
+      (entries, observer) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        video.preload = 'auto';
+        video.load();
+        // iPhones fetch video data only after play(); a muted play is allowed, and it pauses at once
+        video
+          .play()
+          .then(() => video.pause())
+          .catch(() => {});
+      },
+      { rootMargin: '800px 0px' },
+    ).observe(root);
+    window.addEventListener('scroll', queue, { passive: true });
+    window.addEventListener('resize', queue);
+  }
+</script>
