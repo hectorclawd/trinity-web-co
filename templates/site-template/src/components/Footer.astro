@@ -36,7 +36,7 @@ const social = site.social.filter((link) => !isPlaceholder(link.href));
 
     <p class="text-sm sm:col-span-2">
       &copy; {year} {(site.legalName ?? site.name).replace(/\.$/, '')}.{' '}
-      <a class="text-white underline" href="/privacy/">Privacy</a>
+      <a class="inline-flex min-h-11 items-center text-white underline" href="/privacy/">Privacy</a>
       {
         site.credit && (
           <span>
