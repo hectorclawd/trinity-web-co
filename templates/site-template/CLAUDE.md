@@ -23,6 +23,7 @@ Built and maintained by Trinity Web Co. (Hector). Follow the Trinity Web Co. pla
 - **Never invent reviews, testimonials, customers, awards, licenses or stats.** Use only what the client provided, word for word, attributed as they gave it.
 - No medical, legal or financial claims. No "guaranteed" results or rankings.
 - No stock photos of fake staff or fake "our team" shots. Stock is fine for generic scenes (a house, a tool, a car).
+- No AI-made photos of the client's products, food or work. AI-made general scenes only with the owner's written OK (playbook decisions log, 2026-10-21).
 - Don't hard-code business facts in pages or components. Every fact lives in `src/content/site.ts`.
 - Don't add third-party widgets or scripts (review widgets, chat bubbles, trackers) without Hector's OK. They slow the site and break the CSP.
 - Don't push to `main` without Hector reviewing the diff.

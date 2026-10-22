@@ -3,6 +3,9 @@ Thumbs.db
 node_modules/
 .playwright-cli/
 .wrangler/
+# Taste design skill: installed from its repo (playbook §5, design toolkit), not committed
+.claude/skills/design-taste-frontend/
+.taste-skill/
 .env
 
 # Client site repos live in their own git repos (trinitywebco-sites org)

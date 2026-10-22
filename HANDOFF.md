@@ -109,6 +109,15 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **Ownership wording (Hector, 2026-10-20):** posts, the playbook (§6, decisions log), the agreement (6.6) and the scope template say the client owns the domain, Google Business Profile and Google Search Console. Visitor stats live in Vercel Web Analytics on Trinity's team and reach the client in the monthly report. C6's caption must name the one-time $150 handoff fee.
 - **Render notes:** `scripts/render.mjs` takes `--split N` (story sets: one MP4 and PNG per frame) and `--no-sync` (run `npm run sync` once, then several renders at once). The kit's `check` only audits a folder's `index.html`, so copy the kit's `brand`, `compositions`, `hyperframes.json`, `meta.json`, `package.json` and `frame.md` into a scratch folder with the piece as `index.html`. Opening a composition's HTML file straight in a browser shows a blank page; look at the renders.
 
+## Site build clip and the design guide (2026-10-21)
+
+- **The guide:** "Cooked or Cracked: 5 free repos that make Claude design" (Google Drive, `extra/`). What we took from it is in playbook §5 ("Design toolkit and build recipe") and §7 ("Private preview for a shop with no website"), with two decisions-log rows: private previews are allowed, and AI images only for general scenes with the owner's OK. Its prices and Cloudflare hosting weren't adopted. Taste is the one tool not installed yet (auto mode blocked it; Hector runs the line in `CHECKLIST.md`), and it's git-ignored once installed.
+- **The clip:** How it works shows a drawn phone running through the five steps (a text thread, the proposal, the demo page filling in over its sketch, launch, a care text). It's scrubbed by scroll and never plays on its own. Screen readers skip it. With reduced motion or no JavaScript it shows its poster, and the video loads only when the section is close.
+- **Re-rendering it** (after changing `site-build/site-build.html` or the How it works steps, which it mirrors): from `business/marketing/instagram/`, `HYPERFRAMES_CLI="<plugin launcher>" node scripts/render.mjs site-build/site-build.html --lang en`. Then, from the repo root, encode it cropped to the phone:
+  - `ffmpeg -i business/marketing/instagram/out/site-build/site-build-en.mp4 -vf "crop=628:1166:226:92" -c:v libx264 -preset slow -crf 32 -g 2 -keyint_min 2 -sc_threshold 0 -pix_fmt yuv420p -movflags +faststart -an site/public/media/build-clip.mp4`
+  - and the poster: `ffmpeg -sseof -0.05 -i <same input> -vf "crop=628:1166:226:92" -frames:v 1 -c:v libwebp -quality 82 site/public/media/build-clip-poster.webp`
+  - That gives about 1.25 MB of video and a 15 KB poster. The keyframe every 2 frames is what keeps scrubbing smooth.
+
 ## `motion-studio` (moved out of this repo on 2026-10-18)
 
 - **Where:** `C:\Users\hlmpr\projects\motion-studio`. Until 2026-10-18 it sat untracked inside this repo as `motion-studio/`; Hector chose to move it out.
