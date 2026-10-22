@@ -40,6 +40,8 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-15 | Instagram content speaks to small restaurants and other small businesses as well as the two default niches, in English and Spanish. Outreach stays on the §1 default niches | Hector wants the account to reach any small local business; content costs nothing per niche, while outreach time is limited | After the first 20 posts, or when a restaurant asks for a quote |
 | 2026-10-20 | The client owns the domain, Google Business Profile and Google Search Console; "analytics" is no longer on the ownership list | Section 6 said the client owns their analytics, but section 5 runs Vercel Web Analytics on Trinity's own Vercel team, which the client can't own. Posts and contracts can't promise it | If a client asks for an analytics account of their own, or at the attorney review |
 | 2026-10-21 | Keep the name Trinity Web Co.; the domain is trinitywebdallas.com, and the business email hello@trinitywebdallas.com | trinitywebco.com belongs to someone else. Keeping the name keeps the logo, @trinitywebco and the Instagram posts and voiceovers; the domain change is a find-and-replace | If a "Trinity Web" business launches in DFW, or the SOSDirect or USPTO search turns up a conflict |
+| 2026-10-21 | Private previews for a real shop with no website are allowed as an outreach tactic, under the rules in section 7: private, noindex, shown in person, deleted after a no | A shop sees its own site, not a stranger's demo; the design guide's case study built one in an evening | After 10 previews, or the first time an owner objects |
+| 2026-10-21 | AI-made images on client sites only for general scenes, with the owner's written OK; never as photos of their products, food or work | Customers should see what they'll actually get; AI product photos would misrepresent a real business | At the attorney review, or when a client asks for AI product photos |
 
 ### Changelog
 
@@ -69,6 +71,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-15 | §6: Stripe cost now includes the ACH fee, the 0.4% Invoicing fee and the 0.7% Billing fee (checked on stripe.com/pricing 2026-10-14); links to `business/stripe-setup.md` |
 | 2026-10-20 | §6: domain and hosting ownership policy names Google Search Console instead of "analytics"; the agreement (6.6) and scope template match |
 | 2026-10-21 | Decisions log: the business keeps its name, on trinitywebdallas.com |
+| 2026-10-21 | §5: design toolkit and build recipe (Taste, Playwright CLI, Impeccable, optional DESIGN.md and img2threejs) and the scroll-played clip; §7: private previews for shops with no website; decisions log: previews and AI images |
 
 ## 1. Business model
 
@@ -340,6 +343,31 @@ Build every client site from one starter template where all business facts live 
 
 **Default plan:** Claude Pro ($20/mo) to start. Move to Max (about $100/mo) once you regularly hit usage limits mid-build, usually around client 4 or 5.
 
+### Design toolkit and build recipe
+
+Adapted from the design guide "Cooked or Cracked: 5 free repos that make Claude design" (Henry Chua, tested 27 Sep 2026; a copy is in Google Drive, `extra/`). Its prices and its hosting (Cloudflare Pages) don't apply here: prices are sections 2 and 3, and hosting is Vercel Pro.
+
+**The tools (all free).** Start a new Claude Code session after installing one, so Claude loads it. Where a tool's rules disagree with the client's brand or the template, the brand and the template win.
+
+| Tool | What it does | When to use it | Install |
+| --- | --- | --- | --- |
+| Taste (`design-taste-frontend`) | Design rules that stop the "AI look"; deals a researched art direction; finds openly licensed photos of the client's world, with credits | Every build | `npx skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -y` (reviewed 2026-10-21: MIT licence; its scripts only search open image archives) |
+| Playwright CLI | Opens the site in a real browser, clicks everything and takes screenshots | Every build, before anyone sees it | `npm install -g @playwright/cli` (installed) |
+| Impeccable | Lists design problems on a finished page; `critique`, `audit`, `polish` | Every build, after version 1 and before launch | Claude Code plugin (installed) |
+| Awesome DESIGN.md | Style files copied from big brands' sites | Only for a client with no look of their own; keep their colors | One folder from `github.com/VoltAgent/awesome-design-md` |
+| img2threejs | Rebuilds a photographed object as a 3D model | Only for a product customers would spin round (a sneaker, a bottle); never food | `github.com/img2threejs/img2threejs` (Python 3.10+) |
+
+**The build, step by step** (inside the section 4 workflow, starting from the template):
+
+1. Fill `site.ts` from the intake. Ask Claude to build version 1 from the template, "using the taste skill for every design decision", with colors taken from the client's logo.
+2. Photos, in this order: the client's own; then openly licensed photos of their street, city or trade, with credits (Taste's archive search); AI-made images only for general scenes (a street, a texture), with the owner's written OK, and never as photos of their products, food or work (decisions log, 2026-10-21).
+3. One signature scroll moment per site, tied to what the business does. Not a fade-up on every section.
+4. Playwright: click every link and button, screenshot every section at 390px and 1440px and as an iPhone, and fix what's broken.
+5. `/impeccable audit`. Check each finding before fixing it (many are false alarms), then run `/impeccable polish`.
+6. The pre-launch QA checklist below, then show the owner.
+
+**A scroll-played clip** (the guide's signature trick, and Trinity's own How it works section): render a short clip with the HyperFrames kit or from the client's own footage, encode it with a keyframe every 2 frames so seeking stays smooth, and let the page set the video's time from the scroll. The working component is `site/src/components/site/BuildClip.astro`; copy it into the template the first time a client site uses one.
+
 ### Starter template structure
 
 ```
@@ -585,6 +613,16 @@ Best for salons, barbers, detailers and trainers who post often. Follow them and
 - Two follow-ups maximum, then stop. Honor every "no" and opt-out immediately.
 - Emails include your real name, business name, a mailing address (PO box or virtual mailbox) and a way to opt out.
 - Never claim results you haven't produced ("I'll get you on page 1"). Say what you'll build and how you'll measure it.
+
+### Private preview for a shop with no website
+
+From the same design guide (section 5, design toolkit; decisions log, 2026-10-21). For a shop that clearly deserves a site, a private preview lets the owner see their own site before they hire you.
+
+- **Pick:** 4.5 stars or more, 150+ Google reviews, no website (search the name to be sure), and one clear product or service.
+- **Build it in an evening from the template:** their real name, hours and services from their Google profile, colors from their logo, and openly licensed or generic photos. No AI photos of their products, food or work, no reviews copied onto it, and no prices you haven't checked with them.
+- **Keep it private:** a Vercel preview behind the login, noindex, never linked or posted anywhere, never on a public address.
+- **Show it in person** on your phone (walk-in script above). Then quote at the section 2 prices, and build nothing more until they've signed.
+- **If they say no,** delete the preview and its repo that week.
 
 ## 8. Pricing and income math
 

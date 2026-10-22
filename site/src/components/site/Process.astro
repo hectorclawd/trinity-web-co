@@ -2,6 +2,7 @@
 // The client process is a real sequence, so the steps are numbered and joined by a
 // river-green connector. Every step is plain HTML; the connector's draw-in is CSS only.
 import { offer } from '../../content/site';
+import BuildClip from './BuildClip.astro';
 
 const { heading, steps } = offer.process;
 ---
@@ -9,16 +10,19 @@ const { heading, steps } = offer.process;
 <section id="process" class="section process" aria-labelledby="process-title">
   <div class="wrap">
     <h2 id="process-title">{heading}</h2>
-    <ol class="steps">
-      {
-        steps.map((step) => (
-          <li>
-            <h3>{step.title}</h3>
-            <p>{step.text}</p>
-          </li>
-        ))
-      }
-    </ol>
+    <div class="process-body">
+      <ol class="steps">
+        {
+          steps.map((step) => (
+            <li>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <BuildClip />
+    </div>
   </div>
 </section>
 
@@ -76,52 +80,48 @@ const { heading, steps } = offer.process;
     }
   }
 
-  /* Wide screens: one row of five steps with a horizontal connector */
+  /* A vertical timeline at every width, so no column gets cramped */
+  .steps {
+    max-width: 48rem;
+  }
+  .steps li {
+    padding: 0 0 2.25rem calc(var(--marker) + 1.4rem);
+  }
+  .steps li:last-child {
+    padding-bottom: 0;
+  }
+  .steps li:not(:last-child)::after {
+    --connect-from: scaleY(0);
+    top: calc(var(--marker) + 0.4rem);
+    bottom: 0.4rem;
+    left: calc(var(--marker) / 2 - 1px);
+    width: 2px;
+    transform-origin: center top;
+  }
+  .steps h3 {
+    padding-top: 0.45rem;
+  }
+
+  /* Wide screens: the steps on the left, the build clip beside them (BuildClip.astro keeps it
+     in view); more room between steps gives the clip scroll to play through */
   @media (min-width: 68rem) {
-    .steps {
+    .process-body {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 2rem;
+      grid-template-columns: minmax(0, 1fr) 22rem;
+      align-items: start;
+      column-gap: 4rem;
+      margin-top: 3rem;
+    }
+    .process-body .steps {
+      margin-top: 0;
     }
     .steps li {
-      padding-top: 3.75rem;
-    }
-    .steps li:not(:last-child)::after {
-      --connect-from: scaleX(0);
-      top: calc(var(--marker) / 2 - 1px);
-      left: calc(var(--marker) + 0.5rem);
-      right: calc(-2rem + 0.5rem);
-      height: 2px;
-      transform-origin: left center;
+      padding-bottom: 3.5rem;
     }
   }
 
-  /* Narrower screens: a vertical timeline, so no column gets cramped */
-  @media (max-width: 67.99rem) {
-    .steps {
-      max-width: 48rem;
-    }
-    .steps li {
-      padding: 0 0 2.25rem calc(var(--marker) + 1.4rem);
-    }
-    .steps li:last-child {
-      padding-bottom: 0;
-    }
-    .steps li:not(:last-child)::after {
-      --connect-from: scaleY(0);
-      top: calc(var(--marker) + 0.4rem);
-      bottom: 0.4rem;
-      left: calc(var(--marker) / 2 - 1px);
-      width: 2px;
-      transform-origin: center top;
-    }
-    .steps h3 {
-      padding-top: 0.45rem;
-    }
-  }
-
-  /* Tablets: title beside its text, to use the width without stretching lines */
-  @media (min-width: 44rem) and (max-width: 67.99rem) {
+  /* Tablets and up: title beside its text, to use the width without stretching lines */
+  @media (min-width: 44rem) {
     .steps li {
       display: grid;
       grid-template-columns: minmax(10rem, 13rem) 1fr;

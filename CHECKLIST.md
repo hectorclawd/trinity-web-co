@@ -50,6 +50,8 @@ In launch order. Items in the same group can run in parallel.
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)
 
 **Site content**
+- [x] How it works build clip: a drawn phone runs through the five steps as you scroll, from the design guide's scroll-played clip (2026-10-21, branch `build-clip`, for Hector's OK). Made with the Instagram kit (`business/marketing/instagram/site-build/`), shown by `site/src/components/site/BuildClip.astro`; re-render steps in HANDOFF.md
+- [ ] Install the Taste design skill (auto mode blocks Claude from installing it): in PowerShell from the repo root, `npx skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -y`, then start a new session (playbook §5, design toolkit)
 - [x] Short personal story for the About section (2026-10-14: Hector's own copy, merged 62ce5b4)
 - [ ] Headshot for the About section: save it as `site/src/assets/headshot.jpg`: JPG, not HEIC (iPhone: Settings → Camera → Formats → Most Compatible), portrait 4:5, at least 1200 × 1500 px, head and shoulders with room to crop. Don't commit it: Claude adds it, plus a photo slot in the About section, on a new branch and sends a preview for Hector's OK before merging
 - [x] Review the `faq-form-process` preview, then merge it into `main` (built 2026-10-18): two optional contact form questions (what the site should get customers to do, when to go live), FAQs on revision rounds, Spanish and online stores, the sign-and-pay step under How it works, and visitor stats in Starter (2026-10-18: reviewed and merged, 55211e6; branch deleted)
