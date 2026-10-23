@@ -1,10 +1,14 @@
 ---
 // The How it works clip: a drawn phone runs through the five steps as you scroll; it never plays
 // on its own. With motion on, the section pins (Process.astro): the page holds still while the
-// scroll plays the clip and marks the step it shows, then the page moves on. Made with the Instagram kit (business/marketing/instagram/site-build/, see
-// HANDOFF.md), encoded with a keyframe every 2 frames so seeking stays smooth. Screen readers
-// skip it: the steps beside it already say everything it shows. With reduced motion or without
-// JavaScript it shows its poster, the finished state, and the video never downloads.
+// scroll plays the clip and marks the step it shows, then the page moves on. Made with the
+// Instagram kit (business/marketing/instagram/site-build/, see HANDOFF.md), encoded with a
+// keyframe every 2 frames so seeking stays smooth. The scrub follows the scroll-craft skill's
+// engine: the clip runs across the stage's whole time on screen with a settle in the middle, the
+// playhead eases toward the scroll, seeks are rate-limited, and the poster holds until a real
+// frame has painted. Screen readers skip it: the steps beside it already say everything it
+// shows. With reduced motion or without JavaScript it shows its poster, the finished state, and
+// the video never downloads.
 ---
 
 <div class="build-clip" data-build-clip>
@@ -20,10 +24,12 @@
     aria-hidden="true"
     tabindex="-1"
   ></video>
+  <img class="build-clip-poster" src="/media/build-clip-poster.webp" width="628" height="1166" alt="" />
 </div>
 
 <style>
   .build-clip {
+    position: relative;
     width: min(100%, 22rem);
     margin: 2.5rem auto 0;
   }
@@ -31,6 +37,18 @@
     display: block;
     width: 100%;
     height: auto;
+  }
+  /* Holds the frame until the video has painted one: iPhones show a seeked but never-played
+     video as blank */
+  .build-clip-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s;
+  }
+  .build-clip.has-frame .build-clip-poster {
+    opacity: 0;
   }
   /* Wide screens: the clip stays in view beside the steps while they scroll past */
   @media (min-width: 68rem) {
@@ -44,8 +62,8 @@
   /* Pinned (see Process.astro): the whole stage holds still, so the clip sizes to its height,
      leaving room under it on phones for the step it is showing */
   :global(.process.is-pinned) .build-clip {
-    position: static;
-    width: auto;
+    position: relative;
+    width: fit-content;
     margin: 0 auto;
   }
   :global(.process.is-pinned) .build-clip video {
@@ -68,8 +86,6 @@
   const stage = track?.firstElementChild as HTMLElement | null;
 
   if (root && video && section && steps && track && stage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let ready = false;
-    let queued = false;
     const items = [...steps.children];
     // Pin only where the stage fits: not on a phone turned sideways or a very short window
     const tallEnough = window.matchMedia('(min-height: 34rem)');
@@ -77,63 +93,97 @@
     setPinned();
     tallEnough.addEventListener('change', setPinned);
 
-    // Pinned: how far the stage has stuck through the track. Otherwise, beside the steps (wide
-    // screens) the clip follows the reader down the list; above them (phones), it plays as the
-    // clip itself crosses the screen.
+    // scroll-craft's dwell remap: quick at the edges, a settle in the middle. 0.35 lands the
+    // fast part on the slides in and out and the slow part inside the pin.
+    const DWELL = 0.35;
+    const dwell = (x: number) => (1 - DWELL) * x + DWELL * (4 * (x - 0.5) ** 3 + 0.5);
+    const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
+
+    // Pinned: the clip runs across the stage's whole time on screen, from the moment the track
+    // enters at the bottom to the moment the stage leaves under the header, so it never sits
+    // frozen while the page slides it in or out. Otherwise, beside the steps (wide screens) the
+    // clip follows the reader down the list; above them (phones), it plays as it crosses the screen.
     const progress = () => {
       const vh = window.innerHeight;
       if (section.classList.contains('is-pinned')) {
         const t = track.getBoundingClientRect();
-        const s = stage.getBoundingClientRect();
-        return (s.top - t.top) / (t.height - s.height);
+        const pinTop = parseFloat(getComputedStyle(stage).top) || 0;
+        return dwell(clamp01((vh - t.top) / (t.height + vh - pinTop)));
       }
       if (getComputedStyle(root).position === 'sticky') {
         const r = steps.getBoundingClientRect();
-        return (vh * 0.55 - r.top) / r.height;
+        return clamp01((vh * 0.55 - r.top) / r.height);
       }
       const r = root.getBoundingClientRect();
-      return (vh - r.top) / (vh + r.height);
+      return clamp01((vh - r.top) / (vh + r.height));
     };
-    // The playhead eases toward the scroll position (scroll-craft's scrub smoothing: 18% of the
-    // gap per frame), so a trackpad flick glides instead of jumping frames
-    const EASE = 0.18;
-    let shown = 0;
-    const update = () => {
+
+    // Scroll only sets a target; the step on screen follows it straight away
+    let target = 0;
+    let queued = false;
+    const read = () => {
       queued = false;
-      const p = Math.min(1, Math.max(0, progress()));
+      target = progress();
       // The clip gives each step an equal share, so the step on screen is the matching slice
-      const current = Math.min(items.length - 1, Math.floor(p * items.length));
+      const current = Math.min(items.length - 1, Math.floor(target * items.length));
       items.forEach((item, i) => {
         item.classList.toggle('is-active', i === current);
         item.classList.toggle('is-done', i < current);
       });
-      if (!ready) return;
-      const target = p * (video.duration - 0.05);
-      shown += (target - shown) * EASE;
-      if (Math.abs(target - shown) < 0.01) shown = target;
-      else queue();
-      if (Math.abs(video.currentTime - shown) > 0.02) video.currentTime = shown;
     };
     const queue = () => {
       if (queued) return;
       queued = true;
-      requestAnimationFrame(update);
+      requestAnimationFrame(read);
     };
 
-    video.addEventListener(
-      'loadedmetadata',
-      () => {
-        ready = true;
-        queue();
-      },
-      { once: true },
-    );
-    // iPhones decode a muted video only after play(); a muted play is allowed, and it pauses at once
+    // The playhead eases toward the target (18% of the gap per frame), so a trackpad flick
+    // glides. A seek smaller than the deadband shows nothing and costs a phone a decode, and no
+    // seek is asked for while the last one is still resolving (one stuck past 700ms is re-sent).
+    const EASE = 0.18;
+    const DEADBAND = window.matchMedia('(pointer: coarse)').matches ? 0.02 : 0.008;
+    let shown = 0;
+    let stuckSince = 0;
+    const tick = () => {
+      requestAnimationFrame(tick);
+      if (!(video.duration > 0)) return;
+      if (video.seeking) {
+        const now = performance.now();
+        if (!stuckSince) stuckSince = now;
+        else if (now - stuckSince > 700) {
+          stuckSince = now;
+          video.currentTime += 0.001;
+        }
+        return;
+      }
+      stuckSince = 0;
+      if (Math.abs(target - shown) < 0.0005) return;
+      shown += (target - shown) * EASE;
+      const time = shown * (video.duration - 0.05);
+      if (Math.abs(video.currentTime - time) > DEADBAND) video.currentTime = time;
+    };
+
+    // iPhones decode a muted video only after play(); a muted play is allowed, and it pauses at
+    // once. In Low Power Mode it isn't, so the reader's first touch tries again.
     const prime = () =>
       video
         .play()
         .then(() => video.pause())
         .catch(() => {});
+    window.addEventListener('pointerdown', prime, { once: true, passive: true });
+    // The poster lifts once a real frame is up, or after 2.5s in case a seek never reports back
+    const reveal = () => root.classList.add('has-frame');
+    video.addEventListener(
+      'loadedmetadata',
+      () => {
+        video.currentTime = Math.max(shown * video.duration, 0.001);
+        video.addEventListener('seeked', reveal, { once: true });
+        setTimeout(reveal, 2500);
+        requestAnimationFrame(tick);
+      },
+      { once: true },
+    );
+
     // Load the video only when How it works is close. It comes down whole, as scroll-craft does,
     // so every seek is local (Safari seeks a streamed video slowly); if that fails, it streams.
     new IntersectionObserver(
@@ -155,6 +205,7 @@
           .then((blob) => {
             // If the browser refuses the local copy, stream the file instead
             video.addEventListener('error', stream, { once: true });
+            video.preload = 'auto';
             video.src = URL.createObjectURL(blob);
             prime();
           })
