@@ -171,7 +171,8 @@ const { heading, steps } = offer.process;
     --stage-h: calc(100svh - var(--pin-top) - var(--pin-bottom));
   }
   .process.is-pinned .process-track {
-    height: calc(var(--stage-h) + 250svh);
+    /* A long pin: about a screen and a bit of scrolling per step, so the clip plays slowly */
+    height: calc(var(--stage-h) + 550svh);
     margin-top: 1.5rem;
   }
   .process.is-pinned .process-stage {
