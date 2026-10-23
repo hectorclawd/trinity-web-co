@@ -1,6 +1,7 @@
 ---
 // The How it works clip: a drawn phone runs through the five steps as you scroll; it never plays
-// on its own. Made with the Instagram kit (business/marketing/instagram/site-build/, see
+// on its own. With motion on, the section pins (Process.astro): the page holds still while the
+// scroll plays the clip and marks the step it shows, then the page moves on. Made with the Instagram kit (business/marketing/instagram/site-build/, see
 // HANDOFF.md), encoded with a keyframe every 2 frames so seeking stays smooth. Screen readers
 // skip it: the steps beside it already say everything it shows. With reduced motion or without
 // JavaScript it shows its poster, the finished state, and the video never downloads.
@@ -40,21 +41,52 @@
       margin: 0;
     }
   }
+  /* Pinned (see Process.astro): the whole stage holds still, so the clip sizes to its height,
+     leaving room under it on phones for the step it is showing */
+  :global(.process.is-pinned) .build-clip {
+    position: static;
+    width: auto;
+    margin: 0 auto;
+  }
+  :global(.process.is-pinned) .build-clip video {
+    width: auto;
+    height: max(15rem, calc(var(--stage-h) - 12rem));
+  }
+  @media (min-width: 68rem) {
+    :global(.process.is-pinned) .build-clip video {
+      height: min(41rem, calc(var(--stage-h) - 3rem));
+    }
+  }
 </style>
 
 <script>
   const root = document.querySelector<HTMLElement>('[data-build-clip]');
   const video = root?.querySelector('video');
+  const section = document.getElementById('process');
   const steps = document.querySelector<HTMLElement>('#process .steps');
+  const track = document.querySelector<HTMLElement>('[data-process-track]');
+  const stage = track?.firstElementChild as HTMLElement | null;
 
-  if (root && video && steps && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (root && video && section && steps && track && stage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let ready = false;
     let queued = false;
+    const items = [...steps.children];
+    // Pin only where the stage fits: not on a phone turned sideways or a very short window
+    const tallEnough = window.matchMedia('(min-height: 34rem)');
+    const setPinned = () => section.classList.toggle('is-pinned', tallEnough.matches);
+    setPinned();
+    tallEnough.addEventListener('change', setPinned);
 
-    // Beside the steps (wide screens), the clip follows the reader down the list. Above them
-    // (phones), it plays as the clip itself crosses the screen.
+    // Pinned: how far the stage has stuck through the track. Otherwise, beside the steps (wide
+    // screens) the clip follows the reader down the list; above them (phones), it plays as the
+    // clip itself crosses the screen.
     const progress = () => {
       const vh = window.innerHeight;
+      if (section.classList.contains('is-pinned')) {
+        const t = track.getBoundingClientRect();
+        const s = stage.getBoundingClientRect();
+        return (s.top - t.top) / (t.height - s.height);
+      }
       if (getComputedStyle(root).position === 'sticky') {
         const r = steps.getBoundingClientRect();
         return (vh * 0.55 - r.top) / r.height;
@@ -64,8 +96,14 @@
     };
     const update = () => {
       queued = false;
-      if (!ready) return;
       const p = Math.min(1, Math.max(0, progress()));
+      // The clip gives each step an equal share, so the step on screen is the matching slice
+      const current = Math.min(items.length - 1, Math.floor(p * items.length));
+      items.forEach((item, i) => {
+        item.classList.toggle('is-active', i === current);
+        item.classList.toggle('is-done', i < current);
+      });
+      if (!ready) return;
       const time = p * (video.duration - 0.05);
       if (Math.abs(video.currentTime - time) > 0.02) video.currentTime = time;
     };
@@ -100,5 +138,6 @@
     ).observe(root);
     window.addEventListener('scroll', queue, { passive: true });
     window.addEventListener('resize', queue);
+    queue();
   }
 </script>
