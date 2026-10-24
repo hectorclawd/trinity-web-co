@@ -52,6 +52,20 @@ const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in perso
       <div>
         <h2 id="contact-title">{offer.contact.heading}</h2>
         <p class="mt-5 max-w-md">{offer.contact.text}</p>
+        {
+          site.phone && (
+            <p class="mt-5 max-w-md font-semibold">
+              {site.phone.textable ? 'Rather call or text?' : 'Rather call?'}{' '}
+              <a class="inline-flex min-h-11 items-center whitespace-nowrap" href={`tel:${site.phone.e164}`}>{site.phone.display}</a>
+              {site.phone.textable && (
+                <>
+                  {' '}·{' '}
+                  <a class="inline-flex min-h-11 items-center whitespace-nowrap" href={`sms:${site.phone.e164}`}>Send a text</a>
+                </>
+              )}
+            </p>
+          )
+        }
         <p class="mt-5 max-w-md font-semibold">
           Prefer email?{' '}
           <a href={`mailto:${site.email}`}>{site.email}</a>
