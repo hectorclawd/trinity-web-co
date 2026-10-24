@@ -33,7 +33,7 @@ The pricing section on this build shows the outreach kit's ranges (Launch $750â€
 
 - [x] Checked at 360, 390, 768, 1024 and 1440px wide, no sideways scrolling (2026-10-24)
 - [ ] Tested on a real iPhone (Safari) and a real Android phone (Chrome)
-- [ ] Phone number is a `tel:` link; tap targets at least 44Ã—44px. **The site shows no phone number at all** (contact is the form and email), so there's no `tel:` link to check. Tap targets pass Lighthouse. Hector to decide: add a call/text number, or keep form and email only
+- [x] Phone number is a `tel:` link; tap targets at least 44Ã—44px. (2026-10-24, 3219683: (214) 730-8304 added as `tel:` and `sms:` links in the contact section, 44px tall at 375 wide, plus the footer, 404 page and schema)
 - [x] Main call-to-action visible without scrolling on a phone
 
 ## Speed
@@ -63,7 +63,7 @@ The pricing section on this build shows the outreach kit's ranges (Launch $750â€
 - [ ] Contact and quote forms deliver to the client's inbox (check spam folder too). A test from the preview reached hello@trinitywebdallas.com on 2026-10-21; repeat it on the live site on launch day
 - [x] Spam protection on (honeypot) and a thank-you message or page shows
 - [x] Booking embed loads on mobile and a test booking works. Not applicable: the site has no booking embed (contact is the form)
-- [x] Map shows the right location; click-to-call and directions links work. Not applicable: service-area business with no map, and no phone number (see Mobile)
+- [x] Map shows the right location; click-to-call and directions links work. No map (service-area business); the call and text links point at +12147308304
 
 ## Content and legal
 
@@ -75,7 +75,7 @@ The pricing section on this build shows the outreach kit's ranges (Launch $750â€
 ## Still open before launch
 
 1. **Prices:** put the 2026-10-24 evening prices on the site (queued in another session), then recheck pricing, FAQ and the meta description.
-2. **Phone number:** decide whether the site shows a call or text number.
+2. ~~Phone number~~: done 2026-10-24 (3219683).
 3. **Headshot** for the About section (blocks launch per `CLAUDE.md`).
 
 ## Hector to check by hand
