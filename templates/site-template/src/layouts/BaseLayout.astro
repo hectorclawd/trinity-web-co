@@ -52,7 +52,7 @@ const callBar = site.features.callBar !== false && Boolean(site.phone);
     <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
     <slot name="head" />
   </head>
   <body class:list={{ 'has-call-bar': callBar }}>
