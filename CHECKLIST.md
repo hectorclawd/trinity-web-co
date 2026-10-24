@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-21
+Last updated: 2026-10-23
 
 ## DONE
 
@@ -48,6 +48,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
 - [ ] Attorney review of `business/sales/master-service-agreement.md` and `contract-scope-template.md`, using the 14-point list in `CLAUDE.md`
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)
+- [ ] Bring the sales docs up to the 2026-10-23 prices (Launch $750–$1,250, Growth $1,500–$2,500, one care plan $50–$99/mo, no Premium or founding offer): `price-sheet.html` (before any walk-in), `discovery-call.md`, `master-service-agreement.md`, `contract-scope-template.md`, `stripe-setup.md`, and the held founding-offer Instagram carousel. Then redo playbook §8 income math
 
 **Site content**
 - [x] How it works build clip: a drawn phone runs through the five steps as you scroll, from the design guide's scroll-played clip (2026-10-21, branch `build-clip`, for Hector's OK). Made with the Instagram kit (`business/marketing/instagram/site-build/`), shown by `site/src/components/site/BuildClip.astro`; re-render steps in HANDOFF.md
@@ -67,7 +68,7 @@ In launch order. Items in the same group can run in parallel.
 - [x] Optional forced-colors polish: the checklist progress bar and the How it works connector line disappear, and the founding card loses its panel edge. The text still carries the meaning, so this doesn't block launch (2026-10-13: fixed with system colors in site/ and the template CTABand; checked at 360 and 1440px with high contrast on and off)
 
 **Launch day**
-- [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other
+- [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other. Make `www` the main address (2026-10-23: outreach links to https://www.trinitywebdallas.com), and change `site.url` in `site/src/content/site.ts` to match
 - [ ] Launch day: re-enable production deploys from main. Clear the Ignored Build Step in `trinity-web-co-site` → Settings → Git, set on 2026-10-12 to pause production builds
 - [ ] Swap the demo slot links from preview URLs to production URLs (the links on `main` need a Vercel login): set each slot's `url` in `site/src/content/site.ts` to the demo's production URL and add its mobile `pageSpeed`, before deploying `site/`
 - [ ] Deploy `site/` to production

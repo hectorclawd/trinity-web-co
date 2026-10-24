@@ -162,7 +162,6 @@ export interface StudioOffer {
   niches: { heading: string; items: string[] };
   pricing: { heading: string; lede: string; note: string; packages: Package[] };
   care: { heading: string; intro: string; plans: CarePlan[] };
-  founding: { heading: string; text: string; button: Link };
   demos: { heading: string; lede: string; slots: DemoSlot[] };
   process: { heading: string; steps: { title: string; text: string }[] };
   promises: string[];
