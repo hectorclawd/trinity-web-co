@@ -1,0 +1,561 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- R5 · Demo: Good Oak Barbershop (show the work): a 31-second Reel (1080×1920).
+         0–4.4 s the hook over a scroll of the demo; 4.4–26.9 s the callouts as Chris names each
+         thing; 26.9–31 s the shared end card. Voiceover r5/audio/r5-en.mp3 (Chris, approved).
+         English only for now: add `es` copy and its word timings once Hector has checked the Spanish.
+
+         The demo screenshots in r5/img/ are fresh captures of the demo's built homepage (astro preview,
+         Playwright at 390×844, 3×, reduced motion, JPEG 85). "Open now" reads from the clock, so the
+         capture ran on a fixed clock inside the shop's hours: timezoneId America/Chicago and
+         page.clock.setFixedTime("2026-10-21T14:30:00-05:00"), a Wednesday at 2:30 pm (open 10 to 7).
+         The page showed "Open now · until 7 pm". The call bar stays hidden while the hero's buttons
+         show, so it isn't in the full-page shot; the hero's "Text to hold a chair" button (an sms:
+         link) shows texting instead. The demo has no gallery (features.gallery is off) and Chris
+         doesn't name one, so there's no gallery callout. The search screen is a mock (the demo is
+         noindexed and never shows in Google), so it carries the Example badge.
+         Render: node scripts/render.mjs r5/r5.html --lang en -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-captions,
+      #el-end-card {
+        position: absolute;
+        inset: 0;
+      }
+      .r5-layer {
+        position: absolute;
+        inset: 0;
+      }
+
+      /* The phone, the same as R4's and always drawn whole, never cut by a line. Resting place
+         240–880 × 336–1356, left of the Reel buttons' column; captions sit on the Limestone below.
+         In the hook it sits small under the headline on the same base (it scales from its bottom centre). */
+      .r5-window {
+        position: absolute;
+        inset: 0;
+      }
+      .r5-device {
+        position: absolute;
+        left: 240px;
+        top: 336px;
+        width: 640px;
+        height: 1020px;
+        transform-origin: 50% 100%;
+      }
+      /* A drawn phone: a 3 px Ink ring and a Paper bezel. Flat, no shadow. */
+      .r5-phone {
+        position: absolute;
+        inset: 0;
+        box-sizing: border-box;
+        border: var(--rule) solid var(--ink);
+        border-radius: 56px;
+        background: var(--paper);
+      }
+      /* The window the page scrolls in, 620 × 1000. Its own color shows only in the bounce past
+         the top, where it continues the demo's dark notice bar */
+      .r5-screen {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: 620px;
+        height: 1000px;
+        overflow: hidden;
+        border-radius: 46px;
+        background: #231914;
+      }
+      .r5-page {
+        position: absolute;
+        inset: 0;
+      }
+      .r5-page img {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 620px;
+      }
+      /* Demo badge where R4 has it: top right, its right edge on the phone's (x 880). The search
+         mock's Example badge takes the same spot once the demo is off screen */
+      .r5-badges {
+        position: absolute;
+        right: 200px;
+        top: 260px;
+        display: flex;
+        gap: 16px;
+      }
+      .r5-badges > .twc-badge--example {
+        opacity: 0;
+      }
+
+      /* The search screen (a mock: Example badge). One field, then the demo's own title and
+         description, with no position number, map or stars */
+      /* Its left Line edge shows while it slides in; at rest the edge sits just outside the window */
+      .r5-search {
+        position: absolute;
+        inset: 0 0 0 -3px;
+        box-sizing: border-box;
+        padding: 48px 32px 0;
+        border-left: var(--rule) solid var(--line);
+        background: var(--paper);
+      }
+      .r5-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        height: 104px;
+        box-sizing: border-box;
+        padding: 0 32px;
+        border: var(--rule) solid var(--line);
+        border-radius: var(--radius-pill);
+        background: var(--limestone);
+      }
+      .r5-glass {
+        flex: none;
+        display: block;
+        color: var(--muted);
+      }
+      .r5-query {
+        position: relative;
+        font-size: 42px;
+        line-height: 1;
+        font-weight: 500;
+        font-stretch: 100%;
+        white-space: pre;
+      }
+      .r5-caret {
+        position: absolute;
+        left: 0;
+        top: -6px;
+        width: 4px;
+        height: 54px;
+        border-radius: 2px;
+        background: var(--river);
+      }
+      /* Good Oak's result is one of several: neutral grey placeholders above and below it, with
+         no names, positions or ranking */
+      .r5-results {
+        display: flex;
+        flex-direction: column;
+        gap: 52px;
+        margin-top: 56px;
+      }
+      .r5-ghost {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .r5-ghost i {
+        display: block;
+        height: 22px;
+        border-radius: var(--radius-pill);
+        background: var(--line);
+      }
+      .r5-ghost i:nth-child(1) { width: 34%; }
+      .r5-ghost i:nth-child(2) { width: 82%; height: 30px; }
+      .r5-ghost i:nth-child(4) { width: 64%; }
+      .r5-result {
+        padding-right: 16px;
+      }
+      .r5-result > * {
+        margin: 0;
+      }
+      .r5-site {
+        font-size: 30px;
+        line-height: 1.2;
+        font-weight: 650;
+        font-stretch: 108%;
+        color: var(--muted);
+      }
+      .r5-title {
+        margin-top: 14px;
+        font-size: 38px;
+        line-height: 1.2;
+        font-weight: 680;
+        font-stretch: 104%;
+        letter-spacing: -0.005em;
+        color: var(--river);
+      }
+      .r5-desc {
+        margin-top: 18px;
+        font-size: 32px;
+        line-height: 1.4;
+        font-weight: 450;
+        color: var(--muted);
+        text-wrap: pretty;
+      }
+
+      /* The hook headline, under the badge and above the phone, which peeks up below it */
+      .r5-head {
+        position: absolute;
+        left: var(--pad);
+        top: 352px;
+        margin: 0;
+        max-width: 792px;
+        text-wrap: balance;
+      }
+      /* Callouts as in R4: a short Ink label on one line above the phone, left of the badge, and a
+         River leader down the gutter on the phone's left, then in to the thing Chris names */
+      .r5-label {
+        position: absolute;
+        left: var(--pad);
+        top: 260px;
+        margin: 0;
+        font-size: var(--fs-body);
+        line-height: 1.12;
+        font-weight: 700;
+        font-stretch: 108%;
+        letter-spacing: -0.005em;
+        white-space: nowrap;
+        opacity: 0;
+      }
+      .r5-leaders {
+        position: absolute;
+        left: 0;
+        top: 0;
+        overflow: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="r5" data-start="0" data-duration="31" data-width="1080" data-height="1920">
+      <!-- The voiceover, from the first frame. Spanish will be r5/audio/r5-es.mp3 -->
+      <audio id="r5-vo" src="r5/audio/r5-en.mp3" data-start="0" data-duration="26.285" data-track-index="4" data-volume="1"></audio>
+
+      <!-- The demo on a phone, from the first frame until the end card. The Demo badge rides on it -->
+      <section id="r5-phone" class="clip r5-layer" data-start="0" data-duration="26.9" data-track-index="1">
+        <div class="r5-window">
+        <div class="r5-device" data-layout-allow-overflow>
+          <div class="r5-phone"></div>
+          <div class="r5-screen">
+            <div class="r5-page" data-layout-allow-overflow>
+              <img class="r5-shot" data-layout-allow-overflow src="r5/img/good-oak-home.jpg" alt="The Good Oak Barbershop demo homepage on a phone" />
+              <img class="r5-sticky" src="r5/img/good-oak-header.jpg" alt="" />
+            </div>
+            <div class="r5-search" data-layout-allow-overflow>
+              <div class="r5-field">
+                <svg class="r5-glass" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 20.5 20.5"></path></svg>
+                <span class="r5-query"><span class="r5-caret"></span></span>
+              </div>
+              <div class="r5-results">
+                <div class="r5-ghost"><i></i><i></i><i></i><i></i></div>
+                <div class="r5-result">
+                  <p class="r5-site"></p>
+                  <p class="r5-title"></p>
+                  <p class="r5-desc"></p>
+                </div>
+                <div class="r5-ghost"><i></i><i></i><i></i><i></i></div>
+                <div class="r5-ghost"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="r5-badges"></div>
+      </section>
+
+      <!-- 1 · The hook -->
+      <section id="r5-hook" class="clip r5-layer" data-start="0" data-duration="4.412" data-track-index="2">
+        <h1 class="r5-head t-headline"></h1>
+      </section>
+
+      <!-- 2 · The callouts, from "This is Good Oak Barbershop" until the end card -->
+      <section id="r5-callouts" class="clip r5-layer" data-start="4.412" data-duration="22.488" data-track-index="2">
+        <svg class="r5-leaders" width="1080" height="1920" viewBox="0 0 1080 1920" aria-hidden="true"></svg>
+      </section>
+
+      <div id="el-captions" data-track-kind="captions" data-composition-id="captions" data-composition-src="compositions/captions.html"
+        data-start="0" data-duration="26.9" data-track-index="3" data-width="1080" data-height="1920"></div>
+
+      <!-- 3 · The end card, 0.6 s after Chris's last word -->
+      <div id="el-end-card" data-composition-id="end-card" data-composition-src="compositions/end-card.html"
+        data-start="26.9" data-duration="4.1" data-track-index="5" data-width="1080" data-height="1920"></div>
+    </div>
+    <script>
+      // On-screen words. Captions carry what Chris says; these only add to it. The search result is
+      // the demo's own page title and description (its src/content/site.ts, seo); the name comes from config.ts.
+      const COPY = {
+        en: {
+          hook: "What Instagram can’t do",
+          callouts: {
+            notice: "It says so on every page",
+            prices: "The full price menu",
+            text: "One tap opens a text",
+            openNow: "Updates itself from the hours",
+            search: "In the shop’s own words",
+          },
+          search: {
+            query: "barber near me",
+            title: (name) => `${name} | Haircuts and fades, Oak Cliff`,
+            description: "Walk-in barbershop in Oak Cliff: haircuts, skin fades, beard trims and hot towel shaves. Walk in Tuesday to Saturday, or text to hold a chair.",
+          },
+        },
+      };
+
+      // Chris's word timings (r5/audio/r5-en.words.json), inlined because a composition can't fetch
+      // a local file at render time. [text, start, end] in seconds.
+      const WORDS = {
+        en: [
+          ["Your", 0, 0.197], ["Instagram", 0.232, 0.604], ["is", 0.662, 0.708], ["great.", 0.766, 1.219], ["Here's", 1.544, 1.8], ["what", 1.823, 1.927], ["a", 1.962, 1.985], ["website", 2.032, 2.368],
+          ["can", 2.392, 2.485], ["do", 2.543, 2.624], ["that", 2.682, 2.786], ["Instagram", 2.821, 3.297], ["can't.", 3.355, 3.808], ["This", 4.412, 4.598], ["is", 4.656, 4.772], ["Good", 4.853, 5.027],
+          ["Oak", 5.062, 5.19], ["Barbershop,", 5.271, 5.944], ["a", 6.014, 6.084], ["demo", 6.165, 6.409], ["built", 6.478, 6.664], ["by", 6.711, 6.85], ["Trinity", 6.92, 7.291], ["Web", 7.361, 7.523],
+          ["Co.", 7.593, 7.941], ["It's", 8.638, 8.824], ["not", 8.87, 8.998], ["a", 9.033, 9.056], ["real", 9.102, 9.265], ["shop.", 9.323, 9.81], ["Prices", 10.321, 10.67], ["are", 10.704, 10.797],
+          ["right", 10.832, 10.983], ["there,", 11.006, 11.273], ["no", 11.331, 11.505], ["\"DM", 11.714, 12.365], ["for", 12.516, 12.643], ["prices.\"", 12.701, 13.468], ["Customers", 13.978, 14.443], ["text", 14.501, 14.791],
+          ["to", 14.814, 14.872], ["book.", 14.93, 15.348], ["An", 16.161, 16.312], ["\"Open", 16.335, 16.625], ["now\"", 16.683, 16.846], ["badge", 16.881, 17.148], ["answers", 17.194, 17.519], ["the", 17.566, 17.635],
+          ["first", 17.717, 17.949], ["thing", 17.984, 18.146], ["everyone", 18.216, 18.518], ["wants", 18.553, 18.715], ["to", 18.75, 18.808], ["know.", 18.854, 19.191], ["And", 19.516, 19.644], ["when", 19.667, 19.772],
+          ["someone", 19.806, 20.05], ["searches", 20.085, 20.41], ["\"barber", 20.445, 20.863], ["near", 20.909, 21.025], ["me,\"", 21.072, 21.374], ["Google", 21.618, 21.885], ["has", 21.908, 22.001], ["a", 22.047, 22.07],
+          ["real", 22.152, 22.349], ["page", 22.407, 22.651], ["to", 22.686, 22.744], ["show", 22.79, 22.953], ["them.", 22.999, 23.266], ["DM", 23.777, 24.067], ["us", 24.137, 24.241], ["\"check\"", 24.334, 24.926],
+          ["and", 25.101, 25.228], ["we'll", 25.275, 25.402], ["look", 25.426, 25.553], ["at", 25.588, 25.635], ["yours.", 25.669, 26.285],
+        ],
+      };
+
+      const vars = window.__hyperframes.getVariables();
+      const lang = vars.lang;
+      if (!COPY[lang] || !WORDS[lang]) throw new Error(`R5 has no "${lang}" copy or voiceover yet. Add them once Hector has checked the Spanish.`);
+      const words = WORDS[lang].map(([text, start, end]) => ({ text, start, end }));
+      TWC.init(vars, { transcript: words });
+      const copy = COPY[lang];
+      const motion = TWC.motion;
+      const $ = (s) => document.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+      const SVG = "http://www.w3.org/2000/svg";
+      const svgEl = (tag, attrs, parent) => {
+        const node = document.createElementNS(SVG, tag);
+        for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+        return parent.appendChild(node);
+      };
+
+      /** When Chris starts saying a word (the nth time), so every change lands on its word. */
+      const cue = (word, n = 1) => {
+        const plain = (t) => t.toLowerCase().replace(/[^a-z']/g, "");
+        const hits = words.filter((w) => plain(w.text) === word);
+        if (!hits[n - 1]) throw new Error(`R5: no "${word}" (#${n}) in the voiceover`);
+        return hits[n - 1].start;
+      };
+
+      // The capture, measured in the demo's CSS pixels (a 390 px wide page). SCALE turns them into
+      // frame pixels: the 390 px page fills the 620 px screen (as in R4).
+      const SCREEN = { left: 250, top: 346, width: 620 };
+      const SCALE = SCREEN.width / 390;
+      const SHOT = {
+        stick: 31.25, // the header's top in the page: the demo notice bar above it scrolls away
+        // Vertical centers of what the callouts point at
+        notice: 15.6, // "Demo site: a made-up business."
+        menuRow: 1172, // the first line of the price menu ("Haircut … $30")
+        textButton: 516.8, // "Text to hold a chair" (an sms: link to the shop's number)
+        openNow: 575.2, // "Open now · until 7 pm"
+      };
+      // Where the page sits for each part (how far it's scrolled, in CSS px)
+      const AT = { top: 0, shopfront: 560, about: 1840, menu: 905, hero: 300 };
+
+      // ---------- Build ----------
+      const page = $(".r5-page");
+      const shot = $(".r5-shot");
+      const sticky = $(".r5-sticky");
+      const demoBadge = TWC.badge("demo", lang);
+      const exampleBadge = TWC.badge("example", lang);
+      $(".r5-badges").append(exampleBadge, demoBadge);
+      // The demo's header is sticky: once the notice bar scrolls away, this copy holds it at the top
+      gsap.set(sticky, { opacity: 0 });
+
+      const head = fill($("#r5-hook .r5-head"), copy.hook);
+
+      // Search screen: one span per character, so the query types itself out
+      const search = $(".r5-search");
+      const query = $(".r5-query");
+      const caret = $(".r5-caret");
+      const chars = [...copy.search.query].map((ch) => query.insertBefore(make("span", "", ch), caret));
+      const name = TWC.t("demos.goodOak.name");
+      fill($(".r5-site"), name);
+      fill($(".r5-title"), copy.search.title(name));
+      fill($(".r5-desc"), copy.search.description);
+
+      // Callout labels, one at a time in the band above the phone
+      const callouts = $("#r5-callouts");
+      const leaders = $(".r5-leaders");
+      const labelSize = {};
+      const label = (text) => {
+        const node = callouts.appendChild(make("p", "r5-label", text));
+        if (labelSize[text]) node.style.fontSize = labelSize[text];
+        return node;
+      };
+
+      // ---------- Motion helpers ----------
+      const frameY = (cssY, scroll) => SCREEN.top + (cssY - scroll) * SCALE;
+      const DRAG = { duration: 0.14, share: 0.05 }; // the finger's short drag before it lets go
+      const dragEase = gsap.parseEase("power1.in");
+
+      /** A flick: a short drag, then the page coasts on the momentum spring and stops.
+          The sticky header copy shows whenever the scroll is past the header's own top. */
+      function flick(tl, from, to, at) {
+        const mid = from + (to - from) * DRAG.share;
+        const release = at + DRAG.duration;
+        const { duration, ease } = motion.momentum;
+        tl.fromTo(shot, { y: -from * SCALE }, { y: -mid * SCALE, duration: DRAG.duration, ease: "power1.in", immediateRender: false }, at);
+        tl.fromTo(shot, { y: -mid * SCALE }, { y: -to * SCALE, duration, ease, immediateRender: false }, release);
+        const scrollAt = (t) =>
+          t < release ? from + (mid - from) * dragEase((t - at) / DRAG.duration) : mid + (to - mid) * ease(Math.min(1, (t - release) / duration));
+        let stuck = from >= SHOT.stick;
+        for (let t = at; t <= release + duration + 1e-6; t += 1 / 240) {
+          const now = scrollAt(t) >= SHOT.stick;
+          if (now !== stuck) tl.set(sticky, { opacity: now ? 1 : 0 }, t);
+          stuck = now;
+        }
+        return release + duration;
+      }
+
+      /** Draws a stroke from its measured length on the river-draw curve (as the kit does). */
+      function prepStroke(path) {
+        const len = path.getTotalLength();
+        const hidden = len + 4;
+        path.style.strokeDasharray = `${len} ${hidden + len}`;
+        path.style.strokeDashoffset = hidden;
+        return hidden;
+      }
+
+      /** One callout, drawn like R4's: its label rises above the phone, then a River leader runs
+          down the gutter and in to what Chris is naming, ending on a River dot. */
+      const LEADER = { x: 100, top: 326, end: SCREEN.left + 12, radius: 18 };
+      function callout(tl, { text, cssY, scroll, y: fixedY, at, drawAt, out }) {
+        const node = label(text);
+        const y = fixedY ?? frameY(cssY, scroll);
+        const { x, top, end, radius: r } = LEADER;
+        const g = svgEl("g", {}, leaders);
+        const path = svgEl("path", { d: `M${x} ${top} V${y - r} Q${x} ${y} ${x + r} ${y} H${end}`, fill: "none", stroke: "var(--river)", "stroke-width": 3, "stroke-linecap": "round", "stroke-linejoin": "round" }, g);
+        const dot = svgEl("circle", { cx: end, cy: y, r: 7, fill: "var(--river)" }, g);
+        const hidden = prepStroke(path);
+
+        TWC.rise(tl, node, at, { y: 20, spring: motion.snappy });
+        tl.fromTo(path, { strokeDashoffset: hidden }, { strokeDashoffset: 0, duration: 0.45, ease: motion.draw }, drawAt);
+        tl.fromTo(dot, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, drawAt + 0.4);
+        // Leaves the way it came: the label drops back as it fades, the leader fades with it
+        tl.fromTo([node, g], { opacity: 1 }, { opacity: 0, duration: 0.18, ease: "power1.in", immediateRender: false }, out - 0.2);
+        tl.fromTo(node, { y: 0 }, { y: 20, duration: 0.2, ease: "power1.in", immediateRender: false }, out - 0.2);
+      }
+
+      document.fonts.ready.then(() => {
+        TWC.fit(head, { max: 96, min: 72, maxHeight: 176 });
+        // Labels stay on one line, clear of whichever badge is on (as R4 does)
+        const room = 880 - Math.max(demoBadge.offsetWidth, exampleBadge.offsetWidth) - 32 - 88;
+        for (const text of Object.values(copy.callouts)) {
+          const probe = label(text);
+          for (let size = 42; size > 36 && probe.offsetWidth > room; size -= 1) probe.style.fontSize = `${size - 1}px`;
+          probe.remove();
+          labelSize[text] = probe.style.fontSize;
+        }
+
+        // Caret positions after each typed character
+        const caretX = [0, ...chars.map((span) => span.offsetLeft + span.offsetWidth + 2)];
+
+        const tl = gsap.timeline({ paused: true });
+        const device = $(".r5-device");
+
+        // 1 · Hook: the headline settles in while the demo, small and whole below it (as in R4),
+        // scrolls past its shopfront to the barber chair. The phone grows into place at "This is Good Oak"
+        const base = device.offsetTop + device.offsetHeight;
+        const small = Math.min(0.6, (base - head.offsetTop - head.offsetHeight - 72) / device.offsetHeight);
+        gsap.set(device, { scale: small });
+        tl.fromTo(device, { scale: small }, { scale: 1, duration: motion.move.duration * 1.2, ease: motion.move.ease, immediateRender: false }, cue("this"));
+        TWC.rise(tl, head, 0.05);
+        flick(tl, AT.top, AT.shopfront, cue("here's"));
+        flick(tl, AT.shopfront, AT.about, cue("instagram", 2));
+        tl.fromTo(head, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in", immediateRender: false }, cue("this") - 0.24);
+        tl.fromTo(head, { y: 0 }, { y: 28, duration: 0.22, ease: "power1.in", immediateRender: false }, cue("this") - 0.24);
+
+        // 2 · Callouts, each as Chris names it
+        const top = flick(tl, AT.about, AT.top, cue("this"));
+        callout(tl, { text: copy.callouts.notice, cssY: SHOT.notice, scroll: AT.top, at: cue("demo"), drawAt: cue("demo") + 0.12, out: cue("prices") });
+
+        const menu = flick(tl, AT.top, AT.menu, cue("prices"));
+        callout(tl, { text: copy.callouts.prices, cssY: SHOT.menuRow, scroll: AT.menu, at: cue("prices"), drawAt: menu, out: cue("customers") });
+
+        const hero = flick(tl, AT.menu, AT.hero, cue("customers"));
+        // The label waits for the page to settle on the hero's buttons, so it never points at nothing
+        callout(tl, { text: copy.callouts.text, cssY: SHOT.textButton, scroll: AT.hero, at: hero, drawAt: hero + 0.08, out: cue("an") });
+        callout(tl, { text: copy.callouts.openNow, cssY: SHOT.openNow, scroll: AT.hero, at: cue("an"), drawAt: cue("an") + 0.12, out: cue("and") });
+
+        // The search: the screen slides in like a new page, the query types itself, then the demo's
+        // own title and description arrive. A mock, so the Example badge comes with it
+        const push = cue("and");
+        tl.fromTo(search, { x: SCREEN.width }, { x: 0, duration: motion.move.duration, ease: motion.move.ease, immediateRender: true }, push);
+        tl.fromTo(page, { x: 0 }, { x: -SCREEN.width * 0.3, duration: motion.move.duration, ease: motion.move.ease, immediateRender: false }, push);
+        // Badges: while both pages are on screen both badges are on. Once the mock covers the demo,
+        // the Demo badge leaves and Example glides into its spot, so the mock carries only Example
+        const covered = push + motion.move.duration;
+        tl.fromTo(exampleBadge, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, push);
+        tl.fromTo(demoBadge, { opacity: 1 }, { opacity: 0, duration: 0.18, ease: "power1.in", immediateRender: false }, covered);
+        tl.fromTo(exampleBadge, { x: 0 }, { x: demoBadge.offsetWidth + 16, duration: motion.move.duration, ease: motion.move.ease, immediateRender: false }, covered + 0.12);
+        const typeAt = cue("barber") - 0.04;
+        const typeStep = 0.06;
+        tl.set(caret, { x: caretX[0] }, push);
+        chars.forEach((span, i) => {
+          tl.fromTo(span, { opacity: 0 }, { opacity: 1, duration: 0.001 }, typeAt + i * typeStep);
+          tl.set(caret, { x: caretX[i + 1] }, typeAt + i * typeStep);
+        });
+        const found = cue("google");
+        tl.fromTo(caret, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none", immediateRender: false }, found - 0.1);
+        const title = $(".r5-title");
+        const ghosts = [...document.querySelectorAll(".r5-ghost")];
+        [ghosts[0], $(".r5-site"), title, $(".r5-desc"), ghosts[1], ghosts[2]].forEach((node, i) => TWC.rise(tl, node, found + i * motion.stagger, { y: 20 }));
+        // Points at the result's title: the demo's own page title and description, no ranking
+        const titleY = SCREEN.top + title.offsetTop + title.offsetHeight / 4;
+        callout(tl, { text: copy.callouts.search, y: titleY, at: found, drawAt: found + 0.3, out: 26.65 });
+
+        // Out: the phone drops back as it fades, then the badge, just before the end card
+        tl.fromTo(device, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.45);
+        tl.fromTo(device, { y: 0 }, { y: 28, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.45);
+        tl.fromTo(exampleBadge, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in", immediateRender: false }, 26.6);
+
+        window.__timelines["r5"] = tl;
+      });
+    </script>
+  </body>
+</html>

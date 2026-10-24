@@ -59,6 +59,17 @@ export const config = {
     goodOak: { name: 'Good Oak Barbershop', pageSpeed: '[score]', loadTime: '[load time]' },
   },
 
+  /**
+   * The Reels' narrator (Hector, 2026-10-20): one ElevenLabs voice for English and Spanish.
+   * Not a secret. The API key is in Bitwarden and the ELEVENLABS_API_KEY Windows user variable.
+   */
+  narrator: {
+    name: 'Chris',
+    voiceId: 'iP95p4xoKVk53GoZ742B',
+    model: 'eleven_multilingual_v2',
+    settings: { stability: 0.5, similarity_boost: 0.75, style: 0, use_speaker_boost: true },
+  },
+
   /** Small interface words. Hector checks every Spanish string before it renders. */
   labels: {
     demo: { en: 'Demo', es: 'Demo' },

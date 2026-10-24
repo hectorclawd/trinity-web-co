@@ -1,0 +1,3 @@
+# R1 · Spanish voiceover, the content plan's draft. Not checked yet: once Hector checks it, add a line
+# "# Checked by Hector: YYYY-MM-DD" and scripts/voiceover.mjs will read it.
+¿Y si pudieras mandarle un mensaje al que hizo tu página web? Trinity Web Co. hace páginas web rápidas para negocios de Dallas: aire acondicionado y plomería, barberías, salones, restaurantes. Sin intermediarios ni tickets. Mándanos un mensaje y te contestamos el mismo día. Precios fijos, y el dominio y las cuentas son tuyos. ¿Quieres saber cómo está tu página? Mándanos "REVISAR" y te enviamos un video gratis de dos minutos.

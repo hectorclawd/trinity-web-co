@@ -1,0 +1,431 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- R1 · A website guy you can text: the kit's first Reel (1080×1920, 26.4 s).
+         Scenes from the plan ("Reel scripts", R1), timed to Chris's approved voiceover
+         (r1/audio/r1-en.mp3; word timings inlined below from r1/audio/r1-en.words.json):
+           0–2.3 s      the text thread, over "What if you could just text your website guy?"
+           2.3–11.1 s   the river across Dallas; a neighborhood lights up on each trade Chris names
+           11.1–16.4 s  the thread again: a second text, and our reply on "the same day"
+           16.4–22.2 s  "Fixed prices." and "Your domain and accounts are yours."
+           22.2–26.4 s  the shared end card, from "DM", so CHECK lands on "check"
+         Captions run on their own track until the end card. English only for now.
+         Render: npm run piece -- r1/r1.html --lang en -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-captions,
+      #el-end-card {
+        position: absolute;
+        inset: 0;
+      }
+      .r1-scene {
+        position: absolute;
+        inset: 0;
+      }
+      /* Scene content is centered in the band from y 300 to 1300: under the top safe zone (250 px)
+         and above the caption pills (from about y 1380). Its top is set in the script, from its
+         measured height */
+      .r1-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 0;
+      }
+      .r1-body > * {
+        margin: 0;
+      }
+
+      /* 1 and 3 · The thread. The owner's texts come in (the kit's Paper bubble, Line ring, tight
+         corner bottom left); our replies go out on the right in Paper with a River ring and Ink
+         text, tight corner bottom right. The River fill is kept for the DM keyword alone. The
+         thread is made up, so the Example badge sits over it the whole time. It stops at x 880,
+         so a reply never runs into the Reel buttons */
+      .r1-thread {
+        right: calc(1080px - var(--rail-x) + var(--rule)); /* the reply's 3 px ring stays left of x 880 */
+      }
+      .r1-msgs {
+        margin-top: 56px;
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+      }
+      .r1-msg {
+        position: relative;
+        display: flex;
+      }
+      .r1-msg--out {
+        justify-content: flex-end;
+      }
+      .r1-thread .r1-bubble {
+        box-sizing: border-box;
+        max-width: 760px;
+        padding: 0.3em 0.5em 0.36em;
+        white-space: normal;
+        font-size: 68px;
+        line-height: 1.12;
+        letter-spacing: -0.005em;
+        font-stretch: 104%;
+        font-weight: 640;
+        text-wrap: pretty;
+      }
+      .r1-thread .r1-bubble--out {
+        background: var(--paper);
+        color: var(--ink);
+        box-shadow: 0 0 0 var(--rule) var(--river);
+      }
+      /* Our side typing: the same outgoing bubble, holding three dots, in the reply's place */
+      .r1-thread .r1-typing {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .r1-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: var(--muted);
+      }
+
+      /* 2 · Dallas: the site's river, stretched to fill the frame, bleeding off both edges.
+         Drawn at frame size (1 unit = 1 px) */
+      .r1-river {
+        position: absolute;
+        inset: 0;
+        display: block;
+      }
+
+      /* 4 · What you get: two plain statements in Chris's words */
+      .r1-own-lead {
+        margin-top: 72px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="r1" data-start="0" data-duration="26.4" data-width="1080" data-height="1920">
+      <div class="twc-bg"></div>
+
+      <section id="r1-s1" class="clip r1-scene" data-start="0" data-duration="2.3" data-track-index="1">
+        <div class="r1-body r1-thread"></div>
+      </section>
+
+      <section id="r1-s2" class="clip r1-scene" data-start="2.3" data-duration="8.8" data-track-index="1"></section>
+
+      <section id="r1-s3" class="clip r1-scene" data-start="11.1" data-duration="5.3" data-track-index="1">
+        <div class="r1-body r1-thread"></div>
+      </section>
+
+      <section id="r1-s4" class="clip r1-scene" data-start="16.4" data-duration="5.8" data-track-index="1">
+        <div class="r1-body r1-own">
+          <p class="r1-own-fixed t-display"></p>
+          <p class="r1-own-lead t-headline"></p>
+          <p class="r1-own-end t-headline t-river"></p>
+        </div>
+      </section>
+
+      <div
+        id="el-captions"
+        data-track-kind="captions"
+        data-composition-id="captions"
+        data-composition-src="compositions/captions.html"
+        data-start="0"
+        data-duration="22.2"
+        data-track-index="2"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <div
+        id="el-end-card"
+        data-composition-id="end-card"
+        data-composition-src="compositions/end-card.html"
+        data-start="22.2"
+        data-duration="4.2"
+        data-track-index="1"
+        data-width="1080"
+        data-height="1920"
+      ></div>
+
+      <audio id="r1-voiceover" src="r1/audio/r1-en.mp3" data-start="0" data-duration="25.64" data-track-index="3" data-volume="1"></audio>
+    </div>
+    <script>
+      // On-screen words for R1. The thread is a made-up example (Example badge); everything else on
+      // screen is something Chris says. The captions carry his full sentences. Each moment names
+      // the word it lands on (`*Cue`), looked up in the transcript below. English only for now: add
+      // `es` (copy and transcript) once Hector has checked the Spanish.
+      const COPY = {
+        en: {
+          // Scene 1: the first exchange; the reply goes out on "website"
+          first: { incoming: "Can you change our Saturday hours?", reply: "Done. Take a look.", replyCue: "website" },
+          // Scene 2: one neighborhood lights up on each trade Chris names (the voice gives the trades)
+          tradeCues: ["AC", "barbers", "salons", "restaurants"],
+          // Scene 3: the thread again on "No account managers, no tickets"; we start typing on
+          // "Text us" and the reply lands on "the same day"
+          second: { incoming: "Can you add our new menu?", reply: "Done. It's live.", typingCue: "Text", replyCue: "same" },
+          // Scene 4
+          fixed: "Fixed prices.",
+          fixedCue: "Fixed",
+          ownLead: "Your domain and accounts",
+          ownLeadCue: "your",
+          ownEnd: "are yours.",
+          ownEndCue: "are",
+        },
+      };
+
+      // Chris's word timings from r1/audio/r1-en.words.json, as [text, start, end] in seconds, one
+      // sentence a line. Inlined, because the renderer can't be relied on to fetch a local file
+      // (and compositions never fetch); `words` below turns them back into {text, start, end}.
+      const TRANSCRIPT = {
+        en: [
+          ["What", 0, 0.174], ["if", 0.197, 0.244], ["you", 0.267, 0.337], ["could", 0.372, 0.488], ["just", 0.511, 0.65], ["text", 0.685, 0.964], ["your", 0.987, 1.08], ["website", 1.126, 1.486], ["guy?", 1.509, 1.904],
+          ["Trinity", 2.345, 2.728], ["Web", 2.798, 2.972], ["Co.", 3.03, 3.425], ["builds", 3.866, 4.133], ["fast", 4.203, 4.54], ["websites", 4.598, 5.027], ["for", 5.062, 5.155], ["Dallas", 5.213, 5.515], ["businesses:", 5.561, 6.293],
+          ["AC", 6.618, 6.966], ["and", 7.14, 7.221], ["plumbing,", 7.279, 7.872], ["barbers,", 8.081, 8.847], ["salons,", 9.021, 9.741], ["restaurants.", 9.892, 10.693],
+          ["No", 11.134, 11.285], ["account", 11.331, 11.575], ["managers,", 11.622, 12.109], ["no", 12.179, 12.33], ["tickets.", 12.399, 13.026],
+          ["Text", 13.63, 13.978], ["us", 14.036, 14.211], ["and", 14.327, 14.478], ["you", 14.536, 14.605], ["hear", 14.663, 14.779], ["back", 14.826, 14.977], ["the", 15.035, 15.105], ["same", 15.151, 15.383], ["day.", 15.418, 15.778],
+          ["Fixed", 16.474, 16.776], ["prices,", 16.834, 17.426], ["and", 17.461, 17.6], ["your", 17.647, 17.763], ["domain", 17.821, 18.146], ["and", 18.193, 18.262], ["accounts", 18.297, 18.727], ["are", 18.785, 18.924], ["yours.", 18.97, 19.493],
+          ["Want", 20.19, 20.352], ["to", 20.375, 20.422], ["know", 20.457, 20.549], ["how", 20.584, 20.654], ["your", 20.7, 20.805], ["site", 20.851, 21.025], ["is", 21.049, 21.118], ["doing?", 21.153, 21.559],
+          ["DM", 22.256, 22.558], ["us", 22.628, 22.767], ["\"check\"", 22.976, 23.731], ["for", 23.847, 24.009], ["a", 24.056, 24.09], ["free", 24.172, 24.416], ["two-minute", 24.462, 24.88], ["video.", 24.903, 25.635],
+        ],
+      };
+
+      const vars = window.__hyperframes.getVariables();
+      const words = (TRANSCRIPT[vars.lang] || []).map(([text, start, end]) => ({ text, start, end }));
+      // The captions stop where the end card starts (it carries the DM line itself), so the caption
+      // track only gets the words before it
+      const endCardStart = Number(document.getElementById("el-end-card").dataset.start);
+      const { lang } = TWC.init(vars, { transcript: words.filter((w) => w.start < endCardStart) });
+      if (!COPY[lang] || !words.length) throw new Error(`R1 has no "${lang}" copy or voiceover yet. Add both once Hector has checked the Spanish.`);
+      const copy = COPY[lang];
+      const motion = TWC.motion;
+      const $ = (s) => document.querySelector(s);
+      const make = (tag, className, text, parent) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        if (parent) parent.appendChild(node);
+        return node;
+      };
+
+      // When Chris starts saying a word (the first time it's said after `after`), less a lead so
+      // the motion lands on the word rather than just after it
+      const LEAD = 0.06;
+      const bare = (text) => String(text).toLowerCase().replace(/[^a-z0-9áéíñóúü-]/g, "");
+      const cue = (word, after = 0) => {
+        const hit = words.find((w) => w.start >= after && bare(w.text) === bare(word));
+        if (!hit) throw new Error(`R1: the voiceover never says "${word}" after ${after} s`);
+        return Math.max(after, hit.start - LEAD);
+      };
+      const sceneStart = (id) => Number($(id).dataset.start);
+      // Content blocks center on this line, in the band from y 300 to 1300
+      const CENTER = 800;
+
+      // 1 and 3 · The thread (made up, so it carries the Example badge)
+      function thread(body, exchanges) {
+        body.appendChild(TWC.badge("example", lang));
+        const list = make("div", "r1-msgs", null, body);
+        const rows = [];
+        exchanges.forEach(({ incoming, reply }) => {
+          const inRow = make("div", "r1-msg r1-msg--in", null, list);
+          const inBubble = inRow.appendChild(TWC.bubble(incoming, "in"));
+          inBubble.classList.add("r1-bubble");
+          const outRow = make("div", "r1-msg r1-msg--out", null, list);
+          const outBubble = outRow.appendChild(TWC.bubble(reply));
+          outBubble.classList.add("r1-bubble", "r1-bubble--out");
+          rows.push({ row: inRow, bubble: inBubble }, { row: outRow, bubble: outBubble });
+        });
+        return rows;
+      }
+      const s1Rows = thread($("#r1-s1 .r1-thread"), [copy.first]);
+      const s3Rows = thread($("#r1-s3 .r1-thread"), [copy.first, copy.second]);
+      // Our side typing, in the place of the second reply
+      const typing = make("span", "twc-bubble r1-bubble r1-bubble--out r1-typing", null, s3Rows[3].row);
+      const dots = [0, 1, 2].map(() => make("span", "r1-dot", null, typing));
+
+      // 2 · Dallas: the site's river curve and its four phone stops, scaled to the frame and
+      // stretched in height so the river fills it. Built here rather than with TWC.river, which
+      // keeps the curve's 5:1 shape and so can't grow without pushing the stops off the frame.
+      const SVG = "http://www.w3.org/2000/svg";
+      const svgEl = (tag, attrs, parent) => {
+        const node = document.createElementNS(SVG, tag);
+        for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+        if (parent) parent.appendChild(node);
+        return node;
+      };
+      const RIVER = { sx: 0.9, sy: 3.4, top: 590, minY: 64, line: 12, bank: 96, dot: 16, label: 44 };
+      const rx = (x) => +(x * RIVER.sx).toFixed(1);
+      const ry = (y) => +(RIVER.top + (y - RIVER.minY) * RIVER.sy).toFixed(1);
+      // The path is absolute M/C/S commands, so every number pair is a point
+      const riverPath = TWC.data.river.path.replace(/(-?\d*\.?\d+)\s+(-?\d*\.?\d+)/g, (_, x, y) => `${rx(+x)} ${ry(+y)}`);
+      const riverSvg = svgEl("svg", { class: "r1-river", "data-layout-allow-overflow": "", viewBox: "0 0 1080 1920", width: 1080, height: 1920, "aria-hidden": "true" }, $("#r1-s2"));
+      const common = { d: riverPath, fill: "none", stroke: "var(--river)", "stroke-linecap": "round" };
+      const bank = svgEl("path", { ...common, "stroke-width": RIVER.bank, opacity: 0.14 }, riverSvg);
+      const riverLine = svgEl("path", { ...common, "stroke-width": RIVER.line }, riverSvg);
+      const stops = TWC.data.river.stops.filter((s) => s.phone).map((s) => {
+        const g = svgEl("g", {}, riverSvg);
+        const x = rx(s.x);
+        const y = ry(s.y);
+        const dot = svgEl("circle", { cx: x, cy: y, r: RIVER.dot, fill: "var(--paper)", stroke: "var(--ink)", "stroke-width": 5 }, g);
+        const above = s.labelY < s.y;
+        const label = svgEl("text", {
+          x,
+          y: above ? y - 44 : y + 76,
+          "text-anchor": "middle",
+          fill: "var(--ink)",
+          style: `font: 650 ${RIVER.label}px var(--font); font-stretch: 110%`,
+        }, g);
+        label.textContent = s.name;
+        return { dot, label };
+      });
+
+      // 4 · What you get
+      $("#r1-s4 .r1-own-fixed").textContent = copy.fixed;
+      $("#r1-s4 .r1-own-lead").textContent = copy.ownLead;
+      $("#r1-s4 .r1-own-end").textContent = copy.ownEnd;
+
+      // Strokes draw from their measured length, like the kit's. The undrawn offset adds one stroke
+      // width, so the round cap never shows as a dot before the pen starts.
+      const prepStroke = (path) => {
+        const len = path.getTotalLength();
+        const hidden = len + Number(path.getAttribute("stroke-width"));
+        path.style.strokeDasharray = `${len} ${hidden + len}`;
+        path.style.strokeDashoffset = hidden;
+        return hidden;
+      };
+
+      // A wrapped inline-block keeps the full width, so the bubble would read like a card: size it
+      // to its longest line, the way a text message hugs its words (as s3/s3-answer.html does)
+      const hug = (node) => {
+        const range = document.createRange();
+        range.selectNodeContents(node);
+        const box = node.getBoundingClientRect();
+        const scale = box.width / node.offsetWidth;
+        const style = getComputedStyle(node);
+        const padX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+        const textLeft = box.left + parseFloat(style.paddingLeft) * scale;
+        const textRight = Math.max(...[...range.getClientRects()].map((r) => r.right));
+        node.style.width = `${Math.ceil((textRight - textLeft) / scale + padX) + 2}px`;
+      };
+      // How tall a thread is down to the bottom of row `n` (layout values, so tweens don't count)
+      // (a row's offsetParent is the thread body, so offsetTop already counts the badge)
+      const heightTo = (rows, n) => rows[n - 1].row.offsetTop + rows[n - 1].row.offsetHeight;
+      // Keeps a river label inside the 88 px margins (and left of the Reel buttons below y 1060)
+      const clampLabel = (label) => {
+        const box = label.getBBox();
+        const right = box.y + box.height > 1060 ? 880 : 992;
+        const shift = Math.max(0, 88 - box.x) - Math.max(0, box.x + box.width - right);
+        label.setAttribute("x", Number(label.getAttribute("x")) + shift);
+      };
+
+      document.fonts.ready.then(() => {
+        [...s1Rows, ...s3Rows].forEach(({ bubble }) => hug(bubble));
+        typing.style.height = `${s3Rows[3].bubble.offsetHeight}px`;
+        stops.forEach(({ label }) => clampLabel(label));
+
+        // Center each block on CENTER. Scene 3 is placed for its full thread and starts moved down
+        // by the part not sent yet, so its first exchange sits exactly where scene 1 left it.
+        const s1Body = $("#r1-s1 .r1-thread");
+        s1Body.style.top = `${CENTER - s1Body.offsetHeight / 2}px`;
+        const s3Body = $("#r1-s3 .r1-thread");
+        const s3Top = CENTER - s3Body.offsetHeight / 2;
+        s3Body.style.top = `${s3Top}px`;
+        const s3Y = (n) => CENTER - heightTo(s3Rows, n) / 2 - s3Top;
+        const s4Body = $("#r1-s4 .r1-own");
+        s4Body.style.top = `${CENTER - s4Body.offsetHeight / 2}px`;
+
+        const hiddenLine = prepStroke(riverLine);
+        const tl = gsap.timeline({ paused: true });
+
+        // A sent or received text grows from its bubble's tight corner, with no bounce
+        const pop = (node, at, origin) => {
+          tl.fromTo(node, { opacity: 0 }, { opacity: 1, duration: 0.18, ease: "none" }, at);
+          tl.fromTo(node, { scale: 0.9, y: 30, transformOrigin: origin }, { scale: 1, y: 0, duration: motion.snappy.duration, ease: motion.snappy.ease }, at);
+        };
+        const IN = "0% 100%";
+        const OUT = "100% 100%";
+
+        // 1 · The owner's text pops in, then our reply goes out as Chris says "website"
+        pop(s1Rows[0].bubble, 0.04, IN);
+        pop(s1Rows[1].bubble, cue(copy.first.replyCue), OUT);
+
+        // 2 · The river draws across Dallas from "Trinity". Then, as Chris names each trade, one
+        // neighborhood lights up along it, west to east.
+        const s2 = sceneStart("#r1-s2");
+        tl.fromTo(bank, { opacity: 0 }, { opacity: 0.14, duration: 0.6, ease: "power1.out" }, s2 + 0.04);
+        tl.fromTo(riverLine, { strokeDashoffset: hiddenLine }, { strokeDashoffset: 0, duration: 2.8, ease: motion.draw }, s2 + 0.04);
+        stops.forEach(({ dot, label }, i) => {
+          const at = cue(copy.tradeCues[i], s2);
+          tl.fromTo(dot, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, at);
+          TWC.rise(tl, label, at + 0.06, { y: 14, spring: motion.snappy });
+        });
+
+        // 3 · Back to the thread, as scene 1 left it. On "No account managers" the owner's next
+        // text comes straight in and the thread moves up for it; on "Text us" we start typing;
+        // the reply lands on "the same day".
+        const s3 = sceneStart("#r1-s3");
+        const thread3 = s3Body;
+        const scroll = (from, to, at, render) =>
+          tl.fromTo(thread3, { y: from }, { y: to, duration: motion.move.duration, ease: motion.move.ease, immediateRender: render }, at);
+        scroll(s3Y(2), s3Y(3), s3 + 0.04, true);
+        pop(s3Rows[2].bubble, s3 + 0.04, IN);
+        const typingAt = cue(copy.second.typingCue, s3);
+        scroll(s3Y(3), s3Y(4), typingAt, false);
+        pop(typing, typingAt, OUT);
+        const replyAt = cue(copy.second.replyCue, s3);
+        tl.fromTo(dots, { opacity: 0.35 }, { opacity: 1, duration: 0.25, ease: "sine.inOut", stagger: 0.12, repeat: 4, yoyo: true }, typingAt + 0.12);
+        tl.to(typing, { opacity: 0, duration: 0.12, ease: "none" }, replyAt);
+        pop(s3Rows[3].bubble, replyAt, OUT);
+
+        // 4 · Each statement rises on its words; "are yours." lands last, in River
+        const s4 = sceneStart("#r1-s4");
+        TWC.rise(tl, $("#r1-s4 .r1-own-fixed"), cue(copy.fixedCue, s4));
+        TWC.rise(tl, $("#r1-s4 .r1-own-lead"), cue(copy.ownLeadCue, s4));
+        TWC.rise(tl, $("#r1-s4 .r1-own-end"), cue(copy.ownEndCue, s4));
+
+        window.__timelines["r1"] = tl;
+      });
+    </script>
+  </body>
+</html>
