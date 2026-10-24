@@ -14,6 +14,7 @@ export const site: SiteConfig = {
   schemaType: 'ProfessionalService',
   foundingYear: 2026,
 
+  phone: { display: '(214) 730-8304', e164: '+12147308304', textable: true },
   email: 'hello@trinitywebdallas.com',
   serviceAreaOnly: true,
   hours: [],
