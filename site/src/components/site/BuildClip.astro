@@ -100,12 +100,11 @@
     const dwell = (x: number) => (1 - DWELL) * x + DWELL * (4 * (x - 0.5) ** 3 + 0.5);
     const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 
-    // Pinned: the clip starts a third of the way into the slide in and ends a third of the way
-    // into the slide out, so it never sits frozen while the page moves it (scroll-craft's rule)
-    // but nearly all of it plays while the page holds still, as Hector asked. Otherwise, beside
-    // the steps (wide screens) the clip follows the reader down the list; above them (phones), it
-    // plays as it crosses the screen.
-    const LEAD = 0.35;
+    // Pinned: the whole clip plays while the page holds still, start to finish inside the pin, as
+    // Hector asked (scroll-craft would start it during the slide in; LEAD is the share of the
+    // slide it would take). Otherwise, beside the steps (wide screens) the clip follows the reader
+    // down the list; above them (phones), it plays as it crosses the screen.
+    const LEAD = 0;
     const progress = () => {
       const vh = window.innerHeight;
       if (section.classList.contains('is-pinned')) {
