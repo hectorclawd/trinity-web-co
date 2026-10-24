@@ -30,25 +30,18 @@ export const config = {
     },
   },
 
-  /** Playbook §2. Founding prices appear only in the held H1 carousel. */
+  /** Playbook §2: two packages, priced as ranges. The exact price is set in the proposal. */
   packages: [
-    { id: 'starter', name: 'Starter', price: 1500, foundingPrice: 900, pages: 4 },
-    { id: 'growth', name: 'Growth', price: 2800, foundingPrice: 1800, pages: 7 },
-    { id: 'premium', name: 'Premium', price: 4800, foundingPrice: null, pages: 12 },
+    { id: 'launch', name: 'Launch', priceFrom: 750, priceTo: 1250, pages: 5 },
+    { id: 'growth', name: 'Growth', priceFrom: 1500, priceTo: 2500, pages: 7 },
   ],
 
-  /** Playbook §3. */
-  carePlans: [
-    { id: 'essential', name: 'Care Essential', monthly: 49 },
-    { id: 'standard', name: 'Care Standard', monthly: 99 },
-    { id: 'plus', name: 'Care Plus', monthly: 199 },
-  ],
-
-  /** Playbook §3 Default: every build includes the first 3 months of Care Standard. */
-  includedCareMonths: 3,
-
-  /** Playbook §2: founding prices are for the first 3 clients only. */
-  foundingSpots: 3,
+  /**
+   * Playbook §3: one care plan, quoted per client within the range by edit time
+   * (30 minutes a month at the low end, up to 1 hour at the high end). Billed from
+   * launch, month to month, 30 days' notice to cancel. No included months.
+   */
+  care: { name: 'Care plan', monthlyFrom: 50, monthlyTo: 99, editMinutesFrom: 30, editMinutesTo: 60 },
 
   /**
    * Real numbers only. The demos have no production PageSpeed results yet, so these

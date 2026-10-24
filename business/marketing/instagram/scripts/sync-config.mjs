@@ -17,12 +17,18 @@ const playbook = readFileSync(repo('business/playbook.md'), 'utf8').split('\n');
 const row = (label) => {
   const line = playbook.find((l) => l.startsWith(`| ${label} |`));
   if (!line) fail(`couldn't find the "${label}" row in business/playbook.md`);
-  return line.split('|').slice(2, -1).map((cell) => Number(cell.replace(/[^0-9]/g, '')) || null);
+  return line.split('|').slice(2, -1).map((cell) => (cell.match(/\$[\d,]+/g) || []).map((n) => Number(n.replace(/[^0-9]/g, ''))));
 };
+const pagesLine = playbook.find((l) => l.startsWith('| Pages |'));
+if (!pagesLine) fail('couldn\'t find the "Pages" row in business/playbook.md');
+const pageCounts = pagesLine.split('|').slice(2, -1).map((cell) => Number(cell.match(/Up to (\d+)/)?.[1]) || null);
+const careLine = playbook.find((l) => l.startsWith('One care plan at '));
+if (!careLine) fail('couldn\'t find the "One care plan at" line in business/playbook.md §3');
+const careRange = careLine.match(/\$(\d+)–\$(\d+)/)?.slice(1).map(Number);
 const checks = [
-  ['§2 Dallas price', row('Dallas price'), config.packages.map((p) => p.price)],
-  ['§2 founding price', row('Founding-client price (first 3 clients only)'), config.packages.map((p) => p.foundingPrice)],
-  ['§3 care plan price', row('Price'), config.carePlans.map((p) => p.monthly)],
+  ['§2 Dallas price', row('Dallas price'), config.packages.map((p) => [p.priceFrom, p.priceTo])],
+  ['§2 pages', pageCounts, config.packages.map((p) => p.pages)],
+  ['§3 care plan price', careRange, [config.care.monthlyFrom, config.care.monthlyTo]],
 ];
 for (const [what, playbookValues, configValues] of checks) {
   if (JSON.stringify(playbookValues) !== JSON.stringify(configValues)) {

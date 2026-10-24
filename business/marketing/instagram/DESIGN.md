@@ -119,7 +119,7 @@ Density is low. A frame carries one idea, at sizes readable on a phone held at a
 - Light, flat ground: Limestone, Paper, or River deep. No shadows.
 - One River message bubble per frame for the DM keyword.
 - The river drawing and the bridge logo as recurring signatures.
-- Gold appears only on a primary button or the founding offer.
+- Gold appears only on a primary button.
 
 ## Colors
 
@@ -130,7 +130,7 @@ A cool, quiet palette from the website: green-black ink on pale limestone, with 
 - **River deep** (#0E3F3C): prices, big numbers, the bridge logo on light frames, and the background of a dark frame.
 
 ### Secondary
-- **Gold** (#EDB23A): primary buttons and the founding offer (H1) only. Nowhere else, not even as an accent.
+- **Gold** (#EDB23A): primary buttons only. Nowhere else, not even as an accent.
 
 ### Neutral
 - **Ink** (#13262B): all headline and body text on light frames; the fill of badges and caption pills.
@@ -140,7 +140,7 @@ A cool, quiet palette from the website: green-black ink on pale limestone, with 
 - **Line** (#C6CFC9): hairline rings and dividers where Ink would be too strong.
 
 ### Named Rules
-**The Gold Rule.** Gold is a promise of action. It appears on a primary button or the founding offer and nowhere else; the DM bubble is River, not Gold.
+**The Gold Rule.** Gold is a promise of action. It appears on a primary button and nowhere else; the DM bubble is River, not Gold.
 
 **The One Bubble Rule.** A frame has at most one River message bubble, and it holds the keyword the viewer should send.
 
@@ -192,7 +192,7 @@ Plain and sturdy throughout: solid fills, generous padding, no outlines or effec
 
 ### Buttons
 - **Shape:** gently rounded (16px).
-- **Primary:** Gold fill, Ink text, weight 700 at 108% width, padding 0.5em × 1em. Only for a real primary action or the founding offer.
+- **Primary:** Gold fill, Ink text, weight 700 at 108% width, padding 0.5em × 1em. Only for a real primary action.
 - **Other buttons:** none. A secondary action is a text line, not a second button.
 
 ### Chips
@@ -226,7 +226,7 @@ Plain and sturdy throughout: solid fills, generous padding, no outlines or effec
 - **Do** read every price, name and keyword from `config.ts` through the kit, never typed in.
 
 ### Don't:
-- **Don't** use Gold anywhere except a primary button or the founding offer.
+- **Don't** use Gold anywhere except a primary button.
 - **Don't** add drop shadows, glows, gradients or outlines for decoration.
 - **Don't** use a second typeface, all-caps labels, or wide body text.
 - **Don't** put two message bubbles or two buttons on one frame.

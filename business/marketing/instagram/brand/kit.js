@@ -44,6 +44,13 @@
   function monthly(n, lang) {
     return price(n) + t("labels.perMonth", lang);
   }
+  /** A price range with an en dash: "$750–$1,250". Word joiners keep it on one line. */
+  function priceRange(from, to) {
+    return price(from) + "\u2060\u2013\u2060" + price(to);
+  }
+  function monthlyRange(from, to, lang) {
+    return priceRange(from, to) + t("labels.perMonth", lang);
+  }
   /** Splits a DM line like "DM {keyword} for a free site check" around the keyword. */
   function dm(kind, lang) {
     const [before, after] = t(`dm.${kind}`, lang).split("{keyword}");
@@ -425,7 +432,7 @@
 
   window.TWC = {
     data: DATA,
-    init, vars, transcript, t, price, monthly, dm,
+    init, vars, transcript, t, price, monthly, priceRange, monthlyRange, dm,
     spring, bezier, motion, rise,
     logo, drawLogo, showLogo, river, drawRiver, showRiver,
     fit, arrow, badge, bubble, captions, endsSentence, guides,
