@@ -1,0 +1,592 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <!-- S2 · Behind the build: a 5-frame story set (1080×1920), 5 s a frame. The plan asks for screen
+         recordings of the demos; with none to use, each frame is a designed moment (as S1's frame 3):
+         1 the Good Oak demo's homepage plan drawing itself, 2 its real site.ts typing out, 3 its phone
+         screenshot scrolling in the same phone, 4 the playbook's pre-launch QA ticking off, 5 the quiz.
+         The Quiz sticker (frame 5, answer A) is added in the Instagram app in the sticker area
+         (y 1060 to 1390), kept empty. English only for now. Render: npm run piece -- s2/s2.html --split 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .s2-frame {
+        position: absolute;
+        inset: 0;
+      }
+      /* Every frame: the headline at the same top (300 px, under the 250 px safe zone), one plain
+         line under it on frames 1 to 4, then the frame's picture from 740 px down to above the
+         brand line (about 1486 px). Frame 5 keeps the sticker area (y 1060 to 1390) empty. */
+      .s2-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 300px;
+      }
+      .s2-body > * {
+        margin: 0;
+      }
+      /* The five headlines share one size and wrap onto two lines; 1.03 leading so descenders
+         never touch the line under them */
+      .s2-head {
+        max-width: 904px;
+        line-height: 1.03;
+        text-wrap: balance;
+      }
+      .s2-body .s2-line {
+        margin-top: 36px;
+        max-width: 880px;
+        text-wrap: pretty;
+      }
+      .s2-vis {
+        position: absolute;
+        left: var(--pad);
+        top: 740px;
+        width: 904px;
+      }
+      svg {
+        display: block;
+      }
+      /* The Demo and Example badges sit on the top edge of the thing they label, like a sticker
+         on it, and stay on screen with it the whole time */
+      .s2-badge {
+        position: absolute;
+        top: -33px;
+        left: 40px;
+      }
+
+      /* 1 and 3 · The same drawn phone: a plain outline with a home bar, the screen 360 px wide
+         (the narrowest width the QA checklist tests) */
+      .s2-phone {
+        position: relative;
+        width: 392px;
+        height: 666px;
+      }
+      .s2-phone > svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      /* Each wireframe block's name, beside it, on C1's River bar marker */
+      .s2-labels {
+        position: absolute;
+        left: 440px;
+        top: 0;
+        width: 464px;
+      }
+      .s2-label {
+        position: absolute;
+        left: 0;
+        padding-left: 56px;
+        white-space: nowrap;
+      }
+      .s2-label::before,
+      .s2-widths .is-shown::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 30px;
+        height: 7px;
+        border-radius: var(--radius-pill);
+        background: var(--river);
+      }
+
+      /* 2 · The code: real lines from the demo's src/content/site.ts, typing themselves out.
+         The only monospace in the kit, and only inside this block. A system monospace stack,
+         named first so the renderer doesn't put Inter in front of a generic family (it renders
+         as its bundled JetBrains Mono) */
+      .s2-code {
+        position: relative;
+        box-sizing: border-box;
+        width: 904px;
+        padding: 40px 44px 52px;
+        border-radius: var(--radius-card);
+        background: var(--paper);
+      }
+      .s2-file,
+      .s2-pre {
+        font-family: "SF Mono", Menlo, Consolas, ui-monospace, monospace;
+        font-variant-ligatures: none;
+      }
+      .s2-file {
+        margin: 0;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        color: var(--muted);
+        font-size: var(--fs-label);
+      }
+      .s2-pre {
+        position: relative;
+        margin: 28px 0 0;
+        font-size: var(--fs-body);
+        line-height: 1.7;
+        white-space: pre;
+        color: var(--muted);
+      }
+      .s2-pre .kw,
+      .s2-pre .ty {
+        color: var(--river-deep);
+        font-weight: 700;
+      }
+      .s2-pre .key {
+        color: var(--ink);
+      }
+      .s2-pre .str {
+        color: var(--river);
+      }
+      .s2-caret {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 4px;
+        height: 1.2em;
+        margin-top: 0.25em;
+        border-radius: var(--radius-pill);
+        background: var(--river);
+      }
+
+      /* 3 · The test: the demo's phone screenshot, flat, inside the same phone as frame 1. The
+         site's header is sticky, so it stays put while the page scrolls under it */
+      .s2-screen {
+        position: absolute;
+        left: 16px;
+        top: 40px;
+        width: 360px;
+        height: 594px;
+        overflow: hidden;
+        border-radius: var(--radius-card);
+        background: var(--paper);
+      }
+      .s2-screen img {
+        position: absolute;
+        left: 0;
+        display: block;
+        width: 360px;
+        height: auto;
+      }
+      .s2-screen .s2-sticky {
+        top: 0;
+      }
+      .s2-screen .s2-page {
+        top: 69px;
+      }
+      /* The five screen sizes the checklist tests, in plain words, beside the phone where frame
+         1's labels sit, starting level with the top of the screen. Body Muted; the one on screen
+         is marked and in Ink */
+      .s2-widths {
+        position: absolute;
+        left: 440px;
+        top: 40px;
+        width: 464px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .s2-widths li {
+        position: relative;
+        padding-left: 56px;
+        white-space: nowrap;
+        font-variant-numeric: lining-nums tabular-nums;
+      }
+      .s2-widths li + li {
+        margin-top: 4px;
+      }
+      .s2-widths .is-shown {
+        color: var(--ink);
+        font-weight: 650;
+      }
+
+      /* 4 · The checklist: five items from the playbook's pre-launch QA, ticked in order */
+      .s2-checks {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .s2-checks li {
+        display: grid;
+        grid-template-columns: 68px 1fr;
+        column-gap: 36px;
+        align-items: center;
+      }
+      .s2-checks li + li {
+        margin-top: 44px;
+      }
+      .s2-box {
+        box-sizing: border-box;
+        width: 68px;
+        height: 68px;
+        border: 5px solid var(--ink);
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+      }
+
+      /* 5 · The quiz: two made-up pages, A and B, side by side above the sticker area, each
+         letter in a River circle like the kit's number circles */
+      .s2-quiz {
+        position: absolute;
+        left: var(--pad);
+        top: 576px;
+        width: 904px;
+        height: 460px;
+      }
+      .s2-option {
+        position: absolute;
+        top: 0;
+        width: 376px;
+        height: 460px;
+      }
+      .s2-option--b {
+        left: 528px;
+      }
+      .s2-letter {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: grid;
+        place-items: center;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: var(--river);
+        color: var(--paper);
+        font-size: var(--fs-lead);
+        line-height: 1;
+        font-weight: 820;
+        font-stretch: 116%;
+      }
+      .s2-mock {
+        position: absolute;
+        left: 112px;
+        top: 0;
+        width: 264px;
+        height: 460px;
+      }
+      .s2-mock > svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      .s2-mock .s2-badge {
+        left: auto;
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="s2" data-start="0" data-duration="25" data-width="1080" data-height="1920">
+      <div id="el-frame" data-composition-id="story-frame" data-composition-src="compositions/story-frame.html" data-variable-values='{"tone":"light","brand":true}' data-start="0" data-duration="25" data-track-index="0" data-width="1080" data-height="1920"></div>
+      <!-- Each frame: the headline and its line in .s2-body, the frame's picture under them -->
+      <section id="s2-f1" class="clip s2-frame" data-start="0" data-duration="5" data-track-index="1">
+        <div class="s2-body"><h1 class="s2-head t-headline"></h1><p class="s2-line t-lead"></p></div>
+        <div class="s2-vis"><div class="s2-phone"></div><div class="s2-labels"></div></div>
+      </section>
+      <section id="s2-f2" class="clip s2-frame" data-start="5" data-duration="5" data-track-index="1">
+        <div class="s2-body"><h2 class="s2-head t-headline"></h2><p class="s2-line t-lead"></p></div>
+        <div class="s2-vis"><div class="s2-code"><p class="s2-file"></p><pre class="s2-pre"></pre></div></div>
+      </section>
+      <section id="s2-f3" class="clip s2-frame" data-start="10" data-duration="5" data-track-index="1">
+        <div class="s2-body"><h2 class="s2-head t-headline"></h2><p class="s2-line t-lead"></p></div>
+        <div class="s2-vis">
+          <div class="s2-phone">
+            <div class="s2-screen">
+              <img class="s2-page" src="s2/img/good-oak-home-360.jpg" alt="" data-layout-allow-overflow />
+              <img class="s2-sticky" src="s2/img/good-oak-header-360.jpg" alt="" />
+            </div>
+          </div>
+          <ul class="s2-widths"></ul>
+        </div>
+      </section>
+      <section id="s2-f4" class="clip s2-frame" data-start="15" data-duration="5" data-track-index="1">
+        <div class="s2-body"><h2 class="s2-head t-headline"></h2><p class="s2-line t-lead"></p></div>
+        <div class="s2-vis"><ul class="s2-checks"></ul></div>
+      </section>
+      <section id="s2-f5" class="clip s2-frame" data-start="20" data-duration="5" data-track-index="1">
+        <div class="s2-body"><h2 class="s2-head t-headline"></h2></div>
+        <div class="s2-quiz"><div class="s2-option s2-option--a"></div><div class="s2-option s2-option--b"></div></div>
+      </section>
+    </div>
+    <script>
+      // Frame text, from the plan's S2 outline. Frame 1's labels name the blocks of the Good Oak
+      // demo's homepage (its docs/site-plan.md and the built page). Frame 3's widths and frame 4's
+      // items come from the playbook's §5 pre-launch QA checklist, said shorter. English only for
+      // now: add `es` once Hector has checked the Spanish.
+      const COPY = {
+        en: {
+          plan: { head: "First, we plan every page", line: "You OK the plan before we design anything.", labels: ["Name and menu", "Headline", "Call button", "Shop picture", "Prices"] },
+          code: { head: "Then we build it in code", line: "Every fact about your business lives in one file." },
+          // The checklist's widths (360, 390, 768, 1024, 1440 px) in plain words. The one on screen
+          // (360) comes first, and gets the marker
+          test: { head: "Then we test it on a phone", line: "At five screen sizes, then on real phones.", widths: ["Small phone", "Phone", "Tablet", "Laptop", "Desktop"] },
+          checks: { head: "Then we run the checklist", line: "Nothing launches until every box is ticked.", items: ["Phone number taps to call", "Speed score 90+ on phones", "Every photo under 200 KB", "Forms reach your inbox", "No broken links"] },
+          quiz: { head: "Which page loads faster?", options: ["A", "B"] },
+        },
+      };
+      // Frame 2's code: lines from clients/good-oak-barbers-oak-cliff/site/src/content/site.ts, in
+      // file order, with the lines between them left out. Not translated: it's the file.
+      const demoName = TWC.t("demos.goodOak.name");
+      const CODE = {
+        file: "src/content/site.ts",
+        lines: ["export const site: SiteConfig = {", `  name: '${demoName}',`, "  primaryService: 'haircuts and shaves',", "  phone,", "  locality: 'Oak Cliff, Dallas',", "  hours: ["],
+      };
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`S2 has no "${lang}" copy yet. Add it once Hector has checked the Spanish.`);
+      const copy = COPY[lang];
+      const motion = TWC.motion;
+      const SVG = "http://www.w3.org/2000/svg";
+      const $ = (s, root = document) => root.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = Object.assign(document.createElement(tag), className ? { className } : {});
+        return text != null ? fill(node, text) : node;
+      };
+      const svgEl = (tag, attrs, parent) => {
+        const node = document.createElementNS(SVG, tag);
+        Object.entries(attrs || {}).forEach(([k, v]) => node.setAttribute(k, v));
+        return parent ? parent.appendChild(node) : node;
+      };
+      // No-break spaces keep a number on the line with the word after it and the last two words
+      // together, so no line ends on a lone word (as s3-answer.html's keep() does)
+      const NBSP = String.fromCharCode(160);
+      const keep = (text) => text.replace(/(\d)\s+/g, "$1" + NBSP).replace(/\s+(\S+)$/, NBSP + "$1");
+      // Strokes draw from their measured length, like the kit's river and logo (kit.js prepStroke)
+      const prep = (path) => {
+        const len = path.getTotalLength();
+        const hidden = (path.dataset.hidden = len + +path.getAttribute("stroke-width"));
+        return Object.assign(path.style, { strokeDasharray: `${len} ${hidden + len}`, strokeDashoffset: hidden }) && path;
+      };
+      const draw = (tl, path, at, duration, ease = motion.draw) =>
+        tl.fromTo(path, { strokeDashoffset: +path.dataset.hidden }, { strokeDashoffset: 0, duration, ease }, at);
+      const show = (svg) => svg.querySelectorAll("path").forEach((p) => (p.style.strokeDashoffset = 0));
+      // A rounded rectangle as a path, so it can draw like a pen line
+      const roundRect = (x, y, w, h, r) =>
+        `M${x + r} ${y}H${x + w - r}A${r} ${r} 0 0 1 ${x + w} ${y + r}V${y + h - r}A${r} ${r} 0 0 1 ${x + w - r} ${y + h}` +
+        `H${x + r}A${r} ${r} 0 0 1 ${x} ${y + h - r}V${y + r}A${r} ${r} 0 0 1 ${x + r} ${y}Z`;
+      const circle = (cx, cy, r) => `M${cx - r} ${cy}A${r} ${r} 0 1 1 ${cx + r} ${cy}A${r} ${r} 0 1 1 ${cx - r} ${cy}`;
+      /** A plain drawn phone: the outline in two halves from the top middle (so it draws both ways
+          at once) and the home bar in the bottom bezel, clear of the badge on the top edge.
+          Returns the svg and its paths. */
+      function phone(container, { w, h, r, bottom, line = 6 }) {
+        const svg = svgEl("svg", { width: w, height: h, viewBox: `0 0 ${w} ${h}`, overflow: "visible", "aria-hidden": "true" }, container);
+        const i = line / 2;
+        const cx = w / 2;
+        const stroke = { fill: "none", stroke: "var(--ink)", "stroke-width": line, "stroke-linecap": "round", "stroke-linejoin": "round" };
+        const left = svgEl("path", { ...stroke, d: `M${cx} ${i}H${i + r}A${r} ${r} 0 0 0 ${i} ${i + r}V${h - i - r}A${r} ${r} 0 0 0 ${i + r} ${h - i}H${cx}` }, svg);
+        const right = svgEl("path", { ...stroke, d: `M${cx} ${i}H${w - i - r}A${r} ${r} 0 0 1 ${w - i} ${i + r}V${h - i - r}A${r} ${r} 0 0 1 ${w - i - r} ${h - i}H${cx}` }, svg);
+        const bar = svgEl("path", { ...stroke, d: `M${cx - w * 0.13} ${h - bottom / 2}H${cx + w * 0.13}` }, svg);
+        return { svg, outline: [left, right].map(prep), bar: prep(bar) };
+      }
+      // ---------- Headlines and lines ----------
+      const frames = ["plan", "code", "test", "checks", "quiz"];
+      const heads = frames.map((key, i) => fill($(`#s2-f${i + 1} .s2-head`), keep(copy[key].head)));
+      frames.slice(0, 4).forEach((key, i) => fill($(`#s2-f${i + 1} .s2-line`), keep(copy[key].line)));
+      // ---------- 1 · The plan ----------
+      // The Good Oak homepage from the top, as a wireframe on the 360 px screen (16 px side
+      // bezels, 40 px top): its header, headline, call button, shop picture and price list
+      const P = { w: 392, h: 666, r: 56, top: 40, side: 16, bottom: 32 };
+      const planPhone = phone($("#s2-f1 .s2-phone"), P);
+      const sketch = svgEl("g", { transform: `translate(${P.side} ${P.top})`, fill: "none", stroke: "var(--river)", "stroke-linecap": "round", "stroke-linejoin": "round" }, planPhone.svg);
+      const line = (d, width) => prep(svgEl("path", { d, "stroke-width": width }, sketch));
+      const blocks = [
+        { y: 36, paths: [line(circle(34, 36, 14), 5), line("M62 30H150", 7), line("M62 46H124", 7), line(roundRect(264, 18, 68, 36, 8), 5), line("M0 76H360", 3)] },
+        { y: 146, paths: [line("M28 114H300", 18), line("M28 146H318", 18), line("M28 178H214", 18), line("M28 216H318", 7), line("M28 238H284", 7)] },
+        { y: 293, paths: [line(roundRect(28, 266, 224, 54, 10), 5), line("M64 293H216", 8)] },
+        { y: 432, paths: [line(roundRect(28, 348, 304, 168, 12), 5), line("M50 496L126 418L178 468L218 436L310 496", 5), line(circle(272, 394, 18), 5)] },
+        { y: 563, paths: [line("M28 548H156", 8), line("M284 548H332", 8), line("M28 578H134", 8), line("M284 578H332", 8)] },
+      ];
+      const badge = (parent, kind) => parent.appendChild(make("div", "s2-badge")).appendChild(TWC.badge(kind, lang)).parentNode;
+      const planBadge = badge($("#s2-f1 .s2-vis"), "demo");
+      const labels = copy.plan.labels.map((text, i) => {
+        const label = $("#s2-f1 .s2-labels").appendChild(make("p", "s2-label t-body", text));
+        label.style.top = `${P.top + blocks[i].y - 28}px`;
+        return label;
+      });
+      if (labels.length !== blocks.length) throw new Error("S2: one label per wireframe block");
+      // ---------- 2 · The code ----------
+      fill($("#s2-f2 .s2-file"), CODE.file);
+      badge($("#s2-f2 .s2-code"), "demo");
+      const pre = $("#s2-f2 .s2-pre");
+      // Light syntax colors from the kit palette: keywords River deep, keys Ink, strings River,
+      // punctuation Muted. One span per character, so the code can type itself out
+      const TOKEN = /('[^']*')|\b(export|const)\b|\b(SiteConfig)\b|(\w+)(?=:)|(\s+)|(\w+)|([^\s\w']+)/g;
+      const typed = [];
+      CODE.lines.forEach((text, row) => {
+        if (row) pre.append("\n");
+        let lead = true;
+        for (const m of text.matchAll(TOKEN)) {
+          const cls = m[1] ? "str" : m[2] ? "kw" : m[3] ? "ty" : m[4] ? "key" : "";
+          // The indent appears with the line's first character, the way an editor indents
+          for (const ch of m[0]) typed.push(Object.assign(pre.appendChild(make("span", cls, ch)), { indent: (lead = lead && ch === " ") }));
+        }
+      });
+      const caret = pre.appendChild(make("span", "s2-caret"));
+      // ---------- 3 · The test ----------
+      // The 360 px homepage (rows 100 to 1250 of home-360-full.jpg) under the site's sticky header
+      // (rows 31 to 99). SCROLL lands the page in the gaps between blocks: "Open now" at the top,
+      // the shop picture whole, then "What we do" and its first line
+      const SCROLL = 480;
+      const testPhone = phone($("#s2-f3 .s2-phone"), P);
+      show(testPhone.svg);
+      const testBadge = badge($("#s2-f3 .s2-vis"), "demo");
+      copy.test.widths.forEach((width, i) => $("#s2-f3 .s2-widths").appendChild(make("li", `t-body t-muted${i ? "" : " is-shown"}`, keep(width))));
+      const shot = Object.assign($("#s2-f3 .s2-page"), { alt: `${demoName}'s homepage on a phone, 360 px wide` });
+      $("#s2-f3 .s2-sticky").alt = `${demoName}'s header`;
+      // ---------- 4 · The checklist ----------
+      const checks = copy.checks.items.map((text) => {
+        const li = $("#s2-f4 .s2-checks").appendChild(make("li"));
+        const box = li.appendChild(make("span", "s2-box"));
+        const svg = svgEl("svg", { width: 40, height: 40, viewBox: "0 0 40 40", "aria-hidden": "true" }, box);
+        const tick = prep(svgEl("path", { d: "M8 21L16.5 29.5L32 11", fill: "none", stroke: "var(--paper)", "stroke-width": 6, "stroke-linecap": "round", "stroke-linejoin": "round" }, svg));
+        li.appendChild(make("span", "s2-item t-lead", keep(text)));
+        return { li, box, tick };
+      });
+      // ---------- 5 · The quiz ----------
+      // Two made-up pages (so each has the Example badge), drawn on a 240 × 410 screen:
+      // A, one photo sized for phones and a call button; B, a big slider, an autoplay video
+      // (playing, so it shows a pause button) and a pop-up that jumps in over it. No load times.
+      const Q = { w: 264, h: 460, r: 40, bottom: 28 };
+      // Each page is a list of shapes, [tag, attributes, text], on its 240 × 410 screen
+      const bar = (x, y, w, h, fill, rx = h / 2) => ["rect", { x, y, width: w, height: h, rx, fill }];
+      const lines = (y, widths, h = 7, fill = "var(--muted)") => widths.map((w, i) => bar(14, y + i * (h + 8), w, h, fill));
+      const hills = (x, y, w, h) => ["path", { d: `M${x} ${y + h}L${x + w * 0.34} ${y + h * 0.42}L${x + w * 0.56} ${y + h * 0.72}L${x + w * 0.72} ${y + h * 0.52}L${x + w} ${y + h}Z`, fill: "var(--river)", opacity: 0.5 }];
+      const pen = (d, stroke, width) => ["path", { d, fill: "none", stroke, "stroke-width": width, "stroke-linecap": "round", "stroke-linejoin": "round" }];
+      const PAGE = [bar(0, 0, 240, 410, "var(--paper)", 26), ["circle", { cx: 24, cy: 22, r: 9, fill: "var(--river)" }], bar(42, 18, 76, 8, "var(--ink)"), bar(0, 44, 240, 2, "var(--line)", 0)];
+      const MOCKS = [
+        // A: one photo sized for phones, a headline, two lines, the call button (its handset drawn:
+        // Archivo has no phone glyph), two more lines
+        [
+          ["rect", { x: 14, y: 60, width: 212, height: 128, rx: 12, fill: "var(--river)", opacity: 0.14 }], hills(14, 96, 212, 92), ["circle", { cx: 184, cy: 94, r: 15, fill: "var(--river)" }],
+          ...lines(204, [196, 136], 14, "var(--ink)"), ...lines(250, [204, 164]), bar(14, 292, 212, 60, "var(--river)", 12),
+          ["path", { d: "M58 307c-3 0-6 3-6 6 1 13 11 23 24 24 3 0 6-3 6-6v-4l-7-3-4 4c-4-2-8-6-10-10l4-4-3-7z", fill: "var(--paper)" }],
+          ["text", { x: 98, y: 332, fill: "var(--paper)", style: "font: 720 30px var(--font); font-stretch: 112%" }, "Call"], ...lines(370, [200, 144]),
+        ],
+        // B: a full-width slider with arrows and dots, a playing video (so a pause button and its
+        // progress bar), lines of text, and the pop-up (drawn separately, it jumps in)
+        [
+          ["rect", { x: 0, y: 46, width: 240, height: 150, fill: "var(--river)", opacity: 0.14 }], hills(0, 96, 240, 100), pen("M30 106L18 120L30 134", "var(--river-deep)", 6), pen("M210 106L222 120L210 134", "var(--river-deep)", 6),
+          ...[106, 120, 134].map((cx, d) => ["circle", { cx, cy: 180, r: 5, fill: d ? "var(--paper)" : "var(--river-deep)", stroke: "var(--river-deep)", "stroke-width": 2 }]),
+          bar(14, 208, 212, 100, "var(--ink)", 12), bar(106, 228, 10, 30, "var(--paper)", 3), bar(124, 228, 10, 30, "var(--paper)", 3), bar(30, 272, 180, 5, "var(--muted)"), bar(30, 272, 72, 5, "var(--paper)"), ...lines(326, [204, 150]),
+        ],
+      ];
+      // The pop-up: a card with a close button, over the bottom of the video and the text
+      const POPUP = [["rect", { x: 14, y: 284, width: 212, height: 116, rx: 14, fill: "var(--paper)", stroke: "var(--ink)", "stroke-width": 4 }], pen("M196 300L208 312M208 300L196 312", "var(--ink)", 5), bar(32, 302, 124, 12, "var(--ink)"), bar(32, 324, 150, 7, "var(--muted)"), bar(32, 344, 176, 38, "var(--river)", 10)];
+      const paint = (shapes, parent) => shapes.forEach(([tag, attrs, text]) => (svgEl(tag, attrs, parent).textContent = text || ""));
+      let popup = null;
+      const options = copy.quiz.options.map((letter, i) => {
+        const option = $(`#s2-f5 .s2-option--${i ? "b" : "a"}`);
+        option.appendChild(make("span", "s2-letter", letter));
+        const mock = option.appendChild(make("div", "s2-mock"));
+        const { svg } = phone(mock, Q);
+        show(svg);
+        const g = svgEl("g", { transform: "translate(12 22)" }, svg);
+        paint([...PAGE, ...MOCKS[i]], g);
+        if (i === 1) paint(POPUP, (popup = svgEl("g", {}, g)));
+        badge(mock, "example");
+        return option;
+      });
+      document.fonts.ready.then(() => {
+        // The five headlines at one size (the size the longest fits on two lines at), so the frames
+        // read as a set
+        const size = Math.min(...heads.map((head) => TWC.fit(head, { max: 104, min: 80, maxHeight: 232 })));
+        heads.forEach((head) => (head.style.fontSize = `${size}px`));
+        frames.slice(0, 4).forEach((key, i) => TWC.fit($(`#s2-f${i + 1} .s2-line`), { max: 54, min: 46, maxHeight: 140 }));
+        // The code starts at Body size and steps down until its longest line fits inside the card
+        let codeSize = 42;
+        while (codeSize > 28 && pre.scrollWidth > pre.clientWidth) pre.style.fontSize = `${(codeSize -= 1)}px`;
+        const tl = gsap.timeline({ paused: true });
+        // Each frame opens the same way: the headline rises, then its line
+        const intro = (n) => {
+          TWC.rise(tl, $(`#s2-f${n} .s2-head`), (n - 1) * 5 + 0.15);
+          if ($(`#s2-f${n} .s2-line`)) TWC.rise(tl, $(`#s2-f${n} .s2-line`), (n - 1) * 5 + 0.45);
+          return (n - 1) * 5;
+        };
+        // 1 · The plan draws itself: the phone, then each block in reading order, its name beside it
+        let at = intro(1);
+        tl.fromTo(planBadge, { opacity: 0 }, { opacity: 1, ...motion.fade }, at + 0.8);
+        planPhone.outline.forEach((p) => draw(tl, p, at + 0.8, 0.8));
+        draw(tl, planPhone.bar, at + 1.3, 0.3, motion.pen);
+        blocks.forEach((block, i) => {
+          const start = at + 1.45 + i * 0.4;
+          block.paths.forEach((p, j) => draw(tl, p, start + j * 0.06, 0.5));
+          TWC.rise(tl, labels[i], start + 0.12, { y: 14, spring: motion.snappy });
+        });
+        // 2 · The code types itself out, sped up, the caret riding the last character
+        at = intro(2);
+        TWC.rise(tl, $("#s2-f2 .s2-code"), at + 0.75);
+        const caretAt = (span) => ({ x: span.offsetLeft + span.offsetWidth + 2, y: span.offsetTop });
+        tl.set(caret, { x: typed[0].offsetLeft, y: typed[0].offsetTop }, at);
+        let t = at + 1.25;
+        typed.forEach((span) => {
+          tl.fromTo(span, { opacity: 0 }, { opacity: 1, duration: 0.001 }, t);
+          tl.set(caret, caretAt(span), t);
+          if (!span.indent) t += 0.017;
+        });
+        // 3 · The page is shown at phone size, then flicked a short way down under its sticky
+        // header and left to settle
+        at = intro(3);
+        TWC.rise(tl, [$("#s2-f3 .s2-phone"), testBadge, $("#s2-f3 .s2-widths")], at + 0.75);
+        tl.fromTo(shot, { y: 0 }, { y: -SCROLL, duration: motion.momentum.duration, ease: motion.momentum.ease }, at + 2.0);
+        // 4 · The checklist ticks itself off, one box at a time
+        at = intro(4);
+        checks.forEach(({ li }, i) => TWC.rise(tl, li, at + 0.75 + i * motion.stagger));
+        checks.forEach(({ box, tick }, i) => {
+          const when = at + 1.5 + i * 0.42;
+          tl.fromTo(box, { backgroundColor: "rgba(29, 107, 102, 0)", borderColor: "#13262b" }, { backgroundColor: "#1d6b66", borderColor: "#1d6b66", duration: 0.12, ease: "power1.out" }, when);
+          draw(tl, tick, when + 0.04, 0.26, motion.pen);
+        });
+        // 5 · The two pages arrive, then B's pop-up jumps in over it
+        at = intro(5);
+        options.forEach((option, i) => TWC.rise(tl, option, at + 0.5 + i * motion.stagger));
+        tl.fromTo(popup, { opacity: 0, scale: 0.86, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: motion.snappy.duration, ease: motion.snappy.ease }, at + 1.7);
+        window.__timelines["s2"] = tl;
+      });
+    </script>
+  </body>
+</html>

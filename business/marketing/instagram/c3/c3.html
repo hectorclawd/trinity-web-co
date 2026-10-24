@@ -1,0 +1,365 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"lang","type":"enum","label":"Language","default":"en","options":[{"value":"en","label":"English"},{"value":"es","label":"Español"}]},
+    {"id":"guides","type":"boolean","label":"Show safe zones","default":false}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1350" />
+    <!-- C3 · What customers look for in the first 5 seconds: an 8-slide carousel (1080×1350), one
+         slide per second. Slide text is the plan's ("Carousel scripts", C3), with two changes from
+         Hector's week-3 brief: the plan's "Most sites we check are missing at least 3 of these" slide
+         isn't built (no free checks are done yet, so it isn't true yet), and the reviews slide is
+         text only (the demos are made-up businesses, so any review on them would be invented).
+         Each element slide shows that element on one of our two demos, cropped from the demo repos'
+         2x phone screenshots (docs/screenshots/home-360-top.jpg and home-360-call-bar.jpg) into
+         c3/img/, with the Demo badge beside it. The CTA slide is C1's slide 7, built the same way
+         from config.ts. English only for now: the Spanish copy gets added once Hector checks it.
+         Render: npm run piece -- c3/c3.html --lang en --still -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script src="brand/generated.js"></script>
+    <script src="brand/kit.js"></script>
+    <link rel="stylesheet" href="brand/kit.css" />
+    <style>
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "Archivo Variable";
+        src: url("brand/fonts/archivo-latin-ext-wdth-normal.woff2") format("woff2-variations");
+        font-weight: 100 900;
+        font-stretch: 62% 125%;
+        unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1350px;
+        overflow: hidden;
+        background: var(--limestone);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: var(--ink);
+        font-family: var(--font);
+      }
+      #el-frame {
+        position: absolute;
+        inset: 0;
+      }
+      .c3-slide {
+        position: absolute;
+        inset: 0;
+      }
+      /* Each slide's content sits in the frame's content box: 88 px sides, from 236 px down */
+      .c3-body {
+        position: absolute;
+        left: var(--pad);
+        right: var(--pad);
+        top: 236px;
+      }
+      .c3-body > * {
+        margin: 0;
+      }
+      /* The river spans the 88 px margins (904 px), so its neighborhood labels stay inside them */
+      .c3-river {
+        position: absolute;
+        left: var(--pad);
+        top: 896px;
+        width: 904px;
+      }
+      .c3-river svg {
+        display: block;
+      }
+
+      /* 1 · Cover, laid out like C2's: the hook, then the river */
+      /* Display's 0.93 leading lets descenders touch the line below, so wrapped headlines open up */
+      .c3-body .c3-title {
+        max-width: 904px;
+        line-height: 1.02;
+        text-wrap: balance;
+      }
+      /* The cover's river sits lower than C2's, under a five-line hook */
+      #c3-s1 .c3-river {
+        top: 976px;
+      }
+
+      /* 2–7 · The six things: the number in a River circle, the thing, the demo showing it, then
+         why a customer looks for it under the rule */
+      .c3-body .c3-num {
+        display: grid;
+        place-items: center;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: var(--river);
+        color: var(--paper);
+        font-size: var(--fs-lead);
+        line-height: 1;
+        font-weight: 820;
+        font-stretch: 116%;
+        font-variant-numeric: lining-nums;
+      }
+      .c3-body .c3-thing {
+        margin-top: 48px;
+        max-width: 904px;
+        line-height: 1.04;
+        text-wrap: balance;
+      }
+      .c3-nowrap {
+        white-space: nowrap;
+      }
+      /* The demo crop from the 720 px (2x) phone screenshots, shown a touch smaller (680 px, never
+         upscaled, so it stays sharp), flat in a 3 px Line ring. The Demo badge sits beside it,
+         top-aligned, so it never covers what the crop shows and still ends inside the 88 px margin */
+      .c3-body .c3-shot {
+        display: flex;
+        align-items: flex-start;
+        gap: 24px;
+        margin-top: 56px;
+      }
+      .c3-frame {
+        flex: none;
+        overflow: hidden;
+        border: var(--rule) solid var(--line);
+        border-radius: var(--radius-card);
+      }
+      .c3-frame img {
+        display: block;
+        width: 680px;
+        height: auto;
+      }
+      .c3-badge {
+        flex: none;
+        margin-top: 4px;
+      }
+      .c3-body .c3-line {
+        margin-top: 56px;
+        padding-top: 40px;
+        border-top: var(--rule) solid var(--ink);
+        max-width: 880px;
+        text-wrap: pretty;
+      }
+      /* 6 · Reviews has no demo to show: the advice carries the slide alone.
+         One sentence per block, so "Never make them up." stands on its own line */
+      .c3-body .c3-advice {
+        margin-top: 56px;
+        padding-top: 40px;
+        border-top: var(--rule) solid var(--ink);
+        max-width: 880px;
+      }
+      .c3-advice span {
+        display: block;
+        text-wrap: balance;
+      }
+
+      /* 8 · CTA, as C1's slide 7: the keyword is a river message bubble, the river closes the carousel */
+      .c3-body .c3-cta {
+        max-width: 904px;
+        text-wrap: balance;
+      }
+      .c3-body .c3-ask {
+        margin-top: 28px;
+      }
+      .c3-ask .twc-bubble {
+        margin-left: 0.18em;
+      }
+      .c3-body .c3-langs {
+        margin-top: 44px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="c3" data-start="0" data-duration="8" data-width="1080" data-height="1350">
+      <div
+        id="el-frame"
+        data-composition-id="carousel-slide"
+        data-composition-src="compositions/carousel-slide.html"
+        data-variable-values='{"tone":"light","swipe":1}'
+        data-start="0"
+        data-duration="8"
+        data-track-index="0"
+        data-width="1080"
+        data-height="1350"
+      ></div>
+
+      <section id="c3-s1" class="clip c3-slide" data-start="0" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <h1 class="c3-title t-display"></h1>
+        </div>
+        <div class="c3-river"></div>
+      </section>
+
+      <!-- 2–7 · One slide per thing, in the plan's order. The crops are real demo pixels; the script
+           puts the number and headline above each one and the reason under it -->
+      <section id="c3-s2" class="clip c3-slide c3-thing-slide" data-thing="0" data-start="1" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <figure class="c3-shot">
+            <div class="c3-frame"><img src="c3/img/call-good-oak.jpg" width="720" height="140" alt="Good Oak Barbershop demo: a red Call (214) 555-0162 button" /></div>
+          </figure>
+        </div>
+      </section>
+      <section id="c3-s3" class="clip c3-slide c3-thing-slide" data-thing="1" data-start="2" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <figure class="c3-shot">
+            <div class="c3-frame"><img src="c3/img/open-good-oak.jpg" width="720" height="110" alt="Good Oak Barbershop demo: a green dot and Open now, until 7 pm" /></div>
+          </figure>
+        </div>
+      </section>
+      <section id="c3-s4" class="clip c3-slide c3-thing-slide" data-thing="2" data-start="3" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <figure class="c3-shot">
+            <div class="c3-frame"><img src="c3/img/area-purple-martin.jpg" width="720" height="320" alt="Purple Martin Heating &amp; Air demo: the headline Heating and air repair for East Dallas homes" /></div>
+          </figure>
+        </div>
+      </section>
+      <section id="c3-s5" class="clip c3-slide c3-thing-slide" data-thing="3" data-start="4" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <figure class="c3-shot">
+            <div class="c3-frame"><img src="c3/img/prices-good-oak.jpg" width="720" height="336" alt="Good Oak Barbershop demo: a price list, Haircut $30 and Skin fade $35, with how long each takes" /></div>
+          </figure>
+        </div>
+      </section>
+      <section id="c3-s6" class="clip c3-slide c3-thing-slide" data-thing="4" data-start="5" data-duration="1" data-track-index="1">
+        <div class="c3-body"></div>
+      </section>
+      <section id="c3-s7" class="clip c3-slide c3-thing-slide" data-thing="5" data-start="6" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <figure class="c3-shot">
+            <div class="c3-frame"><img src="c3/img/quote-purple-martin.jpg" width="720" height="136" alt="Purple Martin Heating &amp; Air demo: Get a free quote and Text us buttons" /></div>
+          </figure>
+        </div>
+      </section>
+
+      <section id="c3-s8" class="clip c3-slide" data-start="7" data-duration="1" data-track-index="1">
+        <div class="c3-body">
+          <p class="c3-cta t-display"></p>
+          <p class="c3-ask t-headline"></p>
+          <p class="c3-langs t-label t-muted"></p>
+        </div>
+        <div class="c3-river"></div>
+      </section>
+    </div>
+    <script>
+      // Slide text from the plan, with the two week-3 changes (no "missing at least 3" slide; reviews
+      // as text only). The CTA and the languages line come from config.ts. Each thing's `why` says,
+      // in one plain line, why a customer looks for it. `keep` (headline) and `whyKeep` (reason) list
+      // words that must not break apart (a hyphenated word, "at least", the start of a clause).
+      // English only for now: add `es` once Hector has checked the Spanish slide text.
+      const COPY = {
+        en: {
+          cover: "What customers look for in the first 5 seconds",
+          things: [
+            { head: "A tap-to-call button", keep: ["tap-to-call"], why: "On a phone, one tap beats copying a number." },
+            { head: "Hours, and whether you’re open now", why: "Nobody wants to call, or drive over, and find you closed." },
+            { head: "Where you work", why: "Customers want to know you come to them, or how far the drive is.", whyKeep: ["or how far"] },
+            { head: "Prices, or at least “starting at”", keep: ["at least"], why: "Even a ballpark tells people if you fit their budget." },
+            {
+              head: "Real reviews",
+              advice: ["Link to your Google reviews, or show a few with the customer’s OK.", "Never make them up."],
+            },
+            { head: "A way to book or get a quote", why: "When they’re ready, the next step should be right there." },
+          ],
+        },
+      };
+
+      const { lang } = TWC.init(window.__hyperframes.getVariables());
+      if (!COPY[lang]) throw new Error(`C3 has no "${lang}" copy yet. Add it once Hector has checked the slide text.`);
+      const copy = COPY[lang];
+      const $ = (s, root = document) => root.querySelector(s);
+      const fill = (node, text) => ((node.textContent = text), node);
+      const make = (tag, className, text) => {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text != null) node.textContent = text;
+        return node;
+      };
+      // No-break spaces keep a number on the line with the word after it ("5 seconds", never
+      // "5 / seconds") and the last two words together, so no line ends on one word (s3-answer's keep)
+      const NBSP = String.fromCharCode(160);
+      const keep = (text) => text.replace(/(\d)\s+/g, "$1" + NBSP).replace(/\s+(\S+)$/, NBSP + "$1");
+      // Text with some words kept on one line (so "tap-to-call" never splits at a hyphen), as in C2
+      const fillKeeping = (node, text, words = []) => {
+        if (!words.length) return fill(node, text);
+        const pattern = new RegExp(`(${words.map((w) => w.replace(/[-]/g, "\\-")).join("|")})`, "g");
+        text.split(pattern).forEach((part) => {
+          if (!part) return;
+          node.append(words.includes(part) ? make("span", "c3-nowrap", part) : part);
+        });
+        return node;
+      };
+      // TWC.fit only measures height, so a single wide word could still run past the margin:
+      // step the size down until nothing is wider than the box (C6's helper)
+      const fitWidth = (node, min) => {
+        let size = parseFloat(node.style.fontSize);
+        while (size > min && node.scrollWidth > node.clientWidth) node.style.fontSize = `${(size -= 2)}px`;
+      };
+
+      // 1 · Cover
+      const title = fill($("#c3-s1 .c3-title"), keep(copy.cover));
+      TWC.showRiver(TWC.river($("#c3-s1 .c3-river"), { width: 904, stops: "phone" }));
+
+      // 2–7 · The six things, numbered by their place in the list (a real count, 1 to 6). A slide
+      // with a demo crop gets the Demo badge beside it; the reviews slide has no crop and no badge
+      const things = [...document.querySelectorAll(".c3-thing-slide")];
+      if (things.length !== copy.things.length) throw new Error("C3: one slide per thing");
+      const heads = things.map((slide) => {
+        const i = Number(slide.dataset.thing);
+        const thing = copy.things[i];
+        const body = $(".c3-body", slide);
+        const shot = $(".c3-shot", slide);
+        const num = make("p", "c3-num", String(i + 1));
+        num.setAttribute("aria-hidden", "true");
+        const head = fillKeeping(make("h2", "c3-thing t-headline"), keep(thing.head), thing.keep);
+        body.prepend(num, head);
+        if (shot) {
+          const badge = TWC.badge("demo", lang);
+          badge.classList.add("c3-badge");
+          shot.appendChild(badge);
+          body.appendChild(fillKeeping(make("p", "c3-line t-body t-muted"), keep(thing.why), thing.whyKeep));
+        } else {
+          if (!thing.advice) throw new Error(`C3: slide ${i + 2} has neither a demo crop nor advice`);
+          const advice = make("p", "c3-advice t-lead");
+          thing.advice.forEach((sentence) => advice.appendChild(make("span", "", keep(sentence))));
+          body.append(advice);
+        }
+        return head;
+      });
+
+      // 8 · CTA, as C1's slide 7: "Free site check:" as the headline, then "DM" + the keyword bubble
+      // on its own line (the last word before the keyword is the verb: DM / manda), then the languages
+      const cta = TWC.dm("carouselCta", lang);
+      const verbAt = cta.before.lastIndexOf(" ");
+      const ctaLine = fill($("#c3-s8 .c3-cta"), cta.before.slice(0, verbAt));
+      const ask = $("#c3-s8 .c3-ask");
+      ask.append(make("span", "c3-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
+      if (cta.after) ask.append(` ${cta.after}`);
+      fill($("#c3-s8 .c3-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c3-s8 .c3-river"), { width: 904, stops: "phone" }));
+
+      document.fonts.ready.then(() => {
+        TWC.fit(title, { max: 144, min: 96, maxHeight: 680 });
+        fitWidth(title, 88);
+        // The six things share one headline size (the size the longest fits on two lines at), so
+        // the slides read as a set when swiped
+        const size = Math.min(...heads.map((head) => TWC.fit(head, { max: 96, min: 72, maxHeight: 210 })));
+        heads.forEach((head) => ((head.style.fontSize = `${size}px`), fitWidth(head, 64)));
+        TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
+        fitWidth(ctaLine, 72);
+        // Stills: one frame per slide, so nothing moves
+        window.__timelines["c3"] = gsap.timeline({ paused: true });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+# R4 · Spanish voiceover, the content plan's draft. Not checked yet: once Hector checks it, add a line
+# "# Checked by Hector: YYYY-MM-DD" and scripts/voiceover.mjs will read it.
+Esta es Purple Martin Heating and Air. No es una compañía real. Trinity Web Co. la hizo como demostración, para mostrarte cómo podría ser la página de tu negocio. Los botones de llamar y mandar mensaje se quedan abajo en la pantalla, para que tus clientes nunca tengan que buscar tu número. "How a visit works" contesta lo que la gente pregunta antes de llamar. Los servicios caben en una sola pantalla. Y es rápida en el celular. ¿Quieres una así? Mándanos "REVISAR".
