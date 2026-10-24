@@ -47,7 +47,7 @@ Not done yet:
 - Texas LLC (Form 205, about $300), then EIN, then a business bank account, then Stripe.
 - Sales tax question on care-plan hosting (Comptroller or CPA), before the first care-plan invoice.
 - Attorney review of the contracts (about $300–$600), before the first client signs.
-- Instagram: approve the 24 ideas for weeks 7–12 by 2026-10-31; finish weeks 1–2 in Spanish with captions; schedule week 1; posting starts 2026-11-02.
+- Instagram: weeks 7–12 approved 2026-10-24, their scripts still to write; finish weeks 1–2 in Spanish with captions; schedule week 1; posting starts 2026-11-02.
 - After launch: Google Search Console, a Google Business Profile, a Cal.com booking link, a one-page PDF price sheet, then outreach.
 No clients yet. All 3 founding spots are open.
 
@@ -472,11 +472,11 @@ What posts each week (English, then Spanish a day or two later):
 5 (Nov 30): C5, R7, C9, S4 + S3
 6 (Dec 7): R2 and H1 only if the website is live. If not, post week 7's pieces and keep R2 and H1 for launch week.
 7 (Dec 14): R8, C10, R9, S5
-8 (Dec 21): C11, R10, C12, S6. Christmas is Friday; schedule ahead.
+8 (Dec 21): R10, C11, C12, S6. Christmas is Friday; schedule ahead.
 9 (Dec 28): R11, C13, R12, S7. New Year's Day is Friday; schedule ahead.
-10 (Jan 4): C14, R13, C15, S8
-11 (Jan 11): R14, C16, R15, S9
-12 (Jan 18): C17, C18, R16, S10
+10 (Jan 4): R13, C14, C15, S8. R13 posts in Spanish first, English the next day.
+11 (Jan 11): R14, C16, R15, S9. R14 posts in Spanish first, English the next day.
+12 (Jan 18): R16, C17, C18, S10
 Post time: use whatever times Hector gives you. Until he does, suggest 11:30 a.m. Central for feed posts and mark it "starting guess, check Insights' most active times."
 
 EVERY FRIDAY (or whenever Hector asks for "next week's plan")

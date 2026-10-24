@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-21
+Last updated: 2026-10-24
 
 ## DONE
 
@@ -82,7 +82,7 @@ In launch order. Items in the same group can run in parallel.
 - [x] C1 prices carousel: 7 slides from the plan, English, then Spanish once Hector checks the slide text. No audio, so it can start now. It's the kit's first multi-slide render: check that each second gives exactly one slide (2026-10-20: English approved and merged, 6cdc7f9, with the kit's DESIGN.md; slide 6 now says "Your Google Search Console" instead of visitor stats, merged with week 2. Spanish is part of the "other pieces" item below)
 - [x] Weeks 1 and 2 in English: S1 speed-check story set (2026-10-20, 9eb5335, with PRODUCT.md); C2 slow-site carousel, C6 own-it carousel, and S3 ask-us story with its reusable answer frame (2026-10-20, approved, merged with this update). They're in Drive, "Trinity Web Co. Instagram posts", in weekly folders with posting notes. C6's caption must name the one-time $150 handoff fee. Posts promise Google Search Console, not analytics (playbook decisions log, 2026-10-20). R5, week 2's Reel, waits on the narrator voice
 - [ ] Growth plan setup before posting starts on 2026-11-02 (the doc's "Before posting starts" list): profile, the kit's DESIGN.md (impeccable's documenter agent), weeks 1 and 2 built in both languages with captions, finish-reviewer pass, week 1 scheduled
-- [ ] Approve the 24 new pieces for weeks 7 to 12 in the growth plan by 2026-10-31, then write their scripts into the content plan doc
+- [ ] Write the scripts for weeks 7 to 12 into the content plan doc (the 24 pieces were approved in the growth plan on 2026-10-24: 14 from Content Idea Scout, 10 from the first list)
 - [ ] R1 intro Reel: move the ElevenLabs key from `C:\Users\hlmpr\projects\motion-studio\.env` into Bitwarden (2026-10-20: done), pick one multilingual narrator voice (2026-10-20: Chris, in the kit's `config.ts`), and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then time the scenes and end card to the audio (2026-10-20: `scripts/voiceover.mjs` makes each take plus its word timings for the captions; English voiceovers done for R1, R3, R4 and R5; R1, R4 and R5 are being built; Spanish waits on Hector's check of each `script-es.txt`)
 - [x] Decide on the untracked `motion-studio/` folder (a 24 s site showcase video side project with its own git repo and an ElevenLabs key in `.env`; details in HANDOFF.md) (2026-10-18: moved out to `C:\Users\hlmpr\projects\motion-studio`, venv paths fixed; Hector backs up the files listed in HANDOFF.md to Google Drive)
 - [ ] Build the other 18 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; founding-offer carousel built but held). Hector checks each Spanish script before it renders
