@@ -7,7 +7,7 @@
 @theme {
   --color-brand: #1D6B66;       /* river: links, rules, step markers */
   --color-brand-dark: #0E3F3C;  /* river deep: niche band, footer, prices */
-  --color-accent: #EDB23A;      /* gold: primary buttons and the founding offer only */
+  --color-accent: #EDB23A;      /* gold: primary buttons only */
   --color-accent-dark: #D99A1E;
   --color-on-accent: #13262B;   /* ink on gold */
   --color-bg: #ECEFE9;          /* limestone */
@@ -89,7 +89,7 @@
 
   /* Main calls to action: a small arrow that nudges forward on hover or keyboard focus.
      The label never moves, the focus ring stays, and the arrow holds still for reduced motion.
-     Below 24rem the arrow would push "Ask about a founding spot" onto two lines, so it's left off. */
+     Below 24rem the arrow would push a longer label onto two lines, so it's left off. */
   @media (min-width: 24rem) {
     .btn-arrow::after {
       content: "";

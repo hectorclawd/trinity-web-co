@@ -4,7 +4,7 @@ The playbook's pre-launch QA checklist (section 5). `/qa` fills in what it can c
 
 **Run on:** 2026-10-24 (local preview build, not yet deployed) · **Commit:** 972cd9f (main) · **Preview URL:** http://localhost:4393/
 
-The pricing section on this build shows the outreach kit's ranges (Launch $750–$1250, Growth $1500–$2500, care $50–$99/mo). Hector changed the prices again on the evening of 2026-10-24 (Launch from $499, Growth from $999, care $49/mo), and another session is putting them on the site. Recheck the pricing section, FAQ and meta description once that lands.
+The pricing section on this build shows the outreach kit's ranges (Launch $750–$1250, Growth $1500–$2500, care $50–$99/mo). Hector changed the prices again on the evening of 2026-10-24 (Launch from $499, Growth from $999, care $49/mo), and branch `site-new-prices` puts them on the site (pricing section, care plan, FAQ and meta description). Recheck those once it's merged.
 
 ## Automated results
 
