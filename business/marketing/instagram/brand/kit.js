@@ -273,10 +273,37 @@
   }
 
   /** Burned-in captions from word timings ([{text, start, end}], as `hyperframes transcribe` writes).
-      One short phrase at a time: a new phrase after a 0.5 s pause or a sentence end, and a phrase
-      longer than 6 words or 2.5 s is cut into even parts (5 + 4, not 6 + 3). */
+      One short phrase at a time: a new phrase after a 0.5 s pause or a sentence end. A phrase
+      longer than 6 words or 2.5 s is cut where the speaker would breathe: after a comma, colon or
+      dash near the middle, otherwise into even parts (5 + 4, not 6 + 3) that never end on a little
+      word ("the bottom of / the screen" becomes "the bottom / of the screen"). */
   const ABBREVIATIONS = /^(Co|St|Dr|Mr|Mrs|Ms|Jr|Inc|Ave|Sra|Sr|Dra)\.$/;
   const endsSentence = (text) => /[.?!]$/.test(text) && !ABBREVIATIONS.test(text);
+  const endsClause = (text) => /[,;:–—]$/.test(text);
+  const LITTLE = new Set("a an the of to at in on for and or but your our my its with from by de del la el los las y o en por para tu su sus que con al".split(" "));
+  // Little words, and a word that opens a quote without closing it, shouldn't end a line
+  const isLittle = (text) => LITTLE.has(text.toLowerCase().replace(/[^\p{L}]/gu, "")) || (/^["“]/.test(text) && !/["”][,.?!]*$/.test(text));
+  function splitRun(run, maxWords, maxSeconds) {
+    const seconds = run[run.length - 1].end - run[0].start;
+    if (run.length <= maxWords && seconds <= maxSeconds) return [run];
+    // A clause break closest to the middle, keeping two words or more on each side
+    let cut = -1;
+    for (let i = 2; i <= run.length - 2; i++) {
+      if (endsClause(run[i - 1].text) && (cut < 0 || Math.abs(i - run.length / 2) < Math.abs(cut - run.length / 2))) cut = i;
+    }
+    if (cut > 0) return [...splitRun(run.slice(0, cut), maxWords, maxSeconds), ...splitRun(run.slice(cut), maxWords, maxSeconds)];
+    const parts = Math.max(Math.ceil(run.length / maxWords), Math.ceil(seconds / maxSeconds));
+    const groups = [];
+    for (let start = 0, left = parts; start < run.length; left = Math.max(1, left - 1)) {
+      // Share what's left evenly, so a moved word never strands one word on the last line
+      let end = left === 1 ? run.length : start + Math.ceil((run.length - start) / left);
+      // Don't end a line on a little word: move it to the next one
+      while (end < run.length && end - start > 2 && isLittle(run[end - 1].text)) end -= 1;
+      groups.push(run.slice(start, end));
+      start = end;
+    }
+    return groups;
+  }
   function captions(tl, container, transcript, { offset = 0, maxWords = 6, maxSeconds = 2.5 } = {}) {
     const words = (Array.isArray(transcript) ? transcript : transcript.words)
       .filter((w) => w.type !== "spacing" && String(w.text).trim())
@@ -291,12 +318,7 @@
         current = [];
       }
     });
-    const groups = runs.flatMap((run) => {
-      const seconds = run[run.length - 1].end - run[0].start;
-      const parts = Math.max(Math.ceil(run.length / maxWords), Math.ceil(seconds / maxSeconds));
-      const size = Math.ceil(run.length / parts);
-      return Array.from({ length: Math.ceil(run.length / size) }, (_, i) => run.slice(i * size, (i + 1) * size));
-    });
+    const groups = runs.flatMap((run) => splitRun(run, maxWords, maxSeconds));
     // A lone word joins the phrase before it, unless it ends a sentence.
     for (let i = groups.length - 1; i > 0; i--) {
       if (groups[i].length === 1 && !endsSentence(groups[i][0].text)) groups.splice(i - 1, 2, groups[i - 1].concat(groups[i]));
