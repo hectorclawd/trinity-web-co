@@ -120,25 +120,6 @@
   td.featured-col { background: #EEF3F0; }
   tr.price-row td { font-weight: 700; }
 
-  /* Founding offer */
-  .founding {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.16in;
-    align-items: center;
-    margin-top: 0.1in;
-    padding: 6px 12px;
-    background: var(--gold);
-    color: var(--ink);
-    border-radius: 4px;
-  }
-  .founding h2 { color: var(--ink); margin: 0; font-size: 10.5pt; }
-  .founding .prices { display: flex; gap: 0.18in; margin-top: 3px; }
-  .founding .prices div { font-size: 8pt; }
-  .founding .prices b { display: block; font-size: 13pt; font-stretch: 112%; font-weight: 800; }
-  .founding .prices s { color: #5A4A1E; font-weight: 500; font-size: 8pt; }
-  .founding p { margin: 0; font-size: 8.3pt; }
-
   /* Terms and add-ons */
   ul.terms { margin: 0; padding-left: 1.1em; columns: 2; column-gap: 0.25in; }
   ul.terms li { margin-bottom: 3px; break-inside: avoid; }
@@ -179,71 +160,52 @@
       </div>
     </div>
     <div class="top-note">
-      <strong>Fixed prices. You own it.</strong>
+      <strong>Prices in writing. You own it.</strong>
       Built by a local developer you can text. Your domain and accounts stay in your name.
     </div>
   </header>
 
   <section>
-    <h2>Website packages <span>One-time price. Every build includes 3 months of Care Standard.</span></h2>
+    <h2>Website packages <span>Starting prices. Your exact price is in writing after our call, before any work starts.</span></h2>
     <table>
-      <colgroup><col class="label"><col><col><col></colgroup>
+      <colgroup><col class="label"><col><col></colgroup>
       <thead>
         <tr>
           <th></th>
-          <th><div class="plan"><div class="head"><h3>Starter</h3><div class="price">$1,500</div></div><div class="for">New or very small businesses</div></div></th>
-          <th><div class="plan featured"><div class="head"><h3>Growth</h3><div class="price">$2,800</div></div><div class="for"><span class="tag">Recommended</span>For calls and bookings</div></div></th>
-          <th><div class="plan"><div class="head"><h3>Premium</h3><div class="price">$4,800</div></div><div class="for">Many services or areas, lots of content</div></div></th>
+          <th><div class="plan"><div class="head"><h3>Launch</h3><div class="price"><small>from </small>$499</div></div><div class="for">New or very small businesses</div></div></th>
+          <th><div class="plan featured"><div class="head"><h3>Growth</h3><div class="price"><small>from </small>$999</div></div><div class="for"><span class="tag">Recommended</span>For calls and bookings</div></div></th>
         </tr>
       </thead>
       <tbody>
-        <tr><th>Every site</th><td colspan="3">Click-to-call and text buttons · Google Maps and hours · fast on phones</td></tr>
-        <tr><th>Pages (up to)</th><td>4: Home, Services, About, Contact</td><td class="featured-col">7: + 2 service/area pages, Gallery/FAQ</td><td>12: + 4 more service/area pages, blog</td></tr>
-        <tr><th>Forms</th><td>Spam-protected contact form</td><td class="featured-col">Contact form + quote request form</td><td>Contact form + multi-step quote form</td></tr>
-        <tr><th>Online booking</th><td>Link to your booking tool</td><td class="featured-col">Embedded (Square, Vagaro, Booksy…)</td><td>Embedded booking, styled to match</td></tr>
-        <tr><th>Reviews</th><td>3 reviews + Google review link</td><td class="featured-col">6–8 reviews + review-request QR code</td><td>+ a full reviews page</td></tr>
-        <tr><th>Local search</th><td>Titles, sitemap, Search Console</td><td class="featured-col">+ schema, area pages, Google profile</td><td>+ plan for 10 local search terms</td></tr>
-        <tr><th>Blog</th><td>—</td><td class="featured-col">—</td><td>3 launch posts written for local search</td></tr>
-        <tr><th>Analytics</th><td>Visitor analytics</td><td class="featured-col">+ call and form click tracking</td><td>+ 30-day results report</td></tr>
-        <tr><th>Writing</th><td>You supply it; I edit and polish</td><td class="featured-col">I write it from a 30-minute interview</td><td>I write everything</td></tr>
-        <tr><th>Photos</th><td>Yours or licensed stock</td><td class="featured-col">15 stock images + yours, optimized</td><td>+ 1-hour on-site photo session</td></tr>
-        <tr><th>Revision rounds</th><td>2</td><td class="featured-col">2</td><td>3</td></tr>
-        <tr class="price-row"><th>Ready in</th><td>10 business days</td><td class="featured-col">15 business days</td><td>25 business days</td></tr>
+        <tr><th>Every site</th><td colspan="2">Click-to-call and text buttons · Google Maps and hours · fast on phones</td></tr>
+        <tr><th>Pages (up to)</th><td>5: Home, About, Services, Gallery/Work, Contact</td><td class="featured-col">7: + 2 service or service-area pages</td></tr>
+        <tr><th>Forms</th><td>Spam-protected contact form</td><td class="featured-col">Contact form + quote request form</td></tr>
+        <tr><th>Online booking</th><td>Link to your booking tool</td><td class="featured-col">Embedded (Square, Vagaro, Booksy…)</td></tr>
+        <tr><th>Reviews</th><td>3 reviews + Google review link</td><td class="featured-col">6–8 reviews + review-request QR code</td></tr>
+        <tr><th>Local search</th><td>Titles, sitemap, Search Console</td><td class="featured-col">+ schema, area pages, Google profile</td></tr>
+        <tr><th>Analytics</th><td>Visitor analytics</td><td class="featured-col">+ call and form click tracking</td></tr>
+        <tr><th>Writing</th><td>You supply it; I edit and polish</td><td class="featured-col">I write it from a 30-minute interview</td></tr>
+        <tr><th>Photos</th><td>Yours or licensed stock</td><td class="featured-col">15 stock images + yours, optimized</td></tr>
+        <tr><th>Revision rounds</th><td>2</td><td class="featured-col">2</td></tr>
+        <tr class="price-row"><th>Ready in</th><td>10 business days</td><td class="featured-col">15 business days</td></tr>
       </tbody>
     </table>
   </section>
 
-  <div class="founding">
-    <div>
-      <h2>Founding-client prices</h2>
-      <div class="prices">
-        <div><b>$900</b>Starter <s>$1,500</s></div>
-        <div><b>$1,800</b>Growth <s>$2,800</s></div>
-      </div>
-    </div>
-    <p><strong>For my first 3 clients only</strong> (not offered on Premium). In return, you agree in writing to a short testimonial and to let me show your site as an example of my work. Includes 3 months of Care Standard.</p>
-  </div>
-
   <section>
-    <h2>Monthly care plans <span>I host it, keep it running, and make your edits. No logins for you to manage.</span></h2>
+    <h2>Monthly care plan <span>I host it and keep it running. No logins for you to manage.</span></h2>
     <table class="care">
-      <colgroup><col class="label"><col><col><col></colgroup>
+      <colgroup><col class="label"><col></colgroup>
       <thead>
         <tr>
           <th></th>
-          <th><div class="plan"><div class="head"><h3>Care Essential</h3><div class="price">$49<small>/mo</small></div></div><div class="for">Hosting and upkeep</div></div></th>
-          <th><div class="plan featured"><div class="head"><h3>Care Standard</h3><div class="price">$99<small>/mo</small></div></div><div class="for"><span class="tag">3 months included</span>with every build</div></div></th>
-          <th><div class="plan"><div class="head"><h3>Care Plus</h3><div class="price">$199<small>/mo</small></div></div><div class="for">Ongoing content and local search</div></div></th>
+          <th><div class="plan featured"><div class="head"><h3>Care plan</h3><div class="price">$49<small>/mo</small></div></div><div class="for">Optional. Starts on launch day</div></div></th>
         </tr>
       </thead>
       <tbody>
-        <tr><th>Every plan</th><td colspan="3">Hosting and SSL · uptime monitoring · forms and booking tested monthly · security updates · backups</td></tr>
-        <tr><th>Edits per month</th><td>30 minutes</td><td class="featured-col">1 hour</td><td>3 hours</td></tr>
-        <tr><th>I reply within</th><td>3 business days</td><td class="featured-col">1 business day</td><td>Same business day</td></tr>
-        <tr><th>Monthly report</th><td>—</td><td class="featured-col">One-page email: visits, calls, forms</td><td>Report + 20-minute quarterly call</td></tr>
-        <tr><th>Google profile</th><td>—</td><td class="featured-col">2 posts a month</td><td>4 posts a month + review replies</td></tr>
-        <tr><th>New content</th><td>—</td><td class="featured-col">—</td><td>1 blog post or service page a month</td></tr>
-        <tr><th>Yearly refresh</th><td>—</td><td class="featured-col">New photos, copy tune-up</td><td>New photos, copy tune-up</td></tr>
+        <tr><th>Included</th><td class="featured-col">Hosting and SSL · uptime monitoring · forms and booking tested monthly · security updates · backups</td></tr>
+        <tr><th>I reply within</th><td class="featured-col">1 business day</td></tr>
+        <tr><th>Edits</th><td class="featured-col">Not included: $75/hr in 30-minute blocks, quoted before I start</td></tr>
       </tbody>
     </table>
   </section>
@@ -251,12 +213,12 @@
   <section>
     <h2>How it works</h2>
     <ul class="terms">
-      <li><strong>Starter and Growth: half to book, half at launch.</strong> Premium: 40% to book, 30% at first review, 30% at launch. Founding Starter: paid upfront.</li>
+      <li><strong>Half to book, half before launch.</strong> The deposit holds your spot.</li>
       <li><strong>The build clock starts once your content is in.</strong> Your site stays on a preview link until the final payment.</li>
       <li><strong>A revision round</strong> is one combined list of changes, sent within 5 business days. New pages or features are quoted first.</li>
-      <li><strong>Care Standard renews at $99/mo</strong> after the 3 included months. Cancel with 30 days' notice. Unused edit time doesn't roll over.</li>
+      <li><strong>The care plan is $49/mo from launch day,</strong> month to month. Cancel with 30 days' notice. No free months.</li>
       <li><strong>You own your domain, Google profile and accounts.</strong> If you leave a care plan, I hand over the code and help you move ($150 one-time).</li>
-      <li><strong>Need more?</strong> Work beyond your care plan is $75/hr, always quoted before I start.</li>
+      <li><strong>Edits and extra work</strong> are $75/hr in 30-minute blocks, always quoted before I start.</li>
     </ul>
   </section>
 

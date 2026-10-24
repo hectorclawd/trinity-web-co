@@ -11,15 +11,15 @@ Set up this client site from the intake answers. Follow the Trinity Web Co. play
    - No street address: if the business travels to customers, set `serviceAreaOnly: true`. If it's a shop that doesn't publish its street, leave `serviceAreaOnly: false`, omit `address` and set `locality` (e.g. "Oak Cliff, Dallas").
    - `phone.e164` is `+1` followed by 10 digits. `phone.textable` only if the intake says texts are OK.
    - Pick the most specific schema.org `schemaType` for the niche (HVACBusiness, Plumber, Electrician, HousePainter, HairSalon, BarberShop, NailSalon, BeautySalon, AutoRepair, AutoWash, ExerciseGym, SportsActivityLocation, ...).
-   - Reviews: only the ones the client listed, word for word, with the name and source as given. Starter shows 3; Growth and Premium show 6–8. Never write or improve a review.
+   - Reviews: only the ones the client listed, word for word, with the name and source as given. Launch shows 3; Growth shows 6–8. Never write or improve a review.
    - Services and areas: write body copy from the intake in the client's tone. Area pages must say something specific to that area, not the same text with the city name swapped.
-   - Quote form (Growth and Premium): the default wording and ZIP field suit trades. For a shop customers visit (barber, salon), set `forms.quoteHeading` and `forms.quoteSubmitLabel` (e.g. "Request a time"), `forms.quoteZip: false`, and a `forms.replyNote` that fits, since "within one business day" reads wrong for a haircut this week.
+   - Quote form (Growth): the default wording and ZIP field suit trades. For a shop customers visit (barber, salon), set `forms.quoteHeading` and `forms.quoteSubmitLabel` (e.g. "Request a time"), `forms.quoteZip: false`, and a `forms.replyNote` that fits, since "within one business day" reads wrong for a haircut this week.
    - Set `features` for the package (see the README table) and set `seo.title` (under 60 characters) and `seo.description` (under 155).
 4. Remove what the package doesn't include:
-   - Starter: delete `src/pages/services/`, `src/pages/areas/`, `src/pages/blog/`, `src/content/blog/` and the collection in `src/content.config.ts`; point service cards at `/#services` or omit `href`.
+   - Launch: delete `src/pages/services/`, `src/pages/areas/`, `src/pages/blog/`, `src/content/blog/` and the collection in `src/content.config.ts`; point service cards at `/#services` or omit `href`.
    - Growth: delete the blog pages and content; keep at most 2 service or area pages. List every service and area the client offers, and set `page: false` on the ones without their own page: they still show on the homepage, just without a link.
-   - Premium: keep everything; delete the sample post once real posts exist.
-   - Keep the page count within the package limit (4 / 7 / 12).
+   - A blog isn't in either package. Keep it only when the client buys it as a quoted extra, and delete the sample post once real posts exist.
+   - Keep the page count within the package limit (5 / 7).
 5. Brand: update `src/styles/tokens.css` (colors, fonts) from the intake's brand answers. Swap the `@fontsource-variable` package if the font changes (`npm install`, update the import). Check every text and button color pair for 4.5:1 contrast.
 6. Images: put the client's photos in `src/assets/` (keep each under ~2,000px; Astro outputs WebP), update the imports in `site.ts`, and write real alt text. Replace `public/favicon.svg` and `public/og-image.jpg` (1200×630), and describe the new share image in `seo.ogImageAlt`.
 7. If there's a booking embed or another iframe, add its host to `frame-src` in `vercel.json`. If the form uses Web3Forms, it's already allowed.

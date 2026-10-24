@@ -24,7 +24,7 @@
 **Add-ons:**
 - [Add-on]: $[price]
 
-**Total: $[total]** (50% to start, 50% at launch)
+**Total: $[total]** (50% to book, 50% before launch)
 
 ## Timeline
 
@@ -43,7 +43,7 @@ About [X] weeks from the day I have your content.
 
 ## After launch
 
-I recommend **[Care / Care Plus], $[price]/month**: hosting, updates, backups and [edits]. Optional. If you'd rather manage it yourself, I'll hand everything over.
+I recommend the **care plan, $49/month** from launch day: hosting, updates and backups. Edits are $75 an hour, quoted first. Optional. If you'd rather manage it yourself, I'll hand everything over.
 
 ## Next step
 

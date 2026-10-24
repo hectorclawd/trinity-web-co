@@ -31,14 +31,13 @@ Source: playbook §4. Goal: find out if they're a fit, then send a proposal **wi
 12. When do you want this live, and is anything driving that date?
 13. Who besides you has a say in the decision?
 14. Have you set a budget?
-    *If they hesitate:* "My packages run $1,500 to $4,800. Most businesses like yours fit Growth at $2,800. For my first 3 clients only, I have founding prices: $900 for Starter or $1,800 for Growth."
-    *(Drop the founding sentence once those spots are filled.)*
+    *If they hesitate:* "My packages start at $499. Most businesses like yours fit Growth, which starts at $999. While I build my portfolio, Launch starts at $499 for a 5-page site."
 
 ### Close (2 min)
 
-> Based on what you told me, I'd recommend **[package]**. I'll send a proposal by **[tomorrow, time]** with the exact pages, price and timeline. If it looks right, you sign online and pay a deposit to hold your spot: half the price, or 40% for Premium. Any questions before then?
+> Based on what you told me, I'd recommend **[package]**. I'll send a proposal by **[tomorrow, time]** with the exact pages, price and timeline. If it looks right, you sign online and pay a deposit to hold your spot: half the price, with the other half due before launch. Any questions before then?
 
-- Pitch **Growth first**. Starter is the fallback if budget is tight.
+- Pitch **Growth first**. Launch is the fallback if budget is tight.
 - Don't promise rankings or results. Say what you'll build and how you'll measure it.
 
 ---

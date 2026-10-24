@@ -3,7 +3,7 @@
 Paste the client's intake form answers here (playbook section 4, intake form fields). `/new-site` reads this file to fill `src/content/site.ts`. Leave a field blank if the client didn't answer. Never guess.
 
 **Date received:**
-**Package:** Starter / Growth / Premium
+**Package:** Launch / Growth
 
 ## Business basics
 - Legal business name:

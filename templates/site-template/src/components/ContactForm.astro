@@ -6,7 +6,7 @@ import { isPlaceholder } from '../lib/format';
 
 interface Props {
   endpoint: string;
-  /** "quote" adds a job-type select and, unless site.forms.quoteZip is false, a ZIP field (Growth and Premium) */
+  /** "quote" adds a job-type select and, unless site.forms.quoteZip is false, a ZIP field (Growth) */
   variant?: 'contact' | 'quote';
   jobTypes?: string[];
   /** Field labels that differ per business */

@@ -19,7 +19,7 @@ The sample data is a fictional "Sample HVAC Co." so the template builds and can 
 ```
 src/content/site.ts        all business facts (single source of truth)
 src/content/types.ts       the shape of site.ts
-src/content/blog/          Markdown posts (Premium only)
+src/content/blog/          Markdown posts (only when a blog is bought as an extra)
 src/components/            Header, Footer, Hero, ServiceCard, Reviews, MapEmbed, ContactForm,
                            BookingEmbed, CTABand, FAQ, Gallery, HoursList, CallBar
 src/layouts/BaseLayout.astro  meta tags, Open Graph, LocalBusiness schema, analytics
@@ -35,14 +35,14 @@ vercel.json                security headers and CSP
 
 ## Package → what to keep
 
-| | Starter | Growth | Premium |
-|---|---|---|---|
-| Pages | index, about, contact (up to 4) | + 2 service or area pages, gallery or FAQ (up to 7) | + up to 4 more service or area pages, and blog (up to 12) |
-| Services and areas without their own page | n/a | `page: false` | `page: false` |
-| `features.quoteForm` | false | true | true (multi-step: extend ContactForm) |
-| `features.booking` | false (link only, in the nav or CTA) | true (embed) | true (embed, styled to match) |
-| `features.blog` | false | false | true |
-| Reviews | 3 | 6–8 | 6–8, plus a reviews page |
+| | Launch | Growth |
+|---|---|---|
+| Pages | index, about, services, gallery or work, contact (up to 5) | + 2 service or area pages (up to 7) |
+| Services and areas without their own page | n/a | `page: false` |
+| `features.quoteForm` | false | true |
+| `features.booking` | false (link only, in the nav or CTA) | true (embed) |
+| `features.blog` | false | false (true only when a blog is bought as an extra) |
+| Reviews | 3 | 6–8 |
 
 ## Demo sites
 

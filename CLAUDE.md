@@ -17,8 +17,8 @@ A SessionStart hook (`.claude/settings.json`, script `.claude/hooks/checklist.js
 | Topic | Playbook section |
 |---|---|
 | Ideal client, target niches, positioning | §1 Business model |
-| Packages (Starter / Growth / Premium), founding-client prices, add-ons, revision rounds | §2 Service packages |
-| Care plans (Care Essential / Care Standard / Care Plus) and the rules that protect Hector's time | §3 Monthly care plans |
+| Packages (Launch / Growth, starting prices), add-ons, revision rounds | §2 Service packages |
+| The care plan ($49/mo, edits billed hourly) and the rules that protect Hector's time | §3 Monthly care plan |
 | Client workflow: discovery call, proposal, contract, deposit, intake, content, build, review rounds, launch checklist, handoff | §4 Client workflow |
 | Stack, Claude Code workflow, starter template structure, naming conventions | §5 Technical build process |
 | Pre-launch QA checklist | §5 Pre-launch QA checklist |
@@ -65,7 +65,7 @@ CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude
   - River deep `#0E3F3C`
   - Limestone `#ECEFE9` (page background)
   - Paper `#FAFBF8`
-  - Gold `#EDB23A` (primary buttons and the founding-client offer only)
+  - Gold `#EDB23A` (primary buttons only)
 - **Signature element:** the hero's line drawing of the Trinity River with Dallas neighborhoods along it. The logo is the Margaret Hunt Hill Bridge arch with three cables (the "Trinity").
 - **Voice:** plain, friendly, specific. Write like you're talking to a shop owner at their counter. No jargon, no hype, no fake urgency. Sentence case everywhere. Never promise rankings or results. Don't lead with "I use AI" (playbook §1).
 
@@ -129,16 +129,15 @@ Other open items:
 - [ ] Business setup per playbook §6 (LLC, EIN, bank account, sales tax question on hosting).
 - [ ] Attorney review (playbook §6, about $300–$600) of `business/sales/master-service-agreement.md` and `business/sales/contract-scope-template.md` before the first client signs. Bring the "Attorney review list" at the end of the agreement. It covers:
   1. Order of precedence between the agreement and a scope page.
-  2. Deposit refund rule: fully refundable until the kickoff call, non-refundable after; founding Starter: 50% of the upfront payment counts as the deposit (§3.2, §11.2; playbook §4, contract essentials #3 and #11).
+  2. Deposit refund rule: fully refundable until the kickoff call, non-refundable after (§3.2, §11.2; playbook §4, contract essentials #3 and #11).
   3. Late fee of 1.5%/month and Texas usury limits (§3.5).
   4. Sales tax on care-plan hosting (§3.7; also a CPA or Comptroller question).
   5. Privacy policy and industry disclaimers are the client's responsibility (§5.6).
   6. Ownership: the client owns the site once the build fees are paid, and unpaid care-plan fees don't affect ownership; Designer keeps and licenses its template and components (§6.1–6.2).
-  7. Care plan auto-renewal after the 3 included months (§7.3); ending a plan unpaid for 60 days by written notice, handoff with fees still owed (§7.6a, §7.8); the 30-day hosting window after any care plan ends (§7.8).
+  7. Care plan monthly renewal from launch day (§7.3); ending a plan unpaid for 60 days by written notice, handoff with fees still owed (§7.6a, §7.8); the 30-day hosting window after any care plan ends (§7.8).
   8. Abandonment: invoicing the full remaining balance (§8.2).
   9. Warranty disclaimer, accessibility, and a possible Texas DTPA waiver (§9.3–9.4).
   10. Liability cap, indirect-damages exclusion, client indemnity, fit with E&O insurance (§10).
   11. Disputes: venue, attorney's fees, mediation (§12).
   12. Confidentiality, customer data and breach duties (§13.2–13.3).
   13. Signing before the LLC exists, and assigning to the LLC later (§13.9).
-  14. FTC endorsement disclosure for founding-client testimonials (scope page).

@@ -23,7 +23,7 @@
 
 ## 1. Scope
 
-**Package:** ☐ Starter ☐ Growth ☐ Premium
+**Package:** ☐ Launch (from $499, up to 5 pages) ☐ Growth (from $999, up to 7 pages)
 
 **Pages (exact list):**
 
@@ -35,7 +35,7 @@
 
 **Features included:** ________ *(copy from playbook §2 for the chosen package: forms, booking, reviews, SEO setup, analytics, copywriting, photos)*
 
-**Revision rounds included:** ____ (Starter 2 · Growth 2 · Premium 3)
+**Revision rounds included:** ____ (Launch 2 · Growth 2)
 
 **Add-ons:** ________ *(e.g. extra page $150, Spanish version +40%, rush +25%; or "none")*
 
@@ -44,7 +44,7 @@
 ## 2. Timeline
 
 - **Client content due date:** ________ (7 days after kickoff)
-- **Build turnaround:** ____ business days (Starter 10 · Growth 15 · Premium 25), **starting the day all content is received**, not the day this is signed.
+- **Build turnaround:** ____ business days (Launch 10 · Growth 15), **starting the day all content is received**, not the day this is signed.
 - Review links are sent with a short walkthrough video. Revisions are turned around in 2–3 business days.
 
 ## 3. Payment
@@ -54,28 +54,20 @@
 | Package price | $________ | |
 | Add-ons | $________ | |
 | **Total** | **$________** | |
-**Starter and Growth (50/50):**
+**Launch and Growth (50/50):**
 
 | Payment | Amount | Due |
 | --- | --- | --- |
 | Deposit | $________ (50%) | At signing; work starts when it clears |
 | Final payment | $________ (50%) | Before the domain points to the new site |
 
-**Premium (40/30/30):**
-
-| Payment | Amount | Due |
-| --- | --- | --- |
-| Deposit | $________ (40%) | At signing; work starts when it clears |
-| Second payment | $________ (30%) | When the first review link is sent |
-| Final payment | $________ (30%) | Before the domain points to the new site |
-
-*Founding Starter ($900): paid 100% upfront at signing. $450 of it (50%) counts as the deposit.* Delete the schedules that don't apply.
+Until the final payment clears, the site stays on a preview link; the domain is pointed at it after that.
 
 - **Deposit refunds:** the deposit is fully refundable if the Client cancels before the kickoff call, and non-refundable after the kickoff call. *(Attorney to confirm this wording.)*
 - Percentage add-ons (Spanish version, rush delivery) are calculated on the package price the Client actually pays.
 
 - Payment by card or ACH bank transfer through Stripe.
-- **Late fee:** ____% per month on balances more than 15 days overdue. *(Playbook example: 1.5%. Attorney to confirm.)*
+- **Late fee:** ____% per month on balances more than 15 days overdue, and work pauses until the balance is paid. *(Proposed: 1.5%. Not final: attorney to confirm.)*
 - Work pauses while any payment is overdue. The site stays on a preview link until paid in full.
 
 ## 4. Revisions and change orders
@@ -98,15 +90,15 @@ The Client will:
 - Once paid in full, the Client owns the final site code, content and domain.
 - The Designer keeps the right to reuse its own templates, components and know-how on other projects.
 - The Designer may show the finished site in its portfolio.
-- **The Client always owns their domain**, registered in the Client's own registrar account. The Client also owns their Google Business Profile and Google Search Console; the Designer is added as a manager or user, never the only owner. Visitor stats from the hosting analytics are shared in the care plan's reports.
+- **The Client always owns their domain**, registered in the Client's own registrar account. The Client also owns their Google Business Profile and Google Search Console; the Designer is added as a manager or user, never the only owner. Visitor stats from the hosting analytics are shared on request.
 - Logins are shared through a password manager, never by email or text.
 
 ## 7. Hosting and care plan
 
-**Plan after the included months:** ☐ Care Essential $49/mo ☐ Care Standard $99/mo ☐ Care Plus $199/mo ☐ Declined (handoff after the included months)
+**Care plan:** ☐ Care plan $________/month ☐ Declined (handoff at launch)
 
-- The first 3 months of Care Standard are included in the build price, founding prices included. The plan then renews automatically at **$________/month**, billed on the ____ of each month by auto-charge, starting ________.
-- Included: ________ *(copy from playbook §3 for the chosen plan)*. Unused edit time does not roll over. Work beyond the plan is $75/hour, quoted first.
+- The care plan starts billing on launch day (________) and renews every month at **$________/month**, billed on the ____ of each month by auto-charge. There are no free or included months.
+- Included: ________ *(copy from playbook §3)*. Content edits are not included: every edit, and any other work beyond the plan, is $75/hour in 30-minute blocks, quoted first.
 - **Either side may cancel with 30 days' written notice.**
 - **On cancellation:** the Designer transfers the GitHub repository to the Client's account and helps move hosting, for a one-time $150 handoff fee. The Designer keeps hosting the site for 30 days after the plan ends so the Client can move it.
 - **Late payments:** if a care-plan payment isn't fixed within 15 days, edits pause, but the site stays online. If it's still unpaid 60 days after its due date, the Designer may end the care plan by written notice and hand off the site. The unpaid fees and the handoff fee stay owed (master service agreement §7.6a and §7.8).
@@ -135,19 +127,6 @@ For 30 days after launch, the Designer fixes bugs (things that don't work as bui
 ## 12. Governing law
 
 This agreement is governed by the laws of the State of Texas. Venue is Dallas County, Texas.
-
----
-
-## Founding-client terms *(delete if not a founding client)*
-
-In exchange for the founding price of $________ (standard price $________), the Client agrees to:
-
-- Provide a short written testimonial after launch
-- Allow the Designer to show the site as a case study
-
-A Google review is not part of this exchange. The Designer may ask for one after launch, as with every client, and the Client is free to decline.
-
-> **Ask the attorney:** when you publish a founding client's testimonial, FTC endorsement rules may require saying the client received a discount.
 
 ---
 

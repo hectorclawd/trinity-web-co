@@ -1,6 +1,8 @@
 # Trinity Web Co.: handoff
 
 Last updated: 2026-10-20 (Instagram weeks 1 and 2 built in English and merged: C1, S1, C2, C6, S3; posts and contracts now promise Google Search Console, not analytics; the ElevenLabs key is in Bitwarden; next is week 3 and the narrator voice. Earlier: site polish, white hero river dots, site FAQ and form additions, and the Instagram brand kit merged; `motion-studio` moved out of this repo; production deploys paused). Written for a fresh Claude Code session picking this up with no other context.
+**Prices (2026-10-24, latest):** Launch from $499 (up to 5 pages), Growth from $999 (up to 7 pages), one care plan at $49/mo for hosting and upkeep with no edit time (edits $75/hr in 30-minute blocks, quoted first), billed from launch. 50% to book, 50% before launch. No Premium, no founding offer, no included care months. They're in the playbook §1–3 and §8, the sales docs, contracts, Stripe guide, client template, Grok prompts and the Instagram kit (C1 and C8 re-done; new slides handed to Hector for Drive). The site's prices are on branch `site-new-prices`, waiting on Hector's OK of the preview. Any other price further down this file is history.
+
 Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/playbook.md` (how the business runs) before changing anything. `CHECKLIST.md` holds the current DONE / TO DO list; a SessionStart hook (`.claude/hooks/checklist.js`) summarizes it at the start of every session.
 
 ## Where things stand

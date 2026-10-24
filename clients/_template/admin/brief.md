@@ -1,8 +1,8 @@
 # [Business name]
 
 **Status:** discovery / proposal / building / launched / care plan
-**Package:** Launch / Storefront / Growth
-**Care plan:** none / Care / Care Plus
+**Package:** Launch / Growth
+**Care plan:** none / Care plan ($49/mo)
 **Contract signed:** [date]
 **Deposit paid:** [date]
 **Launch date:** [target] → [actual]

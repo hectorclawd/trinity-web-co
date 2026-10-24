@@ -109,7 +109,7 @@ export interface SiteConfig {
   forms: {
     /** Formspree or Web3Forms endpoint. Keep the template placeholder until it exists (see isPlaceholder in src/lib/format.ts). */
     contactEndpoint: string;
-    /** Job types for the quote form (Growth and Premium) */
+    /** Job types for the quote form (Growth) */
     quoteJobTypes?: string[];
     /** Quote form wording. Defaults suit trades: "Get a free quote" and "Request my quote" */
     quoteHeading?: string;

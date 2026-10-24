@@ -30,17 +30,14 @@ What that means on real invoices:
 
 | Invoice | By card | By ACH |
 | --- | --- | --- |
-| Founding Starter, $900 upfront | about $30.00 | about $8.60 |
-| Growth deposit, $1,400 | about $46.50 | about $10.60 |
-| Premium deposit, $1,920 | about $63.70 | about $12.70 |
-| Care Essential, $49/mo | about $2.06 | about $0.73 |
-| Care Standard, $99/mo | about $3.86 | about $1.48 |
-| Care Plus, $199/mo | about $7.46 | about $2.98 |
+| Launch deposit, $249.50 (half of $499) | about $8.53 | about $2.99 |
+| Growth deposit, $499.50 (half of $999) | about $16.78 | about $5.99 |
+| Care plan, $49/mo | about $2.06 | about $0.73 |
 
 Two things follow from the table:
 
 - **Ask for ACH on build invoices.** Keep cards on as a fallback, and add a line to each invoice: "Paying by bank transfer (ACH) is easiest for both of us."
-- **A refunded deposit still costs you its fees.** If a Growth client cancels before kickoff and gets the $1,400 deposit back, you're out about $46.50 by card, or $10.60 by ACH.
+- **A refunded deposit still costs you its fees.** If a Growth client at $999 cancels before kickoff and gets the $499.50 deposit back, you're out about $16.78 by card, or $5.99 by ACH.
 
 ## One-time account setup
 
@@ -54,7 +51,7 @@ Do these once, in order, in the Stripe Dashboard.
 6. **Payment methods:** turn on cards and ACH Direct Debit (US bank account). Leave the others off.
 7. **Invoice defaults** (Settings → Billing → Invoices): due in 15 days unless the scope says otherwise; send reminders before and after the due date; footer: "Questions about this invoice? Text or email [name] at [phone] / [email]."
 8. **Failed care-plan payments** (Billing → Revenue recovery → Retries): Smart Retries, 8 tries within 2 weeks (Stripe's default). When retries run out: **"Leave the subscription past-due."** Don't pick cancel or pause. Playbook §3 says a care plan ends only by your written notice after 60 days unpaid, never automatically, and the site never goes offline. Also turn on retries for ACH (Local payment methods).
-9. **Customer emails** (Settings → Billing → Subscriptions and emails): send receipts, failed-payment emails with a link to update the card, and the reminder before a trial ends. That reminder doubles as notice that the included months are ending.
+9. **Customer emails** (Settings → Billing → Subscriptions and emails): send receipts and failed-payment emails with a link to update the card. There are no trials: the care plan bills from launch day.
 10. **Customer portal** (Settings → Billing → Customer portal): turn it on so clients can update their card or bank and see past invoices. **Turn off canceling and switching plans** in the portal. The contract needs 30 days' written notice to cancel (MSA §7.7), and plan changes go through a new scope page.
 
 ## Product catalog
@@ -65,21 +62,14 @@ Create these once (Product catalog → Add product). Names are what clients see 
 
 | Product | Price |
 | --- | --- |
-| Starter website | $1,500 |
-| Growth website | $2,800 |
-| Premium website | $4,800 |
-| Starter website, founding price | $900 |
-| Growth website, founding price | $1,800 |
+| Launch website | From $499: set the price from the signed scope page on each invoice |
+| Growth website | From $999: set the price from the signed scope page on each invoice |
 
-Premium has no founding price (playbook §2).
-
-**Care plans** (recurring, monthly):
+**Care plan** (recurring, monthly):
 
 | Product | Price |
 | --- | --- |
-| Care Essential | $49/month |
-| Care Standard | $99/month |
-| Care Plus | $199/month |
+| Care plan | $49/month |
 
 **Add-ons and extra work** (one-time):
 
@@ -100,16 +90,12 @@ Each payment is its own invoice, sent when the scope page says it's due. Create 
 
 | Package | Invoice 1 (at signing) | Invoice 2 | Invoice 3 |
 | --- | --- | --- | --- |
-| Starter, Growth | Deposit, 50% | Final, 50%, before the domain points to the site | — |
-| Premium | Deposit, 40% | Second, 30%, when the first review link goes out | Final, 30%, before the domain points to the site |
-| Founding Starter | 100% ($900), at signing | — | — |
+| Launch, Growth | Deposit, 50% | Final, 50%, before the domain points to the site | — |
 
 Line wording, so the client can match each invoice to the scope page:
 
-- "Growth website: deposit (50% of $2,800)"
-- "Growth website: final payment (50% of $2,800)"
-- "Premium website: second payment (30% of $4,800)"
-- Founding Starter, in the invoice memo: "$450 of this payment is the deposit (scope page §3)."
+- "Growth website: deposit (50% of $[scope price])"
+- "Growth website: final payment (50% of $[scope price])"
 
 Add-ons go on the deposit invoice when they're agreed at signing, or on their own invoice when they're change orders.
 
@@ -122,12 +108,12 @@ Add-ons go on the deposit invoice when they're agreed at signing, or on their ow
 
 ## Starting a care plan
 
-Every build includes 3 months of Care Standard; the plan the client picked on the scope page starts after that (playbook §3, MSA §7.2–7.3).
+The care plan is $49 a month and starts billing on launch day. There are no free or included months (playbook §3, MSA §7.2–7.3).
 
-1. **At launch**, create a subscription for the customer with the plan picked on the scope page (Care Essential, Standard or Plus), set to charge automatically.
-2. **Add a trial**: free for 3 monthly periods, then the plan's monthly price. Stripe calls this a trial offer. The client pays nothing for the included months, and the first charge lands on the same day of the month as launch. Put that date on the scope page ("billed on the ____ of each month, starting ________").
-3. **Get a payment method on file**: send the client the customer portal link so they can add a card or bank account. Ask for ACH; it costs them nothing extra and you about $1.48 a month instead of $3.86 on Care Standard.
-4. **If they declined a care plan** on the scope page, don't create a subscription. Calendar the handoff for the end of the included months instead.
+1. **At launch**, create a subscription for the customer on the Care plan product, set to charge automatically, with no trial. The first charge lands on launch day, and later ones on the same day each month. Put that date on the scope page ("billed on the ____ of each month").
+2. **Edits are separate**: bill them on their own invoices with the "Extra work, per 30 minutes" product, quoted first.
+3. **Get a payment method on file**: send the client the customer portal link so they can add a card or bank account. Ask for ACH; it costs them nothing extra and you about $0.73 a month instead of $2.06.
+4. **If they declined a care plan** on the scope page, don't create a subscription. Do the handoff at launch instead ($150, playbook §4).
 
 **When a care-plan payment fails:**
 
@@ -155,7 +141,7 @@ At a handful of Dallas clients, a manual rate is enough. Fill the same answer in
 New Stripe accounts come with a test mode (a sandbox). Fake cards and bank accounts work there, and nothing is charged. Run these once:
 
 - [ ] Send a test Growth deposit invoice to your own email. Pay one copy with test card `4242 4242 4242 4242` and another by test ACH. Check the email, the invoice page and the receipt for the right name, logo and wording.
-- [ ] Create a test Care Standard subscription with the 3-month free trial. Confirm the first charge date and that the trial-ending reminder is set to go out.
+- [ ] Create a test care plan subscription ($49/month) starting today, with no trial. Confirm it charges today and on the same day next month.
 - [ ] Open the customer portal link: you can update the payment method, and there's no cancel button.
 - [ ] Refund a test payment and check what it costs.
 

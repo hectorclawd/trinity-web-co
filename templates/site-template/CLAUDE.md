@@ -9,8 +9,8 @@ Built and maintained by Trinity Web Co. (Hector). Follow the Trinity Web Co. pla
 | Business | {{BUSINESS_NAME}} |
 | Client slug | {{CLIENT_SLUG}} (repo `site-{{CLIENT_SLUG}}` in the `trinitywebco-sites` GitHub org, Vercel project of the same name) |
 | Niche | {{NICHE}} |
-| Package | {{Starter / Growth / Premium}} |
-| Care plan | {{Care Essential / Care Standard / Care Plus}} |
+| Package | {{Launch / Growth}} |
+| Care plan | {{Care plan ($49/mo) / none}} |
 | Decision-maker | {{NAME}}, prefers {{text / email / call}} |
 | Main call to action | {{Call / Book / Request a quote}} |
 

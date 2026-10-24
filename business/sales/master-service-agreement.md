@@ -46,12 +46,11 @@ This master service agreement (the "Agreement") starts on ________ (the "Effecti
 
 ## 3. Payment
 
-3.1 **Fees and schedule.** Client pays the fees in the Scope on the schedule in the Scope. Under the playbook, the schedule is 50/50 for Starter and Growth, 40/30/30 for Premium, and 100% at signing for a founding Starter.
+3.1 **Fees and schedule.** Client pays the fees in the Scope on the schedule in the Scope. Under the playbook, the schedule for Launch and Growth is a 50% deposit to book and 50% before launch. The final payment is due before the domain is pointed at the new Site; until then the Site stays on a preview link.
 
 3.2 **Deposit.** Work starts only after the deposit has cleared. The deposit holds Client's place in Designer's schedule.
 - If Client cancels **before the kickoff call**, Designer refunds the deposit in full.
 - If Client cancels **after the kickoff call**, the deposit is not refundable.
-- When a Scope is paid 100% at signing (founding Starter), **50% of that payment counts as the deposit**. If Client cancels after the kickoff call, section 11.3 decides how much of the other 50% is refunded.
 
 > **⚖ Attorney review:** confirm that this refund rule is enforceable as written and appears the same way here, in section 11 and on the Scope.
 
@@ -113,21 +112,20 @@ Client will:
 
 6.5 **Portfolio.** Designer may show the finished Site, its URL and screenshots in Designer's portfolio and marketing. Designer will only publish a testimonial or case study that Client wrote or approved, attributed the way Client approves.
 
-6.6 **Domain and accounts.** Client always owns the domain, registered in Client's own registrar account. Designer never registers a client domain in its own name. Client also owns its Google Business Profile and Google Search Console accounts. Designer is added as a manager or user, never as the only owner. Visitor statistics from the hosting provider's analytics stay on Designer's hosting account and are shared with Client in the care plan's reports.
+6.6 **Domain and accounts.** Client always owns the domain, registered in Client's own registrar account. Designer never registers a client domain in its own name. Client also owns its Google Business Profile and Google Search Console accounts. Designer is added as a manager or user, never as the only owner. Visitor statistics from the hosting provider's analytics stay on Designer's hosting account and are shared with Client on request.
 
 ## 7. Hosting and care plan
 
 7.1 **Hosting.** While the Site is on a care plan, Designer hosts it on Designer's hosting account (currently Vercel Pro). Hosting is included in the care plan, not sold separately. Every Site Designer hosts must be on a care plan.
 
-7.2 **Included months.** Each build includes the first 3 months of Care Standard, founding prices included. The included months have no separate cash value and aren't refunded if Client cancels them early.
+7.2 **When billing starts.** The care plan starts billing on the day the Site launches. There are no free or included months.
 
-7.3 **Renewal.** After the included months, the care plan chosen on the Scope starts automatically at its monthly price, unless Client cancels in writing before it starts. Designer charges it by card or ACH on the same day each month.
+7.3 **Renewal.** The care plan renews every month at the price on the Scope until either party cancels under 7.7. Designer charges it by card or ACH on the same day each month.
 
 > **⚖ Attorney review:** confirm that this automatic renewal is disclosed clearly enough for a business client in Texas. Ask whether the Scope should have a separate checkbox or initials next to the renewal terms.
 
-7.4 **What's included.** Each plan includes what the Scope lists (from playbook §3), including the content-edit time and response time. Response times are in business days and refer to Designer's first reply and start of work, not finished work.
-- Unused edit time doesn't roll over.
-- Work beyond the plan is billed at $75 an hour in 30-minute blocks, quoted first.
+7.4 **What's included.** The plan includes what the Scope lists (from playbook §3): hosting, SSL and uptime monitoring, monthly form and booking checks, security updates, backups and replies within 1 business day. Response times are in business days and refer to Designer's first reply and start of work, not finished work.
+- Content edits aren't included in the plan. Every edit, and any other work beyond the plan, is billed at $75 an hour in 30-minute blocks, quoted first.
 
 7.5 **No uptime promise.** Designer monitors the Site and works to fix outages within the plan's response time. Designer doesn't guarantee uptime, and isn't responsible for outages caused by the hosting provider, the domain registrar, Client's form or booking tools, or other third parties, beyond working with them to fix the problem.
 
@@ -139,7 +137,7 @@ Client will:
 
 7.7 **Cancellation.** Either party may cancel a care plan with 30 days' written notice.
 
-7.8 **Handoff.** When a care plan ends, or Client declines one after the included months, Designer will:
+7.8 **Handoff.** When a care plan ends, or Client declines one, or Client has paid in full and asks for the code, Designer will:
 - Transfer the Site's GitHub repository to Client's own account.
 - Help move hosting to an account Client controls.
 - Charge a one-time handoff fee of $150.
@@ -184,7 +182,7 @@ After the care plan ends, Designer keeps hosting the Site for 30 days so Client 
 > - the 12-month care-plan window in 10.1
 > - whether 10.2 should apply to both sides or only to Designer
 > - whether the indemnity in 10.3 should be mutual
-> - how all of this fits with professional liability (E&O) insurance, which §6 says is required before Premium clients
+> - how all of this fits with professional liability (E&O) insurance (playbook §6)
 
 ## 11. Termination
 
@@ -268,14 +266,13 @@ By signing, each party agrees to this Agreement. Each signer confirms they have 
 4. **Sales tax** on care-plan hosting (3.7; also a CPA or Comptroller question).
 5. **Privacy policy and disclaimers:** whether that responsibility sits with Client (5.6).
 6. **Ownership wording:** Client owns the Site once the build fees are paid, and unpaid care-plan fees don't affect ownership; Client owns the code while Designer keeps and licenses Designer Tools (6.1–6.2).
-7. **Automatic renewal and ending for non-payment:** disclosure and consent for the renewal after the 3 included months (7.3); notice, the handoff and collecting unpaid fees when a care plan ends after 60 days unpaid, and the 30-day hosting window afterward (7.6a, 7.8).
+7. **Automatic renewal and ending for non-payment:** disclosure and consent for the monthly renewal that starts at launch (7.3); notice, the handoff and collecting unpaid fees when a care plan ends after 60 days unpaid, and the 30-day hosting window afterward (7.6a, 7.8).
 8. **Abandonment:** whether invoicing the full remaining balance is enforceable (8.2).
 9. **Warranty disclaimer, accessibility and the Texas Deceptive Trade Practices Act:** wording, formatting and whether to include a waiver (9.3–9.4).
 10. **Liability cap, the indirect-damages exclusion, the indemnity, and fit with E&O insurance** (10.1–10.3).
 11. **Disputes:** venue, attorney's fees, mediation (12).
 12. **Confidentiality, customer data and breach duties** (13.2–13.3).
 13. **Signing before the LLC exists,** and assigning the Agreement to the LLC later (13.9).
-14. **Founding-client testimonials (on the Scope):** whether the FTC endorsement rules require saying the client got a discount when the testimonial is published.
 
 ## Before first use (Hector)
 

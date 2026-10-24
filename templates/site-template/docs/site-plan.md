@@ -2,7 +2,7 @@
 
 Send this to the client on build day 1 and get a thumbs-up before designing (playbook section 4, build phase).
 
-**Package:** {{Starter / Growth / Premium}} (page limit: {{4 / 7 / 12}})
+**Package:** {{Launch / Growth}} (page limit: {{5 / 7}})
 
 ## Pages
 

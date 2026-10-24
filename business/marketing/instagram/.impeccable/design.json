@@ -253,7 +253,7 @@
       "kind": "custom",
       "refersTo": "hero",
       "description": "A package name over its price, the price set as the hero, as on C1.",
-      "html": "<div class=\"ds-price\"><p class=\"ds-price-name\">Growth</p><p class=\"ds-price-figure\">$2,800</p><p class=\"ds-price-pages\">Up to 7 pages</p></div>",
+      "html": "<div class=\"ds-price\"><p class=\"ds-price-name\">Growth</p><p class=\"ds-price-figure\">From $999</p><p class=\"ds-price-pages\">Up to 7 pages</p></div>",
       "css": ".ds-price { font-family: 'Archivo Variable', system-ui, sans-serif; color: #13262B; } .ds-price p { margin: 0; } .ds-price-name { font-size: 48px; font-weight: 760; font-stretch: 116%; letter-spacing: -0.015em; } .ds-price-figure { margin-top: 8px; font-size: 128px; line-height: 0.9; font-weight: 820; font-stretch: 125%; letter-spacing: -0.035em; color: #0E3F3C; } .ds-price-pages { margin-top: 16px; font-size: 36px; font-weight: 620; font-stretch: 108%; }"
     },
     {

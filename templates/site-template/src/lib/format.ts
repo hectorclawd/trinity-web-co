@@ -17,7 +17,7 @@ export function isPlaceholder(value: string | undefined): boolean {
   return !value || value.includes('REPLACE_ME');
 }
 
-/** Form heading, button text and the line next to the form, from site.forms (quote form on Growth and Premium) */
+/** Form heading, button text and the line next to the form, from site.forms (quote form on Growth) */
 export function formLabels(site: SiteConfig) {
   const quote = site.features.quoteForm;
   return {

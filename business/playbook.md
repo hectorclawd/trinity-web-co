@@ -78,6 +78,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | §5: Claude builds, Codex fixes (step 9 of "Using Claude Code efficiently"); decisions log: the Codex split |
 | 2026-10-23 | §1–4, §6–8: the outreach kit's prices (Launch and Growth as ranges, one care plan); Premium, the founding offer and the bundled care months removed; §7 scripts use the kit's Launch line; §8 math flagged for a redo |
 | 2026-10-24 | §1–3: Launch from $499, Growth from $999, care plan $49/mo with no edit time included (edits at $75/hr); §4 budget line and §7 scripts updated to match |
+| 2026-10-24 | §8: income math redone for the new prices (about $26/hr take-home at 10 clients); §5 template tree and §6 insurance line no longer mention Premium |
 
 ## 1. Business model
 
@@ -381,7 +382,7 @@ site-template/
 │   ├── content/
 │   │   ├── site.ts           # SINGLE source of truth: name, phone, hours, address,
 │   │   │                     # services, areas, reviews, social links, booking URL
-│   │   └── blog/             # Markdown posts (Premium)
+│   │   └── blog/             # Markdown posts (not in either package; a quoted extra)
 │   ├── components/           # Header, Footer, Hero, ServiceCard, Reviews, MapEmbed,
 │   │                         # ContactForm, BookingEmbed, CTABand, FAQ, Gallery
 │   ├── layouts/BaseLayout.astro  # meta tags, Open Graph, LocalBusiness schema
@@ -470,9 +471,9 @@ This is general information, not legal or tax advice. Fees below are approximate
 - [ ] Get a free EIN from IRS.gov (10 minutes, use it instead of your SSN on forms)
 - [ ] Open a free business checking account (local credit union, or an online bank such as Mercury or Novo)
 - [ ] Calendar the annual Texas franchise tax Public Information Report, due May 15. Small LLCs owe no franchise tax below the revenue threshold, but the report is still required
-- [ ] Ask the Texas Comptroller (or a CPA) whether you need a sales tax permit. Texas treats some data processing and hosting as taxable, so bundled hosting in care plans may be taxable even if design work is not. Settle this before billing your first care plan
+- [ ] Ask the Texas Comptroller (or a CPA) whether you need a sales tax permit. Texas treats some data processing and hosting as taxable, so hosting in the care plan may be taxable even if design work is not. Settle this before billing your first care plan
 - [ ] Set aside 25–30% of profit for federal taxes (self-employment tax is 15.3%; Texas has no state income tax). Pay quarterly estimates (Apr 15, Jun 15, Sep 15, Jan 15) once you expect to owe $1,000+ for the year
-- [ ] Optional at the start, required before Premium clients: professional liability (E&O) insurance, often $30–$60/mo for a solo web designer
+- [ ] Optional at the start: professional liability (E&O) insurance, often $30–$60/mo for a solo web designer
 - [ ] One-time: pay a Texas small-business attorney (about $300–$600) to review your contract template. Cheaper than one bad dispute
 
 ### Contract essentials
@@ -624,36 +625,35 @@ From the same design guide (section 5, design toolkit; decisions log, 2026-10-21
 
 ## 8. Pricing and income math
 
-> **Out of date since 2026-10-23.** The table below uses the old prices (Starter, Premium, three care plans, founding prices). Redo it for the section 2–3 prices before relying on these numbers.
-
-At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $3,250 a month after costs and taxes, on roughly 13 hours a week. That's around $59 per hour in every scenario; growth comes from more clients, not longer hours per client.
+Redone 2026-10-24 for the section 2–3 prices. At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $1,380 a month after costs and taxes, on roughly 12 hours a week: about $26 per hour. That's less than half of what the old prices paid per hour. The low build prices are most of the gap, so revisit them after the first 3 clients (below).
 
 **Assumptions** (change them as real numbers come in):
 
-- "Active clients" = clients paying a care plan. New builds are added on top at the pace shown.
-- Average build = $2,400 (a mix of mostly Growth with some Starter and Premium at standard prices).
-- A build takes about 28 hours including sales, calls and admin. Care takes about 0.5 / 1 / 3 hours a month for Care Essential / Care Standard / Care Plus.
+- "Active clients" = clients paying the care plan. New builds are added on top at the pace shown.
+- Average build = $800 (mostly Growth from $999, some Launch from $499). The real price is set in each proposal.
+- Care plan $49/mo per client, plus about 30 minutes of billed edits per client per month at $75/hr ($37.50).
+- A build takes about 28 hours including sales, calls and admin. Care takes about 1 hour per client per month (30 minutes of upkeep, 30 minutes of edits).
 - Costs: Claude ($20, then $100 from 5 clients), Vercel Pro $20, Google Workspace $8, insurance $40 from 10 clients, plus about 3% card fees.
 - Taxes: 25% of profit set aside for federal income and self-employment tax (no Texas state income tax).
 
 |  | **2 clients** | **5 clients** | **10 clients** |
 | --- | --- | --- | --- |
-| Care plan mix | 2 Care Standard | 2 Care Essential, 2 Care Standard, 1 Care Plus | 3 Care Essential, 5 Care Standard, 2 Care Plus |
-| Recurring care revenue | $198/mo | $495/mo | $1,040/mo |
+| Care plans ($49) | $98/mo | $245/mo | $490/mo |
+| Billed edits | $75/mo | $188/mo | $375/mo |
 | New builds | 1 every 2 months | 1 per month | 3 every 2 months |
-| Build revenue | $1,200/mo | $2,400/mo | $3,600/mo |
-| **Gross revenue** | **$1,398/mo** | **$2,895/mo** | **$4,640/mo** |
-| Tools + payment fees | $90 | $215 | $307 |
-| Taxes set aside (25%) | $327 | $670 | $1,083 |
-| **Take-home** | **$981/mo** | **$2,010/mo** | **$3,250/mo** |
-| Hours | about 16/mo (4/wk) | about 34/mo (8/wk) | about 55/mo (13/wk) |
-| Take-home per hour | about $61 | about $59 | about $59 |
+| Build revenue | $400/mo | $800/mo | $1,200/mo |
+| **Gross revenue** | **$573/mo** | **$1,233/mo** | **$2,065/mo** |
+| Tools + payment fees | $65 | $165 | $230 |
+| Taxes set aside (25%) | $127 | $267 | $459 |
+| **Take-home** | **$381/mo** | **$801/mo** | **$1,376/mo** |
+| Hours | about 16/mo (4/wk) | about 33/mo (8/wk) | about 52/mo (12/wk) |
+| Take-home per hour | about $24 | about $24 | about $26 |
 
 **What the table says:**
 
-- **Recurring revenue is your safety net.** If you stop selling for a semester (finals, internship), 10 care clients still bring in $1,040 a month, about $12,500 a year, for about 13 hours a month.
-- **Your first 3 months earn less.** Founding prices ($900–$1,800) and bundled free care months mean month 1–3 take-home is closer to $600–$900/mo. That's the cost of a portfolio.
-- **Upselling care beats finding new clients.** Moving 3 Care Standard clients to Care Plus adds $300/mo with no sales effort.
+- **Builds are most of the hours and pay the least per hour.** At an $800 average, a 28-hour build earns about $29 an hour before costs. Each $100 added to the average build adds about $150 a month at 10 clients.
+- **Recurring revenue is your safety net.** If you stop selling for a semester (finals, internship), 10 care clients still bring in about $865 a month with their edits, for about 10 hours a month.
+- **Edits are billed, not included.** Every edit is quoted at $75/hr in 30-minute blocks, so a client who needs lots of changes pays for that time instead of eating into a flat fee.
 
 ### When to raise prices
 
