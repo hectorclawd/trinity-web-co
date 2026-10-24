@@ -244,8 +244,8 @@
       </section>
     </div>
     <script>
-      // Slide text from the plan, updated for the 2026-10-24 prices (playbook §2–3). Prices, page counts,
-      // the care range and its edit time, and the CTA come from config.ts.
+      // Slide text from the plan, updated for the 2026-10-24 prices (playbook §2–3). Starting prices,
+      // page counts, the care price, the hourly rate and the CTA come from config.ts.
       // English only for now: add `es` once Hector has checked the Spanish slide text.
       const COPY = {
         en: {
@@ -257,7 +257,7 @@
           },
           care: {
             sub: "for the care plan, once your site is live",
-            detail: (from, to) => `Hosting, security updates, backups and ${from} minutes to ${to / 60} hour of edits a month. Month to month: cancel with 30 days’ notice.`,
+            detail: (hourly) => `Hosting, security updates and backups, with replies within 1 business day. Edits are ${hourly} an hour, quoted first. Month to month: cancel with 30 days’ notice.`,
           },
           own: {
             head: "You own your domain and accounts",
@@ -294,7 +294,7 @@
         const body = $(".c1-body", slide);
         body.append(
           make("p", "c1-name t-title", pkg.name),
-          make("p", "c1-price t-hero", TWC.priceRange(pkg.priceFrom, pkg.priceTo)),
+          make("p", "c1-price t-hero", TWC.priceFrom(pkg.priceFrom, lang)),
           make("p", "c1-pages t-lead", copy.pages(pkg.pages)),
         );
         const sheets = body.appendChild(make("div", "c1-sheets"));
@@ -305,11 +305,11 @@
         if (text.note) body.appendChild(make("p", "c1-note t-lead", text.note));
       });
 
-      // 4 · Care: one plan, quoted within its range
+      // 4 · Care: one plan at one price, edits billed by the hour
       const care = TWC.t("care");
-      fill($("#c1-s4 .c1-big"), TWC.monthlyRange(care.monthlyFrom, care.monthlyTo, lang));
+      fill($("#c1-s4 .c1-big"), TWC.monthly(care.monthly, lang));
       fill($("#c1-s4 .c1-sub"), copy.care.sub);
-      fill($("#c1-s4 .c1-detail"), copy.care.detail(care.editMinutesFrom, care.editMinutesTo));
+      fill($("#c1-s4 .c1-detail"), copy.care.detail(TWC.price(TWC.t("hourlyRate"))));
 
       // 5 · Ownership
       fill($("#c1-s5 .c1-head"), copy.own.head);
@@ -329,7 +329,7 @@
       document.fonts.ready.then(() => {
         TWC.fit($("#c1-s1 .c1-title"), { max: 144, min: 96, maxHeight: 420 });
         TWC.fit($("#c1-s5 .c1-head"), { max: 104, min: 80, maxHeight: 340 });
-        // The price ranges are wider than one number: step them down until they fit the margins,
+        // "From $499" is wider than one number: step the prices down until they fit the margins,
         // then use the smaller size on both package slides so they match as you swipe
         const fitWidth = (node, min) => {
           let size = parseFloat(getComputedStyle(node).fontSize);

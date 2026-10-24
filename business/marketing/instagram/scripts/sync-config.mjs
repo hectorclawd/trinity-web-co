@@ -24,11 +24,15 @@ if (!pagesLine) fail('couldn\'t find the "Pages" row in business/playbook.md');
 const pageCounts = pagesLine.split('|').slice(2, -1).map((cell) => Number(cell.match(/Up to (\d+)/)?.[1]) || null);
 const careLine = playbook.find((l) => l.startsWith('One care plan at '));
 if (!careLine) fail('couldn\'t find the "One care plan at" line in business/playbook.md §3');
-const careRange = careLine.match(/\$(\d+)–\$(\d+)/)?.slice(1).map(Number);
+const carePrice = Number(careLine.match(/^One care plan at \$(\d+)/)?.[1]);
+const hourlyLine = playbook.find((l) => l.includes('billed at $') && l.includes('/hr in 30-minute blocks'));
+if (!hourlyLine) fail('couldn\'t find the hourly rate line in business/playbook.md §3');
+const hourlyRate = Number(hourlyLine.match(/billed at \$(\d+)\/hr/)?.[1]);
 const checks = [
-  ['§2 Dallas price', row('Dallas price'), config.packages.map((p) => [p.priceFrom, p.priceTo])],
+  ['§2 Dallas price', row('Dallas price'), config.packages.map((p) => [p.priceFrom])],
   ['§2 pages', pageCounts, config.packages.map((p) => p.pages)],
-  ['§3 care plan price', careRange, [config.care.monthlyFrom, config.care.monthlyTo]],
+  ['§3 care plan price', carePrice, config.care.monthly],
+  ['§3 hourly rate', hourlyRate, config.hourlyRate],
 ];
 for (const [what, playbookValues, configValues] of checks) {
   if (JSON.stringify(playbookValues) !== JSON.stringify(configValues)) {

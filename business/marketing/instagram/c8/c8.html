@@ -206,13 +206,14 @@
     </div>
     <script>
       // Slide text from the plan, updated for the one care plan (playbook §3, 2026-10-24). The plan's
-      // name, price range and edit time come from config.ts, as do the CTA and the languages line.
+      // name and price and the hourly rate for edits come from config.ts, as do the CTA and the
+      // languages line. The plan includes no edit time, so slide 5 says how edits are billed.
       // Slide 6 answers the two questions the terms raise: when it starts and how to cancel.
       // English only for now: add `es` once Hector has checked the Spanish slide text.
       // `keep` lists words that stay together on one line (a name, or a hyphenated word).
       const COPY = {
         en: {
-          cover: (range) => `What ${range} a month actually covers`,
+          cover: (price) => `What ${price} a month actually covers`,
           covered: [
             {
               head: "Hosting, SSL and uptime monitoring",
@@ -229,9 +230,9 @@
               lineKeep: ["up to date"],
             },
             {
-              head: (from, to) => `${from} minutes to ${to / 60} hour of edits a month`,
-              keep: ["a month"],
-              line: "Send us new text, photos, hours or prices, and we reply within 1 business day. Your price depends on how much edit time you want.",
+              head: "Replies within 1 business day",
+              keep: ["1 business day"],
+              line: (hourly) => `Need new text, photos, hours or prices? Edits are ${hourly} an hour in 30-minute blocks, and we quote them first.`,
             },
           ],
           terms: [
@@ -281,8 +282,10 @@
       // The one care plan, from config.ts
       const care = TWC.t("care");
 
-      // 1 · Cover: the hook with the price range, the plan's name under it
-      const title = fill($("#c8-s1 .c8-title"), copy.cover(TWC.priceRange(care.monthlyFrom, care.monthlyTo)));
+      const hourly = TWC.price(TWC.t("hourlyRate"));
+
+      // 1 · Cover: the hook with the price, the plan's name under it
+      const title = fill($("#c8-s1 .c8-title"), copy.cover(TWC.price(care.monthly)));
       fill($("#c8-s1 .c8-plan-name"), care.name);
       TWC.showRiver(TWC.river($("#c8-s1 .c8-river"), { width: 904, stops: "phone" }));
 
@@ -292,12 +295,12 @@
       const items = coveredSlides.map((slide) => {
         const i = Number(slide.dataset.item);
         const item = copy.covered[i];
-        const headText = typeof item.head === "function" ? item.head(care.editMinutesFrom, care.editMinutesTo) : item.head;
+        const lineText = typeof item.line === "function" ? item.line(hourly) : item.line;
         const body = $(".c8-body", slide);
         const num = body.appendChild(make("p", "c8-num", String(i + 1)));
         num.setAttribute("aria-hidden", "true");
-        const head = body.appendChild(fillKeeping(make("h2", "c8-item t-headline"), headText, item.keep));
-        body.appendChild(make("p", "c8-line t-body t-muted", keep(item.line, item.lineKeep)));
+        const head = body.appendChild(fillKeeping(make("h2", "c8-item t-headline"), item.head, item.keep));
+        body.appendChild(make("p", "c8-line t-body t-muted", keep(lineText, item.lineKeep)));
         return head;
       });
 

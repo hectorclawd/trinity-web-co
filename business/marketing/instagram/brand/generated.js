@@ -25,25 +25,21 @@ window.TWC_DATA = {
       {
         "id": "launch",
         "name": "Launch",
-        "priceFrom": 750,
-        "priceTo": 1250,
+        "priceFrom": 499,
         "pages": 5
       },
       {
         "id": "growth",
         "name": "Growth",
-        "priceFrom": 1500,
-        "priceTo": 2500,
+        "priceFrom": 999,
         "pages": 7
       }
     ],
     "care": {
       "name": "Care plan",
-      "monthlyFrom": 50,
-      "monthlyTo": 99,
-      "editMinutesFrom": 30,
-      "editMinutesTo": 60
+      "monthly": 49
     },
+    "hourlyRate": 75,
     "demos": {
       "purpleMartin": {
         "name": "Purple Martin Heating & Air",
@@ -83,6 +79,10 @@ window.TWC_DATA = {
       "perMonth": {
         "en": "/mo",
         "es": " al mes"
+      },
+      "from": {
+        "en": "From",
+        "es": "Desde"
       }
     }
   },

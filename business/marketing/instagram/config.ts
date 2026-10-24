@@ -30,18 +30,19 @@ export const config = {
     },
   },
 
-  /** Playbook §2: two packages, priced as ranges. The exact price is set in the proposal. */
+  /** Playbook §2: two packages with starting prices. The exact price is set in the proposal. */
   packages: [
-    { id: 'launch', name: 'Launch', priceFrom: 750, priceTo: 1250, pages: 5 },
-    { id: 'growth', name: 'Growth', priceFrom: 1500, priceTo: 2500, pages: 7 },
+    { id: 'launch', name: 'Launch', priceFrom: 499, pages: 5 },
+    { id: 'growth', name: 'Growth', priceFrom: 999, pages: 7 },
   ],
 
   /**
-   * Playbook §3: one care plan, quoted per client within the range by edit time
-   * (30 minutes a month at the low end, up to 1 hour at the high end). Billed from
+   * Playbook §3: one care plan for hosting and upkeep, with no edit time included.
+   * Edits are billed at the hourly rate in 30-minute blocks, quoted first. Billed from
    * launch, month to month, 30 days' notice to cancel. No included months.
    */
-  care: { name: 'Care plan', monthlyFrom: 50, monthlyTo: 99, editMinutesFrom: 30, editMinutesTo: 60 },
+  care: { name: 'Care plan', monthly: 49 },
+  hourlyRate: 75,
 
   /**
    * Real numbers only. The demos have no production PageSpeed results yet, so these
@@ -69,5 +70,6 @@ export const config = {
     example: { en: 'Example', es: 'Ejemplo' },
     swipe: { en: 'Swipe', es: 'Desliza' },
     perMonth: { en: '/mo', es: ' al mes' },
+    from: { en: 'From', es: 'Desde' },
   },
 } as const;
