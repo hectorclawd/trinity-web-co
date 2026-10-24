@@ -244,8 +244,8 @@
       "name": "Primary button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Gold, only for a real primary action or the founding offer.",
-      "html": "<button class=\"ds-btn-primary\">Ask about a founding spot</button>",
+      "description": "Gold, only for a real primary action.",
+      "html": "<button class=\"ds-btn-primary\">Book a free call</button>",
       "css": ".ds-btn-primary { font-family: 'Archivo Variable', system-ui, sans-serif; display: inline-flex; align-items: center; padding: 0.5em 1em; border: 0; border-radius: 16px; background: #EDB23A; color: #13262B; font-size: 36px; font-weight: 700; font-stretch: 108%; cursor: pointer; transition: background-color 0.15s; } .ds-btn-primary:hover { background: #D99A1E; } .ds-btn-primary:focus-visible { outline: 4px solid #13262B; outline-offset: 4px; }"
     },
     {
@@ -273,12 +273,12 @@
       "Light, flat ground: Limestone, Paper, or River deep. No shadows.",
       "One River message bubble per frame for the DM keyword.",
       "The river drawing and the bridge logo as recurring signatures.",
-      "Gold appears only on a primary button or the founding offer."
+      "Gold appears only on a primary button."
     ],
     "rules": [
       {
         "name": "The Gold Rule",
-        "body": "Gold is a promise of action. It appears on a primary button or the founding offer and nowhere else; the DM bubble is River, not Gold.",
+        "body": "Gold is a promise of action. It appears on a primary button and nowhere else; the DM bubble is River, not Gold.",
         "section": "colors"
       },
       {
@@ -311,7 +311,7 @@
       "Do read every price, name and keyword from `config.ts` through the kit, never typed in."
     ],
     "donts": [
-      "Don't use Gold anywhere except a primary button or the founding offer.",
+      "Don't use Gold anywhere except a primary button.",
       "Don't add drop shadows, glows, gradients or outlines for decoration.",
       "Don't use a second typeface, all-caps labels, or wide body text.",
       "Don't put two message bubbles or two buttons on one frame.",

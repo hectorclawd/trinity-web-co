@@ -23,46 +23,23 @@ window.TWC_DATA = {
     },
     "packages": [
       {
-        "id": "starter",
-        "name": "Starter",
-        "price": 1500,
-        "foundingPrice": 900,
-        "pages": 4
+        "id": "launch",
+        "name": "Launch",
+        "priceFrom": 499,
+        "pages": 5
       },
       {
         "id": "growth",
         "name": "Growth",
-        "price": 2800,
-        "foundingPrice": 1800,
+        "priceFrom": 999,
         "pages": 7
-      },
-      {
-        "id": "premium",
-        "name": "Premium",
-        "price": 4800,
-        "foundingPrice": null,
-        "pages": 12
       }
     ],
-    "carePlans": [
-      {
-        "id": "essential",
-        "name": "Care Essential",
-        "monthly": 49
-      },
-      {
-        "id": "standard",
-        "name": "Care Standard",
-        "monthly": 99
-      },
-      {
-        "id": "plus",
-        "name": "Care Plus",
-        "monthly": 199
-      }
-    ],
-    "includedCareMonths": 3,
-    "foundingSpots": 3,
+    "care": {
+      "name": "Care plan",
+      "monthly": 49
+    },
+    "hourlyRate": 75,
     "demos": {
       "purpleMartin": {
         "name": "Purple Martin Heating & Air",
@@ -102,12 +79,16 @@ window.TWC_DATA = {
       "perMonth": {
         "en": "/mo",
         "es": " al mes"
+      },
+      "from": {
+        "en": "From",
+        "es": "Desde"
       }
     }
   },
   "river": {
     "path": "M-30 120 C40 130 80 86 140 88 S280 172 355 168 S440 62 500 64 S640 182 720 178 S810 98 870 96 S1000 156 1070 152 S1170 110 1240 118",
-    "viewBox": "0 0 1200 240",
+    "viewBox": "-10 0 930 330",
     "stops": [
       {
         "name": "West Dallas",

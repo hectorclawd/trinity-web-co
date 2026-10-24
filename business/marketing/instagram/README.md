@@ -54,7 +54,7 @@ Look at `samples/c1-cover.html` for a slide and `samples/r1-end-card.html` for a
 
 ## Design rules
 
-- **Fonts and colors are the brand's**, not the Apple skill's or HyperFrames' defaults: Archivo only, headlines wide (`font-stretch: 125%`), body at normal width; Ink, River, River deep, Limestone, Paper. Gold is only for primary buttons and the founding offer (H1), so the DM keyword is a River message bubble, not gold.
+- **Fonts and colors are the brand's**, not the Apple skill's or HyperFrames' defaults: Archivo only, headlines wide (`font-stretch: 125%`), body at normal width; Ink, River, River deep, Limestone, Paper. Gold is only for primary buttons, so the DM keyword is a River message bubble, not gold.
 - **Motion follows Apple's springs**: `TWC.motion.move` (response 0.4 s, no bounce) for anything settling into place, `snappy` (0.3 s) for small things, and `momentum` (a little bounce) only after a flick, like a phone scroll. Strokes draw with the site's own river curve. Things arrive the way they'd leave.
 - **Safe zones**: on 9:16 frames, no text in the top 250 px or the bottom 350 px, and nothing important right of x 880 below y 1060 on Reels (the like, comment and share buttons). On 4:5 slides, the profile grid trims 34 px from each side, so keep text inside the 88 px margins. `--guides` draws all of this.
 - **Captions** show one short phrase at a time in ink pills: a new phrase after a 0.5 s pause or a sentence end, and anything longer than 6 words or 2.5 s split evenly.

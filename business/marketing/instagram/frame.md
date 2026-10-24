@@ -44,7 +44,7 @@ A local developer you can text, not an agency. Frames look like the website: Lim
 
 ## Don't
 
-- Gold anywhere except a primary button or the founding offer (H1).
+- Gold anywhere except a primary button.
 - Invented social proof, result promises, fake urgency, or a piece about AI.
 - A demo or made-up example on screen without its "Demo" or "Example" badge.
 - A price typed into a composition instead of read from `config.ts`.

@@ -1,6 +1,6 @@
 /* Trinity Web Co. Instagram kit: tokens and shared components.
-   Colors match site/src/styles/tokens.css. Gold is only for primary buttons and the
-   founding offer, so nothing here uses it except .twc-button-primary.
+   Colors match site/src/styles/tokens.css. Gold is only for primary buttons, so
+   nothing here uses it except .twc-button-primary.
 
    Each composition also declares Archivo's @font-face inline (HyperFrames' lint only
    reads @font-face from the composition file itself). Copy it from compositions/end-card.html. */
@@ -12,7 +12,7 @@
   --river-deep: #0e3f3c;
   --limestone: #ecefe9; /* page background */
   --paper: #fafbf8;
-  --gold: #edb23a; /* primary buttons and the founding offer only */
+  --gold: #edb23a; /* primary buttons only */
   --muted: #3e5458;
   --line: #c6cfc9;
 
@@ -155,7 +155,7 @@
   box-decoration-break: clone;
 }
 
-/* Primary button style. Gold, so only for a real primary action or the founding offer. */
+/* Primary button style. Gold, so only for a real primary action. */
 .twc-button-primary {
   display: inline-flex;
   align-items: center;

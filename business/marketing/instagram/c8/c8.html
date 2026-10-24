@@ -9,10 +9,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1350" />
-    <!-- C8 · What $99 a month actually covers: a 9-slide carousel (1080×1350), one slide per second.
-         Slide text is the plan's ("Carousel scripts", C8, Straight answers); what each care plan
-         includes is playbook §3. Every plan name and price, the CTA and the languages line come from
-         config.ts. English only for now: the Spanish copy gets added once Hector checks it.
+    <!-- C8 · What the care plan actually covers: a 7-slide carousel (1080×1350), one slide per second.
+         Slide text is the plan's ("Carousel scripts", C8, Straight answers), updated for the one care
+         plan of 2026-10-24; what it includes and its terms are playbook §3. The plan's name, price
+         range and edit time, the CTA and the languages line come from config.ts. English only for now: the Spanish copy gets added once Hector checks it.
          Render: npm run piece -- c8/c8.html --lang en --still -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="brand/generated.js"></script>
@@ -93,7 +93,7 @@
         margin-top: 40px;
       }
 
-      /* 2–7 · What's covered: the number in a River circle, the item, then what it means under the rule */
+      /* 2–5 · What's covered: the number in a River circle, the item, then what it means under the rule */
       .c8-num {
         display: grid;
         place-items: center;
@@ -122,7 +122,7 @@
         text-wrap: pretty;
       }
 
-      /* 8 · The other two plans: each question as a headline, the plan and its price, then one plain line */
+      /* 6 · The terms: each question as a headline, then one plain line */
       .c8-other {
         max-width: 880px;
       }
@@ -135,25 +135,12 @@
         max-width: 904px;
         line-height: 1.04;
       }
-      .c8-pick {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: baseline;
-        column-gap: 0.4em;
-        margin-top: 24px;
-        font-weight: 720;
-      }
-      .c8-price {
-        color: var(--river-deep);
-        font-weight: 820;
-        font-variant-numeric: lining-nums proportional-nums;
-      }
       .c8-what {
-        margin-top: 16px;
+        margin-top: 24px;
         max-width: 880px;
       }
 
-      /* 9 · CTA, as C1's slide 7: the keyword is a river message bubble, the river closes the carousel */
+      /* 7 · CTA, as C1's slide 6: the keyword is a river message bubble, the river closes the carousel */
       .c8-cta {
         max-width: 904px;
         text-wrap: balance;
@@ -170,14 +157,14 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="c8" data-start="0" data-duration="9" data-width="1080" data-height="1350">
+    <div id="root" data-composition-id="c8" data-start="0" data-duration="7" data-width="1080" data-height="1350">
       <div
         id="el-frame"
         data-composition-id="carousel-slide"
         data-composition-src="compositions/carousel-slide.html"
         data-variable-values='{"tone":"light","swipe":1}'
         data-start="0"
-        data-duration="9"
+        data-duration="7"
         data-track-index="0"
         data-width="1080"
         data-height="1350"
@@ -203,18 +190,12 @@
       <section id="c8-s5" class="clip c8-slide c8-covered" data-item="3" data-start="4" data-duration="1" data-track-index="1">
         <div class="c8-body"></div>
       </section>
-      <section id="c8-s6" class="clip c8-slide c8-covered" data-item="4" data-start="5" data-duration="1" data-track-index="1">
-        <div class="c8-body"></div>
-      </section>
-      <section id="c8-s7" class="clip c8-slide c8-covered" data-item="5" data-start="6" data-duration="1" data-track-index="1">
+
+      <section id="c8-s6" class="clip c8-slide" data-start="5" data-duration="1" data-track-index="1">
         <div class="c8-body"></div>
       </section>
 
-      <section id="c8-s8" class="clip c8-slide" data-start="7" data-duration="1" data-track-index="1">
-        <div class="c8-body"></div>
-      </section>
-
-      <section id="c8-s9" class="clip c8-slide" data-start="8" data-duration="1" data-track-index="1">
+      <section id="c8-s7" class="clip c8-slide" data-start="6" data-duration="1" data-track-index="1">
         <div class="c8-body">
           <p class="c8-cta t-display"></p>
           <p class="c8-ask-dm t-headline"></p>
@@ -224,10 +205,10 @@
       </section>
     </div>
     <script>
-      // Slide text from the plan. What each plan includes is playbook §3; the plan names and prices come
-      // from config.ts (carePlans), as do the CTA and the languages line. Of the plan's allowed extra
-      // facts, this uses one: replies within 1 business day on Care Standard (slide 5). Slide 8's lines
-      // are the edit time, posts and pages that set the other two plans apart, from the same §3 table.
+      // Slide text from the plan, updated for the one care plan (playbook §3, 2026-10-24). The plan's
+      // name and price and the hourly rate for edits come from config.ts, as do the CTA and the
+      // languages line. The plan includes no edit time, so slide 5 says how edits are billed.
+      // Slide 6 answers the two questions the terms raise: when it starts and how to cancel.
       // English only for now: add `es` once Hector has checked the Spanish slide text.
       // `keep` lists words that stay together on one line (a name, or a hyphenated word).
       const COPY = {
@@ -249,25 +230,14 @@
               lineKeep: ["up to date"],
             },
             {
-              head: "1 hour of edits a month",
-              keep: ["a month"],
-              line: "Send us new text, photos, hours or prices, and we reply within 1 business day.",
-            },
-            {
-              head: "A one-page monthly report",
-              keep: ["one-page"],
-              line: "One email each month with how many visits, calls and form messages your site got.",
-            },
-            {
-              head: "2 Google posts a month",
-              keep: ["a month"],
-              line: "We post them on your Google Business Profile, the listing people see on Search and Maps.",
-              lineKeep: ["Google Business Profile"],
+              head: "Replies within 1 business day",
+              keep: ["1 business day"],
+              line: (hourly) => `Need new text, photos, hours or prices? Edits are ${hourly} an hour in 30-minute blocks, and we quote them first.`,
             },
           ],
-          others: [
-            { id: "essential", ask: "Need less?", what: "The same hosting, form checks and updates, with 30 minutes of edits a month." },
-            { id: "plus", ask: "Need more?", what: "3 hours of edits, 4 Google posts, and a new service page or blog post a month.", keep: ["service page"] },
+          terms: [
+            { ask: "When does it start?", what: "The day your site goes live. Then it runs month to month." },
+            { ask: "Can I cancel?", what: "Yes, with 30 days’ notice. Your domain and accounts stay in your name." },
           ],
         },
       };
@@ -309,63 +279,57 @@
         while (size > min && node.scrollWidth > node.clientWidth) node.style.fontSize = `${(size -= 2)}px`;
       };
 
-      // The plan this carousel is about, and the other two, all from config.ts
-      const plans = TWC.t("carePlans");
-      const plan = (id) => {
-        const found = plans.find((p) => p.id === id);
-        if (!found) throw new Error(`C8: config.ts has no "${id}" care plan`);
-        return found;
-      };
-      const standard = plan("standard");
+      // The one care plan, from config.ts
+      const care = TWC.t("care");
+
+      const hourly = TWC.price(TWC.t("hourlyRate"));
 
       // 1 · Cover: the hook with the price, the plan's name under it
-      const title = fill($("#c8-s1 .c8-title"), copy.cover(TWC.price(standard.monthly)));
-      fill($("#c8-s1 .c8-plan-name"), standard.name);
+      const title = fill($("#c8-s1 .c8-title"), copy.cover(TWC.price(care.monthly)));
+      fill($("#c8-s1 .c8-plan-name"), care.name);
       TWC.showRiver(TWC.river($("#c8-s1 .c8-river"), { width: 904, stops: "phone" }));
 
-      // 2–7 · What's covered, numbered by their place in the list (a real count, 1 to 6)
+      // 2–5 · What's covered, numbered by their place in the list (a real count, 1 to 4)
       const coveredSlides = [...document.querySelectorAll(".c8-covered")];
       if (coveredSlides.length !== copy.covered.length) throw new Error("C8: one slide per covered item");
       const items = coveredSlides.map((slide) => {
         const i = Number(slide.dataset.item);
         const item = copy.covered[i];
+        const lineText = typeof item.line === "function" ? item.line(hourly) : item.line;
         const body = $(".c8-body", slide);
         const num = body.appendChild(make("p", "c8-num", String(i + 1)));
         num.setAttribute("aria-hidden", "true");
         const head = body.appendChild(fillKeeping(make("h2", "c8-item t-headline"), item.head, item.keep));
-        body.appendChild(make("p", "c8-line t-body t-muted", keep(item.line, item.lineKeep)));
+        body.appendChild(make("p", "c8-line t-body t-muted", keep(lineText, item.lineKeep)));
         return head;
       });
 
-      // 8 · Need less, or more: each other plan's name and monthly price from config.ts
-      const asks = copy.others.map((other) => {
-        const p = plan(other.id);
-        const block = $("#c8-s8 .c8-body").appendChild(make("div", "c8-other"));
-        const ask = block.appendChild(make("h2", "c8-ask t-headline", other.ask));
-        const pick = block.appendChild(make("p", "c8-pick t-lead"));
-        pick.append(make("span", "c8-pick-name", p.name), make("span", "c8-price", TWC.monthly(p.monthly, lang)));
-        block.appendChild(make("p", "c8-what t-body t-muted", keep(other.what, other.keep)));
+      // 6 · The terms: when it starts, and how to cancel
+      const asks = copy.terms.map((term) => {
+        const block = $("#c8-s6 .c8-body").appendChild(make("div", "c8-other"));
+        const ask = block.appendChild(make("h2", "c8-ask t-headline", term.ask));
+        block.appendChild(make("p", "c8-what t-body t-muted", keep(term.what)));
         return ask;
       });
 
-      // 9 · CTA, as C1's slide 7: "Free site check:" as the headline, then "DM" + the keyword bubble
+      // 7 · CTA, as C1's slide 6: "Free site check:" as the headline, then "DM" + the keyword bubble
       // on its own line (the last word before the keyword is the verb: DM / manda), then the languages
       const cta = TWC.dm("carouselCta", lang);
       const verbAt = cta.before.lastIndexOf(" ");
-      const ctaLine = fill($("#c8-s9 .c8-cta"), cta.before.slice(0, verbAt));
-      const askDm = $("#c8-s9 .c8-ask-dm");
+      const ctaLine = fill($("#c8-s7 .c8-cta"), cta.before.slice(0, verbAt));
+      const askDm = $("#c8-s7 .c8-ask-dm");
       askDm.append(make("span", "c8-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
       if (cta.after) askDm.append(` ${cta.after}`);
-      fill($("#c8-s9 .c8-langs"), TWC.t("business.languages"));
-      TWC.showRiver(TWC.river($("#c8-s9 .c8-river"), { width: 904, stops: "phone" }));
+      fill($("#c8-s7 .c8-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c8-s7 .c8-river"), { width: 904, stops: "phone" }));
 
       document.fonts.ready.then(() => {
         TWC.fit(title, { max: 144, min: 96, maxHeight: 600 });
-        // The six items at one size (the size the longest fits at), so the slides match as you swipe.
+        // The four items at one size (the size the longest fits at), so the slides match as you swipe.
         // 96 px, not 104, so "booking tested" ends short of the margin, inside the rule's width
         const itemSize = Math.min(...items.map((head) => TWC.fit(head, { max: 96, min: 80, maxHeight: 330 })));
         items.forEach((head) => ((head.style.fontSize = `${itemSize}px`), fitWidth(head, 72)));
-        // Slide 8's two questions at the items' size too
+        // Slide 6's two questions at the items' size too
         asks.forEach((ask) => (ask.style.fontSize = `${itemSize}px`));
         TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
         [title, ctaLine, ...asks].forEach((node) => fitWidth(node, 72));

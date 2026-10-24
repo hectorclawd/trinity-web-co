@@ -44,6 +44,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | AI-made images on client sites only for general scenes, with the owner's written OK; never as photos of their products, food or work | Customers should see what they'll actually get; AI product photos would misrepresent a real business | At the attorney review, or when a client asks for AI product photos |
 | 2026-10-21 | Claude Code builds; Codex fixes (security, failing builds, dependency alerts, QA defects) and gives second-opinion reviews. Codex's rules are in `AGENTS.md`, tracked in git | Claude's time goes to building, and a second model catches what the first one missed | If Codex's fixes often need redoing, or its usage limits get in the way |
 | 2026-10-23 | Prices switch to the first-client outreach kit's: Launch $750–$1,250 (5 pages, replaces Starter), Growth $1,500–$2,500, and one care plan at $50–$99/mo priced by edit time. Premium, the founding offer (with its testimonial trade) and the 3 bundled care months are gone; care is optional and billed from launch day | Hector's call. The kit prices Launch as a portfolio-builder for the first 2–3 clients, and its outreach messages quote these numbers | After the first 3 clients |
+| 2026-10-24 | Prices drop to Launch from $499 and Growth from $999 (starting prices; the exact price goes in the proposal), and one care plan at $49/mo for hosting and upkeep only, with no edit time included: every edit is billed at $75/hr in 30-minute blocks, quoted first. Replaces the 2026-10-23 ranges | Hector's call | After the first 3 clients |
 
 ### Changelog
 
@@ -76,6 +77,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | §5: design toolkit and build recipe (Taste, Playwright CLI, Impeccable, optional DESIGN.md and img2threejs) and the scroll-played clip; §7: private previews for shops with no website; decisions log: previews and AI images |
 | 2026-10-21 | §5: Claude builds, Codex fixes (step 9 of "Using Claude Code efficiently"); decisions log: the Codex split |
 | 2026-10-23 | §1–4, §6–8: the outreach kit's prices (Launch and Growth as ranges, one care plan); Premium, the founding offer and the bundled care months removed; §7 scripts use the kit's Launch line; §8 math flagged for a redo |
+| 2026-10-24 | §1–3: Launch from $499, Growth from $999, care plan $49/mo with no edit time included (edits at $75/hr); §4 budget line and §7 scripts updated to match |
 
 ## 1. Business model
 
@@ -93,7 +95,7 @@ You build fast, custom-coded websites for owner-operated Dallas businesses that 
 
 | Rank | Niche | Why it fits | What their site needs most |
 | --- | --- | --- | --- |
-| 1 | Home service trades: HVAC, plumbing, electrical, garage door, handyman | One job is worth $300–$5,000, so a $2,500 site pays for itself fast. Dallas heat keeps HVAC busy year-round | Click-to-call, service-area pages, quote form, reviews |
+| 1 | Home service trades: HVAC, plumbing, electrical, garage door, handyman | One job is worth $300–$5,000, so a $999 site pays for itself fast. Dallas heat keeps HVAC busy year-round | Click-to-call, service-area pages, quote form, reviews |
 | 2 | Outdoor and cleaning crews: lawn care, landscaping, pressure washing, house cleaning, pool service | Many are owner-run crews living on Facebook and word of mouth; recurring customers | Quote form, before/after gallery, service area map |
 | 3 | Barbers, salons, lash, brow and nail studios | Strong Instagram but weak sites; booking is the job to be done | Online booking embed, price list, gallery, Maps |
 | 4 | Auto detailing, tint and independent repair shops | Customers search "near me" on phones; high-ticket packages | Package pricing, booking or quote form, reviews |
@@ -117,8 +119,8 @@ Three proof points to repeat in every pitch:
 
 |  | Dallas agency | Wix / Squarespace DIY | You |
 | --- | --- | --- | --- |
-| Upfront cost | $5,000–$15,000+ | $0 | $750–$2,500 |
-| Monthly cost | $150–$500+ retainers | $17–$50 plan + the owner's time | $50–$99, edits included |
+| Upfront cost | $5,000–$15,000+ | $0 | From $499 |
+| Monthly cost | $150–$500+ retainers | $17–$50 plan + the owner's time | $49, edits at $75/hr |
 | Who builds it | Account manager, then a junior or offshore team | The owner, nights and weekends | You, directly |
 | Speed on phones | Varies; often heavy WordPress | Often slow, generic templates | 90+ PageSpeed target |
 | Turnaround | 6–12 weeks | Whenever the owner finds time | 2–3 weeks |
@@ -132,7 +134,7 @@ Three proof points to repeat in every pitch:
 
 ## 2. Service packages
 
-Two fixed-scope packages, priced as ranges: Launch at $750–$1,250 and Growth at $1,500–$2,500. The exact price goes in the written proposal after the discovery call, before any work starts. Fixed scope with a clear page count is what keeps a part-time schedule sane.
+Two fixed-scope packages with starting prices: Launch from $499 and Growth from $999. The exact price goes in the written proposal after the discovery call, before any work starts. Fixed scope with a clear page count is what keeps a part-time schedule sane.
 
 |  | **Launch** | **Growth** (lead with this) |
 | --- | --- | --- |
@@ -149,11 +151,11 @@ Two fixed-scope packages, priced as ranges: Launch at $750–$1,250 and Growth a
 | Photos | Client supplies or licensed stock | Up to 15 licensed stock images + client photos optimized |
 | Revision rounds | 2 | 2 |
 | Turnaround (after content is in) | 10 business days | 15 business days |
-| Dallas price | **$750–$1,250** | **$1,500–$2,500** |
+| Dallas price | **From $499** | **From $999** |
 
 **Default:** pitch Growth first, every time. It is the package that actually gets them calls, and Launch becomes the fallback when budget is tight rather than the anchor.
 
-**Why Launch is priced low:** it's a portfolio-builder for your first 2–3 clients, who take a chance on someone with no portfolio (decisions log, 2026-10-23). There's no separate founding discount and no testimonial trade. Ask every client for a Google review at day 7 (section 4), and never fake a testimonial or invent a client to fill the gap.
+**Why Launch is priced low:** it's a portfolio-builder for your first 2–3 clients, who take a chance on someone with no portfolio (decisions log, 2026-10-23 and 2026-10-24). There's no separate founding discount and no testimonial trade. Ask every client for a Google review at day 7 (section 4), and never fake a testimonial or invent a client to fill the gap.
 
 ### Add-ons (sell after the main package is agreed)
 
@@ -174,24 +176,22 @@ One round is a single consolidated list of changes sent within 5 business days o
 
 ## 3. Monthly care plan
 
-One care plan at $50–$99 a month, priced by how much edit time the client wants: 30 minutes of edits a month at $50, up to 1 hour at $99. The proposal sets the amount. Care is optional; any site you host must be on the plan, and a client who skips it gets a full handoff instead (section 4).
+One care plan at $49 a month for hosting and upkeep. It includes no edit time: every edit is billed at $75/hr (below). Care is optional; any site you host must be on the plan, and a client who skips it gets a full handoff instead (section 4).
 
 The care plan includes:
 
 - Hosting on your Vercel account, SSL and uptime monitoring
 - Form and booking checks, tested monthly
 - Dependency and security updates, backups in GitHub
-- Content edits (text, photos, hours, prices): 30 minutes a month at $50, up to 1 hour at $99
 - Replies within 1 business day
 
-Monthly reports, Google Business Profile posts, new content and a yearly refresh aren't included; they're work beyond the plan (below).
+Content edits (text, photos, hours, prices), monthly reports, Google Business Profile posts, new content and a yearly refresh aren't included; they're work beyond the plan (below).
 
 **Default:** offer the care plan with every build. It's billed from launch day and renews monthly, with 30 days' notice to cancel, so recurring revenue starts the day the site goes live.
 
 **Rules that protect your time:**
 
-- Unused edit time does not roll over.
-- Work beyond the plan is billed at $75/hr in 30-minute blocks, quoted before you start.
+- Every edit, and any other work beyond the plan, is billed at $75/hr in 30-minute blocks, quoted before you start.
 - Bill care plans on the same day each month by auto-charge (card or ACH) so you never chase payments.
 - If a care-plan payment fails and isn't fixed within 15 days, pause edits and care work until it's paid. Never take the site offline for non-payment. If it's still unpaid 60 days after its due date, you may end the care plan by written notice and hand off the site (repo transfer, $150 handoff fee); the unpaid fees stay owed.
 - Raise prices for new clients first; give existing clients 60 days' notice of any increase.
@@ -233,7 +233,7 @@ Fit and logistics:
 11. Do you have a logo, photos of your work, and text about your services?
 12. When do you want this live, and is anything driving that date?
 13. Who besides you has a say in the decision?
-14. Have you set a budget? (If they hesitate: "My packages run $750 to $2,500. Most businesses like yours fit Growth, at $1,500 to $2,500. While I build my portfolio, Launch is $750 to $1,250 for a 5-page site.")
+14. Have you set a budget? (If they hesitate: "My packages start at $499. Most businesses like yours fit Growth, which starts at $999. While I build my portfolio, Launch starts at $499 for a 5-page site.")
 
 **Red flags (walk away or price higher):** wants e-commerce with 100+ products, "just copy this competitor's site," asks for unlimited revisions, can't name who decides, pushes back on any deposit.
 
@@ -565,7 +565,7 @@ Reach 120 hand-picked local businesses in 30 days at the section 2 prices, about
 >
 > I'm a Dallas web developer building fast sites for local \[trades / salons\]. I recorded a 2-minute video showing 3 things I'd fix: \[Loom link\]
 >
-> I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) is $750–$1,250 while I build my portfolio. Worth a free 20-minute call this week?
+> I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) starts at $499 while I build my portfolio. Worth a free 20-minute call this week?
 >
 > \[Your name\]
 > Trinity Web Co. · \[phone\] · \[your site\]
@@ -587,7 +587,7 @@ Bring: printed one-page price sheet, business cards, your phone with their site 
 >
 > **If the owner is there:** I was looking you up on my phone before I came in. \[Show phone.\] Your reviews are great, but \[your site took 8 seconds to load / I couldn't find a way to book / it doesn't show up when I searched "barber Oak Cliff"\]. Here's a site I built that loads in about one second. \[Show demo.\]
 >
-> I'm taking on my first few clients, so my Launch package is $750 to $1,250 while I build my portfolio. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
+> I'm taking on my first few clients, so my Launch package starts at $499 while I build my portfolio. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
 >
 > **If they're busy or not there:** No problem. Can I leave this with you? \[Hand over sheet with your card stapled and a sticky note: "3 quick fixes for your site, call or text \[phone\], \[Name\]."\] What's the best way to reach the owner?
 

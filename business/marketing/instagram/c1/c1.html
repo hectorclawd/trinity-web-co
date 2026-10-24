@@ -9,7 +9,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1350" />
-    <!-- C1 · What a website costs: a 7-slide carousel (1080×1350), one slide per second.
+    <!-- C1 · What a website costs: a 6-slide carousel (1080×1350), one slide per second.
          Slide text is the plan's ("Carousel scripts", C1); prices, page counts and the CTA come from
          config.ts. English only for now: the Spanish copy gets added once Hector checks it.
          Render: npm run piece -- c1/c1.html --lang en --still -->
@@ -92,7 +92,7 @@
         display: block;
       }
 
-      /* 2–4 · Packages: name, the price as the hero, page count, then what's in it */
+      /* 2–3 · Packages: name, the price as the hero, page count, then what's in it */
       .c1-name {
         margin: 0;
       }
@@ -104,7 +104,7 @@
       .c1-pages {
         margin: 28px 0 0;
       }
-      /* One small page shape per page in the package (4, 7, 12), so the three slides compare at a glance */
+      /* One small page shape per page in the package (5, 7), so the two slides compare at a glance */
       .c1-sheets {
         display: flex;
         gap: 12px;
@@ -149,7 +149,7 @@
         color: var(--river-deep);
       }
 
-      /* 5 · Care: "3 months" as the hero, then the plain terms */
+      /* 4 · Care: the monthly range as the hero, then the plain terms */
       .c1-big {
         margin: 0;
         color: var(--river-deep);
@@ -166,14 +166,14 @@
         max-width: 880px;
       }
 
-      /* 6 · Ownership */
+      /* 5 · Ownership */
       .c1-head {
         margin: 0;
         max-width: 900px;
         text-wrap: balance;
       }
 
-      /* 7 · CTA: the keyword is a river message bubble, the river closes the carousel */
+      /* 6 · CTA: the keyword is a river message bubble, the river closes the carousel */
       .c1-cta {
         margin: 0;
         max-width: 904px;
@@ -191,14 +191,14 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="c1" data-start="0" data-duration="7" data-width="1080" data-height="1350">
+    <div id="root" data-composition-id="c1" data-start="0" data-duration="6" data-width="1080" data-height="1350">
       <div
         id="el-frame"
         data-composition-id="carousel-slide"
         data-composition-src="compositions/carousel-slide.html"
         data-variable-values='{"tone":"light","swipe":1}'
         data-start="0"
-        data-duration="7"
+        data-duration="6"
         data-track-index="0"
         data-width="1080"
         data-height="1350"
@@ -212,17 +212,14 @@
         <div class="c1-river"></div>
       </section>
 
-      <section id="c1-s2" class="clip c1-slide c1-package" data-package="starter" data-start="1" data-duration="1" data-track-index="1">
+      <section id="c1-s2" class="clip c1-slide c1-package" data-package="launch" data-start="1" data-duration="1" data-track-index="1">
         <div class="c1-body"></div>
       </section>
       <section id="c1-s3" class="clip c1-slide c1-package" data-package="growth" data-start="2" data-duration="1" data-track-index="1">
         <div class="c1-body"></div>
       </section>
-      <section id="c1-s4" class="clip c1-slide c1-package" data-package="premium" data-start="3" data-duration="1" data-track-index="1">
-        <div class="c1-body"></div>
-      </section>
 
-      <section id="c1-s5" class="clip c1-slide" data-start="4" data-duration="1" data-track-index="1">
+      <section id="c1-s4" class="clip c1-slide" data-start="3" data-duration="1" data-track-index="1">
         <div class="c1-body">
           <p class="c1-big t-hero"></p>
           <p class="c1-sub t-title"></p>
@@ -230,14 +227,14 @@
         </div>
       </section>
 
-      <section id="c1-s6" class="clip c1-slide" data-start="5" data-duration="1" data-track-index="1">
+      <section id="c1-s5" class="clip c1-slide" data-start="4" data-duration="1" data-track-index="1">
         <div class="c1-body">
           <h2 class="c1-head t-headline"></h2>
           <ul class="c1-list t-lead"></ul>
         </div>
       </section>
 
-      <section id="c1-s7" class="clip c1-slide" data-start="6" data-duration="1" data-track-index="1">
+      <section id="c1-s6" class="clip c1-slide" data-start="5" data-duration="1" data-track-index="1">
         <div class="c1-body">
           <p class="c1-cta t-display"></p>
           <p class="c1-ask t-headline"></p>
@@ -247,21 +244,20 @@
       </section>
     </div>
     <script>
-      // Slide text from the plan. Prices, page counts, the care price and the CTA come from config.ts.
+      // Slide text from the plan, updated for the 2026-10-24 prices (playbook §2–3). Starting prices,
+      // page counts, the care price, the hourly rate and the CTA come from config.ts.
       // English only for now: add `es` once Hector has checked the Spanish slide text.
       const COPY = {
         en: {
           cover: { title: "What a website costs", before: "(no “", struck: "call for a quote", after: "”)" },
           pages: (n) => `Up to ${n} pages`,
           packages: {
-            starter: { includes: ["Contact form", "Click to call and text", "Google Maps"] },
+            launch: { includes: ["Contact form", "Click to call and text", "Google Maps"], note: "Your exact price is in writing before any work starts." },
             growth: { includes: ["Online booking", "A quote form", "Google Business Profile setup"], note: "Most local businesses fit here." },
-            premium: { includes: ["A blog", "A multi-step quote form"] },
           },
           care: {
-            big: (months) => `${months} months`,
-            sub: "of care, included with every build",
-            detail: (plan, price) => `Hosting, security updates, backups and small edits. After that, ${plan} is ${price}. Switch plans or cancel with 30 days’ notice.`,
+            sub: "for the care plan, once your site is live",
+            detail: (hourly) => `Hosting, security updates and backups, with replies within 1 business day. Edits are ${hourly} an hour, quoted first. Month to month: cancel with 30 days’ notice.`,
           },
           own: {
             head: "You own your domain and accounts",
@@ -290,7 +286,7 @@
       aside.append(copy.cover.after);
       TWC.showRiver(TWC.river($("#c1-s1 .c1-river"), { width: 1000, stops: "phone" }));
 
-      // 2–4 · Packages
+      // 2–3 · Packages
       const packages = TWC.t("packages");
       document.querySelectorAll(".c1-package").forEach((slide) => {
         const pkg = packages.find((p) => p.id === slide.dataset.package);
@@ -298,7 +294,7 @@
         const body = $(".c1-body", slide);
         body.append(
           make("p", "c1-name t-title", pkg.name),
-          make("p", "c1-price t-hero", TWC.price(pkg.price)),
+          make("p", "c1-price t-hero", TWC.priceFrom(pkg.priceFrom, lang)),
           make("p", "c1-pages t-lead", copy.pages(pkg.pages)),
         );
         const sheets = body.appendChild(make("div", "c1-sheets"));
@@ -309,30 +305,42 @@
         if (text.note) body.appendChild(make("p", "c1-note t-lead", text.note));
       });
 
-      // 5 · Care
-      const standard = TWC.t("carePlans").find((p) => p.id === "standard");
-      fill($("#c1-s5 .c1-big"), copy.care.big(TWC.t("includedCareMonths")));
-      fill($("#c1-s5 .c1-sub"), copy.care.sub);
-      fill($("#c1-s5 .c1-detail"), copy.care.detail(standard.name, TWC.monthly(standard.monthly, lang)));
+      // 4 · Care: one plan at one price, edits billed by the hour
+      const care = TWC.t("care");
+      fill($("#c1-s4 .c1-big"), TWC.monthly(care.monthly, lang));
+      fill($("#c1-s4 .c1-sub"), copy.care.sub);
+      fill($("#c1-s4 .c1-detail"), copy.care.detail(TWC.price(TWC.t("hourlyRate"))));
 
-      // 6 · Ownership
-      fill($("#c1-s6 .c1-head"), copy.own.head);
-      copy.own.items.forEach((item) => $("#c1-s6 .c1-list").appendChild(make("li", "", item)));
+      // 5 · Ownership
+      fill($("#c1-s5 .c1-head"), copy.own.head);
+      copy.own.items.forEach((item) => $("#c1-s5 .c1-list").appendChild(make("li", "", item)));
 
-      // 7 · CTA: "Free site check:" as the headline, then "DM" + the keyword bubble on its own line
+      // 6 · CTA: "Free site check:" as the headline, then "DM" + the keyword bubble on its own line
       // (the last word before the keyword is the verb: DM / manda), then the languages
       const cta = TWC.dm("carouselCta", lang);
       const verbAt = cta.before.lastIndexOf(" ");
-      const ctaLine = fill($("#c1-s7 .c1-cta"), cta.before.slice(0, verbAt));
-      const ask = $("#c1-s7 .c1-ask");
+      const ctaLine = fill($("#c1-s6 .c1-cta"), cta.before.slice(0, verbAt));
+      const ask = $("#c1-s6 .c1-ask");
       ask.append(make("span", "c1-verb", cta.before.slice(verbAt + 1)), TWC.bubble(cta.keyword));
       if (cta.after) ask.append(` ${cta.after}`);
-      fill($("#c1-s7 .c1-langs"), TWC.t("business.languages"));
-      TWC.showRiver(TWC.river($("#c1-s7 .c1-river"), { width: 1000, stops: "phone" }));
+      fill($("#c1-s6 .c1-langs"), TWC.t("business.languages"));
+      TWC.showRiver(TWC.river($("#c1-s6 .c1-river"), { width: 1000, stops: "phone" }));
 
       document.fonts.ready.then(() => {
         TWC.fit($("#c1-s1 .c1-title"), { max: 144, min: 96, maxHeight: 420 });
-        TWC.fit($("#c1-s6 .c1-head"), { max: 104, min: 80, maxHeight: 340 });
+        TWC.fit($("#c1-s5 .c1-head"), { max: 104, min: 80, maxHeight: 340 });
+        // "From $499" is wider than one number: step the prices down until they fit the margins,
+        // then use the smaller size on both package slides so they match as you swipe
+        const fitWidth = (node, min) => {
+          let size = parseFloat(getComputedStyle(node).fontSize);
+          node.style.whiteSpace = "nowrap";
+          while (size > min && node.scrollWidth > node.clientWidth) node.style.fontSize = `${(size -= 2)}px`;
+          return size;
+        };
+        const prices = [...document.querySelectorAll(".c1-price")];
+        const priceSize = Math.min(...prices.map((node) => fitWidth(node, 96)));
+        prices.forEach((node) => (node.style.fontSize = `${priceSize}px`));
+        fitWidth($("#c1-s4 .c1-big"), 96);
         TWC.fit(ctaLine, { max: 144, min: 96, maxHeight: 460 });
         // Stills: one frame per slide, so nothing moves
         window.__timelines["c1"] = gsap.timeline({ paused: true });

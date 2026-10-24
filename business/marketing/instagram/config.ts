@@ -30,25 +30,19 @@ export const config = {
     },
   },
 
-  /** Playbook §2. Founding prices appear only in the held H1 carousel. */
+  /** Playbook §2: two packages with starting prices. The exact price is set in the proposal. */
   packages: [
-    { id: 'starter', name: 'Starter', price: 1500, foundingPrice: 900, pages: 4 },
-    { id: 'growth', name: 'Growth', price: 2800, foundingPrice: 1800, pages: 7 },
-    { id: 'premium', name: 'Premium', price: 4800, foundingPrice: null, pages: 12 },
+    { id: 'launch', name: 'Launch', priceFrom: 499, pages: 5 },
+    { id: 'growth', name: 'Growth', priceFrom: 999, pages: 7 },
   ],
 
-  /** Playbook §3. */
-  carePlans: [
-    { id: 'essential', name: 'Care Essential', monthly: 49 },
-    { id: 'standard', name: 'Care Standard', monthly: 99 },
-    { id: 'plus', name: 'Care Plus', monthly: 199 },
-  ],
-
-  /** Playbook §3 Default: every build includes the first 3 months of Care Standard. */
-  includedCareMonths: 3,
-
-  /** Playbook §2: founding prices are for the first 3 clients only. */
-  foundingSpots: 3,
+  /**
+   * Playbook §3: one care plan for hosting and upkeep, with no edit time included.
+   * Edits are billed at the hourly rate in 30-minute blocks, quoted first. Billed from
+   * launch, month to month, 30 days' notice to cancel. No included months.
+   */
+  care: { name: 'Care plan', monthly: 49 },
+  hourlyRate: 75,
 
   /**
    * Real numbers only. The demos have no production PageSpeed results yet, so these
@@ -76,5 +70,6 @@ export const config = {
     example: { en: 'Example', es: 'Ejemplo' },
     swipe: { en: 'Swipe', es: 'Desliza' },
     perMonth: { en: '/mo', es: ' al mes' },
+    from: { en: 'From', es: 'Desde' },
   },
 } as const;

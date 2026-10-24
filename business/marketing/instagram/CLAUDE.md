@@ -1,6 +1,6 @@
 # Trinity Web Co. Instagram kit
 
-Read `README.md` first: it maps the kit, the commands, how a piece uses the shared compositions, and the gotchas. The repo's root `CLAUDE.md` and `business/playbook.md` still apply (prices only from the playbook, no invented social proof, "Demo" badges, gold only for primary buttons and the founding offer). The plan is Hector's "Instagram content plan" doc.
+Read `README.md` first: it maps the kit, the commands, how a piece uses the shared compositions, and the gotchas. The repo's root `CLAUDE.md` and `business/playbook.md` still apply (prices only from the playbook, no invented social proof, "Demo" badges, gold only for primary buttons). The plan is Hector's "Instagram content plan" doc.
 
 - Facts and prices live in `config.ts`; run `npm run sync` after editing it. Never type a price into a composition.
 - Use the Apple design skill for layout, spacing, type scale and motion, and the HyperFrames skills for compositions. Brand fonts and colors win over both.

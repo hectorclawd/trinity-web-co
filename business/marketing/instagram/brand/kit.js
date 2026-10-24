@@ -44,6 +44,10 @@
   function monthly(n, lang) {
     return price(n) + t("labels.perMonth", lang);
   }
+  /** A starting price: "From $499" / "Desde $499". */
+  function priceFrom(n, lang) {
+    return t("labels.from", lang) + " " + price(n);
+  }
   /** Splits a DM line like "DM {keyword} for a free site check" around the keyword. */
   function dm(kind, lang) {
     const [before, after] = t(`dm.${kind}`, lang).split("{keyword}");
@@ -425,7 +429,7 @@
 
   window.TWC = {
     data: DATA,
-    init, vars, transcript, t, price, monthly, dm,
+    init, vars, transcript, t, price, monthly, priceFrom, dm,
     spring, bezier, motion, rise,
     logo, drawLogo, showLogo, river, drawRiver, showRiver,
     fit, arrow, badge, bubble, captions, endsSentence, guides,
