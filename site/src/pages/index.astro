@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CTABand from '../components/CTABand.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import RiverHero from '../components/site/RiverHero.astro';
@@ -35,9 +34,6 @@ const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in perso
       <p class="section-lede">{offer.pricing.lede}</p>
       <Packages />
       <CarePlans />
-      <div class="mt-14">
-        <CTABand id="founding" variant="accent" {...offer.founding} />
-      </div>
     </div>
   </section>
 

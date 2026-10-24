@@ -8,7 +8,6 @@ Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailin
 - Two follow-ups maximum, then stop. Honor every "no" and opt-out immediately.
 - Emails include your real name, business name, a mailing address (PO box or virtual mailbox) and a way to opt out.
 - Never claim results you haven't produced ("I'll get you on page 1"). Say what you'll build and how you'll measure it.
-- Only mention founding spots if it's true, and say how many are left.
 
 ---
 
@@ -28,7 +27,7 @@ Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailin
 >
 > I'm a Dallas web developer building fast sites for local [trades / salons]. I recorded a 2-minute video showing 3 things I'd fix: [Loom link]
 >
-> I have a reduced founding price for my first 3 clients only. Worth a 20-minute call this week?
+> I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) is $750–$1,250 while I build my portfolio. Worth a free 20-minute call this week?
 >
 > [Your name]
 > Trinity Web Co. · [Phone] · [Website]
@@ -53,7 +52,7 @@ Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailin
 
 > I was looking you up on my phone before I came in. *[Show phone.]* Your reviews are great, but [your site took 8 seconds to load / I couldn't find a way to book / it doesn't show up when I searched "barber Oak Cliff"]. Here's a site I built that loads in about one second. *[Show demo.]*
 >
-> I have a discounted founding price for my first 3 clients only. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
+> I'm taking on my first few clients, so my Launch package is $750 to $1,250 while I build my portfolio. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
 
 **If they're busy or not there:**
 

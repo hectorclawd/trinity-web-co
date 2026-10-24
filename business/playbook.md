@@ -43,6 +43,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | Private previews for a real shop with no website are allowed as an outreach tactic, under the rules in section 7: private, noindex, shown in person, deleted after a no | A shop sees its own site, not a stranger's demo; the design guide's case study built one in an evening | After 10 previews, or the first time an owner objects |
 | 2026-10-21 | AI-made images on client sites only for general scenes, with the owner's written OK; never as photos of their products, food or work | Customers should see what they'll actually get; AI product photos would misrepresent a real business | At the attorney review, or when a client asks for AI product photos |
 | 2026-10-21 | Claude Code builds; Codex fixes (security, failing builds, dependency alerts, QA defects) and gives second-opinion reviews. Codex's rules are in `AGENTS.md`, tracked in git | Claude's time goes to building, and a second model catches what the first one missed | If Codex's fixes often need redoing, or its usage limits get in the way |
+| 2026-10-23 | Prices switch to the first-client outreach kit's: Launch $750–$1,250 (5 pages, replaces Starter), Growth $1,500–$2,500, and one care plan at $50–$99/mo priced by edit time. Premium, the founding offer (with its testimonial trade) and the 3 bundled care months are gone; care is optional and billed from launch day | Hector's call. The kit prices Launch as a portfolio-builder for the first 2–3 clients, and its outreach messages quote these numbers | After the first 3 clients |
 
 ### Changelog
 
@@ -74,6 +75,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | Decisions log: the business keeps its name, on trinitywebdallas.com |
 | 2026-10-21 | §5: design toolkit and build recipe (Taste, Playwright CLI, Impeccable, optional DESIGN.md and img2threejs) and the scroll-played clip; §7: private previews for shops with no website; decisions log: previews and AI images |
 | 2026-10-21 | §5: Claude builds, Codex fixes (step 9 of "Using Claude Code efficiently"); decisions log: the Codex split |
+| 2026-10-23 | §1–4, §6–8: the outreach kit's prices (Launch and Growth as ranges, one care plan); Premium, the founding offer and the bundled care months removed; §7 scripts use the kit's Launch line; §8 math flagged for a redo |
 
 ## 1. Business model
 
@@ -115,11 +117,11 @@ Three proof points to repeat in every pitch:
 
 |  | Dallas agency | Wix / Squarespace DIY | You |
 | --- | --- | --- | --- |
-| Upfront cost | $5,000–$15,000+ | $0 | $1,500–$4,800 |
-| Monthly cost | $150–$500+ retainers | $17–$50 plan + the owner's time | $49–$199, edits included |
+| Upfront cost | $5,000–$15,000+ | $0 | $750–$2,500 |
+| Monthly cost | $150–$500+ retainers | $17–$50 plan + the owner's time | $50–$99, edits included |
 | Who builds it | Account manager, then a junior or offshore team | The owner, nights and weekends | You, directly |
 | Speed on phones | Varies; often heavy WordPress | Often slow, generic templates | 90+ PageSpeed target |
-| Turnaround | 6–12 weeks | Whenever the owner finds time | 2–5 weeks |
+| Turnaround | 6–12 weeks | Whenever the owner finds time | 2–3 weeks |
 | Ownership | Often locked to their hosting | Locked to the platform | Client owns domain and accounts; code transferable |
 
 **What to say against Wix:** "Wix is great if you have the time. My clients would rather spend that time on jobs. I build it, I keep it updated, and it's faster than a template."
@@ -130,31 +132,28 @@ Three proof points to repeat in every pitch:
 
 ## 2. Service packages
 
-Three fixed-scope packages: Starter at $1,500, Growth at $2,800 and Premium at $4,800. Fixed scope with a clear page count is what keeps a part-time schedule sane.
+Two fixed-scope packages, priced as ranges: Launch at $750–$1,250 and Growth at $1,500–$2,500. The exact price goes in the written proposal after the discovery call, before any work starts. Fixed scope with a clear page count is what keeps a part-time schedule sane.
 
-|  | **Starter** | **Growth** (lead with this) | **Premium** |
-| --- | --- | --- | --- |
-| Best for | New or very small businesses that just need to look legit | Established local businesses that want more calls and bookings | Businesses with many services or areas, ready to invest in content |
-| Pages | Up to 4: Home, Services, About, Contact | Up to 7: adds 2 service-area or service-detail pages and a Gallery or FAQ | Up to 12: adds up to 4 more service/area pages and a blog |
-| Contact form (spam-protected, emails the owner) | Yes | Yes, plus a quote-request form with fields for job type | Yes, multi-step quote form |
-| Click-to-call and text buttons | Yes | Yes | Yes |
-| Google Maps embed and hours | Yes | Yes | Yes |
-| Online booking | Link to their existing tool | Embedded booking (Square, Calendly, Vagaro, Booksy or Cal.com) | Embedded booking, styled to match |
-| Reviews | 3 hand-picked reviews + "Review us on Google" link | 6–8 reviews section + review-request QR code and link | Same as Growth, plus a reviews page |
-| Blog | No | No | Yes, 3 launch posts written for local search |
-| SEO setup | Titles, meta descriptions, sitemap, Google Search Console | Starter + LocalBusiness schema, service-area pages, Google Business Profile setup or cleanup | Growth + keyword plan for 10 local terms and internal linking |
-| Analytics | Vercel Web Analytics | Vercel Web Analytics + call and form click tracking | Growth + a 30-day results report after launch |
-| Copywriting | Client supplies; you edit and polish | You write from a 30-minute interview | You write everything |
-| Photos | Client supplies or licensed stock | Up to 15 licensed stock images + client photos optimized | Same as Growth, plus a 1-hour on-site phone photo session |
-| Revision rounds | 2 | 2 | 3 |
-| Turnaround (after content is in) | 10 business days | 15 business days | 25 business days |
-| Dallas price | **$1,500** | **$2,800** | **$4,800** |
-| Founding-client price (first 3 clients only) | $900 | $1,800 | Not offered |
-|  |  |  |  |
+|  | **Launch** | **Growth** (lead with this) |
+| --- | --- | --- |
+| Best for | New or very small businesses that just need to look legit | Established local businesses that want more calls and bookings |
+| Pages | Up to 5: Home, About, Services, Gallery/Work, Contact | Up to 7: adds 2 service-area or service-detail pages |
+| Contact form (spam-protected, emails the owner) | Yes | Yes, plus a quote-request form with fields for job type |
+| Click-to-call and text buttons | Yes | Yes |
+| Google Maps embed and hours | Yes | Yes |
+| Online booking | Link to their existing tool | Embedded booking (Square, Calendly, Vagaro, Booksy or Cal.com) |
+| Reviews | 3 hand-picked reviews + "Review us on Google" link | 6–8 reviews section + review-request QR code and link |
+| SEO setup (basic local SEO) | Titles, meta descriptions, sitemap, Google Search Console | Launch + LocalBusiness schema, service-area pages, Google Business Profile setup or cleanup |
+| Analytics | Vercel Web Analytics | Vercel Web Analytics + call and form click tracking |
+| Copywriting | Client supplies; you edit and polish | You write from a 30-minute interview |
+| Photos | Client supplies or licensed stock | Up to 15 licensed stock images + client photos optimized |
+| Revision rounds | 2 | 2 |
+| Turnaround (after content is in) | 10 business days | 15 business days |
+| Dallas price | **$750–$1,250** | **$1,500–$2,500** |
 
-**Default:** pitch Growth first, every time. It is the package that actually gets them calls, and Starter becomes the fallback when budget is tight rather than the anchor.
+**Default:** pitch Growth first, every time. It is the package that actually gets them calls, and Launch becomes the fallback when budget is tight rather than the anchor.
 
-**Why founding prices:** your first 3 clients take a chance on someone with no portfolio. In exchange for the discount they agree in writing to a written testimonial and permission to show the site as a case study. A Google review is **not** part of the trade (Google bans incentives for reviews); ask for one separately at day 7, the same as every client (section 4). Founding clients also get the 3 bundled months of Care Standard, like every build. Never fake a testimonial or invent a client to fill the gap.
+**Why Launch is priced low:** it's a portfolio-builder for your first 2–3 clients, who take a chance on someone with no portfolio (decisions log, 2026-10-23). There's no separate founding discount and no testimonial trade. Ask every client for a Google review at day 7 (section 4), and never fake a testimonial or invent a client to fill the gap.
 
 ### Add-ons (sell after the main package is agreed)
 
@@ -167,30 +166,27 @@ Three fixed-scope packages: Starter at $1,500, Growth at $2,800 and Premium at $
 | Rush delivery (half the turnaround) | +25% |
 | Google Business Profile full optimization (if not in package) | $250 |
 
-Percentage add-ons are calculated on the price the client actually pays (the founding price for founding clients).
+Percentage add-ons are calculated on the price the client actually pays.
 
 ### What counts as a revision round
 
 One round is a single consolidated list of changes sent within 5 business days of your review link. New pages, new features or a new design direction are change orders, quoted separately before any work.
 
-## 3. Monthly care plans
+## 3. Monthly care plan
 
-Three care plans at $49, $99 and $199 a month: Care Essential, Care Standard and Care Plus. Any site you host must be on one; a client who declines gets a full handoff instead (section 4).
+One care plan at $50–$99 a month, priced by how much edit time the client wants: 30 minutes of edits a month at $50, up to 1 hour at $99. The proposal sets the amount. Care is optional; any site you host must be on the plan, and a client who skips it gets a full handoff instead (section 4).
 
-|  | **Care Essential** | **Care Standard** (default) | **Care Plus** |
-| --- | --- | --- | --- |
-| Price | $49/mo | $99/mo | $199/mo |
-| Hosting on your Vercel account, SSL, uptime monitoring | Yes | Yes | Yes |
-| Form and booking checks (tested monthly) | Yes | Yes | Yes |
-| Dependency and security updates, backups in GitHub | Yes | Yes | Yes |
-| Content edits (text, photos, hours, prices) | 30 min/mo | 1 hr/mo | 3 hrs/mo |
-| Response time | 3 business days | 1 business day | Same business day |
-| Monthly report (visits, calls, form submissions) | No | Yes, one-page email | Yes, plus a 20-min quarterly call |
-| Google Business Profile posts | No | 2 per month | 4 per month + review replies drafted |
-| New content | No | No | 1 blog post or new service page per month |
-| Annual mini-refresh (new photos, copy tune-up) | No | Yes | Yes |
+The care plan includes:
 
-**Default:** bundle the first 3 months of Care Standard into every build price, founding prices included, then it renews automatically at $99/mo with 30 days' notice to cancel. Clients see the value before they pay for it, and your recurring revenue starts on day one.
+- Hosting on your Vercel account, SSL and uptime monitoring
+- Form and booking checks, tested monthly
+- Dependency and security updates, backups in GitHub
+- Content edits (text, photos, hours, prices): 30 minutes a month at $50, up to 1 hour at $99
+- Replies within 1 business day
+
+Monthly reports, Google Business Profile posts, new content and a yearly refresh aren't included; they're work beyond the plan (below).
+
+**Default:** offer the care plan with every build. It's billed from launch day and renews monthly, with 30 days' notice to cancel, so recurring revenue starts the day the site goes live.
 
 **Rules that protect your time:**
 
@@ -206,10 +202,10 @@ Every project runs the same 9 stages, and no build work starts until the contrac
 
 1. **First contact** (day 0): reply within 4 hours, book a 20-minute discovery call.
 2. **Discovery call** (day 1–3): qualify, then send a proposal within 24 hours.
-3. **Proposal + contract + deposit** (day 3–7): e-signed contract, deposit (50%, or 40% for Premium).
+3. **Proposal + contract + deposit** (day 3–7): e-signed contract, deposit (50%).
 4. **Intake form + kickoff** (day 7–10): client fills the intake form; you set up the repo and accounts.
 5. **Content collection** (by a set date): turnaround clock starts only when content is complete.
-6. **Build** (Starter 10, Growth 15, Premium 25 business days).
+6. **Build** (Launch 10, Growth 15 business days).
 7. **Review rounds**: preview link, consolidated feedback, revisions.
 8. **Final payment + launch**: final payment due before the domain goes live.
 9. **Handoff + care plan**: walkthrough, logins doc, review request, 30-day check-in.
@@ -237,7 +233,7 @@ Fit and logistics:
 11. Do you have a logo, photos of your work, and text about your services?
 12. When do you want this live, and is anything driving that date?
 13. Who besides you has a say in the decision?
-14. Have you set a budget? (If they hesitate: "My packages run $1,500 to $4,800. Most businesses like yours fit Growth at $2,800. For my first 3 clients only, I have founding prices: $900 for Starter or $1,800 for Growth." Drop the founding sentence once those spots are filled.)
+14. Have you set a budget? (If they hesitate: "My packages run $750 to $2,500. Most businesses like yours fit Growth, at $1,500 to $2,500. While I build my portfolio, Launch is $750 to $1,250 for a 5-page site.")
 
 **Red flags (walk away or price higher):** wants e-commerce with 100+ products, "just copy this competitor's site," asks for unlimited revisions, can't name who decides, pushes back on any deposit.
 
@@ -259,11 +255,11 @@ Build this once in Tally or Google Forms and send the link after the deposit cle
 
 ### Payment structure
 
-**Default:** Starter and Growth are 50% deposit to book, 50% before launch. Premium is 40/30/30: 40% to book, 30% at first review, 30% at launch. Projects under $1,000 (founding Starter) are paid 100% upfront, and 50% of that payment counts as the deposit.
+**Default:** Launch and Growth are 50% deposit to book, 50% before launch.
 
 - The deposit holds your calendar slot. It is fully refundable until the kickoff call and non-refundable after it. (Attorney to confirm this wording before first use.)
 - Final payment is due before you point the domain at the new site. The site stays on a preview link until paid.
-- Care plan auto-billing starts the month after the 3 bundled months end.
+- Care plan auto-billing starts on launch day.
 
 ### Content collection
 
@@ -485,7 +481,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 
 1. **Scope:** package name, exact page list, features, number of revision rounds, what is *not* included
 2. **Timeline:** turnaround in business days starting when content is complete; client content due date
-3. **Payment:** 50/50 schedule for Starter and Growth (founding Starter paid 100% upfront, 50% of it counts as the deposit), 40/30/30 for Premium; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
+3. **Payment:** 50/50 schedule for Launch and Growth; deposit refundable until the kickoff call (attorney to confirm); due dates, late fee (e.g. 1.5%/month after 15 days), work pauses on late payment
 4. **Revisions and change orders:** what a round is; new requests quoted in writing first; hourly rate
 5. **Client responsibilities:** content, accuracy of their claims and licenses, rights to photos and logos they send
 6. **Ownership:** client owns the final site code, content and domain once the build fees are paid in full (unpaid care-plan fees stay owed but don't affect ownership); you keep the right to reuse your template and components, and to show the site in your portfolio
@@ -515,7 +511,7 @@ One master contract plus a short project-specific scope page. Every contract cov
 Put this in your contract and on your website's FAQ. Clients trust it, and it ends the most common web-designer horror story.
 
 - **The client always owns their domain.** They register or keep it in *their own* registrar account (Cloudflare Registrar, Porkbun or Namecheap; avoid GoDaddy upsells). They add you as a delegate or share DNS access. You never register a client's domain in your name.
-- **The client owns their Google Business Profile and Google Search Console.** You're added as a manager or user, never the only owner. Visitor stats come from Vercel Web Analytics on your Vercel team (section 5), so they reach the client in the monthly report (Care Standard and Plus), not as an account they own.
+- **The client owns their Google Business Profile and Google Search Console.** You're added as a manager or user, never the only owner. Visitor stats come from Vercel Web Analytics on your Vercel team (section 5), so the client gets them from you on request, not as an account they own.
 - **You host the site on your Vercel Pro team while they're on a care plan.** Hosting is included in the plan, not resold separately.
 - **The code transfers on request** once the project is paid in full: you transfer the GitHub repo to their account and help them move hosting (one-time $150 handoff fee).
 - **Logins live in a password manager** (Bitwarden free) using shared items, never in email or texts.
@@ -523,7 +519,7 @@ Put this in your contract and on your website's FAQ. Clients trust it, and it en
 
 ## 7. Client acquisition: first 3 clients in 30 days
 
-Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–1.5 hours a day around class and work. Expect roughly 120 contacts → 15 replies → 6 discovery calls → 3 signed. Track every contact in one spreadsheet (`business/sales/prospect-tracker.csv`): business, niche, area, channel, date contacted, status, next follow-up, notes. Status is always one of: Contacted, Follow-up 1, Follow-up 2, Replied, Call booked, Proposal sent, Signed, Not interested, Opted out, No reply (closed).
+Reach 120 hand-picked local businesses in 30 days at the section 2 prices, about 1–1.5 hours a day around class and work. Expect roughly 120 contacts → 15 replies → 6 discovery calls → 3 signed. Track every contact in one spreadsheet (`business/sales/prospect-tracker.csv`): business, niche, area, channel, date contacted, status, next follow-up, notes. Status is always one of: Contacted, Follow-up 1, Follow-up 2, Replied, Call booked, Proposal sent, Signed, Not interested, Opted out, No reply (closed).
 
 **Default channel mix:** walk-ins first (highest reply rate for local owners), then email and DMs to the same list. Your warm network goes first of all: first clients often come from a referral like "my cousin's barber needs a site."
 
@@ -532,7 +528,7 @@ Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–
 - [ ] Pick 2 niches (default: home trades + salons/barbers) and 3 areas you can reach easily (e.g. Oak Cliff, Garland, Richardson)
 - [ ] Build the starter template (section 5)
 - [ ] Build 2 demo sites, one per niche, for made-up businesses clearly labeled "Demo" (e.g. "Demo: North Texas HVAC"). They prove your work without inventing clients
-- [ ] Put up your own 1-page site: packages, founding offer, the 2 demos, PageSpeed scores, contact form
+- [ ] Put up your own 1-page site: packages, the 2 demos, PageSpeed scores, contact form
 - [ ] Set up business email, a Google Business Profile for yourself, a Cal.com booking link, and a one-page PDF price sheet
 - [ ] Text or message 20 people you know: "I'm starting a web design business for local businesses. Do you know an owner whose site needs help?"
 
@@ -554,7 +550,6 @@ Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–
 
 - [ ] Follow up every proposal on day 2 and day 5
 - [ ] Final follow-up to everyone who hasn't replied
-- [ ] Offer the founding-price deadline honestly: "I'm taking 3 founding clients at this price; I've got X spots left" (only if true)
 - [ ] Sign contracts, collect deposits, send intake forms
 - [ ] Write down what worked: which niche, which channel, which line got replies. Log it in the decisions table at the top
 
@@ -570,7 +565,7 @@ Reach 120 hand-picked local businesses in 30 days at founding prices, about 1–
 >
 > I'm a Dallas web developer building fast sites for local \[trades / salons\]. I recorded a 2-minute video showing 3 things I'd fix: \[Loom link\]
 >
-> I have a reduced founding price for my first 3 clients only. Worth a 20-minute call this week?
+> I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) is $750–$1,250 while I build my portfolio. Worth a free 20-minute call this week?
 >
 > \[Your name\]
 > Trinity Web Co. · \[phone\] · \[your site\]
@@ -592,7 +587,7 @@ Bring: printed one-page price sheet, business cards, your phone with their site 
 >
 > **If the owner is there:** I was looking you up on my phone before I came in. \[Show phone.\] Your reviews are great, but \[your site took 8 seconds to load / I couldn't find a way to book / it doesn't show up when I searched "barber Oak Cliff"\]. Here's a site I built that loads in about one second. \[Show demo.\]
 >
-> I have a discounted founding price for my first 3 clients only. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
+> I'm taking on my first few clients, so my Launch package is $750 to $1,250 while I build my portfolio. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
 >
 > **If they're busy or not there:** No problem. Can I leave this with you? \[Hand over sheet with your card stapled and a sticky note: "3 quick fixes for your site, call or text \[phone\], \[Name\]."\] What's the best way to reach the owner?
 
@@ -629,6 +624,8 @@ From the same design guide (section 5, design toolkit; decisions log, 2026-10-21
 
 ## 8. Pricing and income math
 
+> **Out of date since 2026-10-23.** The table below uses the old prices (Starter, Premium, three care plans, founding prices). Redo it for the section 2–3 prices before relying on these numbers.
+
 At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $3,250 a month after costs and taxes, on roughly 13 hours a week. That's around $59 per hour in every scenario; growth comes from more clients, not longer hours per client.
 
 **Assumptions** (change them as real numbers come in):
@@ -660,7 +657,7 @@ At 10 care-plan clients plus 1.5 new builds a month, you'd take home about $3,25
 
 ### When to raise prices
 
-- After 3 founding clients: switch to standard prices for everyone new.
-- After 5 launched sites with real results (a before/after PageSpeed score, call counts from analytics): raise Growth to $3,200 and Premium to $5,500.
+- After the first 3 clients: revisit Launch's portfolio-builder price (decisions log, 2026-10-23).
+- After 5 launched sites with real results (a before/after PageSpeed score, call counts from analytics): raise prices for new clients.
 - When you're booked 4+ weeks out: raise prices 15% for new clients. A waitlist means you're underpriced.
 - Every January: review this section with real numbers and log the change in the decisions table.
