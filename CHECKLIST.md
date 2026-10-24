@@ -49,8 +49,8 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Attorney review of `business/sales/master-service-agreement.md` and `contract-scope-template.md`, using the 14-point list in `CLAUDE.md`
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)
 - [x] Bring the sales docs up to the 2026-10-24 prices (Launch from $499, Growth from $999, care plan $49/mo with edits at $75/hr, no Premium or founding offer): `price-sheet.html`, `discovery-call.md`, `outreach-scripts.md`, `master-service-agreement.md`, `contract-scope-template.md`, `stripe-setup.md`, the client template and `clients/_template/`; the founding-offer carousel H1 dropped; playbook §8 income math redone (2026-10-24)
-- [ ] Review and merge `site-new-prices` (the site's pricing, care plan, FAQ and meta description at the 2026-10-24 prices) after checking its Vercel preview
-- [ ] Sync the client template's price wording to `trinitywebco-sites/site-template` (README, CLAUDE.md, commands, docs and comments now say Launch / Growth, no Premium)
+- [x] Review and merge `site-new-prices` (the site's pricing, care plan, FAQ and meta description at the 2026-10-24 prices) after checking its Vercel preview (2026-10-24: Hector OK'd, merged f0eac2a; the "fixed prices" line replaced, db920b8)
+- [x] Sync the client template's price wording to `trinitywebco-sites/site-template` (README, CLAUDE.md, commands, docs and comments now say Launch / Growth, no Premium) (2026-10-24: 084f2bd, org 6e2cd57)
 
 **Site content**
 - [x] How it works build clip: a drawn phone runs through the five steps as you scroll, from the design guide's scroll-played clip (2026-10-21, branch `build-clip`, for Hector's OK). Made with the Instagram kit (`business/marketing/instagram/site-build/`), shown by `site/src/components/site/BuildClip.astro`; re-render steps in HANDOFF.md
