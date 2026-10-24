@@ -15,7 +15,7 @@
 
 ## Visual direction to preserve
 
-- Keep the warm limestone page background, paper surfaces, ink text, river green, and restrained gold accents. Gold remains for primary buttons and the founding offer.
+- Keep the warm limestone page background, paper surfaces, ink text, river green, and restrained gold accents. Gold remains for primary buttons.
 - Keep Archivo as the single type family, with wide headlines and normally proportioned body text.
 - Retain the Trinity River and Dallas-neighborhood line drawing as the memorable hero element.
 - Keep the page direct and readable, with generous section spacing, clear pricing rows, and the existing plain, friendly first-person voice.

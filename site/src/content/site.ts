@@ -70,7 +70,7 @@ export const site: SiteConfig = {
     },
     {
       question: 'Do I have to sign up for a care plan?',
-      answer: 'No, it’s optional. If you want it, it starts on launch day at $50 to $99 a month, depending on how much edit time you want, and you can cancel with 30 days’ notice. If you’d rather host the site yourself, I’ll transfer the code to you and help move the hosting for a one-time $150.',
+      answer: 'No, it’s optional. If you want it, it starts on launch day at $49 a month, and you can cancel with 30 days’ notice. Edits aren’t included in the plan: they’re $75 an hour in 30-minute blocks, and I quote them first. If you’d rather host the site yourself, I’ll transfer the code to you and help move the hosting for a one-time $150.',
     },
     {
       question: 'Can you build an online store?',
@@ -102,7 +102,7 @@ export const site: SiteConfig = {
   logo: { src: '/logo-mark.svg', width: 42, height: 28 },
   seo: {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',
-    description: 'Fast, mobile-friendly websites for Dallas contractors, cleaning crews, salons and barbers. Prices from $750, set up for Google from day one.',
+    description: 'Fast, mobile-friendly websites for Dallas contractors, cleaning crews, salons and barbers. Prices from $499, set up for Google from day one.',
     ogImage: '/og-image.png',
     ogImageAlt: 'Trinity Web Co.: “Websites that bring Dallas customers in,” above a line drawing of the Trinity River',
   },
@@ -121,7 +121,7 @@ export const offer: StudioOffer = {
       { title: 'Turn a visit into a call', text: 'Tap-to-call, directions, booking and a contact form on every page, right where people look for them.' },
       { title: 'Load fast', text: 'Hand-built pages instead of a heavy page builder, so the site opens quickly even on a weak signal.' },
       { title: 'Stay yours', text: 'The domain is registered in your name and the content is yours. If you ever leave, I hand everything over.' },
-      { title: 'Get looked after', text: 'Hosting, security fixes, backups and small edits, all on a simple monthly care plan.' },
+      { title: 'Get looked after', text: 'Hosting, security fixes and backups on a simple monthly care plan, and a quick text when you need an edit.' },
     ],
   },
   niches: {
@@ -141,7 +141,7 @@ export const offer: StudioOffer = {
     packages: [
       {
         name: 'Launch',
-        price: '$750–$1250',
+        price: 'From $499',
         turnaround: 'Ready in 10 business days',
         bestFor: 'For new or very small businesses that need to look legit online.',
         includes: [
@@ -156,7 +156,7 @@ export const offer: StudioOffer = {
       },
       {
         name: 'Growth',
-        price: '$1500–$2500',
+        price: 'From $999',
         turnaround: 'Ready in 15 business days',
         bestFor: 'For established businesses that want more calls and bookings. This is the one I recommend most often.',
         featured: true,
@@ -176,7 +176,7 @@ export const offer: StudioOffer = {
     heading: 'Monthly care plan',
     intro: 'Optional. It starts on launch day, and you can cancel with 30 days’ notice.',
     plans: [
-      { name: 'Care plan', price: '$50–$99/mo', includes: 'Hosting, security updates, backups, monthly form and booking checks, and replies within 1 business day. The price depends on how much edit time you want: 30 minutes a month at $50, up to 1 hour at $99.' },
+      { name: 'Care plan', price: '$49/mo', includes: 'Hosting, security updates, backups, monthly form and booking checks, and replies within 1 business day. Edits aren’t included: they’re $75 an hour in 30-minute blocks, quoted before I start.' },
     ],
   },
   demos: {

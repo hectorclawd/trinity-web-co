@@ -1,10 +1,10 @@
-# Trinity Web Co. website (trinitywebco.com)
+# Trinity Web Co. website (trinitywebdallas.com)
 
 Hector's own one-page site, built from `templates/site-template/`. Follow the root `CLAUDE.md` and `business/playbook.md`. This file covers only what's specific to this site.
 
 ## Rules
 
-- **Prices, packages, care plans and the founding offer must match `business/playbook.md` §2–3.** Change the playbook first, then `offer` in `src/content/site.ts`. Never hard-code a price in a component.
+- **Prices, packages and the care plan must match `business/playbook.md` §2–3.** Change the playbook first, then `offer` in `src/content/site.ts`. Never hard-code a price in a component.
 - **Never invent social proof.** There are no reviews or client logos on this site until real ones exist, with permission. Demo sites are for made-up businesses and are always labeled "Demo" (playbook §7).
 - Voice: first person ("I"), plain and friendly, sentence case. No hype, no fake urgency, no ranking promises. Don't lead with "I use AI."
 
@@ -12,7 +12,7 @@ Hector's own one-page site, built from `templates/site-template/`. Follow the ro
 
 - `src/content/site.ts`:
   - `site`: business facts, nav, FAQ, SEO, form endpoint (template shape).
-  - `offer`: what the studio sells: features, niches, packages, care plans, founding offer, demo slots, process, promises, contact copy.
+  - `offer`: what the studio sells: features, niches, packages, care plan, demo slots, process, promises, contact copy.
 - `src/content/types.ts`: the template types, plus the Trinity-only types at the bottom (`Package`, `CarePlan`, `DemoSlot`, `StudioOffer`).
 - `src/components/`: template components used here (Header, Footer, CTABand, FAQ, ContactForm). **Fix bugs in these in `templates/site-template/` too**, so client sites get the fix.
 - `src/components/site/`: site-only components (RiverHero, Features, Niches, Packages, CarePlans, DemoSlots, Process, About). They use scoped CSS ported from the original design.
