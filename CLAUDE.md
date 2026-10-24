@@ -2,7 +2,7 @@
 
 Trinity Web Co. is Hector's web design business for owner-operated Dallas businesses. Hector runs it solo and part-time; clients work with him directly. It builds fast, custom-coded websites, then earns recurring revenue from monthly care plans.
 
-**Positioning:** a local developer you can text, not an agency. Plain language, fixed prices, and the client owns their domain and accounts.
+**Positioning:** a local developer you can text, not an agency. Plain language, starting prices posted openly with the exact price in writing, and the client owns their domain and accounts.
 
 This business is separate from Focus Forward. Don't mix its checklist, brand, or files into this folder.
 

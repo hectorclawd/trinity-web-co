@@ -2,7 +2,7 @@
 workflow: general-video
 flow: companion
 storyboard: no
-message: "A Dallas web developer you can text: fast sites, fixed prices, and you own it"
+message: "A Dallas web developer you can text: fast sites, prices in writing, and you own it"
 destination: instagram
 aspect: 1080x1920 (Reels, stories), 1080x1350 (carousels)
 language: en, es

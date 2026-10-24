@@ -18,7 +18,7 @@ Trinity Web Co. builds fast, custom-coded websites for these businesses, then ke
 
 ## Positioning
 
-A local developer you can text, not an agency. Fixed prices posted openly, agreed in writing. The client owns their domain, Google Business Profile and accounts. Hand-built sites that load fast on a phone, looked after every month.
+A local developer you can text, not an agency. Starting prices posted openly, the exact price agreed in writing. The client owns their domain, Google Business Profile and accounts. Hand-built sites that load fast on a phone, looked after every month.
 
 ## Operating Context
 

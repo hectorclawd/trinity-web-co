@@ -210,7 +210,7 @@ export const offer: StudioOffer = {
     heading: 'How it works',
     steps: [
       { title: 'Free call', text: '20 minutes on the phone or over coffee. You tell me about the business and what’s not working.' },
-      { title: 'Proposal', text: 'Within 24 hours you get a fixed price, a timeline and a list of what I’ll need from you. If it looks right, you sign online, pay to hold your spot and fill in a form about your business.' },
+      { title: 'Proposal', text: 'Within 24 hours you get your price in writing, a timeline and a list of what I’ll need from you. If it looks right, you sign online, pay to hold your spot and fill in a form about your business.' },
       { title: 'Design and build', text: 'I send a preview link you can open on your phone. You give feedback, and I make the changes.' },
       { title: 'Launch', text: 'The site goes live on your domain, and your Google, Yelp and social links get updated to point to it.' },
       { title: 'Care', text: 'Text or email when something needs to change. I keep the site fast, secure and up to date.' },
