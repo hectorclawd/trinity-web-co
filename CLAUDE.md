@@ -41,7 +41,7 @@ Rules for using it:
 /business      How the business runs
   playbook.md          The full playbook (source of truth, see above)
   stripe-setup.md      Stripe setup guide: fees, account settings, product catalog, invoicing and care-plan billing
-  grok-bots.md         Instructions to paste into the main Grok bot and 8 helpers (prospecting, outreach, Instagram, setup research)
+  grok-bots.md         Instructions to paste into the main Grok bot and 9 helpers (prospecting, outreach, Instagram, posting plans, setup research)
   sales/               Price sheet, discovery call, outreach scripts, master service agreement + scope template, intake form, prospect tracker
   archive/             Old pricing, contracts, outreach scripts and lead list, superseded by the playbook (see its README)
 /templates     Reusable starting points for client work
