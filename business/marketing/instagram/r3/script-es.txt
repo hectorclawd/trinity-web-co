@@ -1,0 +1,3 @@
+# R3 · Spanish voiceover, the content plan's draft. Not checked yet: once Hector checks it, add a line
+# "# Checked by Hector: YYYY-MM-DD" and scripts/voiceover.mjs will read it.
+Se descompone el aire acondicionado en agosto. Agarran el celular y buscan "reparación de aire acondicionado cerca de mí". Tocan un negocio en el mapa, y luego la página web. Si es lenta, o no encuentran el teléfono, se regresan y tocan el siguiente. Con el paquete Growth de Trinity Web Co., la página web, el perfil de Google y los enlaces para reseñas van en un solo trabajo, para que cada paso funcione en el celular. Mándanos "REVISAR" y revisamos la tuya gratis.
