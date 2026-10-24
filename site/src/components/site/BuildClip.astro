@@ -63,6 +63,7 @@
      leaving room under it on phones for the step it is showing */
   :global(.process.is-pinned) .build-clip {
     position: relative;
+    top: auto;
     width: fit-content;
     margin: 0 auto;
   }
@@ -99,16 +100,20 @@
     const dwell = (x: number) => (1 - DWELL) * x + DWELL * (4 * (x - 0.5) ** 3 + 0.5);
     const clamp01 = (x: number) => Math.min(1, Math.max(0, x));
 
-    // Pinned: the clip runs across the stage's whole time on screen, from the moment the track
-    // enters at the bottom to the moment the stage leaves under the header, so it never sits
-    // frozen while the page slides it in or out. Otherwise, beside the steps (wide screens) the
-    // clip follows the reader down the list; above them (phones), it plays as it crosses the screen.
+    // Pinned: the clip starts a third of the way into the slide in and ends a third of the way
+    // into the slide out, so it never sits frozen while the page moves it (scroll-craft's rule)
+    // but nearly all of it plays while the page holds still, as Hector asked. Otherwise, beside
+    // the steps (wide screens) the clip follows the reader down the list; above them (phones), it
+    // plays as it crosses the screen.
+    const LEAD = 0.35;
     const progress = () => {
       const vh = window.innerHeight;
       if (section.classList.contains('is-pinned')) {
         const t = track.getBoundingClientRect();
         const pinTop = parseFloat(getComputedStyle(stage).top) || 0;
-        return dwell(clamp01((vh - t.top) / (t.height + vh - pinTop)));
+        const lead = LEAD * (vh - pinTop);
+        const travel = t.height - stage.offsetHeight;
+        return dwell(clamp01((pinTop + lead - t.top) / (travel + 2 * lead)));
       }
       if (getComputedStyle(root).position === 'sticky') {
         const r = steps.getBoundingClientRect();
