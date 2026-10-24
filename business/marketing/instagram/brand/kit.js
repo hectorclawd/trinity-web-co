@@ -273,10 +273,90 @@
   }
 
   /** Burned-in captions from word timings ([{text, start, end}], as `hyperframes transcribe` writes).
-      One short phrase at a time: a new phrase after a 0.5 s pause or a sentence end, and a phrase
-      longer than 6 words or 2.5 s is cut into even parts (5 + 4, not 6 + 3). */
+      One short phrase at a time: a new phrase after a 0.5 s pause or a sentence end. A phrase
+      longer than 6 words or 2.5 s is cut where the speaker would breathe: after a comma, colon or
+      dash near the middle, otherwise into even parts (5 + 4, not 6 + 3) that never end on a little
+      word ("the bottom of / the screen" becomes "the bottom / of the screen"). */
   const ABBREVIATIONS = /^(Co|St|Dr|Mr|Mrs|Ms|Jr|Inc|Ave|Sra|Sr|Dra)\.$/;
   const endsSentence = (text) => /[.?!]$/.test(text) && !ABBREVIATIONS.test(text);
+  const endsClause = (text) => /[,;:–—]$/.test(text);
+  // Little words, plus the words that open a clause ("answers what / people ask")
+  const LITTLE = new Set("a an the of to at in on for and or but your our my its with from by what that which who when where how than as de del la el los las y o en por para tu su sus que con al cuando donde como".split(" "));
+  // Little words, and a word that opens a quote without closing it, shouldn't end a line
+  const isLittle = (text) => LITTLE.has(text.toLowerCase().replace(/[^\p{L}]/gu, "")) || (/^["“]/.test(text) && !/["”][,.?!]*$/.test(text));
+  // A cut before word i splits a name: two capitalized words, or one on each side of "and" / "&"
+  const joins = (text) => /^(and|&|y)$/i.test(text);
+  const cutsName = (run, i) =>
+    i > 0 && i < run.length &&
+    ((isCapital(run[i - 1].text) && !endsClause(run[i - 1].text) && !endsSentence(run[i - 1].text) &&
+      (isCapital(run[i].text) || (joins(run[i].text) && run[i + 1] && isCapital(run[i + 1].text)))) ||
+      (joins(run[i - 1].text) && run[i - 2] && isCapital(run[i - 2].text) && isCapital(run[i].text)));
+  const spoken = (g) => g[g.length - 1].end - g[0].start;
+  // A phrase on screen for under 0.8 s can't be read: it joins its neighbor
+  function foldShort(groups, maxWords) {
+    for (let i = 0; i < groups.length && groups.length > 1; i++) {
+      if (spoken(groups[i]) >= 0.8) continue;
+      const j = i + 1 < groups.length ? i + 1 : i - 1;
+      if (groups[i].length + groups[j].length > maxWords + 3) continue;
+      const [a, b] = j > i ? [i, j] : [j, i];
+      groups.splice(a, 2, groups[a].concat(groups[b]));
+      i = -1;
+    }
+    return groups;
+  }
+  function splitRun(run, maxWords, maxSeconds) {
+    const seconds = spoken(run);
+    if (run.length <= maxWords && seconds <= maxSeconds) return [run];
+    // Said in one breath: keep it one phrase and let captionLines set it on two lines
+    if (seconds <= 1.6 && run.length <= maxWords + 3) return [run];
+    // A clause break closest to the middle, keeping two words or more on each side
+    let cut = -1;
+    for (let i = 2; i <= run.length - 2; i++) {
+      if (endsClause(run[i - 1].text) && (cut < 0 || Math.abs(i - run.length / 2) < Math.abs(cut - run.length / 2))) cut = i;
+    }
+    if (cut > 0) return foldShort([...splitRun(run.slice(0, cut), maxWords, maxSeconds), ...splitRun(run.slice(cut), maxWords, maxSeconds)], maxWords);
+    const parts = Math.max(Math.ceil(run.length / maxWords), Math.ceil(seconds / maxSeconds));
+    const groups = [];
+    for (let start = 0, left = parts; start < run.length; left = Math.max(1, left - 1)) {
+      // Share what's left evenly, so a moved word never strands one word on the last line
+      let end = left === 1 ? run.length : start + Math.ceil((run.length - start) / left);
+      // Don't end a line on a little word or inside a name: move the cut back
+      while (end < run.length && end - start > 2 && (isLittle(run[end - 1].text) || cutsName(run, end))) end -= 1;
+      // A name that starts the phrase: move the cut past it instead
+      while (end < run.length && cutsName(run, end)) end += 1;
+      groups.push(run.slice(start, end));
+      start = end;
+    }
+    return foldShort(groups, maxWords);
+  }
+  /* A caption pill is 700 px wide at 54 px type, about 20 characters a line. A longer phrase is
+     set as two lines, broken after punctuation if it has some, never after a little word or an
+     opening quote, never inside a name ("Good Oak / Barbershop"), and otherwise as evenly as it
+     goes. Counting characters instead of measuring keeps it deterministic before fonts load. */
+  const CAPTION_LINE = 22;
+  const quoteOpen = (text) => ((text.match(/["“”]/g) || []).length % 2) === 1;
+  const isCapital = (text) => /^["“]?\p{Lu}/u.test(text);
+  // Curly quotes and apostrophes, to match the type in the scenes ("can't" becomes "can’t")
+  const curly = (text) => text.replace(/(^|[\s(])"/g, "$1“").replace(/"/g, "”").replace(/'/g, "’");
+  function captionLines(raw) {
+    const words = raw.map(curly);
+    const text = words.join(" ");
+    if (text.length <= CAPTION_LINE || words.length < 2) return [text];
+    let best = null;
+    for (let i = 1; i < words.length; i++) {
+      const left = words.slice(0, i).join(" ");
+      const right = words.slice(i).join(" ");
+      const before = words[i - 1];
+      let cost = Math.abs(left.length - right.length);
+      if (endsClause(before) || endsSentence(before)) cost -= 12;
+      if (isLittle(before)) cost += 40;
+      if (isCapital(before) && isCapital(words[i]) && !endsClause(before)) cost += 30;
+      if (quoteOpen(left)) cost += 40;
+      if (Math.max(left.length, right.length) > CAPTION_LINE + 6) cost += 25;
+      if (!best || cost < best.cost) best = { cost, lines: [left, right] };
+    }
+    return best.lines;
+  }
   function captions(tl, container, transcript, { offset = 0, maxWords = 6, maxSeconds = 2.5 } = {}) {
     const words = (Array.isArray(transcript) ? transcript : transcript.words)
       .filter((w) => w.type !== "spacing" && String(w.text).trim())
@@ -291,12 +371,7 @@
         current = [];
       }
     });
-    const groups = runs.flatMap((run) => {
-      const seconds = run[run.length - 1].end - run[0].start;
-      const parts = Math.max(Math.ceil(run.length / maxWords), Math.ceil(seconds / maxSeconds));
-      const size = Math.ceil(run.length / parts);
-      return Array.from({ length: Math.ceil(run.length / size) }, (_, i) => run.slice(i * size, (i + 1) * size));
-    });
+    const groups = runs.flatMap((run) => splitRun(run, maxWords, maxSeconds));
     // A lone word joins the phrase before it, unless it ends a sentence.
     for (let i = groups.length - 1; i > 0; i--) {
       if (groups[i].length === 1 && !endsSentence(groups[i][0].text)) groups.splice(i - 1, 2, groups[i - 1].concat(groups[i]));
@@ -305,7 +380,13 @@
     container.appendChild(box);
     groups.forEach((g, i) => {
       const line = html("p", "twc-caption");
-      line.appendChild(html("span", "", g.map((w) => w.text).join(" ")));
+      // The kit picks the line break, not the browser: each line stays whole (see kit.css)
+      const pill = html("span", "");
+      captionLines(g.map((w) => w.text)).forEach((text, i) => {
+        if (i) pill.appendChild(document.createElement("br"));
+        pill.appendChild(document.createTextNode(text));
+      });
+      line.appendChild(pill);
       box.appendChild(line);
       const start = offset + Math.max(0, g[0].start - 0.08);
       const nextStart = groups[i + 1] ? offset + groups[i + 1][0].start - 0.08 : Infinity;

@@ -1,0 +1,3 @@
+# R5 · Spanish voiceover, the content plan's draft. Not checked yet: once Hector checks it, add a line
+# "# Checked by Hector: YYYY-MM-DD" and scripts/voiceover.mjs will read it.
+Tu Instagram está muy bien. Esto es lo que una página web puede hacer y tu Instagram no. Esta es Good Oak Barbershop, una demostración hecha por Trinity Web Co. No es una barbería real. Los precios están a la vista, sin "mándame mensaje para precios". Los clientes mandan un mensaje para hacer su cita. Un aviso de "Abierto ahora" contesta lo primero que todos quieren saber. Y cuando alguien busca "barbería cerca de mí", Google tiene una página de verdad para mostrar. Mándanos "REVISAR" y revisamos la tuya.

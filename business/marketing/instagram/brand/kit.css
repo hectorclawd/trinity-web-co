@@ -145,6 +145,8 @@
   opacity: 0;
 }
 .twc-caption span {
+  /* kit.js captionLines() picks the break; the browser never wraps a caption line itself */
+  white-space: nowrap;
   padding: 0.06em 0.36em 0.1em;
   border-radius: 0.3em;
   background: var(--ink);
