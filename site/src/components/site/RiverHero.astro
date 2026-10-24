@@ -15,19 +15,57 @@ const stops = [
   { name: 'Design District', x: 870, y: 96, labelY: 64, hideOnPhone: true },
   { name: 'Deep Ellum', x: 1070, y: 152, labelY: 196 },
 ];
+// Wide screens: the same river turned 26° to run up the hero's right half, with labels
+// beside each stop (left of peaks, right of troughs) so they stay level and clear of the line.
+// It starts at the West Dallas dot and leaves through the right edge of the screen.
+const widePath =
+  'M170 300 C206 283 277 310 321 286 S340 198 377 182 S494 212 540 186 S570 113 605 94 S700 92 740 69 S820 40 870 34 S940 30 990 22';
+const wideStops = [
+  { name: 'West Dallas', x: 170, y: 300, peak: true },
+  { name: 'Oak Cliff', x: 321, y: 286 },
+  { name: 'Trinity Groves', x: 377, y: 182, peak: true },
+  { name: 'Bishop Arts', x: 540, y: 186 },
+  { name: 'Design District', x: 605, y: 94, peak: true },
+  { name: 'Deep Ellum', x: 740, y: 69 },
+];
 ---
 
 <section class="hero">
-  <div class="wrap">
+  <div class="wrap hero-grid">
     <h1 class="hero-title">{headline}</h1>
-    <p class="hero-lede">{lede}</p>
-    <div class="hero-actions" data-book-cta>
-      <a class="btn btn-primary btn-arrow" href={primaryCta.href}>{primaryCta.label}</a>
-      {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
+    <div class="hero-copy">
+      <p class="hero-lede">{lede}</p>
+      <div class="hero-actions" data-book-cta>
+        <a class="btn btn-primary btn-arrow" href={primaryCta.href}>{primaryCta.label}</a>
+        {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
+      </div>
+    </div>
+
+    <div class="river river-wide" aria-hidden="true">
+      <svg class="river-svg" viewBox="-10 0 930 330" preserveAspectRatio="xMinYMid meet">
+        <path class="river-bank" d={widePath}></path>
+        <path class="river-line" pathLength="1" d={widePath}></path>
+        <g class="river-stops">
+          {
+            wideStops.map((stop, i) => (
+              <g style={`--i:${i}`}>
+                <circle cx={stop.x} cy={stop.y} r="8"></circle>
+                <text
+                  x={stop.peak ? stop.x - 16 : stop.x + 16}
+                  y={stop.peak ? stop.y - 14 : stop.y + 30}
+                  text-anchor={stop.peak ? 'end' : 'start'}
+                >
+                  {stop.name}
+                </text>
+              </g>
+            ))
+          }
+        </g>
+      </svg>
     </div>
   </div>
 
-  <div class="river" aria-hidden="true">
+  <div class="river river-strip" aria-hidden="true">
     <svg class="river-svg" viewBox="0 0 1200 240" preserveAspectRatio="xMidYMid meet">
       <path class="river-bank" d={path}></path>
       <path class="river-line" pathLength="1" d={path}></path>
@@ -67,10 +105,45 @@ const stops = [
     margin-top: 2rem;
   }
 
-  .river {
+  .river-strip {
     max-width: 90rem;
     margin: clamp(2rem, 4vw, 3rem) auto 0;
     padding-bottom: 1rem;
+  }
+  .river-wide {
+    display: none;
+  }
+
+  /* Wide screens: headline across the top, then the copy beside the river, which runs off the right edge */
+  @media (min-width: 75rem) {
+    .hero {
+      padding-bottom: 1rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 6fr) minmax(0, 7fr);
+      column-gap: 2.5rem;
+      align-items: start;
+    }
+    .hero-title {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
+    .river-wide {
+      display: block;
+      margin-top: 1rem;
+      /* bleed past the wrap's padding and side margin to the viewport edge */
+      margin-right: calc(-1 * (max(0px, (100vw - 72rem) / 2) + 2.5rem));
+    }
+    .river-wide .river-svg {
+      overflow: hidden;
+    }
+    .river-wide .river-stops text {
+      font-size: 22px;
+    }
+    .river-strip {
+      display: none;
+    }
   }
   .river-svg {
     width: 100%;
@@ -104,6 +177,8 @@ const stops = [
     font-size: 19px;
     font-weight: 650;
     font-stretch: 110%;
+  }
+  .river-strip text {
     text-anchor: middle;
   }
 
@@ -136,11 +211,11 @@ const stops = [
 
   /* On phones, show the middle stretch of the river at a readable size */
   @media (max-width: 40rem) {
-    .river {
+    .river-strip {
       display: flex;
       justify-content: center;
     }
-    .river-svg {
+    .river-strip .river-svg {
       width: 860px;
       max-width: none;
       flex: none;
