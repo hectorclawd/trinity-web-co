@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-24
+Last updated: 2026-10-25
 
 ## DONE
 
@@ -46,7 +46,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Texas LLC (Form 205 on SOSDirect, about $300), then a free EIN, then a business checking account (playbook §6)
 - [ ] Stripe for deposits, invoices and care-plan billing (playbook §6 invoicing). Step-by-step guide in `business/stripe-setup.md` (2026-10-14); it needs the name, the LLC and EIN, and the business bank account first, then about 30 minutes plus a test-mode dry run
 - [ ] Ask the Texas Comptroller or a CPA whether care-plan hosting needs a sales tax permit; fill the blank in the contracts (before the first care-plan invoice)
-- [ ] Attorney review of `business/sales/master-service-agreement.md` and `contract-scope-template.md`, using the 14-point list in `CLAUDE.md`
+- [ ] Attorney review of `business/sales/master-service-agreement.md` and `contract-scope-template.md`, using the 13-point list in `CLAUDE.md`
 - [ ] PO box or virtual mailbox for the `[Mailing address]` in cold emails (CAN-SPAM; needed before outreach)
 - [x] Bring the sales docs up to the 2026-10-24 prices (Launch from $499, Growth from $999, care plan $49/mo with edits at $75/hr, no Premium or founding offer): `price-sheet.html`, `discovery-call.md`, `outreach-scripts.md`, `master-service-agreement.md`, `contract-scope-template.md`, `stripe-setup.md`, the client template and `clients/_template/`; the founding-offer carousel H1 dropped; playbook §8 income math redone (2026-10-24)
 - [x] Review and merge `site-new-prices` (the site's pricing, care plan, FAQ and meta description at the 2026-10-24 prices) after checking its Vercel preview (2026-10-24: Hector OK'd, merged f0eac2a; the "fixed prices" line replaced, db920b8)
