@@ -45,6 +45,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | Claude Code builds; Codex fixes (security, failing builds, dependency alerts, QA defects) and gives second-opinion reviews. Codex's rules are in `AGENTS.md`, tracked in git | Claude's time goes to building, and a second model catches what the first one missed | If Codex's fixes often need redoing, or its usage limits get in the way |
 | 2026-10-23 | Prices switch to the first-client outreach kit's: Launch $750–$1,250 (5 pages, replaces Starter), Growth $1,500–$2,500, and one care plan at $50–$99/mo priced by edit time. Premium, the founding offer (with its testimonial trade) and the 3 bundled care months are gone; care is optional and billed from launch day | Hector's call. The kit prices Launch as a portfolio-builder for the first 2–3 clients, and its outreach messages quote these numbers | After the first 3 clients |
 | 2026-10-24 | Prices drop to Launch from $499 and Growth from $999 (starting prices; the exact price goes in the proposal), and one care plan at $49/mo for hosting and upkeep only, with no edit time included: every edit is billed at $75/hr in 30-minute blocks, quoted first. Replaces the 2026-10-23 ranges | Hector's call | After the first 3 clients |
+| 2026-10-24 | Professional liability (E&O) insurance is required before the first Growth client | Hector's call | At the attorney review |
 
 ### Changelog
 
@@ -78,6 +79,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-21 | §5: Claude builds, Codex fixes (step 9 of "Using Claude Code efficiently"); decisions log: the Codex split |
 | 2026-10-23 | §1–4, §6–8: the outreach kit's prices (Launch and Growth as ranges, one care plan); Premium, the founding offer and the bundled care months removed; §7 scripts use the kit's Launch line; §8 math flagged for a redo |
 | 2026-10-24 | §1–3: Launch from $499, Growth from $999, care plan $49/mo with no edit time included (edits at $75/hr); §4 budget line and §7 scripts updated to match |
+| 2026-10-24 | §6: E&O insurance required before the first Growth client |
 | 2026-10-24 | §8: income math redone for the new prices (about $26/hr take-home at 10 clients); §5 template tree and §6 insurance line no longer mention Premium |
 
 ## 1. Business model
@@ -473,7 +475,7 @@ This is general information, not legal or tax advice. Fees below are approximate
 - [ ] Calendar the annual Texas franchise tax Public Information Report, due May 15. Small LLCs owe no franchise tax below the revenue threshold, but the report is still required
 - [ ] Ask the Texas Comptroller (or a CPA) whether you need a sales tax permit. Texas treats some data processing and hosting as taxable, so hosting in the care plan may be taxable even if design work is not. Settle this before billing your first care plan
 - [ ] Set aside 25–30% of profit for federal taxes (self-employment tax is 15.3%; Texas has no state income tax). Pay quarterly estimates (Apr 15, Jun 15, Sep 15, Jan 15) once you expect to owe $1,000+ for the year
-- [ ] Optional at the start: professional liability (E&O) insurance, often $30–$60/mo for a solo web designer
+- [ ] Required before the first Growth client (Hector, 2026-10-24): professional liability (E&O) insurance, often $30–$60/mo for a solo web designer
 - [ ] One-time: pay a Texas small-business attorney (about $300–$600) to review your contract template. Cheaper than one bad dispute
 
 ### Contract essentials

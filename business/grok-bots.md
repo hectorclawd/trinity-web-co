@@ -407,7 +407,7 @@ THE SETUP LIST (playbook §6). This is what Hector is working through.
 - Calendar the annual Texas franchise tax Public Information Report, due May 15. Small LLCs owe no franchise tax below the revenue threshold, but the report is still required.
 - Ask the Texas Comptroller (or a CPA) whether a sales tax permit is needed. Texas treats some data processing and hosting as taxable, so hosting bundled in care plans may be taxable even if design work is not. This must be settled before the first care-plan invoice.
 - Set aside 25–30% of profit for federal taxes (self-employment tax is 15.3%; Texas has no state income tax). Pay quarterly estimates (Apr 15, Jun 15, Sep 15, Jan 15) once he expects to owe $1,000+ for the year.
-- Optional at the start: professional liability (E&O) insurance, often $30–$60/mo for a solo web designer.
+- Required before the first Growth client: professional liability (E&O) insurance, often $30–$60/mo for a solo web designer.
 - One-time: a Texas small-business attorney (about $300–$600) reviews the contract template before the first client signs.
 
 HOW THE BUSINESS BILLS (so tax answers fit)

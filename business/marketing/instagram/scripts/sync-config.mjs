@@ -43,7 +43,8 @@ for (const [what, playbookValues, configValues] of checks) {
 // 2. The river drawing, from the site's hero.
 const hero = readFileSync(repo('site/src/components/site/RiverHero.astro'), 'utf8');
 const riverPath = hero.match(/const path =\s*'([^']+)'/)?.[1];
-const viewBox = hero.match(/class="river-svg" viewBox="([^"]+)"/)?.[1];
+// The strip drawing is the one drawn from `path` and `stops`; the wide hero drawing above it has its own viewBox
+const viewBox = hero.match(/class="river river-strip"[\s\S]*?viewBox="([^"]+)"/)?.[1];
 const stops = [...hero.matchAll(/\{ name: '([^']+)', x: (\d+), y: (\d+), labelY: (\d+)(, hideOnPhone: true)? \}/g)].map(
   (m) => ({ name: m[1], x: +m[2], y: +m[3], labelY: +m[4], phone: !m[5] }),
 );
