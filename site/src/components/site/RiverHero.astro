@@ -1,7 +1,7 @@
 ---
 // Trinity Web Co. hero: the line drawing of the Trinity River with Dallas neighborhoods
-// along it. The page's one memorable moment; it draws itself once on load, then a darker
-// current runs along it as the page scrolls.
+// along it. The page's one memorable moment; it draws itself once on load, then glides along
+// its course with a darker current running down it as the page scrolls.
 import { site } from '../../content/site';
 
 const { headline, lede, primaryCta, secondaryCta } = site.hero;
@@ -22,16 +22,17 @@ const stops = [
 const stopsAt = [0.124, 0.29, 0.422, 0.601, 0.726, 0.876];
 // Wide screens: the same river turned 26° to run up the hero's right half, with labels
 // beside each stop (left of peaks, right of troughs) so they stay level and clear of the line.
-// It starts at the West Dallas dot and leaves through the right edge of the screen.
+// It starts at the West Dallas dot and leaves through the right edge of the screen; its last
+// stretch waits past the edge until the drawing glides in with the scroll.
 const widePath =
-  'M170 300 C206 283 277 310 321 286 S340 198 377 182 S494 212 540 186 S570 113 605 94 S700 92 740 69 S820 40 870 34 S940 30 990 22';
+  'M170 300 C206 283 277 310 321 286 S340 198 377 182 S494 212 540 186 S570 113 605 94 S700 92 740 69 S820 40 870 34 S940 30 990 22 S1080 14 1150 4';
 const wideStops = [
   { name: 'West Dallas', x: 170, y: 300, peak: true, at: 0 },
-  { name: 'Oak Cliff', x: 321, y: 286, at: 0.161 },
-  { name: 'Trinity Groves', x: 377, y: 182, peak: true, at: 0.29 },
-  { name: 'Bishop Arts', x: 540, y: 186, at: 0.464 },
-  { name: 'Design District', x: 605, y: 94, peak: true, at: 0.586 },
-  { name: 'Deep Ellum', x: 740, y: 69, at: 0.731 },
+  { name: 'Oak Cliff', x: 321, y: 286, at: 0.138 },
+  { name: 'Trinity Groves', x: 377, y: 182, peak: true, at: 0.248 },
+  { name: 'Bishop Arts', x: 540, y: 186, at: 0.397 },
+  { name: 'Design District', x: 605, y: 94, peak: true, at: 0.501 },
+  { name: 'Deep Ellum', x: 740, y: 69, at: 0.626 },
 ];
 ---
 
@@ -48,24 +49,26 @@ const wideStops = [
 
     <div class="river river-wide" aria-hidden="true">
       <svg class="river-svg" viewBox="-10 0 930 330" preserveAspectRatio="xMinYMid meet">
-        <path class="river-bank" d={widePath}></path>
-        <path class="river-line" pathLength="1" d={widePath}></path>
-        <path class="river-current" pathLength="1" d={widePath}></path>
-        <g class="river-stops">
-          {
-            wideStops.map((stop, i) => (
-              <g style={`--i:${i};--at:${stop.at}`}>
-                <circle cx={stop.x} cy={stop.y} r="8"></circle>
-                <text
-                  x={stop.peak ? stop.x - 16 : stop.x + 16}
-                  y={stop.peak ? stop.y - 14 : stop.y + 30}
-                  text-anchor={stop.peak ? 'end' : 'start'}
-                >
-                  {stop.name}
-                </text>
-              </g>
-            ))
-          }
+        <g class="river-flow">
+          <path class="river-bank" d={widePath}></path>
+          <path class="river-line" pathLength="1" d={widePath}></path>
+          <path class="river-current" pathLength="1" d={widePath}></path>
+          <g class="river-stops">
+            {
+              wideStops.map((stop, i) => (
+                <g style={`--i:${i};--at:${stop.at}`}>
+                  <circle cx={stop.x} cy={stop.y} r="8"></circle>
+                  <text
+                    x={stop.peak ? stop.x - 16 : stop.x + 16}
+                    y={stop.peak ? stop.y - 14 : stop.y + 30}
+                    text-anchor={stop.peak ? 'end' : 'start'}
+                  >
+                    {stop.name}
+                  </text>
+                </g>
+              ))
+            }
+          </g>
         </g>
       </svg>
     </div>
@@ -256,10 +259,32 @@ const wideStops = [
         --flow-end: 60%;
         view-timeline: --hero;
       }
-      /* The wide hero is shorter, so its river reaches the header sooner */
+      /* Wide screens: once the current has lit West Dallas and Oak Cliff, the drawing glides down
+         and left along the river's course, so those two slide out at the bottom left and the
+         stretch past the screen edge flows in. The left and bottom edges fade (the bottom only
+         once it moves, as Oak Cliff's label sits right on it), so nothing leaves with a hard
+         cut. The wide hero is shorter, so it all finishes sooner. */
       @media (min-width: 75rem) {
         .hero {
           --flow-end: 40%;
+        }
+        .river-flow {
+          animation: river-glide linear both;
+        }
+        .river-svg .river-flow {
+          animation-timeline: --hero;
+          animation-range: exit calc(var(--flow-end) / 5) exit var(--flow-end);
+        }
+        .river-wide .river-svg {
+          mask-image:
+            linear-gradient(to right, transparent, #000 1rem),
+            linear-gradient(to top, transparent, #000 var(--river-fade));
+          mask-composite: intersect;
+          animation: river-fade linear both;
+        }
+        .river-wide > .river-svg {
+          animation-timeline: --hero;
+          animation-range: exit calc(var(--flow-end) / 5) exit var(--flow-end);
         }
       }
       /* Measured against the whole screen rather than the page's 5rem anchor padding, so
@@ -283,8 +308,21 @@ const wideStops = [
         animation-range: exit calc(var(--at) * var(--flow-end)) exit calc(var(--at) * var(--flow-end) + 2%);
       }
 
-      /* Phones: the river also slides from West Dallas to Deep Ellum, so all six stops pass by */
-      @media (max-width: 40rem) {
+      /* Phones and tablets: the river slides sideways from West Dallas to Deep Ellum, so every
+         stop passes by. Tablets get a bigger river to slide; phones already crop theirs. */
+      @media (40rem < width < 75rem) {
+        .river-strip {
+          --strip-w: 130vw;
+          display: flex;
+          justify-content: center;
+        }
+        .river-strip .river-svg {
+          width: var(--strip-w);
+          max-width: none;
+          flex: none;
+        }
+      }
+      @media (width < 75rem) {
         .river-strip .river-svg {
           animation: river-pan linear both;
         }
@@ -296,6 +334,22 @@ const wideStops = [
           display: inline;
         }
       }
+    }
+  }
+  @property --river-fade {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+  }
+  @keyframes river-glide {
+    to {
+      transform: translate(-148px, 60px);
+    }
+  }
+  @keyframes river-fade {
+    25%,
+    to {
+      --river-fade: 3rem;
     }
   }
   @keyframes stop-reached {
