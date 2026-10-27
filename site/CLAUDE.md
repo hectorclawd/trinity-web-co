@@ -16,7 +16,7 @@ Hector's own one-page site, built from `templates/site-template/`. Follow the ro
 - `src/content/types.ts`: the template types, plus the Trinity-only types at the bottom (`Package`, `CarePlan`, `DemoSlot`, `StudioOffer`).
 - `src/components/`: template components used here (Header, Footer, CTABand, FAQ, ContactForm). **Fix bugs in these in `templates/site-template/` too**, so client sites get the fix.
 - `src/components/site/`: site-only components (RiverHero, Features, Niches, Packages, CarePlans, DemoSlots, Process, About, PageRiver). They use scoped CSS ported from the original design.
-- `PageRiver.astro`: the river that flows on down the page after the hero, naming a nearby city in the open space by each heading it lists. To change a city or where it shows, edit the `stops` list at its top.
+- `PageRiver.astro`: the river that flows on down the page after the hero, behind the content: it runs off screen and back, slips behind cards, screenshots and the How it works phone, and names a nearby city in the open space by each heading it lists. Section content sits above it because it sets `#main .wrap` to `position: relative; z-index: 1`. To change a city or where it shows, edit the `stops` list at its top.
 - `src/styles/tokens.css`: brand tokens (see the root CLAUDE.md) and Archivo's width axis via `@fontsource-variable/archivo/wdth.css`.
 - `public/og-image.png`: 1200×630 share image. Regenerate it if the headline changes.
 
