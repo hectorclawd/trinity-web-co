@@ -162,6 +162,7 @@ const stops = [
     const GAP_MIN = 48; // shortest stretch of a gap that fits a crossing's name and dot
     const COVER_W = 100; // smallest solid piece the river slips behind
     const COVER_H = 90;
+    const DIVE = 320; // a solid piece this tall or more takes more than one dive
     const STEP = 6; // length between the samples the scroll looks up
     const TIP = 0.75; // the drawn river reaches this far down the screen
     // What the river keeps clear of where it shows. Headings and paragraphs count by their text,
@@ -302,18 +303,37 @@ const stops = [
       const flow = (toY: number) => {
         if (toY > y) curve(x, toY, 'v', 'v');
       };
-      // Is the stretch between l and r, from t to b, free of everything but the given piece?
+      // Is the stretch between l and r, from t to b, free of everything but the given piece? What
+      // sits inside another solid piece tall enough to hide the river there doesn't count: the
+      // river can thread behind one piece to reach the next, like the two demo screenshots. Nor
+      // does a box around a piece that's no wider than it, like a screenshot's list item.
+      const hides = (o: Obstacle, t: number, b: number) =>
+        covers.some(
+          (c) =>
+            c.t <= t &&
+            c.b >= b &&
+            (c.el === o.el || c.el.contains(o.el) || (o.el.contains(c.el) && o.l >= c.l - 2 && o.r <= c.r + 2)),
+        );
       const clear = (l: number, r: number, t: number, b: number, own?: Element) =>
-        r <= l || !obstacles.some((o) => (!own || !(own.contains(o.el) || o.el.contains(own))) && overlaps(o, { l, t, r, b }));
+        r <= l ||
+        !obstacles.some(
+          (o) => (!own || !(own.contains(o.el) || o.el.contains(own))) && overlaps(o, { l, t, r, b }) && !hides(o, t, b),
+        );
 
       // Slip behind a solid piece: in from the side the river is on, and on wide screens back out
       // the same side; on narrow ones, out the far side. Only where the stretches on show are clear.
+      // A tall piece takes a dive for every DIVE of its height, up to three.
       const wide = (c: Rect) => c.r - c.l > width * 0.8;
       const waits: { y: number; release: number }[] = [];
       const cover = (c: (typeof covers)[number]) => {
-        const h = c.b - c.t;
+        const count = Math.max(1, Math.min(3, Math.floor((c.b - c.t) / DIVE)));
+        const band = (c.b - c.t) / count;
+        for (let k = 0; k < count; k++) dive(c, c.t + band * k, c.t + band * (k + 1));
+      };
+      const dive = (c: (typeof covers)[number], top: number, bottom: number) => {
+        const h = bottom - top;
         const s = Math.min(90, h / 2 - BANK - 8);
-        const cy = (c.t + c.b) / 2;
+        const cy = (top + bottom) / 2;
         if (s < 20 || cy - s <= y + 1) return;
         const t = cy - s - BANK - 4;
         const b = cy + s + BANK + 4;
