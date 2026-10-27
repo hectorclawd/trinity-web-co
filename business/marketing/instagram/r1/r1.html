@@ -9,14 +9,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <!-- R1 · A website guy you can text: the kit's first Reel (1080×1920, 26.4 s).
+    <!-- R1 · A website guy you can text: the kit's first Reel (1080×1920, 25.6 s).
          Scenes from the plan ("Reel scripts", R1), timed to Chris's approved voiceover
          (r1/audio/r1-en.mp3; word timings inlined below from r1/audio/r1-en.words.json):
-           0–2.3 s      the text thread, over "What if you could just text your website guy?"
-           2.3–11.1 s   the river across Dallas; a neighborhood lights up on each trade Chris names
-           11.1–16.4 s  the thread again: a second text, and our reply on "the same day"
-           16.4–22.2 s  "You own it.", landing on "are"
-           22.2–26.4 s  the shared end card, from "DM", so CHECK lands on "check"
+           0–2.6 s      the text thread, over "What if you could just text your website guy?"
+           2.6–10.3 s   the river across Dallas; a neighborhood lights up on each trade Chris names
+           10.3–15.6 s  the thread again: a second text, and our reply on "the same day"
+           15.6–21.9 s  "You own it.", landing on "are"
+           21.9–25.6 s  the shared end card, from "DM", so CHECK lands on "check"
          Captions run on their own track until the end card. English only for now.
          Render: npm run piece -- r1/r1.html --lang en -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
@@ -141,20 +141,20 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="r1" data-start="0" data-duration="26.4" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="r1" data-start="0" data-duration="25.6" data-width="1080" data-height="1920">
       <div class="twc-bg"></div>
 
-      <section id="r1-s1" class="clip r1-scene" data-start="0" data-duration="2.3" data-track-index="1">
+      <section id="r1-s1" class="clip r1-scene" data-start="0" data-duration="2.6" data-track-index="1">
         <div class="r1-body r1-thread"></div>
       </section>
 
-      <section id="r1-s2" class="clip r1-scene" data-start="2.3" data-duration="8.8" data-track-index="1"></section>
+      <section id="r1-s2" class="clip r1-scene" data-start="2.6" data-duration="7.7" data-track-index="1"></section>
 
-      <section id="r1-s3" class="clip r1-scene" data-start="11.1" data-duration="5.3" data-track-index="1">
+      <section id="r1-s3" class="clip r1-scene" data-start="10.3" data-duration="5.3" data-track-index="1">
         <div class="r1-body r1-thread"></div>
       </section>
 
-      <section id="r1-s4" class="clip r1-scene" data-start="16.4" data-duration="5.8" data-track-index="1">
+      <section id="r1-s4" class="clip r1-scene" data-start="15.6" data-duration="6.3" data-track-index="1">
         <div class="r1-body r1-own">
           <p class="r1-own-line t-display t-river"></p>
         </div>
@@ -166,7 +166,7 @@
         data-composition-id="captions"
         data-composition-src="compositions/captions.html"
         data-start="0"
-        data-duration="22.2"
+        data-duration="21.9"
         data-track-index="2"
         data-width="1080"
         data-height="1920"
@@ -176,14 +176,14 @@
         id="el-end-card"
         data-composition-id="end-card"
         data-composition-src="compositions/end-card.html"
-        data-start="22.2"
-        data-duration="4.2"
+        data-start="21.9"
+        data-duration="3.7"
         data-track-index="1"
         data-width="1080"
         data-height="1920"
       ></div>
 
-      <audio id="r1-voiceover" src="r1/audio/r1-en.mp3" data-start="0" data-duration="25.64" data-track-index="3" data-volume="1"></audio>
+      <audio id="r1-voiceover" src="r1/audio/r1-en.mp3" data-start="0" data-duration="24.76" data-track-index="3" data-volume="1"></audio>
     </div>
     <script>
       // On-screen words for R1. The thread is a made-up example (Example badge); everything else on
@@ -212,14 +212,14 @@
       // (and compositions never fetch); `words` below turns them back into {text, start, end}.
       const TRANSCRIPT = {
         en: [
-          ["What", 0, 0.174], ["if", 0.197, 0.244], ["you", 0.267, 0.337], ["could", 0.372, 0.488], ["just", 0.511, 0.65], ["text", 0.685, 0.964], ["your", 0.987, 1.08], ["website", 1.126, 1.486], ["guy?", 1.509, 1.904],
-          ["Trinity", 2.345, 2.728], ["Web", 2.798, 2.972], ["Co.", 3.03, 3.425], ["builds", 3.866, 4.133], ["fast", 4.203, 4.54], ["websites", 4.598, 5.027], ["for", 5.062, 5.155], ["Dallas", 5.213, 5.515], ["businesses:", 5.561, 6.293],
-          ["AC", 6.618, 6.966], ["and", 7.14, 7.221], ["plumbing,", 7.279, 7.872], ["barbers,", 8.081, 8.847], ["salons,", 9.021, 9.741], ["restaurants.", 9.892, 10.693],
-          ["No", 11.134, 11.285], ["account", 11.331, 11.575], ["managers,", 11.622, 12.109], ["no", 12.179, 12.33], ["tickets.", 12.399, 13.026],
-          ["Text", 13.63, 13.978], ["us", 14.036, 14.211], ["and", 14.327, 14.478], ["you", 14.536, 14.605], ["hear", 14.663, 14.779], ["back", 14.826, 14.977], ["the", 15.035, 15.105], ["same", 15.151, 15.383], ["day.", 15.418, 15.778],
-          ["Fixed", 16.474, 16.776], ["prices,", 16.834, 17.426], ["and", 17.461, 17.6], ["your", 17.647, 17.763], ["domain", 17.821, 18.146], ["and", 18.193, 18.262], ["accounts", 18.297, 18.727], ["are", 18.785, 18.924], ["yours.", 18.97, 19.493],
-          ["Want", 20.19, 20.352], ["to", 20.375, 20.422], ["know", 20.457, 20.549], ["how", 20.584, 20.654], ["your", 20.7, 20.805], ["site", 20.851, 21.025], ["is", 21.049, 21.118], ["doing?", 21.153, 21.559],
-          ["DM", 22.256, 22.558], ["us", 22.628, 22.767], ["\"check\"", 22.976, 23.731], ["for", 23.847, 24.009], ["a", 24.056, 24.09], ["free", 24.172, 24.416], ["two-minute", 24.462, 24.88], ["video.", 24.903, 25.635],
+          ["What", 0, 0.174], ["if", 0.209, 0.255], ["you", 0.29, 0.36], ["could", 0.395, 0.511], ["just", 0.534, 0.673], ["text", 0.697, 0.929], ["your", 0.952, 1.068], ["website", 1.126, 1.498], ["guy?", 1.521, 1.939],
+          ["Trinity", 2.635, 2.984], ["Web", 3.03, 3.193], ["Co.", 3.251, 3.646], ["builds", 3.971, 4.226], ["fast", 4.284, 4.574], ["websites", 4.621, 4.981], ["for", 5.004, 5.085], ["Dallas", 5.143, 5.41], ["businesses:", 5.468, 6.235],
+          ["AC", 6.444, 6.734], ["and", 6.861, 6.943], ["plumbing,", 6.989, 7.396], ["barbers,", 7.43, 7.999], ["salons,", 8.115, 8.824], ["restaurants.", 8.951, 9.671],
+          ["No", 10.368, 10.484], ["account", 10.542, 10.774], ["managers,", 10.809, 11.227], ["no", 11.262, 11.378], ["tickets.", 11.447, 12.074],
+          ["Text", 12.678, 13.003], ["us", 13.084, 13.235], ["and", 13.363, 13.502], ["you", 13.56, 13.642], ["hear", 13.7, 13.851], ["back", 13.897, 14.106], ["the", 14.187, 14.28], ["same", 14.338, 14.582], ["day.", 14.617, 15.012],
+          ["Prices", 15.709, 16.092], ["in", 16.138, 16.185], ["writing", 16.231, 16.452], ["up", 16.486, 16.556], ["front,", 16.614, 17.032], ["and", 17.357, 17.496], ["your", 17.531, 17.636], ["domain", 17.694, 18.019], ["and", 18.065, 18.147], ["accounts", 18.181, 18.518], ["are", 18.553, 18.657], ["yours.", 18.692, 19.145],
+          ["Want", 19.842, 20.016], ["to", 20.039, 20.085], ["know", 20.12, 20.213], ["how", 20.248, 20.318], ["your", 20.353, 20.469], ["site", 20.503, 20.678], ["is", 20.701, 20.77], ["doing?", 20.817, 21.212],
+          ["DM", 22.024, 22.326], ["us", 22.396, 22.524], ["\"check\"", 22.64, 23.116], ["for", 23.139, 23.255], ["a", 23.301, 23.325], ["free", 23.383, 23.603], ["two-minute", 23.65, 24.056], ["video.", 24.079, 24.753],
         ],
       };
 
