@@ -69,19 +69,6 @@
         max-width: 860px;
         text-wrap: balance;
       }
-      .c1-aside {
-        margin-top: 40px;
-        font-size: 58px;
-        line-height: 1.15;
-        font-stretch: 108%;
-        font-weight: 680;
-        letter-spacing: -0.005em;
-        text-wrap: balance;
-      }
-      .c1-aside s {
-        text-decoration-color: var(--river);
-        text-decoration-thickness: 0.11em;
-      }
       .c1-river {
         position: absolute;
         left: 40px;
@@ -207,15 +194,15 @@
       <section id="c1-s1" class="clip c1-slide" data-start="0" data-duration="1" data-track-index="1">
         <div class="c1-body">
           <h1 class="c1-title t-display"></h1>
-          <p class="c1-aside"></p>
         </div>
         <div class="c1-river"></div>
       </section>
 
-      <section id="c1-s2" class="clip c1-slide c1-package" data-package="launch" data-start="1" data-duration="1" data-track-index="1">
+      <!-- Growth first, the one to lead with (Hector, 2026-10-27) -->
+      <section id="c1-s2" class="clip c1-slide c1-package" data-package="growth" data-start="1" data-duration="1" data-track-index="1">
         <div class="c1-body"></div>
       </section>
-      <section id="c1-s3" class="clip c1-slide c1-package" data-package="growth" data-start="2" data-duration="1" data-track-index="1">
+      <section id="c1-s3" class="clip c1-slide c1-package" data-package="launch" data-start="2" data-duration="1" data-track-index="1">
         <div class="c1-body"></div>
       </section>
 
@@ -249,7 +236,7 @@
       // English only for now: add `es` once Hector has checked the Spanish slide text.
       const COPY = {
         en: {
-          cover: { title: "What a website costs", before: "(no “", struck: "call for a quote", after: "”)" },
+          cover: { title: "What a website costs" },
           pages: (n) => `Up to ${n} pages`,
           packages: {
             launch: { includes: ["Contact form", "Click to call and text", "Google Maps"], note: "Your exact price is in writing before any work starts." },
@@ -280,10 +267,6 @@
 
       // 1 · Cover
       fill($("#c1-s1 .c1-title"), copy.cover.title);
-      const aside = $("#c1-s1 .c1-aside");
-      aside.append(copy.cover.before);
-      aside.appendChild(document.createElement("s")).textContent = copy.cover.struck;
-      aside.append(copy.cover.after);
       TWC.showRiver(TWC.river($("#c1-s1 .c1-river"), { width: 1000, stops: "phone" }));
 
       // 2–3 · Packages
