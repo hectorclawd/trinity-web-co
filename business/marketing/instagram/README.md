@@ -6,7 +6,7 @@ The brand kit and shared HyperFrames pieces for @trinitywebco's 20 Instagram pie
 
 | Path | What it is |
 | --- | --- |
-| `config.ts` | Every fact a piece shows: name, handle, DM keywords (CHECK / REVISAR), prices, `[score]` / `[load time]` placeholders, small labels in both languages. Edit here, then `npm run sync`. |
+| `config.ts` | Every fact a piece shows: name, handle, DM keywords (CHECK / REVISAR), prices, the demos' PageSpeed score and load time, small labels in both languages. Edit here, then `npm run sync`. |
 | `brand/kit.css` | Color tokens (from `site/src/styles/tokens.css`), type scale, spacing, safe zones, and the badge, bubble, caption and guide styles |
 | `brand/kit.js` | The runtime every composition loads: language, strings, prices, springs, the bridge and river drawings, badges, bubbles, captions, safe-zone guides |
 | `brand/generated.js` | Written by `npm run sync` from `config.ts`, the site's river and logo. Don't edit. |
@@ -59,7 +59,7 @@ Look at `samples/c1-cover.html` for a slide and `samples/r1-end-card.html` for a
 - **Safe zones**: on 9:16 frames, no text in the top 250 px or the bottom 350 px, and nothing important right of x 880 below y 1060 on Reels (the like, comment and share buttons). On 4:5 slides, the profile grid trims 34 px from each side, so keep text inside the 88 px margins. `--guides` draws all of this.
 - **Captions** show one short phrase at a time in ink pills: a new phrase after a 0.5 s pause or a sentence end, and anything longer than 6 words or 2.5 s split evenly.
 - **The "Demo" badge** (`TWC.badge("demo", lang)`) stays on screen the whole time a demo is visible; the **"Example" badge** marks made-up examples that aren't our demos (R6's menu).
-- `[score]` and `[load time]` stay as they are until the demos have production PageSpeed results (launch day). Then change them in `config.ts` and re-render.
+- The demos' PageSpeed score and load time in `config.ts` are real: mobile PageSpeed Insights on the production demos, 2026-10-26. If a demo changes, re-measure, update `config.ts` and re-render the pieces that show them.
 
 ## Gotchas
 

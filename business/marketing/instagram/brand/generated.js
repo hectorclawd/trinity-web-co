@@ -43,13 +43,13 @@ window.TWC_DATA = {
     "demos": {
       "purpleMartin": {
         "name": "Purple Martin Heating & Air",
-        "pageSpeed": "[score]",
-        "loadTime": "[load time]"
+        "pageSpeed": "100",
+        "loadTime": "1.1 s"
       },
       "goodOak": {
         "name": "Good Oak Barbershop",
-        "pageSpeed": "[score]",
-        "loadTime": "[load time]"
+        "pageSpeed": "100",
+        "loadTime": "0.9 s"
       }
     },
     "narrator": {

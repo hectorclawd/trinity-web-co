@@ -28,4 +28,4 @@ The brand kit and shared pieces for 20 Instagram pieces (7 Reels, 9 carousels, 4
 
 - Nobody appears on camera. Voiceover is ElevenLabs, with Instagram's AI info label on when posted.
 - Gold only for primary buttons. No invented social proof, no result promises, no fake urgency.
-- `[score]` and `[load time]` stay placeholders until launch day.
+- The demos' PageSpeed score and load time come from `config.ts` (mobile PageSpeed Insights on the production demos, 2026-10-26: 100 and 1.1 s for Purple Martin, 100 and 0.9 s for Good Oak).
