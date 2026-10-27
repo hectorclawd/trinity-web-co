@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-26
+Last updated: 2026-10-27
 
 ## DONE
 
@@ -96,7 +96,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] 12-week review in week 12 (from 2027-01-18), and draft the next 12 weeks from what worked
 
 **Right after launch (playbook §7 Week 1)**
-- [ ] Google Search Console: verify the domain and submit `sitemap.xml`
+- [x] Google Search Console: verify the domain and submit `sitemap.xml` (2026-10-27: Hector verified the domain property trinitywebdallas.com, submitted https://www.trinitywebdallas.com/sitemap-index.xml and requested indexing for the home page)
 - [ ] Google Business Profile for the business, with the site as its website link
 - [ ] Cal.com booking link and a one-page PDF price sheet
 - [ ] Then outreach, playbook §7 weeks 2–4 (`business/sales/prospect-tracker.csv`)
