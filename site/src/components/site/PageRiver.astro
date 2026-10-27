@@ -1,0 +1,498 @@
+---
+// The hero's river keeps flowing down the page, behind the content, and names a nearby city in
+// each open space it passes. Between cities it runs off the side of the screen and comes back,
+// and on the way it slips behind the solid pieces of the page (cards, screenshots, the phone),
+// out one side and back. Where there's room to the right of a heading (wider screens) it loops in
+// from the right edge to a city beside that heading; elsewhere it crosses the gap above a
+// heading, from one edge to the other. Every width lays the page out differently, so the script
+// measures the page, builds the path, and rebuilds it when the layout changes. It draws itself as
+// you scroll, and each city's dot fills as the river reaches it. Decorative: hidden from screen
+// readers, and without JavaScript nothing shows.
+const stops = [
+  { heading: '#what-you-get h2', name: 'Irving' },
+  { heading: '.band h2', name: 'Grand Prairie' },
+  { heading: '#pricing h2', name: 'Garland' },
+  { heading: '.care-title', name: 'Mesquite' },
+  { heading: '#demos h2', name: 'Richardson' },
+  { heading: '#process h2', name: 'Plano' },
+  { heading: '#faq-title', name: 'Fort Worth' },
+];
+---
+
+<svg class="page-river" aria-hidden="true" focusable="false" data-page-river={JSON.stringify(stops.map((stop) => stop.heading))}>
+  <clipPath id="page-river-dark"></clipPath>
+  <path class="river-bank"></path>
+  <path class="river-line"></path>
+  <g class="on-dark" clip-path="url(#page-river-dark)">
+    <path class="river-bank"></path>
+    <path class="river-line"></path>
+  </g>
+</svg>
+<svg class="page-river page-river-stops" aria-hidden="true" focusable="false" data-page-river-stops>
+  {
+    stops.map((stop) => (
+      <g class="stop">
+        <circle r="8" />
+        <text>{stop.name}</text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  :global(#main) {
+    position: relative;
+  }
+  /* The river runs above the section backgrounds but under each section's content, so cards,
+     screenshots and text sit on top of it. The city names sit above everything. */
+  :global(#main .wrap) {
+    position: relative;
+    z-index: 1;
+  }
+  /* Each layer covers main in page pixels; the script sets its height. Clipped, so the stretches
+     that run off screen never make the page scroll sideways. */
+  .page-river {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .page-river-stops {
+    z-index: 2;
+  }
+  .river-bank,
+  .river-line {
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-linecap: round;
+  }
+  .river-bank {
+    stroke-width: 30;
+    opacity: 0.12;
+  }
+  .river-line {
+    stroke-width: 4;
+  }
+  .is-catching path {
+    transition: stroke-dashoffset 0.6s ease-out;
+  }
+  /* Over the dark niche band the river and its names turn paper */
+  .on-dark .river-bank,
+  .on-dark .river-line {
+    stroke: var(--color-surface);
+  }
+
+  .stop {
+    display: none;
+  }
+  .stop.is-placed {
+    display: inline;
+  }
+  /* Paper dots with an ink ring, as in the hero, filled river green once the river reaches them */
+  .stop circle {
+    fill: var(--color-surface);
+    stroke: var(--color-text);
+    stroke-width: 2.5;
+    transition: fill 0.3s;
+  }
+  .stop text {
+    fill: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 650;
+    font-stretch: 110%;
+  }
+  .stop.is-reached circle {
+    fill: var(--color-brand);
+  }
+  .stop.on-dark circle {
+    fill: var(--color-brand-dark);
+    stroke: var(--color-surface);
+  }
+  .stop.on-dark.is-reached circle {
+    fill: var(--color-surface);
+  }
+  .stop.on-dark text {
+    fill: var(--color-surface);
+  }
+  /* While the river draws with the scroll, each city waits for it */
+  .is-drawing .stop {
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .is-drawing .stop.is-reached {
+    opacity: 1;
+  }
+
+  @media print {
+    .page-river {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  type Rect = { l: number; t: number; r: number; b: number };
+  type Obstacle = Rect & { el: Element };
+  type Side = 'left' | 'right';
+
+  const svg = document.querySelector<SVGSVGElement>('[data-page-river]');
+  const names = document.querySelector<SVGSVGElement>('[data-page-river-stops]');
+  const main = document.getElementById('main');
+
+  if (svg && names && main) {
+    const headings: string[] = JSON.parse(svg.dataset.pageRiver ?? '[]');
+    const paths = [...svg.querySelectorAll<SVGPathElement>('path')];
+    const line = svg.querySelector<SVGPathElement>('.river-line')!;
+    const stops = [...names.querySelectorAll<SVGGElement>('.stop')];
+    const clip = svg.querySelector('clipPath')!;
+    const drawing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const OFF = 40; // how far past the screen edge an off-screen stretch runs
+    const BANK = 15; // half the river's width, bank included
+    const CLEAR = 24; // space kept between the river or a name and any content
+    const ROOM = 140; // most open space above or below a heading that a city's loop uses
+    const LOOP_MIN = 100; // shortest loop worth drawing beside a heading
+    const DEPTH_MIN = 120; // least room right of a heading for a city's loop, past its name
+    const GAP_CLEAR = 16; // space kept above and below a crossing, where gaps run tighter
+    const GAP_MIN = 48; // shortest stretch of a gap that fits a crossing's name and dot
+    const COVER_W = 100; // smallest solid piece the river slips behind
+    const COVER_H = 90;
+    const DIVE = 320; // a solid piece this tall or more takes more than one dive
+    const STEP = 6; // length between the samples the scroll looks up
+    const TIP = 0.75; // the drawn river reaches this far down the screen
+    // What the river keeps clear of where it shows. Headings and paragraphs count by their text,
+    // since their boxes run wider than their lines; everything else by its box (the hero's own
+    // river too), as does anything ruled with a top or bottom border, like the feature rows.
+    const TEXT = 'h1, h2, h3, p, summary';
+    const BOXES = 'li, dl, ul, ol, img, video, form, details, button, .btn, .river, [data-process-track]';
+    const ruled = (style: CSSStyleDeclaration) =>
+      (style.borderTopStyle !== 'none' && parseFloat(style.borderTopWidth) > 0) ||
+      (style.borderBottomStyle !== 'none' && parseFloat(style.borderBottomWidth) > 0);
+    const alpha = (color: string) => {
+      const [, , , a = 1] = (color.match(/[\d.]+/g) ?? []).map(Number);
+      return color.startsWith('rgba') || color.includes('/') ? a : 1;
+    };
+    const solid = (el: Element, style: CSSStyleDeclaration) =>
+      el.matches('img, video') ||
+      (style.backgroundColor !== 'transparent' && alpha(style.backgroundColor) > 0.9) ||
+      style.backgroundImage !== 'none';
+
+    let origin = { x: 0, y: 0 };
+    const rel = (r: DOMRect): Rect => ({
+      l: r.left - origin.x,
+      t: r.top - origin.y,
+      r: r.right - origin.x,
+      b: r.bottom - origin.y,
+    });
+    const textRect = (el: Element) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return rel(range.getBoundingClientRect());
+    };
+    const overlaps = (a: Rect, b: Rect) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
+    // Only the part on show: a demo screenshot is a tall image inside a short scrolling window
+    const shown = (el: Element, r: Rect) => {
+      let out = r;
+      for (let a = el.parentElement; a && a !== main; a = a.parentElement) {
+        const style = getComputedStyle(a);
+        if (style.overflowX === 'visible' && style.overflowY === 'visible') continue;
+        const c = rel(a.getBoundingClientRect());
+        out = { l: Math.max(out.l, c.l), t: Math.max(out.t, c.t), r: Math.min(out.r, c.r), b: Math.min(out.b, c.b) };
+      }
+      return out;
+    };
+    const isDark = (color: string) => {
+      const [r = 0, g = 0, b = 0] = (color.match(/[\d.]+/g) ?? []).map(Number);
+      return alpha(color) > 0.5 && 0.2126 * r + 0.7152 * g + 0.0722 * b < 80;
+    };
+
+    // Where the scroll is: page heights sampled along the river, and where each city sits on it
+    let ys: number[] = [];
+    let total = 0;
+    let mainTop = 0;
+    let reachAt: number[] = [];
+    let holds: { at: number; release: number }[] = [];
+    const lengthAt = (y: number) => {
+      let lo = 0;
+      let hi = ys.length;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (ys[mid] < y) lo = mid + 1;
+        else hi = mid;
+      }
+      return Math.min(total, lo * STEP);
+    };
+
+    const build = () => {
+      const box = main.getBoundingClientRect();
+      origin = { x: box.left, y: box.top };
+      mainTop = box.top + window.scrollY;
+      const width = main.clientWidth;
+      for (const layer of [svg, names]) layer.style.height = `${main.offsetHeight}px`;
+
+      // A pinned piece (How it works holds its phone while the clip plays) is measured where it
+      // comes to rest at the end of its track, and the river waits for it there: it isn't drawn
+      // past the top of the piece until the scroll reaches that point.
+      const pins: { el: Element; shift: number; release: number }[] = [];
+      const pinOf = (el: Element) => pins.find((p) => p.el.contains(el));
+      const atRest = (el: Element, r: Rect): Rect => {
+        const shift = pinOf(el)?.shift ?? 0;
+        return { ...r, t: r.t + shift, b: r.b + shift };
+      };
+      const obstacles: Obstacle[] = [];
+      const solids: (Obstacle & { release?: number })[] = [];
+      for (const el of main.querySelectorAll('*')) {
+        if (el.closest('svg.page-river, [data-book-bar]')) continue;
+        const isText = el.matches(TEXT);
+        const isBox = el.matches(BOXES);
+        const style = getComputedStyle(el);
+        if (style.position === 'sticky' && el.parentElement) {
+          const track = rel(el.parentElement.getBoundingClientRect());
+          const restTop = track.b - parseFloat(getComputedStyle(el.parentElement).paddingBottom) - (el as HTMLElement).offsetHeight;
+          const top = parseFloat(style.top) || 0;
+          pins.push({ el, shift: restTop - rel(el.getBoundingClientRect()).t, release: restTop + mainTop - top });
+        }
+        if (isText || isBox || ruled(style)) {
+          const r = atRest(el, shown(el, isText ? textRect(el) : rel(el.getBoundingClientRect())));
+          if (r.r > r.l && r.b > r.t) obstacles.push({ el, ...r });
+        }
+        if (el.closest('.wrap') && solid(el, style)) {
+          const r = atRest(el, shown(el, rel(el.getBoundingClientRect())));
+          if (r.r - r.l >= COVER_W && r.b - r.t >= COVER_H) solids.push({ el, ...r, release: pinOf(el)?.release });
+        }
+      }
+      const dark = [...main.children]
+        .filter((el) => isDark(getComputedStyle(el).backgroundColor))
+        .map((el) => rel(el.getBoundingClientRect()));
+      const inDark = (y: number) => dark.some((d) => d.t <= y && y <= d.b);
+      const bottomAbove = (l: number, r: number, y: number, list: Obstacle[]) =>
+        Math.max(-Infinity, ...list.filter((o) => o.l < r && o.r > l && o.b <= y).map((o) => o.b));
+      const topBelow = (l: number, r: number, y: number, list: Obstacle[]) =>
+        Math.min(Infinity, ...list.filter((o) => o.l < r && o.r > l && o.t >= y).map((o) => o.t));
+
+      const headingEls = headings.map((selector) => main.querySelector(selector));
+      // The solid pieces the river slips behind: the outermost ones only, none holding a city's
+      // heading, and never the hero (its own river lives there)
+      const hero = main.querySelector('.hero');
+      const start = hero ? rel(hero.getBoundingClientRect()).b : 0;
+      const covers = solids
+        .filter((c) => c.t > start && !solids.some((o) => o !== c && o.el.contains(c.el)))
+        .filter((c) => !headingEls.some((h) => h && c.el.contains(h)));
+
+      // The path, built downward: its height only ever grows, which the scroll lookup relies on
+      const n = (v: number) => Math.round(v);
+      const edge = (side: Side) => (side === 'right' ? width + OFF : -OFF);
+      let d = '';
+      let x = width + OFF;
+      let y = start;
+      let side: Side = 'right';
+      // A smooth step to (nx, ny) that leaves and arrives vertical ('v') or level ('h')
+      const curve = (nx: number, ny: number, from: 'v' | 'h', to: 'v' | 'h') => {
+        const c1 = from === 'v' ? [x, (y + ny) / 2] : [(x + nx) / 2, y];
+        const c2 = to === 'v' ? [nx, (y + ny) / 2] : [(x + nx) / 2, ny];
+        d += ` C${n(c1[0])} ${n(c1[1])} ${n(c2[0])} ${n(c2[1])} ${n(nx)} ${n(ny)}`;
+        x = nx;
+        y = ny;
+      };
+      // Straight down off screen, out of sight
+      const flow = (toY: number) => {
+        if (toY > y) curve(x, toY, 'v', 'v');
+      };
+      // Is the stretch between l and r, from t to b, free of everything but the given piece? What
+      // sits inside another solid piece tall enough to hide the river there doesn't count: the
+      // river can thread behind one piece to reach the next, like the two demo screenshots. Nor
+      // does a box around a piece that's no wider than it, like a screenshot's list item.
+      const hides = (o: Obstacle, t: number, b: number) =>
+        covers.some(
+          (c) =>
+            c.t <= t &&
+            c.b >= b &&
+            (c.el === o.el || c.el.contains(o.el) || (o.el.contains(c.el) && o.l >= c.l - 2 && o.r <= c.r + 2)),
+        );
+      const clear = (l: number, r: number, t: number, b: number, own?: Element) =>
+        r <= l ||
+        !obstacles.some(
+          (o) => (!own || !(own.contains(o.el) || o.el.contains(own))) && overlaps(o, { l, t, r, b }) && !hides(o, t, b),
+        );
+
+      // Slip behind a solid piece: in from the side the river is on, and on wide screens back out
+      // the same side; on narrow ones, out the far side. Only where the stretches on show are clear.
+      // A tall piece takes a dive for every DIVE of its height, up to three.
+      const wide = (c: Rect) => c.r - c.l > width * 0.8;
+      const waits: { y: number; release: number }[] = [];
+      const cover = (c: (typeof covers)[number]) => {
+        const count = Math.max(1, Math.min(3, Math.floor((c.b - c.t) / DIVE)));
+        const band = (c.b - c.t) / count;
+        for (let k = 0; k < count; k++) dive(c, c.t + band * k, c.t + band * (k + 1));
+      };
+      const dive = (c: (typeof covers)[number], top: number, bottom: number) => {
+        const h = bottom - top;
+        const s = Math.min(90, h / 2 - BANK - 8);
+        const cy = (top + bottom) / 2;
+        if (s < 20 || cy - s <= y + 1) return;
+        const t = cy - s - BANK - 4;
+        const b = cy + s + BANK + 4;
+        const nearClear = side === 'right' ? clear(c.r, width, t, b, c.el) : clear(0, c.l, t, b, c.el);
+        if (!nearClear) return;
+        const through = wide(c) && (side === 'right' ? clear(0, c.l, t, b, c.el) : clear(c.r, width, t, b, c.el));
+        const cx = (c.l + c.r) / 2;
+        flow(cy - s);
+        if (c.release !== undefined) waits.push({ y: cy - s, release: c.release });
+        if (through) {
+          curve(cx, cy, 'h', 'h');
+          side = side === 'right' ? 'left' : 'right';
+          curve(edge(side), cy + s, 'h', 'h');
+        } else {
+          curve(cx, cy, 'h', 'v');
+          curve(edge(side), cy + s, 'v', 'h');
+        }
+      };
+      // Every piece that sits wholly between the river and the given height
+      const coversUntil = (limit: number) => {
+        for (const c of covers) {
+          if ((c.t + c.b) / 2 > y && c.b < limit) cover(c);
+        }
+      };
+
+      // Each city's name is measured once it can render
+      stops.forEach((stop) => stop.classList.add('is-placed'));
+      const widths = stops.map((stop) => stop.querySelector('text')!.getComputedTextLength());
+      const placed: { cx: number; cy: number; tx: number; ty: number; anchor: string }[] = [];
+      d = `M${n(x)} ${n(y)}`;
+
+      headingEls.forEach((heading, i) => {
+        if (!heading) return;
+        const next = heading.nextElementSibling;
+        const lede = next?.matches('p') ? next : null;
+        const inBlock = (el: Element) => heading.contains(el) || (lede?.contains(el) ?? false);
+        const others = obstacles.filter((o) => !inBlock(o.el));
+        let block = textRect(heading);
+        if (lede) {
+          const r = textRect(lede);
+          block = { l: Math.min(block.l, r.l), t: Math.min(block.t, r.t), r: Math.max(block.r, r.r), b: Math.max(block.b, r.b) };
+        }
+
+        // A loop in from the right edge to the open space beside the heading (and its lede)
+        const left = block.r + CLEAR;
+        const vx = Math.max(left + widths[i] + 16, left + (width - left) * 0.3);
+        const ym = (block.t + block.b) / 2;
+        const sideClear = width - vx >= DEPTH_MIN && clear(left, width, block.t, block.b);
+        const top = Math.max(block.t - ROOM, bottomAbove(left, width, block.t, others) + CLEAR);
+        const bottom = Math.min(block.b + ROOM, topBelow(left, width, block.b, others) - CLEAR);
+        const fitsLoop = sideClear && bottom - top >= LOOP_MIN && top < ym && bottom > ym;
+        if (fitsLoop) coversUntil(top);
+        if (fitsLoop && side === 'right' && y < ym - LOOP_MIN / 2) {
+          const y1 = Math.max(y, top);
+          flow(y1);
+          curve(vx, ym, 'h', 'v');
+          curve(edge('right'), Math.max(bottom, ym + 40), 'v', 'h');
+          placed[i] = { cx: vx, cy: ym, tx: vx - 16, ty: ym + 6.5, anchor: 'end' };
+          return;
+        }
+
+        // Else a crossing through the gap above the heading, in from one edge and out the other.
+        // The line may cross a dark band's edge (its color follows), but the name and dot keep to
+        // one side of it: the heading's side if that fits, or else the roomier one.
+        const gapTop = bottomAbove(0, width, block.t, others) + GAP_CLEAR;
+        coversUntil(gapTop);
+        const t = Math.max(y + 1, gapTop);
+        const b = block.t - GAP_CLEAR;
+        const edges = dark.flatMap((dr) => [dr.t, dr.b]).filter((e) => e > t && e < b);
+        const cuts = [t, ...edges.sort((p, q) => p - q), b];
+        const parts = cuts.slice(1).map((pb, k) => ({ t: cuts[k], b: pb }));
+        const fits = parts.filter((p) => p.b - p.t >= GAP_MIN);
+        const part = fits.find((p) => p.b === b) ?? fits.sort((p, q) => q.b - q.t - (p.b - p.t))[0];
+        if (!part || widths[i] > width - 2 * CLEAR) return;
+        // The dot sits low in its part, with the name above it
+        const cy = Math.min(part.b - 12, (part.t + part.b) / 2 + 14);
+        const slope = Math.min((b - t) * 0.15, cy - t, b - cy);
+        flow(cy - slope);
+        curve(width / 2, cy, 'h', 'h');
+        side = side === 'right' ? 'left' : 'right';
+        curve(edge(side), cy + slope, 'h', 'h');
+        placed[i] = { cx: width / 2, cy, tx: width / 2, ty: cy - 16, anchor: 'middle' };
+      });
+      // On past the last city, behind whatever solid pieces are left
+      coversUntil(main.offsetHeight);
+
+      for (const path of paths) path.setAttribute('d', d.trim());
+      clip.replaceChildren(
+        ...dark.map((dr) => {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', '0');
+          rect.setAttribute('y', String(n(dr.t)));
+          rect.setAttribute('width', String(n(width)));
+          rect.setAttribute('height', String(n(dr.b - dr.t)));
+          return rect;
+        }),
+      );
+
+      total = line.getTotalLength();
+      ys = [];
+      for (let l = 0; l <= total; l += STEP) ys.push(line.getPointAtLength(l).y);
+      reachAt = stops.map((stop, i) => {
+        const spot = placed[i];
+        stop.classList.toggle('is-placed', Boolean(spot));
+        if (!spot) return Infinity;
+        const [dot, name] = [stop.querySelector('circle')!, stop.querySelector('text')!];
+        dot.setAttribute('cx', String(n(spot.cx)));
+        dot.setAttribute('cy', String(n(spot.cy)));
+        name.setAttribute('x', String(n(spot.tx)));
+        name.setAttribute('y', String(n(spot.ty)));
+        name.setAttribute('text-anchor', spot.anchor);
+        stop.classList.toggle('on-dark', inDark(spot.cy));
+        return lengthAt(spot.cy);
+      });
+      holds = waits.map((w) => ({ at: lengthAt(w.y), release: w.release }));
+      if (drawing) for (const path of paths) path.style.strokeDasharray = `${total} ${total}`;
+    };
+
+    // The river is drawn down to TIP of the screen, or to a pinned piece it waits for; each city
+    // is reached once it's drawn past. When a wait ends, the river glides on to catch up.
+    let updateQueued = false;
+    let held = false;
+    let catchUp = 0;
+    const update = () => {
+      updateQueued = false;
+      let drawn = lengthAt(window.scrollY + window.innerHeight * TIP - mainTop);
+      const hold = holds.find((h) => drawn > h.at && window.scrollY < h.release);
+      if (hold) drawn = hold.at;
+      if (held && !hold) {
+        svg.classList.add('is-catching');
+        clearTimeout(catchUp);
+        catchUp = window.setTimeout(() => svg.classList.remove('is-catching'), 600);
+      }
+      held = Boolean(hold);
+      for (const path of paths) path.style.strokeDashoffset = String(total - drawn);
+      stops.forEach((stop, i) => stop.classList.toggle('is-reached', drawn >= reachAt[i]));
+    };
+    const queueUpdate = () => {
+      if (updateQueued) return;
+      updateQueued = true;
+      requestAnimationFrame(update);
+    };
+
+    // Rebuilt whenever main changes size: fonts arriving, a FAQ answer opening, a new width
+    let buildQueued = false;
+    const queueBuild = () => {
+      if (buildQueued) return;
+      buildQueued = true;
+      requestAnimationFrame(() => {
+        buildQueued = false;
+        build();
+        if (drawing) update();
+      });
+    };
+    new ResizeObserver(queueBuild).observe(main);
+    document.fonts.ready.then(queueBuild);
+    if (drawing) {
+      for (const layer of [svg, names]) layer.classList.add('is-drawing');
+      window.addEventListener('scroll', queueUpdate, { passive: true });
+    }
+  }
+</script>
