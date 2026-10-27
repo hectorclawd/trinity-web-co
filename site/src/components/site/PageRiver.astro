@@ -1,0 +1,388 @@
+---
+// The hero's river keeps flowing down the page and names a nearby city in each open space it
+// passes. Where the right margin has room (wide screens) it runs down that margin and loops into
+// the open space beside a heading; elsewhere it runs just off screen and crosses the gap above a
+// heading, from one edge to the other. Every width lays the page out differently, so the script
+// measures the page, builds the path, and rebuilds it when the layout changes. It draws itself as
+// you scroll, and each city's dot fills as the river reaches it. Decorative: hidden from screen
+// readers, and without JavaScript nothing shows.
+const stops = [
+  { heading: '#what-you-get h2', name: 'Irving' },
+  { heading: '.band h2', name: 'Grand Prairie' },
+  { heading: '#pricing h2', name: 'Garland' },
+  { heading: '.care-title', name: 'Mesquite' },
+  { heading: '#demos h2', name: 'Richardson' },
+  { heading: '#process h2', name: 'Plano' },
+  { heading: '#faq-title', name: 'Fort Worth' },
+];
+---
+
+<svg
+  class="page-river"
+  aria-hidden="true"
+  focusable="false"
+  data-page-river={JSON.stringify(stops.map((stop) => stop.heading))}
+>
+  <clipPath id="page-river-dark"></clipPath>
+  <path class="river-bank"></path>
+  <path class="river-line"></path>
+  <g class="on-dark" clip-path="url(#page-river-dark)">
+    <path class="river-bank"></path>
+    <path class="river-line"></path>
+  </g>
+  {
+    stops.map((stop) => (
+      <g class="stop">
+        <circle r="8" />
+        <text>{stop.name}</text>
+      </g>
+    ))
+  }
+</svg>
+
+<style>
+  :global(#main) {
+    position: relative;
+  }
+  /* Covers main in page pixels; the script sets its height. Clipped, so the stretches that run
+     off screen never make the page scroll sideways. */
+  .page-river {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .river-bank,
+  .river-line {
+    fill: none;
+    stroke: var(--color-brand);
+    stroke-linecap: round;
+  }
+  .river-bank {
+    stroke-width: 30;
+    opacity: 0.12;
+  }
+  .river-line {
+    stroke-width: 4;
+  }
+  /* Over the dark niche band the river and its names turn paper */
+  .on-dark .river-bank,
+  .on-dark .river-line {
+    stroke: var(--color-surface);
+  }
+
+  .stop {
+    display: none;
+  }
+  .stop.is-placed {
+    display: inline;
+  }
+  /* Paper dots with an ink ring, as in the hero, filled river green once the river reaches them */
+  .stop circle {
+    fill: var(--color-surface);
+    stroke: var(--color-text);
+    stroke-width: 2.5;
+    transition: fill 0.3s;
+  }
+  .stop text {
+    fill: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 650;
+    font-stretch: 110%;
+  }
+  .stop.is-reached circle {
+    fill: var(--color-brand);
+  }
+  .stop.on-dark circle {
+    fill: var(--color-brand-dark);
+    stroke: var(--color-surface);
+  }
+  .stop.on-dark.is-reached circle {
+    fill: var(--color-surface);
+  }
+  .stop.on-dark text {
+    fill: var(--color-surface);
+  }
+  /* While the river draws with the scroll, each city waits for it */
+  .is-drawing .stop {
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .is-drawing .stop.is-reached {
+    opacity: 1;
+  }
+
+  @media print {
+    .page-river {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  type Rect = { l: number; t: number; r: number; b: number };
+  type Obstacle = Rect & { el: Element };
+
+  const svg = document.querySelector<SVGSVGElement>('[data-page-river]');
+  const main = document.getElementById('main');
+
+  if (svg && main) {
+    const headings: string[] = JSON.parse(svg.dataset.pageRiver ?? '[]');
+    const paths = [...svg.querySelectorAll<SVGPathElement>('path')];
+    const line = svg.querySelector<SVGPathElement>('.river-line')!;
+    const stops = [...svg.querySelectorAll<SVGGElement>('.stop')];
+    const clip = svg.querySelector('clipPath')!;
+    const drawing = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const RAIL_MIN = 56; // narrowest right margin the river runs down; below it, it runs off screen
+    const OFF = 40; // how far past the screen edge an off-screen stretch runs
+    const CLEAR = 24; // space kept between the river or a name and any content
+    const ROOM = 140; // most open space above or below a heading that a city's loop uses
+    const LOOP_MIN = 100; // shortest loop worth drawing beside a heading
+    const DEPTH_MIN = 80; // shallowest a loop can reach in from the rail
+    const GAP_MIN = 50; // shortest gap that fits a crossing with its name above it
+    const STEP = 6; // length between the samples the scroll looks up
+    const TIP = 0.75; // the drawn river reaches this far down the screen
+    // What the river keeps clear of. Headings and paragraphs count by their text, since their
+    // boxes run wider than their lines; everything else by its box (the hero's own river too),
+    // as does anything ruled with a top or bottom border, like the feature and package rows.
+    const TEXT = 'h1, h2, h3, p, summary';
+    const BOXES = 'li, dl, ul, ol, img, video, form, details, button, .btn, .river, [data-process-track]';
+    const ruled = (el: Element) => {
+      const style = getComputedStyle(el);
+      return (
+        (style.borderTopStyle !== 'none' && parseFloat(style.borderTopWidth) > 0) ||
+        (style.borderBottomStyle !== 'none' && parseFloat(style.borderBottomWidth) > 0)
+      );
+    };
+
+    let origin = { x: 0, y: 0 };
+    const rel = (r: DOMRect): Rect => ({
+      l: r.left - origin.x,
+      t: r.top - origin.y,
+      r: r.right - origin.x,
+      b: r.bottom - origin.y,
+    });
+    const textRect = (el: Element) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return rel(range.getBoundingClientRect());
+    };
+    const overlaps = (a: Rect, b: Rect) => a.l < b.r && a.r > b.l && a.t < b.b && a.b > b.t;
+    // Only the part on show: a demo screenshot is a tall image inside a short scrolling window
+    const shown = (el: Element, r: Rect) => {
+      let out = r;
+      for (let a = el.parentElement; a && a !== main; a = a.parentElement) {
+        const style = getComputedStyle(a);
+        if (style.overflowX === 'visible' && style.overflowY === 'visible') continue;
+        const c = rel(a.getBoundingClientRect());
+        out = { l: Math.max(out.l, c.l), t: Math.max(out.t, c.t), r: Math.min(out.r, c.r), b: Math.min(out.b, c.b) };
+      }
+      return out;
+    };
+    const isDark = (color: string) => {
+      const [r = 0, g = 0, b = 0, a = 1] = (color.match(/[\d.]+/g) ?? []).map(Number);
+      return a > 0.5 && 0.2126 * r + 0.7152 * g + 0.0722 * b < 80;
+    };
+
+    // Where the scroll is: page heights sampled along the river, and where each city sits on it
+    let ys: number[] = [];
+    let total = 0;
+    let mainTop = 0;
+    let reachAt: number[] = [];
+    const lengthAt = (y: number) => {
+      let lo = 0;
+      let hi = ys.length;
+      while (lo < hi) {
+        const mid = (lo + hi) >> 1;
+        if (ys[mid] < y) lo = mid + 1;
+        else hi = mid;
+      }
+      return Math.min(total, lo * STEP);
+    };
+
+    const build = () => {
+      const box = main.getBoundingClientRect();
+      origin = { x: box.left, y: box.top };
+      mainTop = box.top + window.scrollY;
+      const width = main.clientWidth;
+      svg.style.height = `${main.offsetHeight}px`;
+
+      const obstacles: Obstacle[] = [...main.querySelectorAll('*')]
+        .filter((el) => !svg.contains(el) && !el.closest('[data-book-bar]'))
+        .filter((el) => el.matches(`${TEXT}, ${BOXES}`) || ruled(el))
+        .map((el) => ({ el, ...shown(el, el.matches(TEXT) ? textRect(el) : rel(el.getBoundingClientRect())) }))
+        .filter((o) => o.r > o.l && o.b > o.t);
+      const dark = [...main.children]
+        .filter((el) => isDark(getComputedStyle(el).backgroundColor))
+        .map((el) => rel(el.getBoundingClientRect()));
+      const inDark = (y: number) => dark.some((d) => d.t <= y && y <= d.b);
+      const bottomAbove = (l: number, r: number, y: number, list: Obstacle[]) =>
+        Math.max(-Infinity, ...list.filter((o) => o.l < r && o.r > l && o.b <= y).map((o) => o.b));
+      const topBelow = (l: number, r: number, y: number, list: Obstacle[]) =>
+        Math.min(Infinity, ...list.filter((o) => o.l < r && o.r > l && o.t >= y).map((o) => o.t));
+
+      const wrap = main.querySelector('section .wrap');
+      const wrapBox = wrap ? rel(wrap.getBoundingClientRect()) : { l: 0, t: 0, r: width, b: 0 };
+      const contentRight = wrap ? wrapBox.r - parseFloat(getComputedStyle(wrap).paddingRight) : width;
+      const margin = width - contentRight;
+      const beside = margin >= RAIL_MIN;
+      const rail = beside ? contentRight + margin / 2 : width + OFF;
+      const hero = main.querySelector('.hero');
+      const start = hero ? rel(hero.getBoundingClientRect()).b : 0;
+
+      // The path, built downward: its height only ever grows, which the scroll lookup relies on
+      const n = (v: number) => Math.round(v);
+      let d = '';
+      let x = 0;
+      let y = 0;
+      // A smooth step to (nx, ny) that leaves and arrives vertical ('v') or level ('h')
+      const curve = (nx: number, ny: number, from: 'v' | 'h', to: 'v' | 'h') => {
+        const c1 = from === 'v' ? [x, (y + ny) / 2] : [(x + nx) / 2, y];
+        const c2 = to === 'v' ? [nx, (y + ny) / 2] : [(x + nx) / 2, ny];
+        d += ` C${n(c1[0])} ${n(c1[1])} ${n(c2[0])} ${n(c2[1])} ${n(nx)} ${n(ny)}`;
+        x = nx;
+        y = ny;
+      };
+      // Straight down the current rail, meandering a little where it shows in the margin
+      const flow = (toY: number) => {
+        const from = y;
+        const base = x;
+        const span = toY - from;
+        if (span <= 0) return;
+        const amp = beside ? Math.min(22, margin / 5) : 0;
+        const halves = amp && span > 240 ? Math.max(2, Math.round(span / 200)) : 1;
+        for (let i = 1; i <= halves; i++) {
+          curve(i === halves ? base : base + (i % 2 ? amp : -amp), from + (span * i) / halves, 'v', 'v');
+        }
+      };
+
+      // Each city's name is measured once it can render
+      stops.forEach((stop) => stop.classList.add('is-placed'));
+      const widths = stops.map((stop) => stop.querySelector('text')!.getComputedTextLength());
+      const placed: { cx: number; cy: number; tx: number; ty: number; anchor: string }[] = [];
+
+      // In from the right edge just below the hero; on wide screens it settles onto the rail
+      d = `M${n(width + OFF)} ${n(start)}`;
+      x = width + OFF;
+      y = start;
+      if (beside) curve(rail, start + 60, 'h', 'v');
+
+      headings.forEach((selector, i) => {
+        const heading = main.querySelector(selector);
+        if (!heading) return;
+        const next = heading.nextElementSibling;
+        const lede = next?.matches('p') ? next : null;
+        const inBlock = (el: Element) => heading.contains(el) || (lede?.contains(el) ?? false);
+        const others = obstacles.filter((o) => !inBlock(o.el));
+        let block = textRect(heading);
+
+        if (beside) {
+          // A loop out from the rail into the open space beside the heading (and its lede)
+          if (lede) {
+            const r = textRect(lede);
+            block = { l: Math.min(block.l, r.l), t: Math.min(block.t, r.t), r: Math.max(block.r, r.r), b: Math.max(block.b, r.b) };
+          }
+          const left = block.r + CLEAR;
+          if (others.some((o) => overlaps(o, { l: left, t: block.t, r: rail, b: block.b }))) return;
+          const vx = Math.max(left + widths[i] + 16, left + (rail - left) * 0.35);
+          if (vx > rail - DEPTH_MIN) return;
+          const y1 = Math.max(y, block.t - ROOM, bottomAbove(left, rail, block.t, others) + CLEAR);
+          const y2 = Math.min(block.b + ROOM, topBelow(left, rail, block.b, others) - CLEAR);
+          const ym = (block.t + block.b) / 2;
+          if (y2 - y1 < LOOP_MIN || y1 >= ym || y2 <= ym) return;
+          flow(y1);
+          curve(vx, ym, 'v', 'v');
+          curve(rail, y2, 'v', 'v');
+          placed[i] = { cx: vx, cy: ym, tx: vx - 16, ty: ym + 6.5, anchor: 'end' };
+        } else {
+          // A crossing through the gap above the heading, in from one edge and out the other.
+          // Where a dark band edge splits the gap, it keeps to the heading's side if that fits.
+          const top = Math.max(y + 1, bottomAbove(0, width, block.t, others) + CLEAR);
+          const bottom = block.t - CLEAR;
+          const edges = dark.flatMap((dr) => [dr.t, dr.b]).filter((e) => e > top && e < bottom);
+          const cuts = [top, ...edges.sort((a, b) => a - b), bottom];
+          const parts = cuts.slice(1).map((b, k) => ({ t: cuts[k], b }));
+          const fits = parts.filter((p) => p.b - p.t >= GAP_MIN);
+          const gap = fits.find((p) => p.b === bottom) ?? fits.sort((a, b) => b.b - b.t - (a.b - a.t))[0];
+          if (!gap || widths[i] > width - 2 * CLEAR) return;
+          const h = gap.b - gap.t;
+          const cy = gap.t + h * 0.62;
+          const other = x > 0 ? -OFF : width + OFF;
+          flow(cy - h * 0.15);
+          curve(width / 2, cy, 'h', 'h');
+          curve(other, cy + h * 0.15, 'h', 'h');
+          placed[i] = { cx: width / 2, cy, tx: width / 2, ty: cy - 16, anchor: 'middle' };
+        }
+      });
+      if (beside) curve(width + OFF, y + 160, 'v', 'h');
+
+      for (const path of paths) path.setAttribute('d', d.trim());
+      clip.replaceChildren(
+        ...dark.map((dr) => {
+          const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          rect.setAttribute('x', '0');
+          rect.setAttribute('y', String(n(dr.t)));
+          rect.setAttribute('width', String(n(width)));
+          rect.setAttribute('height', String(n(dr.b - dr.t)));
+          return rect;
+        }),
+      );
+
+      total = line.getTotalLength();
+      ys = [];
+      for (let l = 0; l <= total; l += STEP) ys.push(line.getPointAtLength(l).y);
+      reachAt = stops.map((stop, i) => {
+        const spot = placed[i];
+        stop.classList.toggle('is-placed', Boolean(spot));
+        if (!spot) return Infinity;
+        const [dot, name] = [stop.querySelector('circle')!, stop.querySelector('text')!];
+        dot.setAttribute('cx', String(n(spot.cx)));
+        dot.setAttribute('cy', String(n(spot.cy)));
+        name.setAttribute('x', String(n(spot.tx)));
+        name.setAttribute('y', String(n(spot.ty)));
+        name.setAttribute('text-anchor', spot.anchor);
+        stop.classList.toggle('on-dark', inDark(spot.cy));
+        return lengthAt(spot.cy);
+      });
+      if (drawing) for (const path of paths) path.style.strokeDasharray = `${total} ${total}`;
+    };
+
+    // The river is drawn down to TIP of the screen; each city is reached once it's drawn past
+    let updateQueued = false;
+    const update = () => {
+      updateQueued = false;
+      const drawn = lengthAt(window.scrollY + window.innerHeight * TIP - mainTop);
+      for (const path of paths) path.style.strokeDashoffset = String(total - drawn);
+      stops.forEach((stop, i) => stop.classList.toggle('is-reached', drawn >= reachAt[i]));
+    };
+    const queueUpdate = () => {
+      if (updateQueued) return;
+      updateQueued = true;
+      requestAnimationFrame(update);
+    };
+
+    // Rebuilt whenever main changes size: fonts arriving, a FAQ answer opening, a new width
+    let buildQueued = false;
+    const queueBuild = () => {
+      if (buildQueued) return;
+      buildQueued = true;
+      requestAnimationFrame(() => {
+        buildQueued = false;
+        build();
+        if (drawing) update();
+      });
+    };
+    new ResizeObserver(queueBuild).observe(main);
+    document.fonts.ready.then(queueBuild);
+    if (drawing) {
+      svg.classList.add('is-drawing');
+      window.addEventListener('scroll', queueUpdate, { passive: true });
+    }
+  }
+</script>
