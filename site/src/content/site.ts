@@ -9,7 +9,8 @@ import demoGoodOak from '../assets/demo-good-oak-scroll.jpg';
 export const site: SiteConfig = {
   name: 'Trinity Web Co.',
   slug: 'trinity-web-co',
-  url: 'https://trinitywebdallas.com/',
+  // www is the main address; Vercel redirects the bare domain to it
+  url: 'https://www.trinitywebdallas.com/',
   primaryService: 'Websites for local businesses',
   schemaType: 'ProfessionalService',
   foundingYear: 2026,
@@ -183,15 +184,16 @@ export const offer: StudioOffer = {
     heading: 'Demo sites',
     lede: 'Two sites built for made-up businesses, so you can see the work before you hire me. Each one is labeled as a demo. Scroll inside a preview to see its whole homepage.',
     // Playbook section 7, week 1: one demo per target niche.
-    // The urls are Vercel previews behind Vercel login until launch. On launch day, swap in the
-    // production urls and add pageSpeed (mobile PageSpeed Insights on the production url) before
-    // deploying this site (CHECKLIST.md, launch day).
+    // Production urls, public since 2026-10-26. pageSpeed is the mobile PageSpeed Insights
+    // performance score on that url, the same day.
     slots: [
       {
         niche: 'Home services',
         // Non-breaking spaces keep "Heating & Air" on one line on phones
         title: 'Demo: Purple Martin Heating & Air',
-        url: 'https://site-purple-martin-air-lake-highlands-9qqg0rano-hlm10.vercel.app',
+        // Vercel cut the project's long name short for its address ("highlan", not "highlands")
+        url: 'https://site-purple-martin-air-lake-highlan.vercel.app/',
+        pageSpeed: 100,
         image: demoPurpleMartin,
         imageAlt:
           'Homepage of the Purple Martin Heating & Air demo: “Heating and air repair for East Dallas homes,” call, quote and text buttons, and an illustration of a ranch house with an AC unit',
@@ -199,7 +201,8 @@ export const offer: StudioOffer = {
       {
         niche: 'Barbers and salons',
         title: 'Demo: Good Oak Barbershop',
-        url: 'https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app',
+        url: 'https://site-good-oak-barbers-oak-cliff.vercel.app/',
+        pageSpeed: 100,
         image: demoGoodOak,
         imageAlt:
           'Homepage of the Good Oak Barbershop demo: “Sharp cuts and hot towel shaves in Oak Cliff,” call and text buttons, “Open now · until 7 pm,” and an illustration of a corner barbershop',

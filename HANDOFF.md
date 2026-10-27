@@ -40,9 +40,9 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 2f48792): https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
 
 - `clients/*/site/` are separate git repos and are git-ignored here. Commit and push each one on its own.
-- Every Vercel project serves previews only, behind Vercel Authentication (a Vercel login). Prospects can't open the demos yet. That's deliberate: the demos go to production on launch day (see the launch checklist in `CLAUDE.md`).
+- Both demos are in production since 2026-10-26, public without a login: https://site-purple-martin-air-lake-highlan.vercel.app/ (Vercel cut the long project name short) and https://site-good-oak-barbers-oak-cliff.vercel.app/. Previews stay behind Vercel Authentication (a Vercel login). `trinity-web-co-site` still has production paused (Ignored Build Step) until launch.
 - **Only `trinity-web-co-site` is connected to GitHub.** Pushing a branch builds a preview by itself. Pushing `main` is skipped (see below). The demo projects deploy only when you run `npx vercel deploy` in the demo repo.
-- Vercel account: team `hlm10` (`team_BAKR7LKO83CePY1tgdUydUiI`), still on **Hobby** (non-commercial). Moving to Pro waits for the name and domain decision.
+- Vercel account: team `hlm10` (`team_BAKR7LKO83CePY1tgdUydUiI`), on **Pro** since 2026-10-26.
 
 ## What happened on 2026-10-07 and 10-08
 

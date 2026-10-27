@@ -98,10 +98,10 @@ Codex (OpenAI's coding agent, through the Codex plugin) takes the fix work so Cl
 
 ## Launch checklist (our own site)
 
-Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID, headshot):
+Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID; on 2026-10-26 Hector chose to launch without the headshot and add it after):
 
 - [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebdallas.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again.
-- [ ] Deploy the demos to production on Pro, run PageSpeed Insights (mobile) on each production URL, then swap the demo slots in `site/src/content/site.ts` from their preview URLs to the production URLs and add `pageSpeed` (titles, images and alt text are already in). Both demos are preview-only now, so the production deploy is `npx vercel deploy --prod` in each demo repo.
+- [x] Deploy the demos to production on Pro, run PageSpeed Insights (mobile) on each production URL, then swap the demo slots in `site/src/content/site.ts` from their preview URLs to the production URLs and add `pageSpeed` (titles, images and alt text are already in). (2026-10-26: Pro is on; both demos are in production, mobile Performance 100 and 100; the slots are filled on branch `launch-day`.)
 
 ## Open items (Hector to confirm)
 
