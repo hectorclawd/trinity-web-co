@@ -2,7 +2,7 @@
 
 Summarized at the start of every Claude Code session in this repo by the SessionStart hook (`.claude/hooks/checklist.js`): the top 3 open items, then each group's done/total. Tick items in place inside their group (`- [x]`) with the date or commit when done, so the counts move; DONE holds older history. Add new to-dos to the right group under TO DO. Longer context is in `HANDOFF.md`.
 
-Last updated: 2026-10-25
+Last updated: 2026-10-26
 
 ## DONE
 
@@ -89,7 +89,7 @@ In launch order. Items in the same group can run in parallel.
 - [ ] Write the scripts for weeks 7 to 12 into the content plan doc (the 24 pieces were approved in the growth plan on 2026-10-24: 14 from Content Idea Scout, 10 from the first list)
 - [ ] R1 intro Reel: move the ElevenLabs key from `C:\Users\hlmpr\projects\motion-studio\.env` into Bitwarden (2026-10-20: done), pick one multilingual narrator voice (2026-10-20: Chris, in the kit's `config.ts`), and make the voiceover in English and Spanish (Hector checks the Spanish script first). Then time the scenes and end card to the audio (2026-10-20: `scripts/voiceover.mjs` makes each take plus its word timings for the captions; English voiceovers done for R1, R3, R4 and R5; 2026-10-24: R1, R4 and R5 built and approved in English, R3 not built yet; Spanish waits on Hector's check of each `script-es.txt`)
 - [x] Decide on the untracked `motion-studio/` folder (a 24 s site showcase video side project with its own git repo and an ElevenLabs key in `.env`; details in HANDOFF.md) (2026-10-18: moved out to `C:\Users\hlmpr\projects\motion-studio`, venv paths fixed; Hector backs up the files listed in HANDOFF.md to Google Drive)
-- [ ] Re-record R1's English voiceover on the PC (`scripts/voiceover.mjs`) and re-render R1 before it posts on 2026-11-02: its script now says "Prices in writing up front" instead of "Fixed prices" (978064d). Replace R1 in Drive's Week 03 "Reels R1 R4 R5" folder
+- [x] Re-record R1's English voiceover on the PC (`scripts/voiceover.mjs`) and re-render R1 before it posts on 2026-11-02: its script now says "Prices in writing up front" instead of "Fixed prices" (978064d). Replace R1 in Drive's Week 03 "Reels R1 R4 R5" folder (2026-10-26, bf30693: new take, R1 now 25.6 s; replaced in Drive, and the new C1 and C8 slides copied in)
 - [ ] Build the other 18 pieces in English and Spanish from the kit (`npm run piece` in `business/marketing/instagram/`; the founding-offer carousel H1 was dropped 2026-10-24). Hector checks each Spanish script before it renders
 - [ ] Post on the growth plan's 12-week schedule, starting 2026-11-02, with its weekly routine (Monday review, build two weeks ahead, Spanish check, captions, 20 minutes a day of local engagement); R2 waits on the demos' production PageSpeed scores
 - [ ] Reset the growth plan's starting targets after week 4 (2026-11-30)
