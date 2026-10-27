@@ -70,13 +70,13 @@ In launch order. Items in the same group can run in parallel.
 - [x] Optional forced-colors polish: the checklist progress bar and the How it works connector line disappear, and the founding card loses its panel edge. The text still carries the meaning, so this doesn't block launch (2026-10-13: fixed with system colors in site/ and the template CTABand; checked at 360 and 1440px with high contrast on and off)
 
 **Launch day**
-- [ ] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other. Make `www` the main address (2026-10-23: outreach links to https://www.trinitywebdallas.com), and change `site.url` in `site/src/content/site.ts` to match
-- [ ] Launch day: re-enable production deploys from main. Clear the Ignored Build Step in `trinity-web-co-site` → Settings → Git, set on 2026-10-12 to pause production builds
+- [x] Add the chosen domain to the Vercel project, update DNS, confirm HTTPS on `www` and the bare domain with one redirecting to the other. Make `www` the main address (2026-10-23: outreach links to https://www.trinitywebdallas.com), and change `site.url` in `site/src/content/site.ts` to match (2026-10-26: both domains on the project, the bare domain 308-redirects to www with the path kept; Cloudflare records "DNS only": A 216.150.1.1 and 216.150.16.1, CNAME www to Vercel; HTTPS valid on both; `site.url` is www, d317035)
+- [x] Launch day: re-enable production deploys from main. Clear the Ignored Build Step in `trinity-web-co-site` → Settings → Git, set on 2026-10-12 to pause production builds (2026-10-26: cleared; every push to `main` now deploys production)
 - [x] Swap the demo slot links from preview URLs to production URLs (the links on `main` need a Vercel login): set each slot's `url` in `site/src/content/site.ts` to the demo's production URL and add its mobile `pageSpeed`, before deploying `site/` (2026-10-26, on branch `launch-day` with `site.url` switched to www, for Hector's OK)
-- [ ] Deploy `site/` to production
-- [ ] Send a test form submission on the live site and confirm it reaches your business inbox
+- [x] Deploy `site/` to production (2026-10-26: merge b182a9a; live at https://www.trinitywebdallas.com)
+- [ ] Send a test form submission on the live site and confirm it reaches your business inbox (2026-10-26: Claude sent "Launch test (Claude Code)" from the live site with two goal boxes ticked, and Formspree accepted it. Hector: confirm it reached hello@ (check spam) and that `goal` shows both boxes)
 - [ ] In Formspree, restrict form `xvkzedbz` to trinitywebdallas.com (left open until launch so tests from preview links work)
-- [ ] Confirm Vercel Analytics shows your own test visit and a test call-click or form event
+- [x] Confirm Vercel Analytics shows your own test visit and a test call-click or form event (2026-10-26: production shows the page views and 1 "Form submit" event)
 
 **Instagram (plans: the "Instagram content plan" doc, linked from `business/marketing/instagram-content-plan.md`, and the "Instagram growth plan" doc, https://claude.ai/code/artifact/70864e6b-70ca-4105-82dc-38346fe34ea6, which holds the schedule and steps)**
 - [x] Create the Instagram business account and send the handle (2026-10-15: @trinitywebco)

@@ -40,7 +40,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 | Demo 2: Good Oak Barbershop (barber) | `clients/good-oak-barbers-oak-cliff/site` | `trinitywebco-sites/site-good-oak-barbers-oak-cliff`, `main` is the only branch | Same name, not Git-connected. Preview (2026-10-13, `main` at 2f48792): https://site-good-oak-barbers-oak-cliff-aj3do2wcx-hlm10.vercel.app |
 
 - `clients/*/site/` are separate git repos and are git-ignored here. Commit and push each one on its own.
-- Both demos are in production since 2026-10-26, public without a login: https://site-purple-martin-air-lake-highlan.vercel.app/ (Vercel cut the long project name short) and https://site-good-oak-barbers-oak-cliff.vercel.app/. Previews stay behind Vercel Authentication (a Vercel login). `trinity-web-co-site` still has production paused (Ignored Build Step) until launch.
+- Both demos are in production since 2026-10-26, public without a login: https://site-purple-martin-air-lake-highlan.vercel.app/ (Vercel cut the long project name short) and https://site-good-oak-barbers-oak-cliff.vercel.app/. Previews stay behind Vercel Authentication (a Vercel login). The site itself is live since 2026-10-26 at https://www.trinitywebdallas.com (the bare domain 308-redirects to www; Cloudflare DNS, records "DNS only"). Its Ignored Build Step is cleared, so every push to `main` deploys production.
 - **Only `trinity-web-co-site` is connected to GitHub.** Pushing a branch builds a preview by itself. Pushing `main` is skipped (see below). The demo projects deploy only when you run `npx vercel deploy` in the demo repo.
 - Vercel account: team `hlm10` (`team_BAKR7LKO83CePY1tgdUydUiI`), on **Pro** since 2026-10-26.
 
@@ -187,7 +187,7 @@ Read `CLAUDE.md` (project rules, open items, launch checklist) and `business/pla
 - **What happened:** `trinity-web-co-site` turned out to be connected to GitHub (`hectorclawd/trinity-web-co`, production branch `main`), so every push to `main` deployed to production. trinity-web-co-site.vercel.app was public with no `noindex`. There were 9 production deployments, the oldest 3 days old.
 - **The fix, with Hector's OK:** the project's Ignored Build Step (Settings → Git) is now `if [ "$VERCEL_ENV" = "production" ]; then echo "Production deploys paused until launch"; exit 0; fi; exit 1`. Pushes to `main` are skipped, and other branches still build previews. Git stays connected.
 - **Cleanup:** all 9 production deployments were removed: the 6 from 2026-10-12 that day, and the 3 older ones (`pblsb5cae`, `ken7pwfyq`, `jnpfycdsq`) on 2026-10-13. trinity-web-co-site.vercel.app returns 404 again. The only production entry left is a Canceled one, from the test push that showed the Ignored Build Step works.
-- **Launch day:** clear the Ignored Build Step to deploy production again (in `CHECKLIST.md`).
+- **Launch day:** clear the Ignored Build Step to deploy production again (in `CHECKLIST.md`). Done 2026-10-26.
 - **To look at `main` before launch:** `main` builds nothing while this is on. Push a branch (it builds a preview by itself) or run `npx -y vercel@latest deploy --target=preview` from the repo root.
 
 ## Gotchas (learned the hard way)

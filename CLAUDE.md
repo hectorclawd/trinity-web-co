@@ -100,7 +100,7 @@ Codex (OpenAI's coding agent, through the Codex plugin) takes the fix work so Cl
 
 Do these on launch day, in order, after the open items below that block launch (domain, Formspree ID; on 2026-10-26 Hector chose to launch without the headshot and add it after):
 
-- [ ] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebdallas.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again.
+- [x] Vercel: move the account from Hobby (non-commercial only) to Pro before launch (playbook §5), then add the `trinitywebdallas.com` domain and deploy to production. Clear the project's Ignored Build Step first, so `main` deploys to production again. (2026-10-26: live at https://www.trinitywebdallas.com, the bare domain redirects to www; every push to `main` now deploys production.)
 - [x] Deploy the demos to production on Pro, run PageSpeed Insights (mobile) on each production URL, then swap the demo slots in `site/src/content/site.ts` from their preview URLs to the production URLs and add `pageSpeed` (titles, images and alt text are already in). (2026-10-26: Pro is on; both demos are in production, mobile Performance 100 and 100; the slots are filled on branch `launch-day`.)
 
 ## Open items (Hector to confirm)
@@ -119,7 +119,7 @@ Files built before the playbook was added, which now conflict with it:
 
 Other open items:
 
-- [ ] Domain. Decided 2026-10-21: keep the name Trinity Web Co. and use `trinitywebdallas.com` (`trinitywebco.com` belongs to someone else). The site now uses `trinitywebdallas.com` and `hello@trinitywebdallas.com`. Registered 2026-10-21 in Hector's own Cloudflare Registrar account (expires 2027-10-21, Cloudflare DNS). The `hello@` mailbox is on Google Workspace with its DNS records (2026-10-21). Still to do: the DNS records for Vercel on launch day.
+- [x] Domain (live 2026-10-26: Vercel DNS records added in Cloudflare, "DNS only"). Decided 2026-10-21: keep the name Trinity Web Co. and use `trinitywebdallas.com` (`trinitywebco.com` belongs to someone else). The site now uses `trinitywebdallas.com` and `hello@trinitywebdallas.com`. Registered 2026-10-21 in Hector's own Cloudflare Registrar account (expires 2027-10-21, Cloudflare DNS). The `hello@` mailbox is on Google Workspace with its DNS records (2026-10-21). Still to do: the DNS records for Vercel on launch day.
 - [x] `trinitywebco-sites` GitHub org created; `templates/site-template/` pushed to `trinitywebco-sites/site-template` as a private template repository with fresh history (52 files, exported from commit 24bdeed; 2026-10-07).
 - [x] Vercel project `trinity-web-co-site` created (root directory `site`, Astro preset, Node 24) and linked with the CLI from the repo root; `.vercelignore` uploads only `site/` (2026-10-07). Preview deployments only for now: the first deploy went to production by default and was removed, so `trinity-web-co-site.vercel.app` returns 404 until launch. Since then the project has been connected to GitHub (production branch `main`). Since 2026-10-12 its Ignored Build Step skips production builds, so pushes to `main` don't deploy and other branches still build previews. Clear it on launch day.
 - [x] Formspree form ID. Replace `REPLACE_ME` in `site.forms.contactEndpoint` in `site/src/content/site.ts` (2026-10-21: form `xvkzedbz`, sends to hello@trinitywebdallas.com; a test from the preview arrived).

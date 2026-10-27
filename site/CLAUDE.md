@@ -35,6 +35,6 @@ Hosting: Vercel (playbook §5). Security headers and CSP are in `vercel.json`; t
 ## Before launch
 
 - [x] Formspree form ID: replace `REPLACE_ME` in `site.forms.contactEndpoint` (2026-10-21: `xvkzedbz`).
-- [ ] Domain `trinitywebdallas.com` (chosen 2026-10-21) registered in Hector's own registrar account and pointed at Vercel.
+- [x] Domain `trinitywebdallas.com` (chosen 2026-10-21) registered in Hector's own registrar account and pointed at Vercel (live 2026-10-26; www is the main address).
 - [x] The 2 demo sites built, then the slots filled in (2026-10-26: production urls and mobile PageSpeed scores).
 - [ ] Headshot and your own story for the About section.
