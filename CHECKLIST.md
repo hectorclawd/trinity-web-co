@@ -74,7 +74,7 @@ In launch order. Items in the same group can run in parallel.
 - [x] Launch day: re-enable production deploys from main. Clear the Ignored Build Step in `trinity-web-co-site` → Settings → Git, set on 2026-10-12 to pause production builds (2026-10-26: cleared; every push to `main` now deploys production)
 - [x] Swap the demo slot links from preview URLs to production URLs (the links on `main` need a Vercel login): set each slot's `url` in `site/src/content/site.ts` to the demo's production URL and add its mobile `pageSpeed`, before deploying `site/` (2026-10-26, on branch `launch-day` with `site.url` switched to www, for Hector's OK)
 - [x] Deploy `site/` to production (2026-10-26: merge b182a9a; live at https://www.trinitywebdallas.com)
-- [ ] Send a test form submission on the live site and confirm it reaches your business inbox (2026-10-26: Claude sent "Launch test (Claude Code)" from the live site with two goal boxes ticked, and Formspree accepted it. Hector: confirm it reached hello@ (check spam) and that `goal` shows both boxes)
+- [x] Send a test form submission on the live site and confirm it reaches your business inbox (2026-10-26: Claude sent "Launch test (Claude Code)" from the live site with two goal boxes ticked, and Formspree accepted it, but no email came, likely filtered as spam since it came from an automated browser with hello@ as both sender and recipient. 2026-10-27: Hector's own test from the live site reached the inbox)
 - [ ] In Formspree, restrict form `xvkzedbz` to trinitywebdallas.com (left open until launch so tests from preview links work)
 - [x] Confirm Vercel Analytics shows your own test visit and a test call-click or form event (2026-10-26: production shows the page views and 1 "Form submit" event)
 
