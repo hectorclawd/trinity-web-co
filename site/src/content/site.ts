@@ -22,9 +22,9 @@ export const site: SiteConfig = {
 
   hero: {
     headline: 'Websites that bring Dallas customers in.',
-    lede: 'Web design for Dallas contractors, cleaning crews, salons, barbers and studios. Fast sites, set up for Google from day one and looked after every month.',
-    primaryCta: { label: 'Book a free 20-minute call', href: '#contact' },
-    secondaryCta: { label: 'See pricing', href: '#pricing' },
+    lede: 'Fast sites for contractors, cleaning crews, salons, barbers and studios. Set up for Google from day one, built by a local you can text, and looked after every month.',
+    primaryCta: { label: 'Book a free 20-minute call', href: '/contact/' },
+    secondaryCta: { label: 'See pricing', href: '/services/' },
   },
   about: {
     heading: 'A neighbor, not an agency',
@@ -85,21 +85,19 @@ export const site: SiteConfig = {
   cta: {
     heading: 'Book a free 20-minute call',
     text: 'No pressure, no sales pitch.',
-    button: { label: 'Book a free call', href: '#contact' },
+    button: { label: 'Book a free call', href: '/contact/' },
   },
 
   forms: { contactEndpoint: 'https://formspree.io/f/xvkzedbz' },
 
   social: [],
   nav: [
-    // Root-relative, so the header still works on /privacy/ and the 404 page
-    { label: 'What you get', href: '/#what-you-get' },
-    { label: 'Pricing', href: '/#pricing' },
-    { label: 'Demos', href: '/#demos' },
-    { label: 'How it works', href: '/#process' },
-    { label: 'About', href: '/#about' },
+    // One page each since the 2026-10-27 redesign; the home page is the logo link
+    { label: 'Services and pricing', href: '/services/' },
+    { label: 'Demo sites', href: '/demos/' },
+    { label: 'Contact', href: '/contact/' },
   ],
-  headerCta: { label: 'Book a free call', href: '/#contact' },
+  headerCta: { label: 'Book a free call', href: '/contact/' },
   logo: { src: '/logo-mark.svg', width: 42, height: 28 },
   seo: {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',

@@ -1,126 +1,146 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import FAQ from '../components/FAQ.astro';
-import ContactForm from '../components/ContactForm.astro';
 import RiverHero from '../components/site/RiverHero.astro';
-import Features from '../components/site/Features.astro';
-import Niches from '../components/site/Niches.astro';
-import Packages from '../components/site/Packages.astro';
-import CarePlans from '../components/site/CarePlans.astro';
-import DemoSlots from '../components/site/DemoSlots.astro';
-import Process from '../components/site/Process.astro';
-import About from '../components/site/About.astro';
-import ProjectReadiness from '../components/site/ProjectReadiness.astro';
-import BookBar from '../components/site/BookBar.astro';
-import CurrentSection from '../components/site/CurrentSection.astro';
-import PageRiver from '../components/site/PageRiver.astro';
+import Icon, { type IconName } from '../components/site/Icon.astro';
+import demoPurpleMartinTop from '../assets/demo-purple-martin-top.jpg';
+import demoGoodOakTop from '../assets/demo-good-oak-top.jpg';
 import { site, offer } from '../content/site';
 
-// Extra contact form fields, styled like the ones inside ContactForm
-const fieldClass =
-  'w-full rounded-btn border-[1.5px] border-muted bg-white px-3.5 py-3 text-[1.0625rem] text-text placeholder:text-muted aria-[invalid=true]:border-error';
-const labelClass = 'mb-1.5 block text-base font-semibold';
-// Formspree joins checked boxes that share a name into one comma-separated value
-const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in person'];
+const featureIcons: IconName[] = ['search', 'phone', 'call', 'bolt', 'key', 'shield'];
+const launch = offer.pricing.packages.find((pkg) => pkg.name === 'Launch');
+const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?? 0));
+// The homepage cards show the top of each demo; the demos page shows the whole homepage
+const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
 ---
 
 <BaseLayout>
   <RiverHero />
-  <Features />
-  <Niches />
 
-  <section id="pricing" class="section" aria-labelledby="pricing-title">
-    <div class="wrap">
-      <h2 id="pricing-title">{offer.pricing.heading}</h2>
-      <p class="section-lede">{offer.pricing.lede}</p>
-      <Packages />
-      <CarePlans />
-    </div>
-  </section>
-
-  <DemoSlots />
-  <Process />
-  <About />
-
-  <div class="bg-surface">
-    <FAQ items={site.faqs} heading="Questions owners ask" />
-  </div>
-
-  <ProjectReadiness />
-
-  <section id="contact" class="section" aria-labelledby="contact-title" data-book-cta>
-    <div class="wrap grid items-start gap-12 md:grid-cols-[1fr_1.15fr] md:gap-20">
-      <div>
-        <h2 id="contact-title">{offer.contact.heading}</h2>
-        <p class="mt-5 max-w-md">{offer.contact.text}</p>
-        {
-          site.phone && (
-            <p class="mt-5 max-w-md font-semibold">
-              {site.phone.textable ? 'Rather call or text?' : 'Rather call?'}{' '}
-              <a class="inline-flex min-h-11 items-center whitespace-nowrap" href={`tel:${site.phone.e164}`}>{site.phone.display}</a>
-              {site.phone.textable && (
-                <>
-                  {' '}·{' '}
-                  <a class="inline-flex min-h-11 items-center whitespace-nowrap" href={`sms:${site.phone.e164}`}>Send a text</a>
-                </>
-              )}
-            </p>
-          )
-        }
-        <p class="mt-5 max-w-md font-semibold">
-          Prefer email?{' '}
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-        </p>
-        <p class="mt-5 max-w-md text-base text-muted">{offer.contact.area}</p>
+  <section class="trust" aria-label="At a glance">
+    <div class="wrap trust-grid">
+      <div class="trust-item">
+        <span class="trust-num" data-count={lowestScore}>{lowestScore}</span>
+        <span class="trust-label">Mobile PageSpeed score on both demo sites</span>
       </div>
-      <ContactForm
-        endpoint={site.forms.contactEndpoint}
-        businessField
-        messageLabel="What do you need help with?"
-        submitLabel="Send my request"
-        successMessage="Request sent. I’ll reply within one business day."
-        fallback={`email ${site.email}`}
-        surface
-      >
-        <div class="mb-4">
-          <label class={labelClass} for="cf-current-site">
-            Current website{' '}<span class="font-normal text-muted">(optional, if you have one)</span>
-          </label>
-          <input
-            class={fieldClass}
-            id="cf-current-site"
-            name="current_site"
-            type="text"
-            inputmode="url"
-            placeholder="yourbusiness.com"
-          />
-        </div>
-        <fieldset class="mb-4">
-          <legend class={labelClass}>
-            What should your site get customers to do?{' '}<span class="font-normal text-muted">(optional)</span>
-          </legend>
-          <div class="grid gap-x-6 sm:grid-cols-2">
-            {
-              goals.map((goal, index) => (
-                <label class="flex min-h-11 cursor-pointer items-center gap-3" for={`cf-goal-${index}`}>
-                  <input class="size-5 flex-none accent-brand" id={`cf-goal-${index}`} name="goal" type="checkbox" value={goal} />
-                  {goal}
-                </label>
-              ))
-            }
+      <div class="trust-item"><span class="trust-num">1 day</span><span class="trust-label">Replies within one business day</span></div>
+      {
+        launch && (
+          <div class="trust-item">
+            <span class="trust-num">{launch.price.replace(/^From /, '')}</span>
+            <span class="trust-label">Launch websites start at, price in writing</span>
           </div>
-        </fieldset>
-        <div class="mb-4">
-          <label class={labelClass} for="cf-timing">
-            When would you like it live?{' '}<span class="font-normal text-muted">(optional)</span>
-          </label>
-          <input class={fieldClass} id="cf-timing" name="timing" type="text" />
-        </div>
-      </ContactForm>
+        )
+      }
+      <div class="trust-item"><span class="trust-num">Yours</span><span class="trust-label">Your domain and content stay in your name</span></div>
     </div>
   </section>
 
-  <BookBar />
-  <CurrentSection />
-  <PageRiver />
+  <section class="section tint" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <span class="eyebrow">What you get</span>
+          <h2 id="features-title">{offer.features.heading}</h2>
+          <p class="lede">{offer.features.lede}</p>
+        </div>
+        <a class="btn btn-line light" href="/services/">Packages and pricing</a>
+      </div>
+      <div class="grid-3">
+        {
+          offer.features.items.map((item, i) => (
+            <article class="card" data-reveal style={`--d:${i % 3}`}>
+              <span class="icon"><Icon name={featureIcons[i % featureIcons.length]} /></span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section ink" aria-labelledby="steps-title">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <span class="eyebrow">How it works</span>
+          <h2 id="steps-title">Three steps from first call to live site</h2>
+        </div>
+        <a class="btn btn-line" href="/contact/">All five steps</a>
+      </div>
+      <ol class="steps">
+        <li class="step" data-reveal style="--d:0">
+          <h3>Free 20-minute call</h3>
+          <p>On the phone or over coffee. You tell me about the business and what's not working.</p>
+        </li>
+        <li class="step" data-reveal style="--d:1">
+          <h3>Your price in writing</h3>
+          <p>Within 24 hours you get your exact price, a timeline and a list of what I'll need. You pay half to hold your spot.</p>
+        </li>
+        <li class="step" data-reveal style="--d:2">
+          <h3>Preview, then launch</h3>
+          <p>You check a preview link on your phone, I make your changes, and the site goes live on your domain.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="demos-title">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <span class="eyebrow">Demo sites</span>
+          <h2 id="demos-title">See the work before you hire me</h2>
+          <p class="lede">Two sites built for made-up businesses. Each one is labeled as a demo.</p>
+        </div>
+        <a class="btn btn-line light" href="/demos/">Scroll through both</a>
+      </div>
+      <div class="demos">
+        {
+          offer.demos.slots.map((slot, i) => (
+            <a class="demo" data-reveal style={`--d:${i}`} href={slot.url} target="_blank" rel="noopener">
+              <div class="demo-shot">
+                <span class="tag">Demo</span>
+                <Image src={demoTops[i]} widths={[600, 900, 1200]} sizes="(max-width: 800px) 100vw, 560px" alt={slot.imageAlt ?? ''} loading="lazy" />
+              </div>
+              <div class="demo-body">
+                <div>
+                  <h3>{slot.title.replace(/^Demo: /, '')}</h3>
+                  <small>{slot.niche} demo</small>
+                </div>
+                {slot.pageSpeed && <span class="score">PageSpeed {slot.pageSpeed}</span>}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" aria-labelledby="about-title">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow">Why Trinity</span>
+        <h2 id="about-title">{site.about.heading}</h2>
+        <ul class="checks">{offer.promises.map((promise) => <li>{promise}</li>)}</ul>
+        <ul class="pills" aria-label={offer.niches.heading}>{offer.niches.items.map((niche) => <li class="pill">{niche}</li>)}</ul>
+      </div>
+      <div class="note-card" data-reveal>
+        {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <p class="sig">Hector, {site.name}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band" aria-labelledby="cta-title">
+    <div class="wrap">
+      <h2 id="cta-title">Book a free <span class="nowrap">20-minute</span> call</h2>
+      <p>{site.cta.text} In English or Spanish, by phone, video or over coffee.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href={site.cta.button.href}>{site.cta.button.label}</a>
+        {site.phone?.textable && <a class="btn btn-line" href={`sms:${site.phone.e164}`}>Text {site.phone.display}</a>}
+      </div>
+    </div>
+  </section>
 </BaseLayout>

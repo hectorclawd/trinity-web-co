@@ -1,9 +1,9 @@
 ---
 // Every page uses this layout: meta tags, Open Graph, LocalBusiness schema, analytics.
-import '../styles/tokens.css';
+import '../styles/site.css';
 import Analytics from '@vercel/analytics/astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Header from '../components/site/SiteHeader.astro';
+import Footer from '../components/site/SiteFooter.astro';
 import { site } from '../content/site';
 import { localBusinessSchema } from '../lib/format';
 
@@ -73,9 +73,68 @@ const schema = localBusinessSchema(site);
 </script>
 
 <script>
-  // Smooth scrolling starts once the page has loaded (see tokens.css), so arriving at /#pricing
+  // Smooth scrolling starts once the page has loaded (see site.css), so arriving at /services/#care
   // from another page jumps straight to the section
   const smooth = () => document.documentElement.classList.add('smooth-scroll');
   if (document.readyState === 'complete') smooth();
   else addEventListener('load', smooth, { once: true });
+</script>
+
+<script>
+  // Menu button, header shadow, hero headline words, cards rising on scroll and counters
+  const menuBtn = document.querySelector<HTMLButtonElement>('.menu-btn');
+  const nav = document.getElementById('site-nav');
+  menuBtn?.addEventListener('click', () => {
+    const open = nav!.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header?.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Words fade up one after another; the h1 keeps its text for screen readers
+  const h1 = document.querySelector('.hero h1');
+  if (h1?.textContent) {
+    const words = h1.textContent.trim().split(/\s+/);
+    h1.textContent = '';
+    words.forEach((word, i) => {
+      const span = document.createElement('span');
+      span.className = 'w';
+      span.style.setProperty('--i', String(i));
+      span.textContent = word;
+      h1.append(span, i < words.length - 1 ? ' ' : '');
+    });
+  }
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const countUp = (el: HTMLElement) => {
+    const end = Number(el.dataset.count);
+    const suffix = el.dataset.suffix ?? '';
+    if (reduced) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / 1200);
+      el.textContent = Math.round(end * (1 - Math.pow(1 - t, 3))) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target as HTMLElement;
+        el.classList.add('in');
+        if (el.dataset.count) countUp(el);
+        io.unobserve(el);
+      }),
+    { threshold: 0.15 },
+  );
+  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+  document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
 </script>

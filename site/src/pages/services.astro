@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/site/Icon.astro';
+import { site, offer } from '../content/site';
+
+const { pricing, care } = offer;
+// The recommended package goes first
+const packages = [...pricing.packages].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false));
+const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?? 0));
+---
+
+<BaseLayout
+  title="Services and pricing"
+  description={`Launch and Growth websites with starting prices posted, and an optional ${care.plans[0]?.price} care plan. Your exact price in writing before any work starts.`}
+>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">Services and pricing</span>
+      <h1>Two packages, one care plan, no surprises</h1>
+      <p class="lede">{pricing.lede}</p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-label="Packages">
+    <div class="wrap">
+      <div class="prices">
+        {
+          packages.map((pkg, i) => (
+            <article class:list={['price-card', { featured: pkg.featured }]} id={pkg.name.toLowerCase()} data-reveal style={`--d:${i}`}>
+              <div class="price-top">
+                <h2>{pkg.name}</h2>
+                {pkg.featured && <span class="badge">Recommended</span>}
+              </div>
+              <p class="price">{pkg.price}</p>
+              <p class="price-meta">{pkg.turnaround}</p>
+              <p>{pkg.bestFor}</p>
+              <ul class="checks">{pkg.includes.map((item) => <li>{item}</li>)}</ul>
+              <a class:list={['btn', pkg.featured ? 'btn-gold' : 'btn-line light']} href="/contact/">Ask about {pkg.name}</a>
+            </article>
+          ))
+        }
+      </div>
+
+      {
+        care.plans.map((plan) => (
+          <div class="care" id="care" data-reveal>
+            <p class="price">{plan.price}</p>
+            <div>
+              <h3>{care.heading}, optional</h3>
+              <p>{plan.includes} {care.intro.replace(/^Optional\. /, '')}</p>
+            </div>
+          </div>
+        ))
+      }
+      <p class="fine">{pricing.note}</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="includes-title">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <span class="eyebrow">Every site includes</span>
+          <h2 id="includes-title">Built to get you calls, not just look nice</h2>
+        </div>
+      </div>
+      <div class="grid-3">
+        <article class="card" data-reveal style="--d:0">
+          <span class="icon"><Icon name="search" /></span>
+          <h3>Set up for Google</h3>
+          <p>Page titles, descriptions, a sitemap and Search Console, with your business details matching everywhere.</p>
+        </article>
+        <article class="card" data-reveal style="--d:1">
+          <span class="icon"><Icon name="phone" /></span>
+          <h3>Phone first</h3>
+          <p>Designed for a small screen first, with tap-to-call and text buttons where thumbs reach them.</p>
+        </article>
+        <article class="card" data-reveal style="--d:2">
+          <span class="icon"><Icon name="bolt" /></span>
+          <h3>Fast on a weak signal</h3>
+          <p>Hand-built pages, no heavy page builder. Both demo sites score {lowestScore} on mobile PageSpeed.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <span class="eyebrow">Questions</span>
+      <h2 id="faq-title">Questions owners ask</h2>
+      <div class="faq">
+        {
+          site.faqs.map((faq) => (
+            <details>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section cta-band" aria-labelledby="cta-title">
+    <div class="wrap">
+      <h2 id="cta-title">Not sure which one fits?</h2>
+      <p>Tell me about your business on a free <span class="nowrap">20-minute</span> call and I'll tell you honestly.</p>
+      <div class="actions"><a class="btn btn-gold" href={site.cta.button.href}>{site.cta.button.label}</a></div>
+    </div>
+  </section>
+</BaseLayout>

@@ -4,15 +4,20 @@ import { site } from '../content/site';
 ---
 
 <BaseLayout title="Privacy" description="How Trinity Web Co. handles the information you send through this website.">
-  <section class="section">
-    <div class="wrap prose-basic max-w-3xl">
-      <h1 class="text-[length:var(--step-3)]">Privacy</h1>
-      <p class="text-muted">Last updated October 7, 2026.</p>
+  <section class="page-head">
+    <div class="wrap">
+      <h1>Privacy</h1>
+      <p class="lede">Last updated October 27, 2026.</p>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="wrap prose">
       <h2>What I collect</h2>
       <p>
         If you fill out the contact form, I receive the details you enter: your name, business name, email, phone number
-        (if given), website and message. The form is processed by Formspree, which delivers it to my inbox.
+        (if given), website, what you're interested in and your message. The form is processed by Formspree, which delivers
+        it to my inbox.
       </p>
 
       <h2>How I use it</h2>
@@ -26,9 +31,7 @@ import { site } from '../content/site';
 
       <h2>Deleting your information</h2>
       <p>
-        Email{' '}
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-        , and I’ll delete your messages and contact details.
+        Email <a href={`mailto:${site.email}`}>{site.email}</a>, and I’ll delete your messages and contact details.
       </p>
 
       <p><a href="/">Back to the homepage</a></p>

@@ -38,13 +38,21 @@ const wideStops = [
 
 <section class="hero">
   <div class="wrap hero-grid">
+    <span class="eyebrow hero-eyebrow">Web design for Dallas small businesses</span>
     <h1 class="hero-title">{headline}</h1>
     <div class="hero-copy">
       <p class="hero-lede">{lede}</p>
-      <div class="hero-actions" data-book-cta>
-        <a class="btn btn-primary btn-arrow" href={primaryCta.href}>{primaryCta.label}</a>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
         {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
       </div>
+      {
+        site.phone && (
+          <p class="hero-note">
+            Or {site.phone.textable ? 'call or text' : 'call'} Hector: <a href={`tel:${site.phone.e164}`}>{site.phone.display}</a>
+          </p>
+        )
+      }
     </div>
 
     <div class="river river-wide" aria-hidden="true">

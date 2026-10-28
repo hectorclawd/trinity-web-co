@@ -4,13 +4,13 @@ import { site } from '../content/site';
 ---
 
 <BaseLayout title="Page not found" noindex>
-  <section class="section">
+  <section class="page-head">
     <div class="wrap">
       <h1>This page doesn’t exist</h1>
-      <p class="mt-5 max-w-xl">The link may be old, or the address may have a typo.</p>
-      <p class="mt-8 flex flex-wrap gap-3">
-        <a class="btn btn-primary" href="/">Go to the homepage</a>
-        {site.phone && <a class="btn btn-secondary" href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a>}
+      <p class="lede">The link may be old, or the address may have a typo.</p>
+      <p class="actions">
+        <a class="btn btn-gold" href="/">Go to the homepage</a>
+        {site.phone && <a class="btn btn-line" href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a>}
       </p>
     </div>
   </section>

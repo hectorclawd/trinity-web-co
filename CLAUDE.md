@@ -59,7 +59,7 @@ CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude
 ## Brand (our own site)
 
 - **Type:** Archivo, self-hosted via `@fontsource-variable/archivo` (width axis). Headlines run wide (`font-stretch: 125%`), body text at normal width. One family only.
-- **Colors** (tokens in `site/src/styles/tokens.css`):
+- **Colors** (variables at the top of `site/src/styles/site.css`):
   - Ink `#13262B`
   - River `#1D6B66`
   - River deep `#0E3F3C`

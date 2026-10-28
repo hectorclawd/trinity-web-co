@@ -1,0 +1,53 @@
+---
+// Footer, plus the call/text bar that stays at the bottom of the screen on phones
+import { site, offer } from '../../content/site';
+import Icon from './Icon.astro';
+
+const services = [
+  ...offer.pricing.packages.map((pkg) => ({ label: `${pkg.name} website`, href: `/services/#${pkg.name.toLowerCase()}` })),
+  { label: 'Monthly care plan', href: '/services/#care' },
+  { label: 'Redo an old website', href: '/services/#faq' },
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="/"><img src={site.logo?.src} alt="" width="42" height="28" />{site.name}</a>
+        <p>Fast, mobile-friendly websites for Dallas small businesses. Built and looked after by Hector, a Dallas local.</p>
+      </div>
+      <div>
+        <h2>Services</h2>
+        <ul>{services.map((s) => <li><a href={s.href}>{s.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2>Pages</h2>
+        <ul>
+          <li><a href="/">Home</a></li>
+          {site.nav.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+          <li><a href="/privacy/">Privacy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Talk to Hector</h2>
+        <ul>
+          {site.phone && <li><a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a></li>}
+          {site.phone?.textable && <li><a href={`sms:${site.phone.e164}`}>Text {site.phone.display}</a></li>}
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li>Dallas and Fort Worth</li>
+        </ul>
+      </div>
+    </div>
+    <p class="footer-base">&copy; {new Date().getFullYear()} {site.name}</p>
+  </div>
+</footer>
+
+{
+  site.phone && (
+    <div class="float-bar">
+      <a class="btn btn-gold" href={`tel:${site.phone.e164}`}><Icon name="call" />Call</a>
+      {site.phone.textable && <a class="btn btn-line" href={`sms:${site.phone.e164}`}><Icon name="text" />Text</a>}
+    </div>
+  )
+}
