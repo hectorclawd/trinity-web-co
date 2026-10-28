@@ -1,0 +1,217 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/site/Icon.astro';
+import { site, offer } from '../content/site';
+import { isPlaceholder } from '../lib/format';
+
+const endpoint = site.forms.contactEndpoint;
+const configured = !isPlaceholder(endpoint);
+const fallback = `email ${site.email}`;
+// Formspree joins checked boxes that share a name into one comma-separated value
+const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in person'];
+const interests = ['Not sure yet', ...offer.pricing.packages.map((pkg) => `${pkg.name}, ${pkg.price.toLowerCase()}`), 'Redo my current website'];
+---
+
+<BaseLayout title="Book a free call" description={`Book a free 20-minute call with Hector at ${site.name}. ${site.phone ? `Call or text ${site.phone.display}.` : ''}`}>
+  <section class="page-head">
+    <div class="wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Book a free <span class="nowrap">20-minute</span> call</h1>
+      <p class="lede">{offer.contact.text}</p>
+    </div>
+  </section>
+
+  <section class="section tint" aria-label="Contact Hector">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Talk to Hector directly</h2>
+        <p class="lede">{offer.contact.area} The call can be in English or Spanish.</p>
+        <ul class="contact-list">
+          {
+            site.phone && (
+              <li>
+                <a href={`tel:${site.phone.e164}`}>
+                  <span class="icon"><Icon name="call" /></span>
+                  <span>{site.phone.display}<small>Call</small></span>
+                </a>
+              </li>
+            )
+          }
+          {
+            site.phone?.textable && (
+              <li>
+                <a href={`sms:${site.phone.e164}`}>
+                  <span class="icon"><Icon name="text" /></span>
+                  <span>{site.phone.display}<small>Text, usually answered the same day</small></span>
+                </a>
+              </li>
+            )
+          }
+          <li>
+            <a href={`mailto:${site.email}`}>
+              <span class="icon"><Icon name="mail" /></span>
+              <span>{site.email}<small>Email</small></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <form
+        class="form"
+        action={endpoint}
+        method="POST"
+        novalidate
+        data-contact-form
+        data-configured={configured ? 'true' : 'false'}
+        data-fallback={fallback}
+      >
+        <p class="form-intro">Every field is required unless it says optional.</p>
+        <div class="field">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="cf-business">Business name</label>
+          <input id="cf-business" name="business" type="text" autocomplete="organization" required />
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="cf-phone">Phone <span class="opt">(optional)</span></label>
+          <input id="cf-phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+        <div class="field">
+          <label for="cf-interest">What are you interested in? <span class="opt">(optional)</span></label>
+          <select id="cf-interest" name="interest">{interests.map((option) => <option>{option}</option>)}</select>
+        </div>
+        <div class="field">
+          <label for="cf-current-site">Current website <span class="opt">(optional, if you have one)</span></label>
+          <input id="cf-current-site" name="current_site" type="text" inputmode="url" placeholder="yourbusiness.com" />
+        </div>
+        <fieldset class="field">
+          <legend>What should your site get customers to do? <span class="opt">(optional)</span></legend>
+          <div class="checkbox-grid">
+            {
+              goals.map((goal, i) => (
+                <label for={`cf-goal-${i}`}>
+                  <input id={`cf-goal-${i}`} name="goal" type="checkbox" value={goal} />
+                  {goal}
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="cf-timing">When would you like it live? <span class="opt">(optional)</span></label>
+          <input id="cf-timing" name="timing" type="text" />
+        </div>
+        <div class="field">
+          <label for="cf-message">What do you need help with?</label>
+          <textarea id="cf-message" name="message" rows="4" required></textarea>
+        </div>
+        <input class="gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button class="btn btn-gold" type="submit">Send my request</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="section ink" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="head-row">
+        <div>
+          <span class="eyebrow">What happens next</span>
+          <h2 id="process-title">{offer.process.heading}</h2>
+        </div>
+      </div>
+      <ol class="steps five">
+        {
+          offer.process.steps.map((step, i) => (
+            <li class="step" data-reveal style={`--d:${i}`}>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Posts to Formspree (no server code), with a honeypot for spam. Each error sits under its
+  // field and is tied to it with aria-describedby, so a screen reader reads it on focus (WCAG 3.3.1)
+  const SEND_LABEL = 'Send my request';
+  const SUCCESS = 'Request sent. I’ll reply within one business day.';
+
+  document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const fallback = form.dataset.fallback ?? '';
+
+    const show = (message: string, kind: 'error' | 'success') => {
+      status.textContent = message;
+      status.className = `form-status ${kind}`;
+    };
+    const errorText = (field: HTMLInputElement) =>
+      field.type === 'email' && field.validity.typeMismatch ? 'Enter an email like name@example.com.' : 'Please fill this in.';
+    const markInvalid = (field: HTMLInputElement) => {
+      const error = document.createElement('p');
+      error.id = `${field.id}-error`;
+      error.className = 'field-error';
+      error.textContent = errorText(field);
+      field.after(error);
+      field.setAttribute('aria-describedby', error.id);
+      field.setAttribute('aria-invalid', 'true');
+    };
+    const clearInvalid = (field: HTMLInputElement) => {
+      document.getElementById(`${field.id}-error`)?.remove();
+      field.removeAttribute('aria-describedby');
+      field.removeAttribute('aria-invalid');
+    };
+
+    form.addEventListener('input', (event) => {
+      const field = event.target as HTMLInputElement;
+      if (field.getAttribute('aria-invalid') === 'true' && field.checkValidity()) clearInvalid(field);
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const required = [...form.querySelectorAll<HTMLInputElement>('[required]')];
+      required.forEach(clearInvalid);
+      const invalid = required.filter((field) => !field.checkValidity());
+      if (invalid.length) {
+        invalid.forEach(markInvalid);
+        const names = invalid.map((field) =>
+          form.querySelector(`label[for="${field.id}"]`)?.textContent?.trim().toLowerCase().replace(/[?:.]$/, ''),
+        );
+        show(`Please check: ${names.join(', ')}.`, 'error');
+        invalid[0].focus();
+        return;
+      }
+
+      if (form.dataset.configured !== 'true') {
+        show(`This form isn’t connected yet. Please ${fallback} instead.`, 'error');
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(res.statusText);
+        form.reset();
+        show(SUCCESS, 'success');
+        button.textContent = 'Sent';
+        document.dispatchEvent(new CustomEvent('contact-form:sent'));
+      } catch {
+        show(`Your message didn’t go through. Try again, or ${fallback}.`, 'error');
+        button.disabled = false;
+        button.textContent = SEND_LABEL;
+      }
+    });
+  });
+</script>

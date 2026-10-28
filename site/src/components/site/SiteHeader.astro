@@ -1,0 +1,21 @@
+---
+// Sticky header: logo, the page links from site.nav, phone (wide screens) and the call button.
+// The menu button opens the links on narrow screens (script in BaseLayout).
+import { site } from '../../content/site';
+
+const here = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="/">
+      <img src={site.logo?.src} alt="" width="42" height="28" />{site.name}
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><span></span></button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      {site.nav.map((link) => <a href={link.href} aria-current={link.href === here ? 'page' : undefined}>{link.label}</a>)}
+    </nav>
+    {site.phone && <a class="header-phone" href={`tel:${site.phone.e164}`}>{site.phone.display}</a>}
+    {site.headerCta && <a class="btn btn-gold header-cta" href={site.headerCta.href}>{site.headerCta.label}</a>}
+  </div>
+</header>

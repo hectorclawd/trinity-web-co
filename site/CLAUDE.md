@@ -1,6 +1,6 @@
 # Trinity Web Co. website (trinitywebdallas.com)
 
-Hector's own one-page site, built from `templates/site-template/`. Follow the root `CLAUDE.md` and `business/playbook.md`. This file covers only what's specific to this site.
+Hector's own site: home, services and pricing, demo sites, contact and privacy pages. First built from `templates/site-template/`; redesigned 2026-10-27 from a website-rebuilder run (Hector's call), so it no longer shares the template's components or Tailwind styles. Follow the root `CLAUDE.md` and `business/playbook.md`. This file covers only what's specific to this site.
 
 ## Rules
 
@@ -14,10 +14,10 @@ Hector's own one-page site, built from `templates/site-template/`. Follow the ro
   - `site`: business facts, nav, FAQ, SEO, form endpoint (template shape).
   - `offer`: what the studio sells: features, niches, packages, care plan, demo slots, process, promises, contact copy.
 - `src/content/types.ts`: the template types, plus the Trinity-only types at the bottom (`Package`, `CarePlan`, `DemoSlot`, `StudioOffer`).
-- `src/components/`: template components used here (Header, Footer, CTABand, FAQ, ContactForm). **Fix bugs in these in `templates/site-template/` too**, so client sites get the fix.
-- `src/components/site/`: site-only components (RiverHero, Features, Niches, Packages, CarePlans, DemoSlots, Process, About, PageRiver). They use scoped CSS ported from the original design.
-- `PageRiver.astro`: the river that flows on down the page after the hero, behind the content: it runs off screen and back, slips behind cards, screenshots and the How it works phone, and names a nearby city in the open space by each heading it lists. Section content sits above it because it sets `#main .wrap` to `position: relative; z-index: 1`. To change a city or where it shows, edit the `stops` list at its top.
-- `src/styles/tokens.css`: brand tokens (see the root CLAUDE.md) and Archivo's width axis via `@fontsource-variable/archivo/wdth.css`.
+- `src/pages/`: `index`, `services`, `demos`, `contact` (the Formspree form and its script), `privacy`, `404`. Each reads its copy and prices from `site.ts`.
+- `src/components/site/`: `SiteHeader`, `SiteFooter` (with the phone call/text bar), `Icon`, and `RiverHero`. RiverHero keeps its scoped CSS and scroll animation; `site.css` recolors it for the dark hero through the old `--color-*` names. **Don't change the shape of its `path` and `stops`**: the Instagram kit's `npm run sync` reads them.
+- `src/layouts/BaseLayout.astro`: meta tags, schema, analytics and the call/text/form tracking, plus the menu, scroll reveal and counter script.
+- `src/styles/site.css`: all styles, with the brand colors as variables at the top and Archivo's width axis via `@fontsource-variable/archivo/wdth.css` (self-hosted: the CSP blocks Google Fonts).
 - `public/og-image.png`: 1200×630 share image. Regenerate it if the headline changes.
 
 ## Demo slots
