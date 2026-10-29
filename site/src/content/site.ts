@@ -6,6 +6,9 @@ import demoGoodOak from '../assets/demo-good-oak-scroll.jpg';
 // SINGLE source of truth for trinitywebdallas.com. Prices, packages and care plans must match
 // business/playbook.md sections 2 and 3: change the playbook first, then this file.
 
+// Hector's Cal.com page for the free 20-minute call (2026-10-29). Every "Book a free call" button goes here
+const BOOKING_URL = 'https://cal.com/trinitywebdallas/free-call';
+
 export const site: SiteConfig = {
   name: 'Trinity Web Co.',
   slug: 'trinity-web-co',
@@ -23,7 +26,7 @@ export const site: SiteConfig = {
   hero: {
     headline: 'Websites that bring Dallas customers in.',
     lede: 'Fast sites for contractors, cleaning crews, salons, barbers and studios. Set up for Google from day one, built by a local you can text, and looked after every month.',
-    primaryCta: { label: 'Book a free 20-minute call', href: '/contact/' },
+    primaryCta: { label: 'Book a free 20-minute call', href: BOOKING_URL },
     secondaryCta: { label: 'See pricing', href: '/services/' },
   },
   about: {
@@ -85,8 +88,10 @@ export const site: SiteConfig = {
   cta: {
     heading: 'Book a free 20-minute call',
     text: 'No pressure, no sales pitch.',
-    button: { label: 'Book a free call', href: '/contact/' },
+    button: { label: 'Book a free call', href: BOOKING_URL },
   },
+
+  booking: { provider: 'Cal.com', url: BOOKING_URL },
 
   forms: { contactEndpoint: 'https://formspree.io/f/xvkzedbz' },
 
@@ -97,7 +102,7 @@ export const site: SiteConfig = {
     { label: 'Demo sites', href: '/demos/' },
     { label: 'Contact', href: '/contact/' },
   ],
-  headerCta: { label: 'Book a free call', href: '/contact/' },
+  headerCta: { label: 'Book a free call', href: BOOKING_URL },
   logo: { src: '/logo-mark.svg', width: 42, height: 28 },
   seo: {
     title: 'Trinity Web Co. | Websites for Dallas small businesses',
@@ -106,7 +111,7 @@ export const site: SiteConfig = {
     ogImageAlt: 'Trinity Web Co.: “Websites that bring Dallas customers in,” above a line drawing of the Trinity River',
   },
 
-  features: { blog: false, booking: false, map: false, gallery: false, quoteForm: false },
+  features: { blog: false, booking: true, map: false, gallery: false, quoteForm: false },
   credit: false,
 };
 

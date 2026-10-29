@@ -32,6 +32,7 @@ const services = [
       <div>
         <h2>Talk to Hector</h2>
         <ul>
+          {site.booking && <li><a href={site.booking.url}>Book a free call</a></li>}
           {site.phone && <li><a href={`tel:${site.phone.e164}`}>Call {site.phone.display}</a></li>}
           {site.phone?.textable && <li><a href={`sms:${site.phone.e164}`}>Text {site.phone.display}</a></li>}
           <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
