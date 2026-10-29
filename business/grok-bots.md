@@ -161,7 +161,7 @@ I noticed [your site takes 9 seconds to load on a phone / you don't have a websi
 I'm a Dallas web developer building fast sites for local [trades / salons]. I recorded a 2-minute video showing 3 things I'd fix: [Loom link]
 I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) starts at $499 while I build my portfolio. Worth a free 20-minute call this week?
 [Your name]
-Trinity Web Co. · [phone] · trinitywebdallas.com
+Trinity Web Co. · cal.com/trinitywebdallas/free-call · trinitywebdallas.com
 [Mailing address]
 Not interested? Just reply "no" and I won't email again.
 

@@ -1,6 +1,6 @@
 # Outreach scripts
 
-Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailing address]` once; everything else in brackets changes per prospect. Log every contact in `prospect-tracker.csv`.
+Source: playbook §7. Fill in `[Your name]`, `[Website]` and `[Mailing address]` once (the booking link is cal.com/trinitywebdallas/free-call; no phone number goes to prospects, playbook decisions log 2026-10-29); everything else in brackets changes per prospect. Log every contact in `prospect-tracker.csv`.
 
 **Rules (playbook §7):**
 
@@ -30,7 +30,7 @@ Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailin
 > I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) starts at $499 while I build my portfolio. Worth a free 20-minute call this week?
 >
 > [Your name]
-> Trinity Web Co. · [Phone] · [Website]
+> Trinity Web Co. · cal.com/trinitywebdallas/free-call · [Website]
 > [Mailing address]
 >
 > Not interested? Just reply "no" and I won't email again.
@@ -56,7 +56,7 @@ Source: playbook §7. Fill in `[Your name]`, `[Phone]`, `[Website]` and `[Mailin
 
 **If they're busy or not there:**
 
-> No problem. Can I leave this with you? *[Hand over the price sheet with your card stapled and a sticky note: "3 quick fixes for your site, call or text [Phone], [Your name]."]* What's the best way to reach the owner?
+> No problem. Can I leave this with you? *[Hand over the price sheet with your card stapled and a sticky note: "3 quick fixes for your site, book a free call at cal.com/trinitywebdallas/free-call, [Your name]."]* What's the best way to reach the owner?
 
 The demo you show is labeled "Demo." Don't call it a client site.
 

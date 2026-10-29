@@ -46,6 +46,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-23 | Prices switch to the first-client outreach kit's: Launch $750–$1,250 (5 pages, replaces Starter), Growth $1,500–$2,500, and one care plan at $50–$99/mo priced by edit time. Premium, the founding offer (with its testimonial trade) and the 3 bundled care months are gone; care is optional and billed from launch day | Hector's call. The kit prices Launch as a portfolio-builder for the first 2–3 clients, and its outreach messages quote these numbers | After the first 3 clients |
 | 2026-10-24 | Prices drop to Launch from $499 and Growth from $999 (starting prices; the exact price goes in the proposal), and one care plan at $49/mo for hosting and upkeep only, with no edit time included: every edit is billed at $75/hr in 30-minute blocks, quoted first. Replaces the 2026-10-23 ranges | Hector's call | After the first 3 clients |
 | 2026-10-24 | Professional liability (E&O) insurance is required before the first Growth client | Hector's call | At the attorney review |
+| 2026-10-29 | Prospects book a free call through Cal.com (cal.com/trinitywebdallas/free-call); Hector's phone number isn't on the website or in outreach materials. Texting is for clients who have signed | Hector wants every first call booked, not taken cold, so his part-time hours stay planned. The value proposition's "a local developer you can text" still holds once someone is a client | After the first 3 clients, or if prospects ask for a number to call |
 
 ### Changelog
 
@@ -81,6 +82,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-24 | §1–3: Launch from $499, Growth from $999, care plan $49/mo with no edit time included (edits at $75/hr); §4 budget line and §7 scripts updated to match |
 | 2026-10-24 | §6: E&O insurance required before the first Growth client |
 | 2026-10-24 | §8: income math redone for the new prices (about $26/hr take-home at 10 clients); §5 template tree and §6 insurance line no longer mention Premium |
+| 2026-10-29 | §7: cold email signature and walk-in sticky note use the Cal.com link instead of a phone number; after a walk-in, follow up by email, and text only if the owner asks; decisions log: texting is for signed clients |
 
 ## 1. Business model
 
@@ -571,7 +573,7 @@ Reach 120 hand-picked local businesses in 30 days at the section 2 prices, about
 > I'm taking on my first few clients now, so my Launch package (5-page site, contact form, basic local SEO) starts at $499 while I build my portfolio. Worth a free 20-minute call this week?
 >
 > \[Your name\]
-> Trinity Web Co. · \[phone\] · \[your site\]
+> Trinity Web Co. · cal.com/trinitywebdallas/free-call · \[your site\]
 > \[Mailing address\]
 >
 > Not interested? Just reply "no" and I won't email again.
@@ -592,9 +594,9 @@ Bring: printed one-page price sheet, business cards, your phone with their site 
 >
 > I'm taking on my first few clients, so my Launch package starts at $499 while I build my portfolio. Could I grab 20 minutes later this week to show you what yours could look like? No cost for the mockup.
 >
-> **If they're busy or not there:** No problem. Can I leave this with you? \[Hand over sheet with your card stapled and a sticky note: "3 quick fixes for your site, call or text \[phone\], \[Name\]."\] What's the best way to reach the owner?
+> **If they're busy or not there:** No problem. Can I leave this with you? \[Hand over sheet with your card stapled and a sticky note: "3 quick fixes for your site, book a free call at cal.com/trinitywebdallas/free-call, \[Name\]."\] What's the best way to reach the owner?
 
-After each visit, log it and send a same-day text or email: "Great meeting you at \[Business\] today. Here's the 2-minute video I mentioned: \[link\]."
+After each visit, log it and send a same-day email (text only if the owner asked you to): "Great meeting you at \[Business\] today. Here's the 2-minute video I mentioned: \[link\]."
 
 ### DM script (Instagram / Facebook)
 
