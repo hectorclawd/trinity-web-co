@@ -99,5 +99,6 @@ In launch order. Items in the same group can run in parallel.
 **Right after launch (playbook §7 Week 1)**
 - [x] Google Search Console: verify the domain and submit `sitemap.xml` (2026-10-27: Hector verified the domain property trinitywebdallas.com, submitted https://www.trinitywebdallas.com/sitemap-index.xml and requested indexing for the home page)
 - [x] Google Business Profile for the business, with the site as its website link (2026-10-28: Hector set it up)
-- [ ] Cal.com booking link and a one-page PDF price sheet
+- [x] Cal.com booking link (2026-10-29: https://cal.com/trinitywebdallas/free-call; every "Book a free call" button on the site goes there, branch `booking-link`. Hector to rename the Cal.com event title from "free-call" to "Free 20-minute call" and add its description)
+- [ ] One-page PDF price sheet
 - [ ] Then outreach, playbook §7 weeks 2–4 (`business/sales/prospect-tracker.csv`)
