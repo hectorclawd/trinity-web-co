@@ -65,9 +65,10 @@ const schema = localBusinessSchema(site);
   import { track } from '@vercel/analytics';
 
   document.addEventListener('click', (event) => {
-    const link = (event.target as Element).closest('a[href^="tel:"], a[href^="sms:"]');
+    const link = (event.target as Element).closest('a[href^="tel:"], a[href^="sms:"], a[href^="https://cal.com/"]');
     if (!link) return;
-    track(link.getAttribute('href')!.startsWith('tel:') ? 'Call click' : 'Text click');
+    const href = link.getAttribute('href')!;
+    track(href.startsWith('tel:') ? 'Call click' : href.startsWith('sms:') ? 'Text click' : 'Booking click');
   });
   document.addEventListener('contact-form:sent', () => track('Form submit'));
 </script>

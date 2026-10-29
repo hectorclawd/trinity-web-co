@@ -18,6 +18,14 @@ const interests = ['Not sure yet', ...offer.pricing.packages.map((pkg) => `${pkg
       <span class="eyebrow">Contact</span>
       <h1>Book a free <span class="nowrap">20-minute</span> call</h1>
       <p class="lede">{offer.contact.text}</p>
+      {
+        site.booking && (
+          <div class="actions">
+            <a class="btn btn-gold" href={site.booking.url}>Pick a time for your call</a>
+            <a class="btn btn-line" href="#contact-form">Or send a message</a>
+          </div>
+        )
+      }
     </div>
   </section>
 
@@ -58,6 +66,7 @@ const interests = ['Not sure yet', ...offer.pricing.packages.map((pkg) => `${pkg
 
       <form
         class="form"
+        id="contact-form"
         action={endpoint}
         method="POST"
         novalidate
