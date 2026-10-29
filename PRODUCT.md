@@ -51,4 +51,4 @@ Hector runs the business solo and part-time. Posts are built from the HyperFrame
 2. Teach before asking. Useful, specific advice comes first; the ask is one plain line at the end.
 3. Show only what's real: labeled demos, real numbers, real clients once they exist.
 4. The owner keeps control: their domain, their accounts, their decision.
-5. Local and personal, not agency: Dallas places, plain words, a reply the same day.
+5. Local and personal, not agency: Dallas places, plain words, a reply within 1 business day.

@@ -47,6 +47,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-24 | Prices drop to Launch from $499 and Growth from $999 (starting prices; the exact price goes in the proposal), and one care plan at $49/mo for hosting and upkeep only, with no edit time included: every edit is billed at $75/hr in 30-minute blocks, quoted first. Replaces the 2026-10-23 ranges | Hector's call | After the first 3 clients |
 | 2026-10-24 | Professional liability (E&O) insurance is required before the first Growth client | Hector's call | At the attorney review |
 | 2026-10-29 | Prospects book a free call through Cal.com (cal.com/trinitywebdallas/free-call); Hector's phone number isn't on the website or in outreach materials. Texting is for clients who have signed | Hector wants every first call booked, not taken cold, so his part-time hours stay planned. The value proposition's "a local developer you can text" still holds once someone is a client | After the first 3 clients, or if prospects ask for a number to call |
+| 2026-10-29 | Replies to client texts are promised within 1 business day, never "the same day" | Hector runs the business part-time; a promise he can keep every week, and it matches the site's About section and the outreach rules | After the first 3 clients |
 
 ### Changelog
 
@@ -83,6 +84,7 @@ Prices and fees are approximate as of October 2026 and drawn from general market
 | 2026-10-24 | §6: E&O insurance required before the first Growth client |
 | 2026-10-24 | §8: income math redone for the new prices (about $26/hr take-home at 10 clients); §5 template tree and §6 insurance line no longer mention Premium |
 | 2026-10-29 | §7: cold email signature and walk-in sticky note use the Cal.com link instead of a phone number; after a walk-in, follow up by email, and text only if the owner asks; decisions log: texting is for signed clients |
+| 2026-10-29 | §1: proof point 3 says texts are answered within 1 business day; decisions log: the reply promise |
 
 ## 1. Business model
 
@@ -118,7 +120,7 @@ Three proof points to repeat in every pitch:
 
 1. **Faster sites.** Hand-coded sites load in about 1 second on a phone and score 90+ on Google PageSpeed. Show the score live next to their current site.
 2. **Built for local search.** Google Business Profile setup, local business schema, service-area pages and review links are part of the build, not an upsell.
-3. **A real person nearby.** You meet in person, answer texts the same day, and handle updates so the owner never logs into anything.
+3. **A real person nearby.** You meet in person, answer texts within 1 business day, and handle updates so the owner never logs into anything.
 
 ### Positioning
 

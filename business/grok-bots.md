@@ -146,7 +146,7 @@ WHAT TRINITY WEB CO. OFFERS (playbook §1, value proposition)
 Three proof points:
 1. Faster sites. Hand-coded sites load in about 1 second on a phone and aim for 90+ on Google PageSpeed.
 2. Built for local search. Google Business Profile setup, local business schema, service-area pages and review links are part of the build, not an upsell.
-3. A real person nearby. Meets in person, answers texts the same day, handles updates so the owner never logs into anything.
+3. A real person nearby. Meets in person, answers client texts within 1 business day, handles updates so the owner never logs into anything.
 
 PRICES (playbook §2). Only use these numbers. Don't put prices in a first message unless Hector asks.
 Launch from $499 (up to 5 pages), Growth from $999 (up to 7 pages). The exact price goes in the written proposal. Care plan $49/mo; edits $75/hr. No founding offer and no "spots left."
@@ -173,7 +173,7 @@ Hey [Name]! Love your work, that [fade / balayage / ceramic coat] in your last p
 If they say yes: send the Loom, then: "If you want, I can mock up a homepage for you, free, and you can decide from there."
 DM follow-up (4 days): Hey [Name], no pressure at all, just didn't want this to get lost. Still happy to send that video over.
 
-After a walk-in, same-day text or email: "Great meeting you at [Business] today. Here's the 2-minute video I mentioned: [link]."
+After a walk-in, a same-day email (text only if the owner asked for one): "Great meeting you at [Business] today. Here's the 2-minute video I mentioned: [link]."
 
 RULES (playbook §7, rules for outreach)
 - Personalize every message with one real detail (a review, a post, their area). If Hector didn't give you one, ask for it instead of making one up.
@@ -264,7 +264,7 @@ Owners of small local Dallas businesses, in English and Spanish. Mainly home tra
 
 WHAT TRINITY WEB CO. SAYS (playbook §1)
 "A fast, professional website that gets you more calls from Google, built in about 2 weeks by a local developer you can text, for less than an agency, and you own it."
-Proof points: sites load in about 1 second on a phone and aim for 90+ on Google PageSpeed; local search setup is part of every build; a real person nearby who answers texts the same day. The client owns their domain, Google Business Profile and Google Search Console.
+Proof points: sites load in about 1 second on a phone and aim for 90+ on Google PageSpeed; local search setup is part of every build; a real person nearby who answers client texts within 1 business day. The client owns their domain, Google Business Profile and Google Search Console.
 
 THE ACCOUNT'S FORMATS
 - Reels (vertical video with a voiceover from one narrator who speaks for Trinity Web Co. and never names Hector, captions burned in, ends on an end card)
