@@ -15,7 +15,7 @@ Hector's own site: home, services and pricing, demo sites, contact and privacy p
   - `offer`: what the studio sells: features, niches, packages, care plan, demo slots, process, promises, contact copy.
 - `src/content/types.ts`: the template types, plus the Trinity-only types at the bottom (`Package`, `CarePlan`, `DemoSlot`, `StudioOffer`).
 - `src/pages/`: `index`, `services`, `demos`, `contact` (the Formspree form and its script), `privacy`, `404`. Each reads its copy and prices from `site.ts`.
-- `src/components/site/`: `SiteHeader`, `SiteFooter` (with the phone call/text bar), `Icon`, and `RiverHero`. RiverHero keeps its scoped CSS and scroll animation; `site.css` recolors it for the dark hero through the old `--color-*` names. **Don't change the shape of its `path` and `stops`**: the Instagram kit's `npm run sync` reads them.
+- `src/components/site/`: `SiteHeader`, `SiteFooter` (with the bar at the bottom of phone screens: "Book a free call", since the site has no phone number by Hector's choice, 2026-10-29), `Icon`, and `RiverHero`. RiverHero keeps its scoped CSS and scroll animation; `site.css` recolors it for the dark hero through the old `--color-*` names. **Don't change the shape of its `path` and `stops`**: the Instagram kit's `npm run sync` reads them.
 - `src/layouts/BaseLayout.astro`: meta tags, schema, analytics and the call/text/form tracking, plus the menu, scroll reveal and counter script.
 - `src/styles/site.css`: all styles, with the brand colors as variables at the top and Archivo's width axis via `@fontsource-variable/archivo/wdth.css` (self-hosted: the CSP blocks Google Fonts).
 - `public/og-image.png`: 1200×630 share image. Regenerate it if the headline changes.

@@ -18,7 +18,7 @@ export const site: SiteConfig = {
   schemaType: 'ProfessionalService',
   foundingYear: 2026,
 
-  phone: { display: '(214) 730-8304', e164: '+12147308304', textable: true },
+  // No phone number on the site (Hector, 2026-10-29): calls are booked through Cal.com only
   email: 'hello@trinitywebdallas.com',
   serviceAreaOnly: true,
   hours: [],

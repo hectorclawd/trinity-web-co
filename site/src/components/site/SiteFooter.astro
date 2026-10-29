@@ -1,5 +1,6 @@
 ---
-// Footer, plus the call/text bar that stays at the bottom of the screen on phones
+// Footer, plus the bar that stays at the bottom of the screen on phones: call/text when the
+// site has a phone number, else the booking button
 import { site, offer } from '../../content/site';
 import Icon from './Icon.astro';
 
@@ -45,10 +46,16 @@ const services = [
 </footer>
 
 {
-  site.phone && (
+  site.phone ? (
     <div class="float-bar">
       <a class="btn btn-gold" href={`tel:${site.phone.e164}`}><Icon name="call" />Call</a>
       {site.phone.textable && <a class="btn btn-line" href={`sms:${site.phone.e164}`}><Icon name="text" />Text</a>}
     </div>
+  ) : (
+    site.booking && (
+      <div class="float-bar">
+        <a class="btn btn-gold" href={site.booking.url}>Book a free call</a>
+      </div>
+    )
   )
 }
