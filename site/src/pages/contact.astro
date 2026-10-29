@@ -9,10 +9,12 @@ const configured = !isPlaceholder(endpoint);
 const fallback = `email ${site.email}`;
 // Formspree joins checked boxes that share a name into one comma-separated value
 const goals = ['Call or text', 'Book online', 'Ask for a quote', 'Visit in person'];
-const interests = ['Not sure yet', ...offer.pricing.packages.map((pkg) => `${pkg.name}, ${pkg.price.toLowerCase()}`), 'Redo my current website'];
+// The recommended package goes first, as on /services/
+const packages = [...offer.pricing.packages].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false));
+const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.price.toLowerCase()}`), 'Redo my current website'];
 ---
 
-<BaseLayout title="Book a free call" description={`Book a free 20-minute call with Hector at ${site.name}. ${site.phone ? `Call or text ${site.phone.display}.` : ''}`}>
+<BaseLayout title="Book a free call" description={`Book a free 20-minute call with Hector at ${site.name}${site.phone ? ` Call or text ${site.phone.display}.` : ''}`}>
   <section class="page-head">
     <div class="wrap">
       <span class="eyebrow">Contact</span>
