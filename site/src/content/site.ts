@@ -25,7 +25,7 @@ export const site: SiteConfig = {
 
   hero: {
     headline: 'Websites that bring Dallas customers in.',
-    lede: 'Fast sites for contractors, cleaning crews, salons, barbers and studios. Set up for Google from day one, built by a local you can text, and looked after every month.',
+    lede: 'Fast sites for contractors, cleaning crews, salons, barbers and studios. Set up for Google from day one, built by a local you deal with directly, and looked after every month.',
     primaryCta: { label: 'Book a free 20-minute call', href: BOOKING_URL },
     secondaryCta: { label: 'See pricing', href: '/services/' },
   },
