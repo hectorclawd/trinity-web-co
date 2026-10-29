@@ -36,7 +36,7 @@ export const site: SiteConfig = {
       'I’m Hector, a Dallas local. I build websites for the small businesses that make this city what it is: the barbershops, the HVAC crews, the salons and the shops you drive past every day.',
       'I didn’t start out in web design. I’ve done network installation jobs in businesses all over DFW, and I started paying attention to how customers actually find the places I was working in. A lot of great local businesses are hard to find online, and that felt like a fixable problem.',
       'I’m also studying marketing and economics, so I think about websites the way a business owner does: does this get you more calls? Every site I build is fast, easy to use on a phone, and set up so customers can call, text or book in one tap.',
-      'When you work with me, you work with me, not an agency or a call center. I’ll explain things in plain English, keep your site up to date, and answer your texts, usually the same day.',
+      'When you work with me, you work with me, not an agency or a call center. I’ll explain things in plain English, keep your site up to date, and reply to your texts within 1 business day.',
       'Right now I’m taking on my first few clients, and my Launch package is priced low while I build my portfolio. If your business deserves a better website, let’s talk.',
     ],
   },

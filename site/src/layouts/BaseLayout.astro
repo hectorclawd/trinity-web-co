@@ -1,6 +1,8 @@
 ---
 // Every page uses this layout: meta tags, Open Graph, LocalBusiness schema, analytics.
 import '../styles/site.css';
+// Same hashed file the CSS loads; preloading it stops the hero text reflowing when Archivo swaps in
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import Analytics from '@vercel/analytics/astro';
 import Header from '../components/site/SiteHeader.astro';
 import Footer from '../components/site/SiteFooter.astro';
@@ -28,6 +30,7 @@ const schema = localBusinessSchema(site);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}

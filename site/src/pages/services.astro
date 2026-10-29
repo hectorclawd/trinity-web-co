@@ -35,7 +35,7 @@ const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?
               <p class="price-meta">{pkg.turnaround}</p>
               <p>{pkg.bestFor}</p>
               <ul class="checks">{pkg.includes.map((item) => <li>{item}</li>)}</ul>
-              <a class:list={['btn', pkg.featured ? 'btn-gold' : 'btn-line light']} href="/contact/">Ask about {pkg.name}</a>
+              <a class:list={['btn', pkg.featured ? 'btn-gold' : 'btn-line light']} href={site.booking?.url ?? '/contact/'}>Book a call about {pkg.name}</a>
             </article>
           ))
         }
