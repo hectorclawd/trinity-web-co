@@ -10,11 +10,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <!-- R4 · Demo: Purple Martin Heating & Air. 30 s Reel: 0–4.8 s hook over a small, whole phone under the
+    <!-- R4 · Demo: Purple Martin Heating & Air. 29.75 s Reel: 0–4.1 s hook over a small, whole phone under the
          headline (on "It's not a real company" the page flicks up to the demo's own notice bar and a River leader
-         points at it); 4.8–26 s the phone grows into place for a scroll-through, a callout as Chris names each thing; 26–30 s the shared end card (the DM ask).
-         Demo badge on whenever the phone is. Captures of the built demo at 390×844, DPR 3, in r4/img/; the
-         sticky header and call bar are laid over them the way the site behaves (CallBar.astro).
+         points at it); 4.1–25.75 s the phone grows into place for a scroll-through, a callout as Chris names each thing; 25.75–29.75 s the shared end card (the DM ask).
+         Demo badge on whenever the phone is. Captures of the live demo's new look (production, 2026-10-29) at
+         390×844, DPR 3, in r4/img/; the sticky header and call bar are laid over them the way the site behaves
+         (CallBar.astro). Voiceover re-recorded 2026-10-30: "The price of a visit is right up top" replaces
+         "Services fit on one screen", since the new site shows services as tall cards (Hector).
          Render: node scripts/render.mjs r4/r4.html --lang en -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
     <script src="brand/generated.js"></script>
@@ -103,7 +105,7 @@
         height: 1000px;
         overflow: hidden;
         border-radius: 46px;
-        background: #fffaf3;
+        background: #1f1726;
       }
       .r4-page,
       .r4-pin,
@@ -164,10 +166,10 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="r4" data-start="0" data-duration="30" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="r4" data-start="0" data-duration="29.75" data-width="1080" data-height="1920">
       <div class="twc-bg"></div>
-      <audio id="r4-voiceover" src="r4/audio/r4-en.mp3" data-start="0" data-duration="25.36" data-track-index="4" data-volume="1"></audio>
-      <section id="r4-demo" class="clip r4-scene" data-start="0" data-duration="26" data-track-index="1">
+      <audio id="r4-voiceover" src="r4/audio/r4-en.mp3" data-start="0" data-duration="25.54" data-track-index="4" data-volume="1"></audio>
+      <section id="r4-demo" class="clip r4-scene" data-start="0" data-duration="25.75" data-track-index="1">
         <div class="r4-window">
           <div class="r4-rig" data-layout-allow-overflow>
             <div class="r4-phone"></div>
@@ -177,6 +179,8 @@
                 <img src="r4/img/page-2.jpg" width="620" height="2391" alt="" />
                 <img src="r4/img/page-3.jpg" width="620" height="2391" alt="" />
                 <img src="r4/img/page-4.jpg" width="620" height="2391" alt="" />
+                <img src="r4/img/page-5.jpg" width="620" height="2391" alt="" />
+                <img src="r4/img/page-6.jpg" width="620" height="1440" alt="" />
               </div>
               <div class="r4-pin"><img src="r4/img/header.jpg" width="620" height="111" alt="" /></div>
               <div class="r4-bar"><img src="r4/img/call-bar.jpg" width="620" height="116" alt="" /></div>
@@ -187,13 +191,13 @@
         <div class="r4-labels"></div>
         <div class="r4-badge"></div>
       </section>
-      <section id="r4-open" class="clip r4-scene" data-start="0" data-duration="5.4" data-track-index="2">
+      <section id="r4-open" class="clip r4-scene" data-start="0" data-duration="4.8" data-track-index="2">
         <h1 class="r4-hook t-headline"></h1>
       </section>
       <div id="el-captions" data-track-kind="captions" data-composition-id="captions" data-composition-src="compositions/captions.html"
-        data-start="0" data-duration="26" data-track-index="3" data-width="1080" data-height="1920"></div>
+        data-start="0" data-duration="25.75" data-track-index="3" data-width="1080" data-height="1920"></div>
       <div id="el-end-card" data-composition-id="end-card" data-composition-src="compositions/end-card.html"
-        data-start="26" data-duration="4" data-track-index="5" data-width="1080" data-height="1920"></div>
+        data-start="25.75" data-duration="4" data-track-index="5" data-width="1080" data-height="1920"></div>
     </div>
     <script>
       // On-screen words: the plan's hook, shortened; callout labels that add to what Chris says rather
@@ -204,7 +208,7 @@
           labels: {
             bar: "Tap to call or text",
             steps: "The visit in three steps",
-            extras: "Every other service, one list",
+            price: "The first question, answered",
             area: "Service area, by name",
           },
           pageAlt: "the demo’s homepage on a phone",
@@ -212,16 +216,17 @@
       };
       // Chris's word timings (r4/audio/r4-en.words.json), inlined: the render never fetches a local file
       const WORDS = [
-        ["This",0,0.197], ["is",0.255,0.313], ["Purple",0.372,0.65], ["Martin",0.685,0.998], ["Heating",1.149,1.544], ["and",1.695,1.892], ["Air.",2.009,2.589], ["It's",2.914,3.123],
-        ["not",3.158,3.286], ["a",3.32,3.344], ["real",3.425,3.622], ["company.",3.68,4.168], ["Trinity",4.772,5.108], ["Web",5.155,5.294], ["Co.",5.341,5.492], ["built",5.7,5.921],
-        ["it",5.956,6.014], ["as",6.06,6.142], ["a",6.2,6.223], ["demo",6.281,6.536], ["to",6.594,6.653], ["show",6.699,6.85], ["what",6.873,6.978], ["a",7.012,7.036],
-        ["site",7.105,7.361], ["for",7.384,7.465], ["your",7.5,7.593], ["business",7.639,7.941], ["could",7.976,8.104], ["look",8.139,8.278], ["like.",8.324,8.673], ["The",9.114,9.23],
-        ["call",9.276,9.451], ["and",9.485,9.555], ["text",9.578,9.764], ["buttons",9.799,10.054], ["stay",10.089,10.263], ["at",10.286,10.344], ["the",10.379,10.449], ["bottom",10.519,10.762],
-        ["of",10.797,10.844], ["the",10.867,10.937], ["screen,",10.96,11.482], ["so",11.923,12.063], ["customers",12.121,12.539], ["never",12.655,12.957], ["hunt",13.027,13.189], ["for",13.236,13.328],
-        ["your",13.375,13.479], ["number.",13.526,13.979], ["\"How",14.582,14.78], ["a",14.838,14.861], ["visit",14.954,15.244], ["works\"",15.302,15.952], ["answers",16.161,16.533], ["what",16.568,16.684],
-        ["people",16.73,16.986], ["ask",17.032,17.206], ["before",17.253,17.485], ["they",17.52,17.624], ["call.",17.671,18.135], ["Services",18.739,19.226], ["fit",19.284,19.424], ["on",19.47,19.528],
-        ["one",19.598,19.726], ["screen.",19.76,20.202], ["And",20.411,20.538], ["it's",20.585,20.701], ["fast",20.759,21.049], ["on",21.107,21.177], ["a",21.223,21.246], ["phone.",21.293,21.711],
-        ["Want",22.222,22.442], ["one",22.5,22.628], ["like",22.663,22.86], ["it?",22.895,23.127], ["DM",23.824,24.149], ["us",24.265,24.393], ["\"check.\"",24.52,25.356],
+        ["This", 0, 0.197], ["is", 0.255, 0.337], ["Purple", 0.406, 0.673], ["Martin", 0.708, 0.952], ["Heating", 1.01, 1.265], ["and", 1.3, 1.37], ["Air.", 1.428, 1.846], ["It's", 2.543, 2.717],
+        ["not", 2.752, 2.844], ["a", 2.879, 2.902], ["real", 2.937, 3.065], ["company.", 3.111, 3.599], ["Trinity", 4.11, 4.481], ["Web", 4.551, 4.702], ["Co.", 4.772, 5.027], ["built", 5.074, 5.341],
+        ["it", 5.375, 5.445], ["as", 5.503, 5.608], ["a", 5.677, 5.7], ["demo", 5.782, 6.188], ["to", 6.513, 6.629], ["show", 6.687, 6.861], ["what", 6.896, 7.012], ["a", 7.047, 7.082],
+        ["site", 7.163, 7.419], ["for", 7.442, 7.523], ["your", 7.558, 7.651], ["business", 7.697, 7.988], ["could", 8.022, 8.15], ["look", 8.173, 8.301], ["like.", 8.359, 8.707], ["The", 9.218, 9.334],
+        ["call", 9.392, 9.683], ["and", 9.706, 9.799], ["text", 9.845, 10.077], ["buttons", 10.112, 10.368], ["stay", 10.391, 10.542], ["at", 10.565, 10.623], ["the", 10.658, 10.728], ["bottom", 10.797, 11.076],
+        ["of", 11.111, 11.157], ["the", 11.204, 11.273], ["screen,", 11.308, 11.796], ["so", 12.121, 12.26], ["customers", 12.33, 12.783], ["never", 12.853, 13.073], ["hunt", 13.131, 13.282], ["for", 13.329, 13.422],
+        ["your", 13.468, 13.573], ["number.", 13.631, 14.072], ["\"How", 14.675, 14.884], ["a", 14.954, 14.977], ["visit", 15.035, 15.302], ["works\"", 15.349, 15.86], ["answers", 15.895, 16.266], ["what", 16.301, 16.417],
+        ["people", 16.463, 16.742], ["ask", 16.8, 17.021], ["before", 17.09, 17.311], ["they", 17.346, 17.45], ["call.", 17.497, 17.961], ["The", 18.565, 18.681], ["price", 18.727, 18.96], ["of", 18.994, 19.052],
+        ["a", 19.099, 19.122], ["visit", 19.18, 19.447], ["is", 19.494, 19.575], ["right", 19.645, 19.795], ["up", 19.83, 19.9], ["top.", 19.946, 20.376], ["And", 20.527, 20.666], ["it's", 20.713, 20.829],
+        ["fast", 20.887, 21.235], ["on", 21.293, 21.363], ["a", 21.409, 21.432], ["phone.", 21.479, 21.943], ["Want", 22.454, 22.64], ["one", 22.698, 22.814], ["like", 22.837, 23], ["it?", 23.035, 23.267],
+        ["DM", 23.871, 24.172], ["us", 24.254, 24.416], ["\"check.\"", 24.59, 25.542],
       ].map(([text, start, end]) => ({ text, start, end }));
       const { lang } = TWC.init(window.__hyperframes.getVariables(), { transcript: WORDS });
       if (!COPY[lang]) throw new Error(`R4 has no "${lang}" copy or voiceover yet. Add both once Hector has checked the Spanish.`);
@@ -240,27 +245,27 @@
       const VIEW = 1000 / K; // the screen shows 629 CSS px of the page
       const TILE = 1500; // each page-N.jpg is 1,500 CSS px, plus 4 px of overlap into the next
       const PAGE = {
-        notice: 31.3, // the demo notice above the sticky header: the header pins once it's gone
-        heroButtons: 568.8, // bottom of the hero's call buttons: the call bar shows once they're off screen
-        callBand: 5005.4, // the call band's buttons, which hide the call bar again (never reached here)
-        header: 70,
+        notice: 56, // the demo notice above the sticky header: the header pins once it's gone
+        heroButtons: 613.5, // bottom of the hero's call buttons: the call bar shows once they're off screen
+        callBand: 6148.6, // the call band's buttons, which hide the call bar again (never reached here)
+        header: 69,
         bar: 73,
       };
       // Where the page sits for each beat (scroll position, CSS px) and the thing each callout points at
       const STOP = {
         top: 0,
         hero: 420, // the hero's buttons and its drawing; the call bar is still down
-        services: 880, // "What we do" just under the header
-        heating: 1290,
-        steps: 2113, // "How a visit works" and its steps
-        extras: 1518, // "We also do": the whole compact list fits between the header and the call bar
-        area: 3912, // "Hours and service area"
+        services: 1150, // "What we do" and the first service card just under the header
+        heating: 1700,
+        steps: 2870, // the dark "How a visit works" band and its steps
+        price: 920, // the trust bar under the hero, the hero drawing just hidden under the header: "$89 Diagnostic visit, waived if you go ahead"
+        area: 5030, // "Hours and service area"
       };
       const TARGET = {
         bar: VIEW - PAGE.bar / 2, // the call bar's buttons, pinned to the screen's bottom
-        steps: 2205.3 + 16.1 - STOP.steps, // the "How a visit works" heading
-        extras: 1592 + 12 - STOP.extras, // the "We also do" heading
-        area: 4052.5 + 14.4 - STOP.area, // the first line of "We serve Lake Highlands, …"
+        steps: 2995.1 - STOP.steps, // the "How a visit works" heading
+        price: 1004 - STOP.price, // the trust bar's "$89"
+        area: 5185.7 - STOP.area, // the first line of "We serve Lake Highlands, …"
       };
 
       /* ---------- Frame geometry ---------- */
@@ -422,46 +427,47 @@
         TWC.rise(tl, hook, 0.15);
         gsap.set(rig, { scale: small });
         TWC.rise(tl, rig, 0.32, { y: 40 });
-        // "It's not a real company." (2.914): the page flicks up to the demo's own notice bar
+        // "It's not a real company." (2.543): the page flicks up to the demo's own notice bar
         // ("Demo site: a made-up business") and a River leader runs from the headline down to it
-        const landed = flick(2.914, STOP.top);
-        drawLeader(notice, Math.max(3.2, landed - 0.8)); // lands on "real", while the page settles
-        // "Trinity Web Co. built it…" (4.772): the headline and its leader go, the phone grows into place
-        retractLeader(notice, 4.6);
-        tl.to(hook, { opacity: 0, duration: 0.2, ease: "power1.in" }, 4.66);
-        tl.to(hook, { y: -36, duration: motion.move.duration, ease: motion.move.ease }, 4.66);
-        tl.fromTo(rig, { scale: small }, { scale: 1, duration: motion.move.duration * 1.2, ease: motion.move.ease, immediateRender: false }, 4.772);
-        // "…to show what a site for your business could look like" (6.699): down past the hero's
+        const landed = flick(2.543, STOP.top);
+        drawLeader(notice, Math.max(2.83, landed - 0.8)); // lands on "real", while the page settles
+        // "Trinity Web Co. built it…" (4.11): the headline and its leader go, the phone grows into place
+        retractLeader(notice, 3.94);
+        tl.to(hook, { opacity: 0, duration: 0.2, ease: "power1.in" }, 4.0);
+        tl.to(hook, { y: -36, duration: motion.move.duration, ease: motion.move.ease }, 4.0);
+        tl.fromTo(rig, { scale: small }, { scale: 1, duration: motion.move.duration * 1.2, ease: motion.move.ease, immediateRender: false }, 4.11);
+        // "…to show what a site for your business could look like" (6.687): down past the hero's
         // headline to its buttons, short of where the call bar takes over
 
-        /* ---- 2 · Scroll-through (4.8–26 s) ---- */
-        flick(6.699, STOP.hero);
+        /* ---- 2 · Scroll-through (4.1–25.75 s) ---- */
+        flick(6.687, STOP.hero);
         // A flick past the hero: its call buttons leave the screen and the call bar slides up
-        flick(9.5, STOP.services);
-        showCallout("bar", 9.95);
-        // "…so customers never hunt for your number" (11.923): keep scrolling; the bar stays put
-        flick(11.923, STOP.heating);
-        // "How a visit works" (14.582)
-        hideCallout("bar", 14.4);
-        flick(14.582, STOP.steps);
-        showCallout("steps", 15.0);
-        // "Services fit on one screen" (18.739): back up to the compact list
-        hideCallout("steps", 18.739);
-        flick(18.739, STOP.extras);
-        showCallout("extras", 19.12);
-        // "And it's fast on a phone" (20.411): one long flick down to the service area
-        hideCallout("extras", 20.24);
-        // The label waits until the page has landed and "phone." has ended (21.711)
-        const areaLanded = flick(20.411, STOP.area, { duration: motion.momentum.duration * 2.2 });
-        showCallout("area", Math.max(areaLanded, 21.75));
+        flick(9.6, STOP.services);
+        showCallout("bar", 10.05);
+        // "…so customers never hunt for your number" (12.121): keep scrolling; the bar stays put
+        flick(12.121, STOP.heating);
+        // "How a visit works" (14.675): down to the dark band right after "number." (14.072), so the
+        // callout is on the heading while Chris says it
+        hideCallout("bar", 13.9);
+        flick(13.95, STOP.steps);
+        showCallout("steps", 14.6);
+        // "The price of a visit is right up top" (18.565): back up to the trust bar under the hero
+        hideCallout("steps", 18.565);
+        flick(18.565, STOP.price, { duration: motion.momentum.duration * 1.9 });
+        showCallout("price", 19.0);
+        // "And it's fast on a phone" (20.527): one long flick down to the service area
+        hideCallout("price", 20.36);
+        // The label waits until the page has landed and "phone." has ended (21.943)
+        const areaLanded = flick(20.527, STOP.area, { duration: motion.momentum.duration * 2.6 });
+        showCallout("area", Math.max(areaLanded, 21.98));
         // "Want one like it?": back to the top of the page, where it started
-        hideCallout("area", 23.0);
-        flick(23.15, STOP.top, { duration: motion.move.duration * 2.1, ease: motion.move.ease });
-        // The phone drops back as it fades (the way it came, clear of the captions), then the badge
-        // goes, just before the end card (26 s)
-        tl.to(rig, { opacity: 0, duration: 0.3, ease: "power1.in" }, 25.1);
-        tl.to(rig, { y: 12, duration: 0.34, ease: "power2.in" }, 25.1); // stays above y 1370
-        tl.to(badge, { opacity: 0, y: 14, duration: 0.2, ease: "power1.in" }, 25.75);
+        hideCallout("area", 23.23);
+        flick(23.38, STOP.top, { duration: motion.move.duration * 2.4, ease: motion.move.ease });
+        // The phone drops back as it fades (the way it came, clear of the captions) with the badge,
+        // just before the end card (25.75 s), so no frame is left empty
+        tl.to(rig, { opacity: 0, duration: 0.3, ease: "power1.in" }, 25.4);
+        tl.to(rig, { y: 12, duration: 0.34, ease: "power2.in" }, 25.4); // stays above y 1370
+        tl.to(badge, { opacity: 0, y: 14, duration: 0.2, ease: "power1.in" }, 25.45);
 
         window.__timelines["r4"] = tl;
       });

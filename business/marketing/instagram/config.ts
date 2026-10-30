@@ -46,12 +46,13 @@ export const config = {
 
   /**
    * Real numbers only (plan, "Rules every piece follows"): mobile PageSpeed Insights on each
-   * demo's production url, 2026-10-26. pageSpeed is the Performance score; loadTime is Largest
+   * demo's production url, after the 2026-10-29 redesign (pagespeed.web.dev, Purple Martin 2026-10-29,
+   * Good Oak 2026-10-30). pageSpeed is the Performance score; loadTime is Largest
    * Contentful Paint, when the main content shows. Re-measure before reusing them much later.
    */
   demos: {
-    purpleMartin: { name: 'Purple Martin Heating & Air', pageSpeed: '100', loadTime: '1.1 s' },
-    goodOak: { name: 'Good Oak Barbershop', pageSpeed: '100', loadTime: '0.9 s' },
+    purpleMartin: { name: 'Purple Martin Heating & Air', pageSpeed: '100', loadTime: '1.2 s' },
+    goodOak: { name: 'Good Oak Barbershop', pageSpeed: '100', loadTime: '1.4 s' },
   },
 
   /**
