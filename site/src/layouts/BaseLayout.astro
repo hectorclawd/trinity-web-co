@@ -141,4 +141,14 @@ const schema = localBusinessSchema(site);
     io.observe(el);
   });
   document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+
+  // Phones: the bottom booking bar waits until the page's own booking buttons have scrolled away
+  const floatBar = document.querySelector<HTMLElement>('.float-bar');
+  const pageCta = document.querySelector('.hero-actions, .page-head .actions');
+  if (floatBar && pageCta) {
+    floatBar.classList.add('away');
+    new IntersectionObserver(([entry]) =>
+      floatBar.classList.toggle('away', entry.isIntersecting || entry.boundingClientRect.top > 0),
+    ).observe(pageCta);
+  }
 </script>

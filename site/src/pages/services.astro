@@ -36,6 +36,7 @@ const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?
               <p>{pkg.bestFor}</p>
               <ul class="checks">{pkg.includes.map((item) => <li>{item}</li>)}</ul>
               <a class:list={['btn', pkg.featured ? 'btn-gold' : 'btn-line light']} href={site.booking?.url ?? '/contact/'}>Book a call about {pkg.name}</a>
+              <p class="price-assure">{offer.reassurance.price}</p>
             </article>
           ))
         }
@@ -106,6 +107,7 @@ const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?
       <h2 id="cta-title">Not sure which one fits?</h2>
       <p>Tell me about your business on a free <span class="nowrap">20-minute</span> call and I'll tell you honestly.</p>
       <div class="actions"><a class="btn btn-gold" href={site.cta.button.href}>{site.cta.button.label}</a></div>
+      <p class="cta-note">{offer.reassurance.price} {offer.reassurance.care}</p>
     </div>
   </section>
 </BaseLayout>

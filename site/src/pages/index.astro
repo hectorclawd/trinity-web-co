@@ -141,6 +141,7 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
         <a class="btn btn-gold" href={site.cta.button.href}>{site.cta.button.label}</a>
         {site.phone?.textable && <a class="btn btn-line" href={`sms:${site.phone.e164}`}>Text {site.phone.display}</a>}
       </div>
+      <p class="cta-note">{offer.reassurance.price} {offer.reassurance.care}</p>
     </div>
   </section>
 </BaseLayout>

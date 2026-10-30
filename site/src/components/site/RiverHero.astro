@@ -2,7 +2,11 @@
 // Trinity Web Co. hero: the line drawing of the Trinity River with Dallas neighborhoods
 // along it. The page's one memorable moment; it draws itself once on load, then glides along
 // its course with a darker current running down it as the page scrolls.
-import { site } from '../../content/site';
+import { site, offer } from '../../content/site';
+// The one proof line under the buttons: the demo sites' real mobile PageSpeed scores
+const scores = offer.demos.slots.flatMap((slot) => (slot.pageSpeed ? [slot.pageSpeed] : []));
+const lowestScore = Math.min(...scores);
+const sameScore = scores.every((score) => score === lowestScore);
 
 const { headline, lede, primaryCta, secondaryCta } = site.hero;
 const path =
@@ -46,6 +50,13 @@ const wideStops = [
         <a class="btn btn-primary" href={primaryCta.href}>{primaryCta.label}</a>
         {secondaryCta && <a class="btn btn-secondary" href={secondaryCta.href}>{secondaryCta.label}</a>}
       </div>
+      {
+        scores.length > 0 && (
+          <p class="hero-note">
+            Both demo sites score {lowestScore}{sameScore ? '' : ' or higher'} on mobile PageSpeed. <a href="/demos/">See them</a>
+          </p>
+        )
+      }
       {
         site.phone && (
           <p class="hero-note">
