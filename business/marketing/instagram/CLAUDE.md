@@ -4,6 +4,7 @@ Read `README.md` first: it maps the kit, the commands, how a piece uses the shar
 
 - Facts and prices live in `config.ts`; run `npm run sync` after editing it. Never type a price into a composition.
 - Use the Apple design skill for layout, spacing, type scale and motion, and the HyperFrames skills for compositions. Brand fonts and colors win over both.
+- Load the `landing-page-design` skill (user-level, from elayadesign/ai-design-skills, added 2026-10-29) when writing or reviewing a post's message, hook, on-screen copy or call to action, and for any landing page a post links to. Use its Part A (one message, one action, benefit first, specific numbers, verb-plus-outcome CTAs) and its B8 banned filler words, no orphaned words and calm system messages. Skip its type scale, spacing and dark backgrounds for 1080-wide frames; the Apple design skill covers those. Where it disagrees with Trinity's rules, Trinity wins: Archivo only, not its Geist/Manrope list; brand colors, no gradient heading text, gold only for primary buttons; never its invented testimonials, customer names or logos (real proof only, demos labeled "Demo"); no guarantee or free trial beyond the playbook's terms; prices only from `config.ts` and the playbook.
 - Hector checks every Spanish script before it renders, and approves samples before full pieces get built.
 - Commit on a branch, after Hector approves.
 

@@ -68,6 +68,7 @@ CHECKLIST.md   DONE / TO DO list, summarized by the SessionStart hook in .claude
   - Gold `#EDB23A` (primary buttons only)
 - **Signature element:** the hero's line drawing of the Trinity River with Dallas neighborhoods along it. The logo is the Margaret Hunt Hill Bridge arch with three cables (the "Trinity").
 - **Voice:** plain, friendly, specific. Write like you're talking to a shop owner at their counter. No jargon, no hype, no fake urgency. Sentence case everywhere. Never promise rankings or results. Don't lead with "I use AI" (playbook §1).
+- **Design skills:** for marketing (Instagram, outreach pages, our site's copy and layout reviews) load the user-level `landing-page-design` skill (elayadesign/ai-design-skills) for page structure, conversion copy and its checklist; the Instagram kit's `CLAUDE.md` says how it fits with the Apple design skill there. Its description says to use it on all web UI and that it wins over defaults; in this repo the brand above, the playbook and the client template's `CLAUDE.md` win. Where they clash: Archivo, not its font list; our colors and no gradient heading text; never its invented testimonials, names or logos; no guarantee, trial or price that isn't in the playbook. Its "mandatory" scroll tagline section is optional here.
 
 ## Rules
 
