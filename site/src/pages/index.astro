@@ -7,7 +7,8 @@ import demoPurpleMartinTop from '../assets/demo-purple-martin-top.jpg';
 import demoGoodOakTop from '../assets/demo-good-oak-top.jpg';
 import { site, offer } from '../content/site';
 
-const featureIcons: IconName[] = ['search', 'phone', 'call', 'bolt', 'key', 'shield'];
+const featureIcons: IconName[] = ['search', 'phone', 'call', 'bolt'];
+const homeFaqs = site.faqs.filter((faq) => faq.onHome);
 const launch = offer.pricing.packages.find((pkg) => pkg.name === 'Launch');
 const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?? 0));
 // The homepage cards show the top of each demo; the demos page shows the whole homepage
@@ -46,13 +47,14 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
         </div>
         <a class="btn btn-line light" href="/services/">Packages and pricing</a>
       </div>
-      <div class="grid-3">
+      <div class="grid-4">
         {
           offer.features.items.map((item, i) => (
-            <article class="card" data-reveal style={`--d:${i % 3}`}>
+            <article class="card" data-reveal style={`--d:${i}`}>
               <span class="icon"><Icon name={featureIcons[i % featureIcons.length]} /></span>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
+              {item.pageSpeed && <span class="score card-score">Demo sites: PageSpeed {lowestScore}</span>}
             </article>
           ))
         }
@@ -67,7 +69,7 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
           <span class="eyebrow">How it works</span>
           <h2 id="steps-title">Three steps from first call to live site</h2>
         </div>
-        <a class="btn btn-line" href="/contact/">All five steps</a>
+        <a class="btn btn-line" href="/contact/#process">All five steps</a>
       </div>
       <ol class="steps">
         <li class="step" data-reveal style="--d:0">
@@ -118,6 +120,12 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
     </div>
   </section>
 
+  <section class="section tagline-band" aria-label="Why it matters">
+    <div class="wrap">
+      <p class="tagline" data-tagline>{offer.tagline}</p>
+    </div>
+  </section>
+
   <section class="section tint" aria-labelledby="about-title">
     <div class="wrap split">
       <div>
@@ -128,8 +136,34 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
       </div>
       <div class="note-card" data-reveal>
         {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        {
+          site.about.more && (
+            <details class="more">
+              <summary>More about me</summary>
+              {site.about.more.map((paragraph) => <p>{paragraph}</p>)}
+            </details>
+          )
+        }
         <p class="sig">Hector, {site.name}</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="home-faq-title">
+    <div class="wrap">
+      <span class="eyebrow">Questions</span>
+      <h2 id="home-faq-title">What owners ask first</h2>
+      <div class="faq">
+        {
+          homeFaqs.map((faq) => (
+            <details>
+              <summary>{faq.question}</summary>
+              <p>{faq.answer}</p>
+            </details>
+          ))
+        }
+      </div>
+      <p class="faq-more"><a href="/services/#faq">All questions and answers</a></p>
     </div>
   </section>
 
