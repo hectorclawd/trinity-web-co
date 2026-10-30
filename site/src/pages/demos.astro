@@ -24,7 +24,8 @@ const { demos } = offer;
               <span class="tag">Demo</span>
               {slot.image && (
                 <div class="scroll-frame" tabindex="0" role="region" aria-label={`${slot.title} homepage, scrollable`}>
-                  <Image src={slot.image} widths={[600, 1000]} sizes="(max-width: 800px) 100vw, 560px" alt={slot.imageAlt ?? ''} loading="lazy" />
+                  {/* The first screenshot is the page's largest paint, so it loads right away */}
+                  <Image src={slot.image} widths={[400, 700, 1000]} sizes="(max-width: 800px) calc(100vw - 2.2rem), 524px" alt={slot.imageAlt ?? ''} loading={i === 0 ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : 'auto'} />
                 </div>
               )}
             </div>
