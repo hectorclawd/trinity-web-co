@@ -208,7 +208,7 @@ export const offer: StudioOffer = {
         pageSpeed: 100,
         image: demoGoodOak,
         imageAlt:
-          'Homepage of the Good Oak Barbershop demo: “Sharp cuts and hot towel shaves in Oak Cliff,” call and text buttons, “Open now · until 7 pm,” and an illustration of a corner barbershop',
+          'Homepage of the Good Oak Barbershop demo: “Sharp cuts and hot towel shaves in Oak Cliff,” call and text buttons, whether the shop is open now, and an illustration of a corner barbershop',
       },
     ],
   },
