@@ -229,6 +229,11 @@ export const offer: StudioOffer = {
     'You own your domain and your content',
     'No promises of “#1 on Google.” Just honest work.',
   ],
+  // Next to the booking buttons (playbook §2–3). No deposit refund line until the attorney confirms it
+  reassurance: {
+    price: 'Your exact price in writing before any work starts.',
+    care: 'The care plan is optional, and you can cancel it with 30 days’ notice.',
+  },
   contact: {
     heading: 'Book a free 20-minute call',
     text: 'Tell me a little about your business, and I’ll reply within one business day to set up a time. No pressure, no sales pitch.',

@@ -165,5 +165,7 @@ export interface StudioOffer {
   demos: { heading: string; lede: string; slots: DemoSlot[] };
   process: { heading: string; steps: { title: string; text: string }[] };
   promises: string[];
+  /** Short terms shown next to booking buttons: the price line and the care plan line */
+  reassurance: { price: string; care: string };
   contact: { heading: string; text: string; area: string };
 }
