@@ -7,12 +7,23 @@ const { pricing, care } = offer;
 // The recommended package goes first
 const packages = [...pricing.packages].sort((a, b) => Number(b.featured ?? false) - Number(a.featured ?? false));
 const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?? 0));
+// The FAQ below as FAQPage schema, for search and AI answers
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: site.faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+};
 ---
 
 <BaseLayout
   title="Services and pricing"
   description={`Launch and Growth websites with starting prices posted, and an optional ${care.plans[0]?.price} care plan. Your exact price in writing before any work starts.`}
 >
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema).replace(/</g, '\\u003c')} />
   <section class="page-head">
     <div class="wrap">
       <span class="eyebrow">Services and pricing</span>

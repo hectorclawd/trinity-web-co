@@ -84,6 +84,8 @@ export interface SiteConfig {
   about: {
     heading: string;
     paragraphs: string[];
+    /** Trinity site: the rest of the story, behind a "More about me" toggle on the home page */
+    more?: string[];
     image?: ImageMetadata;
     imageAlt?: string;
   };
@@ -93,7 +95,8 @@ export interface SiteConfig {
   reviews: Review[];
   googleReviewUrl?: string;
   gallery: GalleryImage[];
-  faqs: { question: string; answer: string }[];
+  /** onHome: also answered on the Trinity home page */
+  faqs: { question: string; answer: string; onHome?: boolean }[];
   cta: { heading: string; text: string; button: Link };
 
   booking?: { provider: string; url: string; embedUrl?: string };
@@ -158,7 +161,10 @@ export interface DemoSlot {
 }
 
 export interface StudioOffer {
-  features: { heading: string; lede: string; items: { title: string; text: string }[] };
+  /** pageSpeed: the card also shows the demo sites' mobile PageSpeed score */
+  features: { heading: string; lede: string; items: { title: string; text: string; pageSpeed?: boolean }[] };
+  /** The large line on the home page whose words light up as it scrolls into view */
+  tagline: string;
   niches: { heading: string; items: string[] };
   pricing: { heading: string; lede: string; note: string; packages: Package[] };
   care: { heading: string; intro: string; plans: CarePlan[] };

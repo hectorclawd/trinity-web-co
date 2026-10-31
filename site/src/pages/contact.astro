@@ -23,7 +23,7 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
       {
         site.booking && (
           <div class="actions">
-            <a class="btn btn-gold" href={site.booking.url}>Pick a time for your call</a>
+            <a class="btn btn-gold" href={site.booking.url}>{site.cta.button.label}</a>
             <a class="btn btn-line" href="#contact-form">Or send a message</a>
           </div>
         )
@@ -129,7 +129,7 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
     </div>
   </section>
 
-  <section class="section ink" aria-labelledby="process-title">
+  <section class="section ink" id="process" aria-labelledby="process-title">
     <div class="wrap">
       <div class="head-row">
         <div>

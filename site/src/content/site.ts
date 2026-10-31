@@ -31,12 +31,15 @@ export const site: SiteConfig = {
   },
   about: {
     heading: 'A neighbor, not an agency',
-    // Hector's own story, approved 2026-10-13; last line rewritten 2026-10-23 when the founding offer was dropped
+    // Hector's own story, approved 2026-10-13; last line rewritten 2026-10-23 when the founding offer was dropped.
+    // Split 2026-10-30 (design suggestion 15): who and how on show, the rest behind "More about me"
     paragraphs: [
       'I’m Hector, a Dallas local. I build websites for the small businesses that make this city what it is: the barbershops, the HVAC crews, the salons and the shops you drive past every day.',
+      'When you work with me, you work with me, not an agency or a call center. I’ll explain things in plain English, keep your site up to date, and reply to your messages within 1 business day.',
+    ],
+    more: [
       'I didn’t start out in web design. I’ve done network installation jobs in businesses all over DFW, and I started paying attention to how customers actually find the places I was working in. A lot of great local businesses are hard to find online, and that felt like a fixable problem.',
       'I’m also studying marketing and economics, so I think about websites the way a business owner does: does this get you more calls? Every site I build is fast, easy to use on a phone, and set up so customers can call, text or book in one tap.',
-      'When you work with me, you work with me, not an agency or a call center. I’ll explain things in plain English, keep your site up to date, and reply to your messages within 1 business day.',
       'Right now I’m taking on my first few clients, and my Launch package is priced low while I build my portfolio. If your business deserves a better website, let’s talk.',
     ],
   },
@@ -48,6 +51,7 @@ export const site: SiteConfig = {
   faqs: [
     {
       question: 'Do I own the website?',
+      onHome: true,
       answer: 'Yes. Your domain stays in your own account, and once the project is paid in full, the code, words and photos made for your site are yours. Your Google Business Profile stays in your name too. I’m added as a manager, never the only owner.',
     },
     {
@@ -56,6 +60,7 @@ export const site: SiteConfig = {
     },
     {
       question: 'How long does it take?',
+      onHome: true,
       answer: 'Launch takes 10 business days and Growth 15, counted from the day your photos and business details are in. You’ll get a checklist and a due date at kickoff, because waiting on content is the most common delay.',
     },
     {
@@ -74,6 +79,7 @@ export const site: SiteConfig = {
     },
     {
       question: 'Do I have to sign up for a care plan?',
+      onHome: true,
       answer: 'No, it’s optional. If you want it, it starts on launch day at $49 a month, and you can cancel with 30 days’ notice. Edits aren’t included in the plan: they’re $75 an hour in 30-minute blocks, and I quote them first. If you’d rather host the site yourself, I’ll transfer the code to you and help move the hosting for a one-time $150.',
     },
     {
@@ -88,7 +94,8 @@ export const site: SiteConfig = {
   cta: {
     heading: 'Book a free 20-minute call',
     text: 'No pressure, no sales pitch.',
-    button: { label: 'Book a free call', href: BOOKING_URL },
+    // Same label as the hero's button (design suggestion 9); the header and phone bar keep the short one
+    button: { label: 'Book a free 20-minute call', href: BOOKING_URL },
   },
 
   booking: { provider: 'Cal.com', url: BOOKING_URL },
@@ -123,11 +130,12 @@ export const offer: StudioOffer = {
       { title: 'Show up when people search nearby', text: 'Your Google Business Profile, page titles and business details get set up the way Google expects, which most local sites skip.' },
       { title: 'Work on every phone', text: 'Every page is designed for a small screen first, then scaled up. No pinching, no tiny buttons, no PDF price lists.' },
       { title: 'Turn a visit into a call', text: 'Tap-to-call, directions, booking and a contact form on every page, right where people look for them.' },
-      { title: 'Load fast', text: 'Hand-built pages instead of a heavy page builder, so the site opens quickly even on a weak signal.' },
-      { title: 'Stay yours', text: 'The domain is registered in your name and the content is yours. If you ever leave, I hand everything over.' },
-      { title: 'Get looked after', text: 'Hosting, security fixes and backups on a simple monthly care plan, and a quick text when you need an edit.' },
+      { title: 'Load fast', text: 'Hand-built pages instead of a heavy page builder, so the site opens quickly even on a weak signal.', pageSpeed: true },
+      // "Stay yours" and "Get looked after" dropped 2026-10-30 (design suggestion 5): the trust bar and care plan already say them
     ],
   },
+  // From Hector's own story (about.more), design suggestion 14
+  tagline: 'A lot of great local businesses are hard to find online. That’s a fixable problem.',
   niches: {
     heading: 'Built for the businesses that make Dallas, Dallas',
     items: [
