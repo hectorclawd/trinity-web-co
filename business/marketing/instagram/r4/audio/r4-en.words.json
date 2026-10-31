@@ -7,391 +7,411 @@
   {
     "text": "is",
     "start": 0.255,
-    "end": 0.313
+    "end": 0.337
   },
   {
     "text": "Purple",
-    "start": 0.372,
-    "end": 0.65
+    "start": 0.406,
+    "end": 0.673
   },
   {
     "text": "Martin",
-    "start": 0.685,
-    "end": 0.998
+    "start": 0.708,
+    "end": 0.952
   },
   {
     "text": "Heating",
-    "start": 1.149,
-    "end": 1.544
+    "start": 1.01,
+    "end": 1.265
   },
   {
     "text": "and",
-    "start": 1.695,
-    "end": 1.892
+    "start": 1.3,
+    "end": 1.37
   },
   {
     "text": "Air.",
-    "start": 2.009,
-    "end": 2.589
+    "start": 1.428,
+    "end": 1.846
   },
   {
     "text": "It's",
-    "start": 2.914,
-    "end": 3.123
+    "start": 2.543,
+    "end": 2.717
   },
   {
     "text": "not",
-    "start": 3.158,
-    "end": 3.286
+    "start": 2.752,
+    "end": 2.844
   },
   {
     "text": "a",
-    "start": 3.32,
-    "end": 3.344
+    "start": 2.879,
+    "end": 2.902
   },
   {
     "text": "real",
-    "start": 3.425,
-    "end": 3.622
+    "start": 2.937,
+    "end": 3.065
   },
   {
     "text": "company.",
-    "start": 3.68,
-    "end": 4.168
+    "start": 3.111,
+    "end": 3.599
   },
   {
     "text": "Trinity",
-    "start": 4.772,
-    "end": 5.108
+    "start": 4.11,
+    "end": 4.481
   },
   {
     "text": "Web",
-    "start": 5.155,
-    "end": 5.294
+    "start": 4.551,
+    "end": 4.702
   },
   {
     "text": "Co.",
-    "start": 5.341,
-    "end": 5.492
+    "start": 4.772,
+    "end": 5.027
   },
   {
     "text": "built",
-    "start": 5.7,
-    "end": 5.921
+    "start": 5.074,
+    "end": 5.341
   },
   {
     "text": "it",
-    "start": 5.956,
-    "end": 6.014
+    "start": 5.375,
+    "end": 5.445
   },
   {
     "text": "as",
-    "start": 6.06,
-    "end": 6.142
+    "start": 5.503,
+    "end": 5.608
   },
   {
     "text": "a",
-    "start": 6.2,
-    "end": 6.223
+    "start": 5.677,
+    "end": 5.7
   },
   {
     "text": "demo",
-    "start": 6.281,
-    "end": 6.536
+    "start": 5.782,
+    "end": 6.188
   },
   {
     "text": "to",
-    "start": 6.594,
-    "end": 6.653
+    "start": 6.513,
+    "end": 6.629
   },
   {
     "text": "show",
-    "start": 6.699,
-    "end": 6.85
+    "start": 6.687,
+    "end": 6.861
   },
   {
     "text": "what",
-    "start": 6.873,
-    "end": 6.978
+    "start": 6.896,
+    "end": 7.012
   },
   {
     "text": "a",
-    "start": 7.012,
-    "end": 7.036
+    "start": 7.047,
+    "end": 7.082
   },
   {
     "text": "site",
-    "start": 7.105,
-    "end": 7.361
+    "start": 7.163,
+    "end": 7.419
   },
   {
     "text": "for",
-    "start": 7.384,
-    "end": 7.465
+    "start": 7.442,
+    "end": 7.523
   },
   {
     "text": "your",
-    "start": 7.5,
-    "end": 7.593
+    "start": 7.558,
+    "end": 7.651
   },
   {
     "text": "business",
-    "start": 7.639,
-    "end": 7.941
+    "start": 7.697,
+    "end": 7.988
   },
   {
     "text": "could",
-    "start": 7.976,
-    "end": 8.104
+    "start": 8.022,
+    "end": 8.15
   },
   {
     "text": "look",
-    "start": 8.139,
-    "end": 8.278
+    "start": 8.173,
+    "end": 8.301
   },
   {
     "text": "like.",
-    "start": 8.324,
-    "end": 8.673
+    "start": 8.359,
+    "end": 8.707
   },
   {
     "text": "The",
-    "start": 9.114,
-    "end": 9.23
+    "start": 9.218,
+    "end": 9.334
   },
   {
     "text": "call",
-    "start": 9.276,
-    "end": 9.451
+    "start": 9.392,
+    "end": 9.683
   },
   {
     "text": "and",
-    "start": 9.485,
-    "end": 9.555
+    "start": 9.706,
+    "end": 9.799
   },
   {
     "text": "text",
-    "start": 9.578,
-    "end": 9.764
+    "start": 9.845,
+    "end": 10.077
   },
   {
     "text": "buttons",
-    "start": 9.799,
-    "end": 10.054
+    "start": 10.112,
+    "end": 10.368
   },
   {
     "text": "stay",
-    "start": 10.089,
-    "end": 10.263
+    "start": 10.391,
+    "end": 10.542
   },
   {
     "text": "at",
-    "start": 10.286,
-    "end": 10.344
+    "start": 10.565,
+    "end": 10.623
   },
   {
     "text": "the",
-    "start": 10.379,
-    "end": 10.449
+    "start": 10.658,
+    "end": 10.728
   },
   {
     "text": "bottom",
-    "start": 10.519,
-    "end": 10.762
+    "start": 10.797,
+    "end": 11.076
   },
   {
     "text": "of",
-    "start": 10.797,
-    "end": 10.844
+    "start": 11.111,
+    "end": 11.157
   },
   {
     "text": "the",
-    "start": 10.867,
-    "end": 10.937
+    "start": 11.204,
+    "end": 11.273
   },
   {
     "text": "screen,",
-    "start": 10.96,
-    "end": 11.482
+    "start": 11.308,
+    "end": 11.796
   },
   {
     "text": "so",
-    "start": 11.923,
-    "end": 12.063
+    "start": 12.121,
+    "end": 12.26
   },
   {
     "text": "customers",
-    "start": 12.121,
-    "end": 12.539
+    "start": 12.33,
+    "end": 12.783
   },
   {
     "text": "never",
-    "start": 12.655,
-    "end": 12.957
+    "start": 12.853,
+    "end": 13.073
   },
   {
     "text": "hunt",
-    "start": 13.027,
-    "end": 13.189
+    "start": 13.131,
+    "end": 13.282
   },
   {
     "text": "for",
-    "start": 13.236,
-    "end": 13.328
+    "start": 13.329,
+    "end": 13.422
   },
   {
     "text": "your",
-    "start": 13.375,
-    "end": 13.479
+    "start": 13.468,
+    "end": 13.573
   },
   {
     "text": "number.",
-    "start": 13.526,
-    "end": 13.979
+    "start": 13.631,
+    "end": 14.072
   },
   {
     "text": "\"How",
-    "start": 14.582,
-    "end": 14.78
+    "start": 14.675,
+    "end": 14.884
   },
   {
     "text": "a",
-    "start": 14.838,
-    "end": 14.861
+    "start": 14.954,
+    "end": 14.977
   },
   {
     "text": "visit",
-    "start": 14.954,
-    "end": 15.244
+    "start": 15.035,
+    "end": 15.302
   },
   {
     "text": "works\"",
-    "start": 15.302,
-    "end": 15.952
+    "start": 15.349,
+    "end": 15.86
   },
   {
     "text": "answers",
-    "start": 16.161,
-    "end": 16.533
+    "start": 15.895,
+    "end": 16.266
   },
   {
     "text": "what",
-    "start": 16.568,
-    "end": 16.684
+    "start": 16.301,
+    "end": 16.417
   },
   {
     "text": "people",
-    "start": 16.73,
-    "end": 16.986
+    "start": 16.463,
+    "end": 16.742
   },
   {
     "text": "ask",
-    "start": 17.032,
-    "end": 17.206
+    "start": 16.8,
+    "end": 17.021
   },
   {
     "text": "before",
-    "start": 17.253,
-    "end": 17.485
+    "start": 17.09,
+    "end": 17.311
   },
   {
     "text": "they",
-    "start": 17.52,
-    "end": 17.624
+    "start": 17.346,
+    "end": 17.45
   },
   {
     "text": "call.",
-    "start": 17.671,
-    "end": 18.135
+    "start": 17.497,
+    "end": 17.961
   },
   {
-    "text": "Services",
-    "start": 18.739,
-    "end": 19.226
+    "text": "The",
+    "start": 18.565,
+    "end": 18.681
   },
   {
-    "text": "fit",
-    "start": 19.284,
-    "end": 19.424
+    "text": "price",
+    "start": 18.727,
+    "end": 18.96
   },
   {
-    "text": "on",
-    "start": 19.47,
-    "end": 19.528
-  },
-  {
-    "text": "one",
-    "start": 19.598,
-    "end": 19.726
-  },
-  {
-    "text": "screen.",
-    "start": 19.76,
-    "end": 20.202
-  },
-  {
-    "text": "And",
-    "start": 20.411,
-    "end": 20.538
-  },
-  {
-    "text": "it's",
-    "start": 20.585,
-    "end": 20.701
-  },
-  {
-    "text": "fast",
-    "start": 20.759,
-    "end": 21.049
-  },
-  {
-    "text": "on",
-    "start": 21.107,
-    "end": 21.177
+    "text": "of",
+    "start": 18.994,
+    "end": 19.052
   },
   {
     "text": "a",
-    "start": 21.223,
-    "end": 21.246
+    "start": 19.099,
+    "end": 19.122
+  },
+  {
+    "text": "visit",
+    "start": 19.18,
+    "end": 19.447
+  },
+  {
+    "text": "is",
+    "start": 19.494,
+    "end": 19.575
+  },
+  {
+    "text": "right",
+    "start": 19.645,
+    "end": 19.795
+  },
+  {
+    "text": "up",
+    "start": 19.83,
+    "end": 19.9
+  },
+  {
+    "text": "top.",
+    "start": 19.946,
+    "end": 20.376
+  },
+  {
+    "text": "And",
+    "start": 20.527,
+    "end": 20.666
+  },
+  {
+    "text": "it's",
+    "start": 20.713,
+    "end": 20.829
+  },
+  {
+    "text": "fast",
+    "start": 20.887,
+    "end": 21.235
+  },
+  {
+    "text": "on",
+    "start": 21.293,
+    "end": 21.363
+  },
+  {
+    "text": "a",
+    "start": 21.409,
+    "end": 21.432
   },
   {
     "text": "phone.",
-    "start": 21.293,
-    "end": 21.711
+    "start": 21.479,
+    "end": 21.943
   },
   {
     "text": "Want",
-    "start": 22.222,
-    "end": 22.442
+    "start": 22.454,
+    "end": 22.64
   },
   {
     "text": "one",
-    "start": 22.5,
-    "end": 22.628
+    "start": 22.698,
+    "end": 22.814
   },
   {
     "text": "like",
-    "start": 22.663,
-    "end": 22.86
+    "start": 22.837,
+    "end": 23
   },
   {
     "text": "it?",
-    "start": 22.895,
-    "end": 23.127
+    "start": 23.035,
+    "end": 23.267
   },
   {
     "text": "DM",
-    "start": 23.824,
-    "end": 24.149
+    "start": 23.871,
+    "end": 24.172
   },
   {
     "text": "us",
-    "start": 24.265,
-    "end": 24.393
+    "start": 24.254,
+    "end": 24.416
   },
   {
     "text": "\"check.\"",
-    "start": 24.52,
-    "end": 25.356
+    "start": 24.59,
+    "end": 25.542
   }
 ]

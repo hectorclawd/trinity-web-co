@@ -44,12 +44,12 @@ window.TWC_DATA = {
       "purpleMartin": {
         "name": "Purple Martin Heating & Air",
         "pageSpeed": "100",
-        "loadTime": "1.1 s"
+        "loadTime": "1.2 s"
       },
       "goodOak": {
         "name": "Good Oak Barbershop",
         "pageSpeed": "100",
-        "loadTime": "0.9 s"
+        "loadTime": "1.4 s"
       }
     },
     "narrator": {

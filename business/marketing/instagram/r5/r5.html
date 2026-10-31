@@ -9,18 +9,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1080, height=1920" />
-    <!-- R5 · Demo: Good Oak Barbershop (show the work): a 31-second Reel (1080×1920).
-         0–4.4 s the hook over a scroll of the demo; 4.4–26.9 s the callouts as Chris names each
-         thing; 26.9–31 s the shared end card. Voiceover r5/audio/r5-en.mp3 (Chris, approved).
+    <!-- R5 · Demo: Good Oak Barbershop (show the work): a 30.85-second Reel (1080×1920).
+         0–4.4 s the hook over a scroll of the demo; 4.4–26.75 s the callouts as Chris names each
+         thing; 26.75–30.85 s the shared end card. Voiceover r5/audio/r5-en.mp3 (Chris, approved).
          English only for now: add `es` copy and its word timings once Hector has checked the Spanish.
 
-         The demo screenshots in r5/img/ are fresh captures of the demo's built homepage (astro preview,
-         Playwright at 390×844, 3×, reduced motion, JPEG 85). "Open now" reads from the clock, so the
+         The demo screenshots in r5/img/ are captures of the live demo's new look (production, 2026-10-29,
+         Playwright at 390×844, 3×, reduced motion, JPEG 85; the page cropped to its top 3,100 CSS px). "Open now" reads from the clock, so the
          capture ran on a fixed clock inside the shop's hours: timezoneId America/Chicago and
          page.clock.setFixedTime("2026-10-21T14:30:00-05:00"), a Wednesday at 2:30 pm (open 10 to 7).
-         The page showed "Open now · until 7 pm". The call bar stays hidden while the hero's buttons
-         show, so it isn't in the full-page shot; the hero's "Text to hold a chair" button (an sms:
-         link) shows texting instead. The demo has no gallery (features.gallery is off) and Chris
+         The page showed "Open now · until 7 pm". The call bar is captured on its own and slides up
+         once the hero's buttons leave the screen, as on the site (CallBar.astro); the hero's "Text to
+         hold a chair" button (an sms: link) is the one the texting callout points at. The demo has no gallery (features.gallery is off) and Chris
          doesn't name one, so there's no gallery callout. The search screen is a mock (the demo is
          noindexed and never shows in Google), so it carries the Example badge.
          Render: node scripts/render.mjs r5/r5.html --lang en -->
@@ -103,7 +103,7 @@
         height: 1000px;
         overflow: hidden;
         border-radius: 46px;
-        background: #231914;
+        background: #231915;
       }
       .r5-page {
         position: absolute;
@@ -115,6 +115,15 @@
         top: 0;
         display: block;
         width: 620px;
+      }
+      /* The demo's call bar, pinned to the screen's bottom (73 CSS px) */
+      .r5-bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 620px;
+        height: 116px;
+        overflow: hidden;
       }
       /* Demo badge where R4 has it: top right, its right edge on the phone's (x 880). The search
          mock's Example badge takes the same spot once the demo is off screen */
@@ -260,12 +269,12 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="r5" data-start="0" data-duration="31" data-width="1080" data-height="1920">
+    <div id="root" data-composition-id="r5" data-start="0" data-duration="30.85" data-width="1080" data-height="1920">
       <!-- The voiceover, from the first frame. Spanish will be r5/audio/r5-es.mp3 -->
       <audio id="r5-vo" src="r5/audio/r5-en.mp3" data-start="0" data-duration="26.285" data-track-index="4" data-volume="1"></audio>
 
       <!-- The demo on a phone, from the first frame until the end card. The Demo badge rides on it -->
-      <section id="r5-phone" class="clip r5-layer" data-start="0" data-duration="26.9" data-track-index="1">
+      <section id="r5-phone" class="clip r5-layer" data-start="0" data-duration="26.75" data-track-index="1">
         <div class="r5-window">
         <div class="r5-device" data-layout-allow-overflow>
           <div class="r5-phone"></div>
@@ -273,6 +282,7 @@
             <div class="r5-page" data-layout-allow-overflow>
               <img class="r5-shot" data-layout-allow-overflow src="r5/img/good-oak-home.jpg" alt="The Good Oak Barbershop demo homepage on a phone" />
               <img class="r5-sticky" src="r5/img/good-oak-header.jpg" alt="" />
+              <div class="r5-bar"><img src="r5/img/good-oak-call-bar.jpg" alt="" /></div>
             </div>
             <div class="r5-search" data-layout-allow-overflow>
               <div class="r5-field">
@@ -306,11 +316,11 @@
       </section>
 
       <div id="el-captions" data-track-kind="captions" data-composition-id="captions" data-composition-src="compositions/captions.html"
-        data-start="0" data-duration="26.9" data-track-index="3" data-width="1080" data-height="1920"></div>
+        data-start="0" data-duration="26.75" data-track-index="3" data-width="1080" data-height="1920"></div>
 
       <!-- 3 · The end card, 0.6 s after Chris's last word -->
       <div id="el-end-card" data-composition-id="end-card" data-composition-src="compositions/end-card.html"
-        data-start="26.9" data-duration="4.1" data-track-index="5" data-width="1080" data-height="1920"></div>
+        data-start="26.75" data-duration="4.1" data-track-index="5" data-width="1080" data-height="1920"></div>
     </div>
     <script>
       // On-screen words. Captions carry what Chris says; these only add to it. The search result is
@@ -385,15 +395,16 @@
       const SCREEN = { left: 250, top: 346, width: 620 };
       const SCALE = SCREEN.width / 390;
       const SHOT = {
-        stick: 31.25, // the header's top in the page: the demo notice bar above it scrolls away
+        stick: 56, // the header's top in the page: the demo notice bar above it scrolls away
+        heroButtons: 613.5, // bottom of the hero's call and text buttons: the call bar shows once they're off screen
         // Vertical centers of what the callouts point at
-        notice: 15.6, // "Demo site: a made-up business."
-        menuRow: 1172, // the first line of the price menu ("Haircut … $30")
-        textButton: 516.8, // "Text to hold a chair" (an sms: link to the shop's number)
-        openNow: 575.2, // "Open now · until 7 pm"
+        notice: 28, // "Demo site: a made-up business."
+        menuRow: 1540.2, // the first line of the price menu ("Haircut … $30")
+        textButton: 589.5, // "Text to hold a chair" (an sms: link to the shop's number)
+        openNow: 647.9, // "Open now · until 7 pm"
       };
       // Where the page sits for each part (how far it's scrolled, in CSS px)
-      const AT = { top: 0, shopfront: 560, about: 1840, menu: 905, hero: 300 };
+      const AT = { top: 0, shopfront: 520, about: 2290, menu: 1240, hero: 360 };
 
       // ---------- Build ----------
       const page = $(".r5-page");
@@ -404,6 +415,11 @@
       $(".r5-badges").append(exampleBadge, demoBadge);
       // The demo's header is sticky: once the notice bar scrolls away, this copy holds it at the top
       gsap.set(sticky, { opacity: 0 });
+      // The call bar starts down, below the screen, as on the site
+      const bar = $(".r5-bar");
+      const BAR_DOWN = 116;
+      const barEase = TWC.bezier(0.25, 0.1, 0.25, 1); // CSS "ease", the call bar's own 0.2 s transition
+      gsap.set(bar, { y: BAR_DOWN });
 
       const head = fill($("#r5-hook .r5-head"), copy.hook);
 
@@ -443,10 +459,14 @@
         const scrollAt = (t) =>
           t < release ? from + (mid - from) * dragEase((t - at) / DRAG.duration) : mid + (to - mid) * ease(Math.min(1, (t - release) / duration));
         let stuck = from >= SHOT.stick;
+        let barUp = from > SHOT.heroButtons;
         for (let t = at; t <= release + duration + 1e-6; t += 1 / 240) {
           const now = scrollAt(t) >= SHOT.stick;
           if (now !== stuck) tl.set(sticky, { opacity: now ? 1 : 0 }, t);
           stuck = now;
+          const up = scrollAt(t) > SHOT.heroButtons;
+          if (up !== barUp) tl.fromTo(bar, { y: up ? BAR_DOWN : 0 }, { y: up ? 0 : BAR_DOWN, duration: 0.2, ease: barEase, immediateRender: false }, t);
+          barUp = up;
         }
         return release + duration;
       }
@@ -514,9 +534,11 @@
         callout(tl, { text: copy.callouts.notice, cssY: SHOT.notice, scroll: AT.top, at: cue("demo"), drawAt: cue("demo") + 0.12, out: cue("prices") });
 
         const menu = flick(tl, AT.top, AT.menu, cue("prices"));
-        callout(tl, { text: copy.callouts.prices, cssY: SHOT.menuRow, scroll: AT.menu, at: cue("prices"), drawAt: menu, out: cue("customers") });
+        // Back up to the hero as soon as "no 'DM for prices.'" ends, so the texting callout is up on "Customers"
+        const toHero = words.find((w) => w.start === cue("prices", 2)).end + 0.1;
+        callout(tl, { text: copy.callouts.prices, cssY: SHOT.menuRow, scroll: AT.menu, at: cue("prices"), drawAt: menu, out: toHero });
 
-        const hero = flick(tl, AT.menu, AT.hero, cue("customers"));
+        const hero = flick(tl, AT.menu, AT.hero, toHero);
         // The label waits for the page to settle on the hero's buttons, so it never points at nothing
         callout(tl, { text: copy.callouts.text, cssY: SHOT.textButton, scroll: AT.hero, at: hero, drawAt: hero + 0.08, out: cue("an") });
         callout(tl, { text: copy.callouts.openNow, cssY: SHOT.openNow, scroll: AT.hero, at: cue("an"), drawAt: cue("an") + 0.12, out: cue("and") });
@@ -546,12 +568,12 @@
         [ghosts[0], $(".r5-site"), title, $(".r5-desc"), ghosts[1]].forEach((node, i) => TWC.rise(tl, node, found + i * motion.stagger, { y: 20 }));
         // Points at the result's title: the demo's own page title and description, no ranking
         const titleY = SCREEN.top + title.offsetTop + title.offsetHeight / 4;
-        callout(tl, { text: copy.callouts.search, y: titleY, at: found, drawAt: found + 0.3, out: 26.65 });
+        callout(tl, { text: copy.callouts.search, y: titleY, at: found, drawAt: found + 0.3, out: 26.5 });
 
         // Out: the phone drops back as it fades, then the badge, just before the end card
-        tl.fromTo(device, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.45);
-        tl.fromTo(device, { y: 0 }, { y: 28, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.45);
-        tl.fromTo(exampleBadge, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in", immediateRender: false }, 26.6);
+        tl.fromTo(device, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.35);
+        tl.fromTo(device, { y: 0 }, { y: 28, duration: 0.3, ease: "power1.in", immediateRender: false }, 26.35);
+        tl.fromTo(exampleBadge, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in", immediateRender: false }, 26.4);
 
         window.__timelines["r5"] = tl;
       });
