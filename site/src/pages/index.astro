@@ -3,16 +3,12 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RiverHero from '../components/site/RiverHero.astro';
 import Icon, { type IconName } from '../components/site/Icon.astro';
-import demoPurpleMartinTop from '../assets/demo-purple-martin-top.jpg';
-import demoGoodOakTop from '../assets/demo-good-oak-top.jpg';
 import { site, offer } from '../content/site';
 
 const featureIcons: IconName[] = ['search', 'phone', 'call', 'bolt'];
 const homeFaqs = site.faqs.filter((faq) => faq.onHome);
 const launch = offer.pricing.packages.find((pkg) => pkg.name === 'Launch');
 const lowestScore = Math.min(...offer.demos.slots.map((slot) => slot.pageSpeed ?? 0));
-// The homepage cards show the top of each demo; the demos page shows the whole homepage
-const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
 ---
 
 <BaseLayout>
@@ -71,7 +67,7 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
         </div>
         <a class="btn btn-line" href="/contact/#process">All five steps</a>
       </div>
-      <ol class="steps">
+      <ol class="steps" data-draw>
         <li class="step" data-reveal style="--d:0">
           <h3>Free 20-minute call</h3>
           <p>On the phone or over coffee. You tell me about the business and what's not working.</p>
@@ -104,7 +100,8 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
             <a class="demo" data-reveal style={`--d:${i}`} href={slot.url} target="_blank" rel="noopener">
               <div class="demo-shot">
                 <span class="tag">Demo</span>
-                <Image src={demoTops[i]} widths={[600, 900, 1200]} sizes="(max-width: 800px) 100vw, 560px" alt={slot.imageAlt ?? ''} loading="lazy" />
+                {/* The demo's whole homepage, top showing; it scrolls down on hover (site.css) */}
+                {slot.image && <Image src={slot.image} widths={[600, 900]} sizes="(max-width: 800px) 100vw, 560px" alt={slot.imageAlt ?? ''} loading="lazy" />}
               </div>
               <div class="demo-body">
                 <div>
@@ -131,7 +128,7 @@ const demoTops = [demoPurpleMartinTop, demoGoodOakTop];
       <div>
         <span class="eyebrow">Why Trinity</span>
         <h2 id="about-title">{site.about.heading}</h2>
-        <ul class="checks">{offer.promises.map((promise) => <li>{promise}</li>)}</ul>
+        <ul class="checks" data-reveal>{offer.promises.map((promise) => <li>{promise}</li>)}</ul>
         <ul class="pills" aria-label={offer.niches.heading}>{offer.niches.items.map((niche) => <li class="pill">{niche}</li>)}</ul>
       </div>
       <div class="note-card" data-reveal>

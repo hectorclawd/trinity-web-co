@@ -36,8 +36,8 @@ const faqSchema = {
     <div class="wrap">
       <div class="prices">
         {
-          packages.map((pkg, i) => (
-            <article class:list={['price-card', { featured: pkg.featured }]} id={pkg.name.toLowerCase()} data-reveal style={`--d:${i}`}>
+          packages.map((pkg) => (
+            <article class:list={['price-card', { featured: pkg.featured }]} id={pkg.name.toLowerCase()} data-reveal style={`--d:${pkg.featured ? 2 : 0}`}>
               <div class="price-top">
                 <h2>{pkg.name}</h2>
                 {pkg.featured && <span class="badge">Recommended</span>}

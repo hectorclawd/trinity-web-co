@@ -28,8 +28,22 @@
   --font-display: var(--font);
   --step-1: 1.375rem;
 
-  /* One easing for all motion: decelerates into place */
+  /* Motion (calm premium, from the motion-design skill): one signature curve that decelerates
+     into place, an exit curve, an in-and-out curve for things that move on screen, and three
+     durations. Hover answers fast and lets go slower. No bounce or overshoot anywhere. */
   --ease: cubic-bezier(.22, 1, .36, 1);
+  --ease-in: cubic-bezier(.4, 0, 1, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+  --dur-quick: .2s;
+  --dur: .5s;
+  --dur-slow: .8s;
+  --hover-in: .12s;
+  --hover-out: .3s;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Pages crossfade with the header held still (browsers without view transitions just load) */
+  @view-transition { navigation: auto; }
+  :root { interpolate-size: allow-keywords; }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -75,8 +89,9 @@ a { color: var(--river); text-underline-offset: 0.18em; }
   min-height: 3.1rem; padding: 0.8rem 1.45rem;
   border: 2px solid transparent; border-radius: 8px;
   font: inherit; font-weight: 680; font-stretch: 108%; line-height: 1.2; text-decoration: none; cursor: pointer;
-  transition: background-color .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease), transform .3s var(--ease);
+  transition: background-color var(--hover-out) var(--ease), color var(--hover-out) var(--ease), border-color var(--hover-out) var(--ease), transform var(--hover-out) var(--ease);
 }
+.btn:hover { transition-duration: var(--hover-in); }
 .btn-gold, .btn-primary { background: var(--gold); color: var(--ink); }
 .btn-gold:hover, .btn-primary:hover { background: var(--gold-dark); color: var(--ink); transform: translateY(-2px); }
 .btn-line, .btn-secondary { border-color: currentColor; color: inherit; }
@@ -87,7 +102,7 @@ a { color: var(--river); text-underline-offset: 0.18em; }
 .btn svg { width: 1.1em; height: 1.1em; flex: none; }
 
 /* Header */
-.site-header { position: sticky; top: 0; z-index: 50; background: rgba(250,251,248,.92); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.site-header { position: sticky; top: 0; z-index: 50; background: rgba(250,251,248,.92); backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color var(--hover-out) var(--ease), box-shadow var(--hover-out) var(--ease); view-transition-name: site-header; }
 .site-header.scrolled { border-color: var(--line); box-shadow: 0 6px 24px rgba(19,38,43,.06); }
 .header-row { position: relative; display: flex; align-items: center; gap: 1.5rem; min-height: 4.5rem; }
 .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); font-weight: 820; font-stretch: 120%; font-size: 1.15rem; letter-spacing: -0.01em; white-space: nowrap; }
@@ -159,9 +174,9 @@ a { color: var(--river); text-underline-offset: 0.18em; }
 .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 1080px) { .grid-4 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 620px) { .grid-4 { grid-template-columns: 1fr; } }
-.card { position: relative; padding: 1.9rem 1.7rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease); }
+.card { position: relative; padding: 1.9rem 1.7rem; background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); transition: transform var(--hover-out) var(--ease), box-shadow var(--hover-out) var(--ease), border-color var(--hover-out) var(--ease); }
 .card .card-score { margin-top: 1.1rem; }
-.card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(19,38,43,.09); border-color: var(--river); }
+.card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(19,38,43,.09); border-color: var(--river); transition-duration: var(--hover-in); }
 .card p { margin-top: 0.6rem; color: var(--muted); }
 .icon { display: grid; place-items: center; width: 3rem; height: 3rem; margin-bottom: 1.2rem; border-radius: 10px; background: var(--limestone); color: var(--river-deep); }
 .tint .icon { background: #DDE6E1; }
@@ -172,18 +187,30 @@ a { color: var(--river); text-underline-offset: 0.18em; }
 .steps.five { grid-template-columns: repeat(5, 1fr); }
 @media (max-width: 1000px) { .steps.five { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 760px) { .steps, .steps.five { grid-template-columns: 1fr; } }
-.step { padding: 2rem 1.7rem; border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); background: rgba(255,255,255,.03); }
+/* Solid fill (ink plus 3% white) so the connecting line below shows only in the gaps */
+.step { position: relative; z-index: 1; padding: 2rem 1.7rem; border: 1px solid rgba(255,255,255,.14); border-radius: var(--radius); background: #1A2D31; }
+/* A thin river-green line draws across the steps as they come into view, echoing the hero river.
+   Only where the steps sit in one row; the script adds .in once (data-draw). */
+.steps[data-draw] { position: relative; }
+.steps[data-draw]::after { content: ""; position: absolute; left: 6%; right: 6%; top: 3.3rem; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--river-light), rgba(127,196,189,.25)); transform: scaleX(0); transform-origin: left; transition: transform 1.2s var(--ease-io) .2s; display: none; }
+.steps[data-draw].in::after { transform: none; }
+@media (min-width: 761px) { .steps[data-draw]:not(.five)::after { display: block; } }
+@media (min-width: 1001px) { .steps.five[data-draw]::after { display: block; } }
 .step::before { counter-increment: step; content: counter(step, decimal-leading-zero); display: block; margin-bottom: 1.3rem; font-size: 2.6rem; font-weight: 820; font-stretch: 125%; line-height: 1; color: var(--gold); }
 .step p { margin-top: 0.6rem; color: var(--on-dark-muted); }
 
 /* Demos */
 .demos { display: grid; gap: 1.5rem; grid-template-columns: 1fr 1fr; }
 @media (max-width: 800px) { .demos { grid-template-columns: 1fr; } }
-.demo { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: inherit; text-decoration: none; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
-a.demo:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(19,38,43,.12); }
-.demo-shot { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: var(--limestone); border-bottom: 1px solid var(--line); }
-.demo-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .8s var(--ease); }
-a.demo:hover .demo-shot img { transform: scale(1.04); }
+.demo { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: inherit; text-decoration: none; transition: transform var(--hover-out) var(--ease), box-shadow var(--hover-out) var(--ease); }
+a.demo:hover { transform: translateY(-4px); box-shadow: 0 22px 48px rgba(19,38,43,.12); transition-duration: var(--hover-in); }
+.demo-shot { position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: var(--limestone); border-bottom: 1px solid var(--line); container-type: size; }
+/* The card holds the demo's whole homepage, top showing. On hover (mouse only) it scrolls slowly
+   down the page and comes back up quicker when the pointer leaves. */
+.demo-shot img { width: 100%; height: auto; transition: transform 1.2s var(--ease); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  a.demo:hover .demo-shot img { transform: translateY(calc(-100% + 100cqh)); transition: transform 7s var(--ease-io) .15s; }
+}
 .tag { position: absolute; top: 0.9rem; left: 0.9rem; z-index: 1; padding: 0.3rem 0.7rem; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
 .demo-body { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 1.4rem 1.6rem; }
 .demo-body small { display: block; color: var(--muted); font-size: 0.92rem; }
@@ -246,6 +273,9 @@ a.demo:hover .demo-shot img { transform: scale(1.04); }
 .faq summary::after { content: "+"; flex: none; font-size: 1.6rem; line-height: 1; color: var(--river); transition: transform .3s var(--ease); }
 .faq details[open] summary::after { transform: rotate(45deg); }
 .faq details p { padding-bottom: 1.4rem; color: var(--muted); max-width: 46rem; }
+/* Answers slide open instead of snapping (browsers that can't animate to auto height just open) */
+.faq details::details-content, .note-card .more::details-content { block-size: 0; overflow: hidden; transition: block-size var(--dur) var(--ease), content-visibility var(--dur) allow-discrete; }
+.faq details[open]::details-content, .note-card .more[open]::details-content { block-size: auto; }
 .faq-more { margin-top: 1.6rem; font-weight: 650; }
 
 /* CTA band */
@@ -284,8 +314,12 @@ a.demo:hover .demo-shot img { transform: scale(1.04); }
 .form .btn { width: 100%; }
 .form-status { margin-top: 1rem; font-weight: 650; }
 .form-status:empty { display: none; }
-.form-status.success { padding: 1rem 1.1rem; border-radius: 8px; background: #E3F1EC; color: var(--river-deep); }
+.form-status.success { display: flex; gap: 0.7rem; align-items: center; padding: 1rem 1.1rem; border-radius: 8px; background: #E3F1EC; color: var(--river-deep); }
+/* A check that draws itself in next to the success message */
+.form-status.success::before { content: ""; flex: none; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--river) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='white' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 10.5l3.2 3L15 6.5'/%3E%3C/svg%3E") center / 70% no-repeat; }
 .form-status.error { color: var(--error); }
+/* Sending: a small ring turns beside the button text */
+.btn.is-sending::after { content: ""; width: 1em; height: 1em; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: spin .9s linear infinite; }
 
 /* Inner page header */
 .page-head { position: relative; overflow: hidden; background: var(--river-deep); color: var(--on-dark); padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); }
@@ -322,21 +356,60 @@ a.demo:hover .demo-shot img { transform: scale(1.04); }
 .float-bar .btn-line { color: #fff; }
 @media (max-width: 760px) { .float-bar { display: flex; } }
 
-/* Motion: the script adds .reveal, so everything stays visible without it */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--d, 0) * 90ms); }
+/* Motion: the script adds .reveal, so everything stays visible without it.
+   Primary layer: the block rises 20px and fades in. Secondary layer: what's inside it (icons,
+   score chips, step numbers, ticks, the Recommended badge) settles 120 ms or more after it. */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease), box-shadow var(--dur-slow) var(--ease); transition-delay: calc(var(--d, 0) * 80ms); }
 .reveal.in { opacity: 1; transform: none; }
+.reveal .icon, .reveal .score, .reveal .badge, .step.reveal::before { opacity: 0; transform: scale(.9); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); transition-delay: calc(var(--d, 0) * 80ms + 160ms); }
+.step.reveal::before { transform: translateY(10px); }
+.reveal .badge { transition-delay: calc(var(--d, 0) * 80ms + 400ms); }
+.reveal.in .icon, .reveal.in .score, .reveal.in .badge, .step.reveal.in::before { opacity: 1; transform: none; }
+.reveal .checks li::before, .checks.reveal li::before { transform: scale(0); transition: transform var(--dur) var(--ease); transition-delay: calc(var(--d, 0) * 80ms + 200ms + var(--n, 0) * 60ms); }
+.reveal.in .checks li::before, .checks.reveal.in li::before { transform: none; }
+.checks li:nth-child(2) { --n: 1; } .checks li:nth-child(3) { --n: 2; } .checks li:nth-child(4) { --n: 3; }
+.checks li:nth-child(5) { --n: 4; } .checks li:nth-child(6) { --n: 5; } .checks li:nth-child(n+7) { --n: 6; }
+/* Pricing: Launch lands first, then Growth (the recommended one) rises a little higher and its
+   shadow arrives after it; the badge comes last */
+.price-card.featured.reveal { box-shadow: none; }
+.price-card.featured.reveal.in { box-shadow: 0 24px 60px rgba(14,63,60,.14); transition-delay: calc(var(--d, 0) * 80ms), calc(var(--d, 0) * 80ms), calc(var(--d, 0) * 80ms + 150ms); }
+@media (min-width: 861px) { .price-card.featured.reveal.in { transform: translateY(-6px); } }
 @media (prefers-reduced-motion: no-preference) {
-  /* Words start partly visible, so the headline reads from the first paint */
+  /* Hero: eyebrow, then the headline word by word, then the text and buttons. Everything starts
+     partly visible, so the hero reads from the first paint and the page's largest paint isn't held back. */
+  .hero-eyebrow, .hero-lede, .hero-actions, .hero-note { animation: rise-in .6s var(--ease) both; }
+  .hero-lede { animation-delay: .25s; }
+  .hero-actions { animation-delay: .35s; }
+  .hero-note { animation-delay: .45s; }
   .hero h1 .w { opacity: .35; transform: translateY(0.25em); animation: word-up .6s var(--ease) forwards; animation-delay: calc(0.05s + var(--i) * 40ms); }
+  /* Page transitions: the old page lifts away fast, the new one rises in; the header stays put */
+  ::view-transition-old(root) { animation: page-out var(--dur-quick) var(--ease-in) both; }
+  ::view-transition-new(root) { animation: page-in .45s var(--ease) .05s both; }
+  ::view-transition-group(site-header) { animation-duration: 0s; }
+  /* Form: an error slides down under its field, and the field gives one small shake */
+  .field-error { animation: rise-in var(--dur-quick) var(--ease) both; }
+  .field .shake { animation: shake .35s var(--ease-io); }
+  .form-status.success, .form-status.error { animation: rise-in var(--dur) var(--ease) both; }
+  .form-status.success::before { animation: pop-in var(--dur) var(--ease) .1s both; }
 }
 @media (prefers-reduced-motion: reduce) {
   html.smooth-scroll { scroll-behavior: auto; }
   .hero::before { animation: none; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal, .reveal .icon, .reveal .score, .reveal .badge, .step.reveal::before { opacity: 1; transform: none; transition: none; }
+  .reveal .checks li::before, .checks.reveal li::before, .steps[data-draw]::after { transform: none; transition: none; }
+  .price-card.featured.reveal { box-shadow: 0 24px 60px rgba(14,63,60,.14); }
   .btn, .card, .demo, .demo-shot img, .float-bar, .menu-btn span, .menu-btn span::before, .menu-btn span::after { transition: none; }
+  .faq details::details-content, .note-card .more::details-content { transition: none; }
+  .btn.is-sending::after { animation-duration: 2.5s; }
   .nav.open a { animation: none; }
   .tagline .tw { opacity: 1; transition: none; }
 }
 @keyframes word-up { to { opacity: 1; transform: none; } }
+@keyframes rise-in { from { opacity: .35; transform: translateY(12px); } }
+@keyframes pop-in { from { opacity: 0; transform: scale(.6); } }
+@keyframes page-out { to { opacity: 0; transform: translateY(-8px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(12px); } }
+@keyframes shake { 20% { transform: translateX(-6px); } 45% { transform: translateX(5px); } 70% { transform: translateX(-3px); } 90% { transform: translateX(1px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
 @keyframes menu-in { from { opacity: 0; transform: translateY(24px); } }
 @keyframes drift { to { transform: scale(1.08) translateX(-2%); } }

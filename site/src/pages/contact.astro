@@ -137,7 +137,7 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
           <h2 id="process-title">{offer.process.heading}</h2>
         </div>
       </div>
-      <ol class="steps five">
+      <ol class="steps five" data-draw>
         {
           offer.process.steps.map((step, i) => (
             <li class="step" data-reveal style={`--d:${i}`}>
@@ -176,6 +176,10 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
       field.after(error);
       field.setAttribute('aria-describedby', error.id);
       field.setAttribute('aria-invalid', 'true');
+      // One small shake (site.css; none with reduced motion). Removing first lets it replay.
+      field.classList.remove('shake');
+      void field.offsetWidth;
+      field.classList.add('shake');
     };
     const clearInvalid = (field: HTMLInputElement) => {
       document.getElementById(`${field.id}-error`)?.remove();
@@ -211,6 +215,7 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
 
       button.disabled = true;
       button.textContent = 'Sending…';
+      button.classList.add('is-sending');
       try {
         const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
         if (!res.ok) throw new Error(res.statusText);
@@ -222,6 +227,8 @@ const interests = ['Not sure yet', ...packages.map((pkg) => `${pkg.name}, ${pkg.
         show(`Your message didn’t go through. Try again, or ${fallback}.`, 'error');
         button.disabled = false;
         button.textContent = SEND_LABEL;
+      } finally {
+        button.classList.remove('is-sending');
       }
     });
   });

@@ -140,7 +140,7 @@ const schema = localBusinessSchema(site);
     el.classList.add('reveal');
     io.observe(el);
   });
-  document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+  document.querySelectorAll('[data-count], [data-draw]').forEach((el) => io.observe(el));
 
   // Phones: the bottom booking bar waits until the page's own booking buttons have scrolled away
   const floatBar = document.querySelector<HTMLElement>('.float-bar');
